@@ -6,33 +6,35 @@
     <title>Calculadora financeira</title>
 </head>
 <body>
+    <h1><b>SIMULE SEU PROCESSO</b></h1>
     <b>Informe a quantidade de produtos distribuídos p/ mês:</b>
-    <input type="number" id="ipt_qtdProdutos"><br>
-    <b>Informe sua quantidade de extravio</b>
-    <input type="number" id="ipt_extravio">
-    <button onclick="analisar()">Seu prejuízo</button>
-    <div id="mensagem"></div>
+    <input type="number" id="ipt_qtdProdutos"><br><br>
+    <b>Informe a quantidade de extravio: </b>
+    <input type="number" id="ipt_extravio"><br><br>
+    <button onclick="analisar()">Calcular</button>
+    <div id="div_mensagem"></div>
 </body>
 </html>
 <script>
-    var produtos = 0
-    var extravio = 0
-    var porcentagem = 0
 
 function analisar(){
-    var produtos = Number(ipt_qtdProdutos.value)
-    var extravio = Number(ipt_extravio.value)
-    var porcentagem = extravio/produtos *100
-    
-    mensagem.innerHTML = `<h3 style = "color: red;"> Sua taxa de perda é de ${porcentagem}%.</h3> <br> <button onclick="analisar2()">Simule aqui!</button>` 
+    var produtos = Number(ipt_qtdProdutos.value);
+    var extravio = Number(ipt_extravio.value);
+    porcentagem = extravio/produtos * 100 // (100 / 1000) * 100 = 1
+    div_mensagem.innerHTML = `<h3 style = "color: red;"> Sua taxa de perda é de ${porcentagem}%.</h3>
+    <b>Simule aqui o seu ganho:</b> <br><br> 
+    <button onclick="analisar2()">Simule aqui!</button>` 
 }
-function analisar2(){
-    var produtos = Number(ipt_qtdProdutos.value)
-    var extravio = Number(ipt_extravio.value)
-    var porcentagemPerda = extravio/produtos
-    var porcentagemExibir= porcentagemPerda * 75
-    var redução =extravio - (extravio *0.25)
 
-        mensagem.innerHTML = `<h3> Com o nosso produto <b>seu prejuízo cai para ${porcentagemExibir}%, em termos de produtos reduzímos seu extravio para ${redução} produtos</h3>`
-    }
+function analisar2(){
+    var produtos = Number(ipt_qtdProdutos.value);
+    var extravio = Number(ipt_extravio.value);
+    var porcentagemPerda = extravio/produtos; // = 0.1
+    var porcentagemExibir= porcentagemPerda * 75; // 0.1 * 75 = 7.50
+    var redução =extravio - (extravio * 0.25); // 100 (100 * 0.25) = 25
+
+        div_mensagem.innerHTML += `<br><h3> Com o nosso produto <b>seu prejuízo cai para ${porcentagemExibir}%.<br>
+        Em termos de produtos, reduzímos seu extravio para ${redução} produtos.</h3>`
+}
+
 </script>
