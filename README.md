@@ -1,6 +1,5 @@
 <h1>
-    <a href="https://www.sptech.school/">
-      <img align="center" width="80px" src="https://avatars.githubusercontent.com/u/180440007?v=4" img width="80" alt="{a} logo" class="img-fluid"></a>
+    <img align="center" width="80px" src="https://avatars.githubusercontent.com/u/180440007?v=4" img width="80" alt="{a} logo" class="img-fluid"></a>
     <span>LOGISTECH Soluções Tecnológicas</span>
 </h1>
 
