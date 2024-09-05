@@ -59,4 +59,4 @@ INSERT INTO Estatistica (data_horario, modelo, quantidade) VALUES
 
 SELECT * FROM Estatistica;
 
-SELECT * FROM Estatistica ORDER BY data_horario;
+SELECT * FROM Estatistica ORDER BY quantidade;
