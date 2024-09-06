@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora financeira</title>
+</head>
+<body>
+    <h1><b>SIMULE SEU PROCESSO</b></h1>
+    <b>Informe a quantidade de produtos distribuídos p/ mês:</b>
+    <input type="number" id="ipt_qtdProdutos"><br><br>
+    <b>Informe a quantidade de extravio por mês: </b>
+    <input type="number" id="ipt_extravio"><br><br>
+    <button onclick="analisar()">Calcular</button>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+
+function analisar(){
+    var produtos = Number(ipt_qtdProdutos.value);
+    var extravio = Number(ipt_extravio.value);
+    porcentagem = extravio/produtos * 100 // (100 / 1000) * 100 = 1
+    div_mensagem.innerHTML = `<h3 style = "color: red;"> Sua taxa de perda é de ${porcentagem}% por mês.</h3>
+    <b>Simule aqui o seu ganho:</b> <br><br> 
+    <button onclick="analisar2()">Simule aqui!</button>` 
+}
+
+function analisar2(){
+    var produtos = Number(ipt_qtdProdutos.value);
+    var extravio = Number(ipt_extravio.value);
+    var porcentagemPerda = extravio/produtos; // = 0.1
+    var porcentagemExibir= porcentagemPerda * 75; // 0.1 * 75 = 7.50
+    var redução =extravio - (extravio * 0.25); // 100 (100 * 0.25) = 25
+
+        div_mensagem.innerHTML += `<br><h3> Com o nosso produto <b>seu prejuízo cai para ${porcentagemExibir}%.<br>
+        Em termos de produtos, reduzímos seu extravio para ${redução} produtos.</h3>`
+}
+
+// colocar mais informações sobre o ganho fazendo a difença
+// colocar a diferença do ganho em produtos
+// verificar uma variavel de valor
+// informar o GANHO real do ganho
+// colocar COR nas informações
+// verificar o ganho do produto com valores para cada placa
+// projetar o futuro com base daqui 3 meses por exemplo
+// informar na DIV mais informações sobre o produto
+// ao invés de informar um valor para cada placa, fazer um tiket médio para o geral das placas 
+</script>
