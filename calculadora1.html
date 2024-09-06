@@ -20,7 +20,7 @@
 function analisar(){
     var produtos = Number(ipt_qtdProdutos.value);
     var extravio = Number(ipt_extravio.value);
-    porcentagem = extravio/produtos * 100; // (100 / 1000) * 100 = 1
+    porcentagem = (extravio / produtos) * 100; // (100 / 1000) * 100 = 1
     div_mensagem.innerHTML = `<p style = "color: red;"> Sua taxa de perda é de ${porcentagem}% por mês.</p>
     <p>Simule aqui o seu ganho:</p> <br>
     <button onclick="analisar2()">Simule aqui!</button>` 
@@ -29,7 +29,7 @@ function analisar(){
 function analisar2(){
     var produtos = Number(ipt_qtdProdutos.value);
     var extravio = Number(ipt_extravio.value);
-    var porcentagemPerda = extravio/produtos; // = 0.1
+    var porcentagemPerda = extravio / produtos; // = 0.1
     var porcentagemExibir = porcentagemPerda * 75; // 0.1 * 75 = 7.50
     var reducao = extravio - (extravio * 0.25); // 100 (100 * 0.25) = 25 
     var qtd_ganho = extravio - reducao; 
@@ -39,7 +39,7 @@ function analisar2(){
 
     div_mensagem.innerHTML += `<br><br> Com o nosso produto seu prejuízo cai para <b style="color:blue"> ${porcentagemExibir}%</b>.<br>
     Em termos de produtos, reduzímos seu extravio para ${reducao} produtos. Com Ganho de <b style="color:blue"> ${qtd_ganho} </b> produtos por mês. <br><br>
-    Considerando um valor médio de placa de R$ ${tiket_medio}, sua empresa terá um ganho real de <b style="color:green"> R$ ${ganho_reais}</b> por mês. </br>
+    Considerando um valor médio de placa de <b> R$ ${tiket_medio} </b>, sua empresa terá um ganho real de <b style="color:green"> R$ ${ganho_reais}</b> por mês. </br>
     Tendo uma projeção de 3 meses com o nosso produto, a empresa terá um ganho de <b style="color:green"> R$ ${projecao}</b>.`
 }
 </script>
