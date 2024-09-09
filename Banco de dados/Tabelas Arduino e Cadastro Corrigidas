@@ -1,0 +1,18 @@
+CREATE TABLE Cadastro(
+IdCadastro INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(255),
+cpf CHAR(14),
+cnpj CHAR(18) NOT NULL,
+data_nasc DATE,
+senha VARCHAR(40),
+email VARCHAR(255),
+genero CHAR(1),
+CONSTRAINT chkgenero CHECK(genero IN('F', 'M', 'O'))
+);
+
+CREATE TABLE Arduino(
+IdSensorChecagem INT PRIMARY KEY AUTO_INCREMENT,
+distancia DECIMAL(8,3),
+tempo_de_medicao TIME,
+data_checagem DATE
+);
