@@ -40,3 +40,27 @@
 .logoImg:hover{
     cursor:pointer;
 }
+
+.container-solucao {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.texto-solucao h1{
+    font-size: 5ch;
+    font-weight: 2000;
+}
+
+.texto-solucao p{
+    color: rgb(73, 73, 73);
+}
+
+footer {
+    background-color: #070E3C;
+    color: white;
+    text-align: center;
+    padding: 70px;
+    width: 100%;
+    font-size: 3ch;
+}
