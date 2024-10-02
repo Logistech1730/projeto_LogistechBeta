@@ -2,6 +2,7 @@
     margin: 0;
     box-sizing: border-box;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    transition: 0.2s;
 }
 
 :root{
@@ -17,6 +18,7 @@
 
 .headerElements ul a:hover{
     color: #b4b4b4;
+    border-bottom: 1px solid #b4b4b4;
 }
 
 .headerElements ul{
@@ -114,6 +116,7 @@
 .mainText button:hover{
     cursor: pointer;
     background-color: #0b2d94;
+    margin: 20px;
 }
 
 .secondSection{
@@ -121,7 +124,9 @@
     height: 100vh;
     justify-content: center;
     align-items: center;
+
 }
+
 
 .sectionLeft{
     display: flex;
@@ -194,6 +199,10 @@ hr{
     font-size: 30px;
 }
 /* Vitor */
+
+
+
+
 
 footer {
     background-color: #070E3C;
