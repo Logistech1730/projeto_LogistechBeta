@@ -10,7 +10,7 @@
     font-weight: 800;
     transition: 0.3s;
 }
-
+ 
 .headerElements ul a:hover{
     color: #b4b4b4;
 }
@@ -43,8 +43,8 @@
 
 .container-solucao {
     text-align: center;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
 }
 
 .texto-solucao h1{
