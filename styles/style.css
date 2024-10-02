@@ -1,27 +1,31 @@
-*{
+* {
     margin: 0;
     box-sizing: border-box;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     transition: 0.2s;
 }
 
-:root{
+body {
+    overflow-x: hidden;
+}
+
+:root {
     --bannerSize: calc(100vh - 100px);
 }
 
-.headerElements ul a{
+.headerElements ul a {
     text-decoration: none;
     color: #fff;
     font-weight: 800;
     transition: 0.3s;
 }
- 
-.headerElements ul a:hover{
+
+.headerElements ul a:hover {
     color: #b4b4b4;
     border-bottom: 1px solid #b4b4b4;
 }
 
-.headerElements ul{
+.headerElements ul {
     display: flex;
     align-items: center;
     gap: 20px;
@@ -29,7 +33,7 @@
     list-style-type: none;
 }
 
-.headerElements{
+.headerElements {
     background-color: #070E3C;
     display: flex;
     justify-content: space-between;
@@ -37,18 +41,18 @@
     width: 100%;
 }
 
-.logoImg{
+.logoImg {
     width: 10%;
     height: 100px;
-    background-image: url(./img/LogisTech.png);
+    background-image: url('../img/LogisTech.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     margin-left: 20px;
 }
 
-.logoImg:hover{
-    cursor:pointer;
+.logoImg:hover {
+    cursor: pointer;
 }
 
 /* Gabriel */
@@ -59,20 +63,21 @@
     margin-bottom: 20vh;
 }
 
-.texto-solucao h1{
+.texto-solucao h1 {
     font-size: 5ch;
     font-weight: 2000;
 }
 
-.texto-solucao p{
+.texto-solucao p {
     color: rgb(73, 73, 73);
     font-size: 3ch;
 }
+
 /* Gabriel */
 
 /* Vitor */
-.bannerImg{
-    background-image: url(./img/bannerImg.png);
+.bannerImg {
+    background-image: url('../img/bannerImg.png');
     height: var(--bannerSize);
     background-repeat: no-repeat;
     background-size: cover;
@@ -83,7 +88,7 @@
     background-attachment: fixed;
 }
 
-.mainText{
+.mainText {
     color: #fff;
     margin-left: 10%;
     display: flex;
@@ -94,16 +99,16 @@
     height: 100vh;
 }
 
-.mainText h1{
+.mainText h1 {
     font-size: 50px;
 }
 
-.mainText p{
+.mainText p {
     font-size: 30px;
     font-weight: 500;
 }
 
-.mainText button{
+.mainText button {
     border-radius: 20px;
     border: none;
     padding: 20px;
@@ -113,13 +118,13 @@
     transition: 0.3s;
 }
 
-.mainText button:hover{
+.mainText button:hover {
     cursor: pointer;
     background-color: #0b2d94;
     margin: 20px;
 }
 
-.secondSection{
+.secondSection {
     display: flex;
     height: 100vh;
     justify-content: center;
@@ -128,7 +133,7 @@
 }
 
 
-.sectionLeft{
+.sectionLeft {
     display: flex;
     height: 100vh;
     width: 100vw;
@@ -136,7 +141,7 @@
     align-items: center;
 }
 
-.sectionRight{
+.sectionRight {
     display: flex;
     height: 100vh;
     width: 100vw;
@@ -145,7 +150,7 @@
     margin: 10% 5% 0 0;
 }
 
-.sectionRight button{
+.sectionRight button {
     border-radius: 20px;
     width: 40%;
     font-size: 20px;
@@ -158,15 +163,15 @@
     transition: 0.3s;
 }
 
-.sectionRight button:hover{
+.sectionRight button:hover {
     cursor: pointer;
     background-color: #0b2d94;
 }
 
 
 
-.circle{
-    background-image: url(./img/LogisTech.png);
+.circle {
+    background-image: url('../img/LogisTech.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 300px;
@@ -179,25 +184,26 @@
     box-shadow: 10px 10px 0px 5px #0E3AC0;
 }
 
-.textSection{
+.textSection {
     width: 50vw;
     height: 100vh;
 }
 
-hr{
-    border: none; 
-    border-top: 2px solid #000; 
+hr {
+    border: none;
+    border-top: 2px solid #000;
     width: 90%;
     margin: 10px 0
 }
 
-.textSection h2{
+.textSection h2 {
     font-size: 50px;
 }
 
-.textSection p{
+.textSection p {
     font-size: 30px;
 }
+
 /* Vitor */
 
 
@@ -215,24 +221,26 @@ footer {
 
 /*Vinicius dantas */
 
-.funcao{
-  width:100vw;
- display: flex;
- justify-content: center;
-margin-top: 100px;
-font-size: 32px;
-font-weight: bold;
-flex-direction: column;
-align-items: center;
+.funcao {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    font-size: 32px;
+    font-weight: bold;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
 }
-.meta{
+
+.meta {
     font-size: 24px;
     font-weight: 0;
     margin-left: 25rem;
     margin-right: 25rem;
 }
 
-.conteiner{
+.conteiner {
     display: flex;
     width: 100vw;
     font-size: 20px;
@@ -240,11 +248,60 @@ align-items: center;
     max-width: 100vw;
 }
 
-.conteiner .circle{
+.conteiner .circle {
     width: 35%;
-    height: 92%;
+    height: auto;
 }
 
-.conteiner .solucao{
-    align-self:center;
+.conteiner .solucao {
+    align-self: center;
+    padding-right: 5rem;
+}
+
+.separacao {
+    width: 100vw;
+    height: 5vh;
+    background-color: #0E3AC0;
+    max-width: 100%;
+}
+
+.alicerces {
+    width: 100vw;
+    height: 75vh;
+}
+
+.alicerces .titulo {
+    font-size: 3rem;
+    margin-top: 3rem;
+    width: 100%;
+    text-align: center;
+}
+
+.alicerces .subtitulo {
+    width: 100%;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.alicerces .cards {
+    display: flex;
+    padding: 3rem;
+    gap: 5rem;
+    height: 80%;
+}
+
+.alicerces .card {
+    width: 33%;
+    background-color: #D9D9D9;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 10%;
+}
+
+.alicerces .card p {
+    font-size: 1.1rem;
+    padding: 2rem;
 }

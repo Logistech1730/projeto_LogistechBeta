@@ -33,7 +33,7 @@
 .logoImg{
     width: 10%;
     height: 100px;
-    background-image: url(./img/LogisTech.png);
+    background-image: url('../img/LogisTech.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -47,7 +47,7 @@
     height: 83.65vh;
     width: 98.75vw;
     background-size: cover;
-    background-image: url(./img/bannerImg.png);
+    background-image: url('../img/bannerImg.png');
     display: flex;
     align-items: center;
     justify-content: center;
