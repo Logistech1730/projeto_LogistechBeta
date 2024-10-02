@@ -73,7 +73,7 @@
     background-image: url(./img/bannerImg.png);
     height: var(--bannerSize);
     background-repeat: no-repeat;
-    background-size: 100% auto;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     justify-content: center;
