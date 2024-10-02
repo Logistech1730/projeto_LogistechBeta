@@ -79,32 +79,34 @@
     width: 16vw;
     margin-bottom: 5vh;
     border-width: 0vh 0 0.2vh 0;
+    z-index: 2;
 }
 .labels {
     position: absolute;
     transition: .5s;
     user-select: none;
+    z-index: 1;
 }
 .label_1 {
-    top:42vh;
+    top:45vh;
 }
 .label_2 {
-    top: 53vh;
+    top: 56vh;
 }
 .label_3 {
-    top: 64vh;
+    top: 67vh;
 }
 input:focus + .label_1, 
 input:valid + .label_1{
-    top:39vh;
+    top:42vh;
 }
 input:focus + .label_2,
 input:valid + .label_2{
-    top:50vh;
+    top:53vh;
 }
 input:focus + .label_3,
 input:valid + .label_3{
-    top:55vh;
+    top:64vh;
 }
 
 textarea:focus, input:focus, select:focus {
@@ -115,7 +117,7 @@ textarea:focus, input:focus, select:focus {
 .area_botao {
     display: flex;
     justify-content: center;
-    margin-top: 6vh;
+    margin-top: 0vh;
 }
 .botao_cadastro {
     background-color: #070E3C;
