@@ -4,6 +4,10 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+:root{
+    --bannerSize: calc(100vh - 100px);
+}
+
 .headerElements ul a{
     text-decoration: none;
     color: #fff;
@@ -27,21 +31,27 @@
     background-color: #070E3C;
     display: flex;
     justify-content: space-between;
+    /* position: fixed; */
+    width: 100%;
 }
 
 .logoImg{
-    width: 500px;
+    width: 10%;
     height: 100px;
     background-image: url(./img/LogisTech.png);
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 20px;
 }
 
 .logoImg:hover{
     cursor:pointer;
 }
 
+/* Gabriel */
 .container-solucao {
+    height: 80vh;
     text-align: center;
     margin-top: 50px;
     margin-bottom: 50px;
@@ -54,13 +64,142 @@
 
 .texto-solucao p{
     color: rgb(73, 73, 73);
+    font-size: 3ch;
 }
+/* Gabriel */
+
+/* Vitor */
+.bannerImg{
+    background-image: url(./img/bannerImg.png);
+    height: var(--bannerSize);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.mainText{
+    color: #fff;
+    margin-left: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+    height: 100vh;
+}
+
+.mainText h1{
+    font-size: 50px;
+}
+
+.mainText p{
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.mainText button{
+    border-radius: 20px;
+    border: none;
+    padding: 20px;
+    background-color: #0E3AC0;
+    color: #fff;
+    font-weight: 800;
+    transition: 0.3s;
+}
+
+.mainText button:hover{
+    cursor: pointer;
+    background-color: #0b2d94;
+}
+
+.secondSection{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.sectionLeft{
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+}
+
+.sectionRight{
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-self: baseline;
+    margin: 10% 5% 0 0;
+}
+
+.sectionRight button{
+    border-radius: 20px;
+    width: 40%;
+    font-size: 20px;
+    margin-top: 5%;
+    border: none;
+    padding: 20px;
+    background-color: #0E3AC0;
+    color: #fff;
+    font-weight: 800;
+    transition: 0.3s;
+}
+
+.sectionRight button:hover{
+    cursor: pointer;
+    background-color: #0b2d94;
+}
+
+
+
+.circle{
+    background-image: url(./img/LogisTech.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 300px;
+    border-radius: 50%;
+    padding: 20px;
+    background-color: #0B144A;
+    height: 40%;
+    width: 45%;
+    margin: 40px;
+    box-shadow: 10px 10px 0px 5px #0E3AC0;
+}
+
+.textSection{
+    width: 50vw;
+    height: 100vh;
+}
+
+hr{
+    border: none; 
+    border-top: 2px solid #000; 
+    width: 90%;
+    margin: 10px 0
+}
+
+.textSection h2{
+    font-size: 50px;
+}
+
+.textSection p{
+    font-size: 30px;
+}
+/* Vitor */
 
 footer {
     background-color: #070E3C;
     color: white;
     text-align: center;
-    padding: 70px;
+    padding: 40px;
     width: 100%;
-    font-size: 3ch;
+    font-size: 2ch;
 }
