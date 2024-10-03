@@ -3,26 +3,25 @@
     box-sizing: border-box;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-
+:root{
+    --bannerSize: calc(100vh - 100px);
+}
 .headerElements ul a{
     text-decoration: none;
     color: #fff;
     font-weight: 800;
     transition: 0.3s;
 }
-:root{
-    --bannerSize: calc(100vh - 100px);
-}
+ 
 .headerElements ul a:hover{
     color: #b4b4b4;
-    border-bottom: 1px solid #b4b4b4;
 }
 
 .headerElements ul{
     display: flex;
     align-items: center;
     gap: 20px;
-    padding: 2vh 5vw 2vh 5vw;
+    padding: 20px 80px 20px 80px;
     list-style-type: none;
 }
 
@@ -33,30 +32,36 @@
 }
 
 .logoImg{
-    width: 10%;
+    width: 500px;
     height: 100px;
-    background-image: url('../img/LogisTech.png');
-    background-size: cover;
+    background-image: url(../imagens/LogisTech.png);
+    background-size: contain;
     background-repeat: no-repeat;
-    background-position: center;
-    margin-left: 20px;
 }
 
 .logoImg:hover{
     cursor:pointer;
 }
+
+.container-solucao {
+    text-align: center;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+}
+
+.texto-solucao h1{
+    font-size: 5ch;
+    font-weight: 2000;
+}
+
+.texto-solucao p{
+    color: rgb(73, 73, 73);
+}
 .background{
-<<<<<<< HEAD:Front-end/cadastro.css
     background-image: url(./img/bannerImg.png);
     height: var(--bannerSize);
     background-repeat: no-repeat;
     background-size: cover;
-=======
-    height: 83.65vh;
-    width: 98.75vw;
-    background-size: cover;
-    background-image: url('../img/bannerImg.png');
->>>>>>> 0c77c95567f48fea2f9b0146c7d186a19fce63fe:styles/cadastro.css
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -64,12 +69,13 @@
     background-attachment: fixed;
 }
 .form_cadastro{
+    height: 60%;
     background-color: #D9D9D9;
-    padding: 5vh 5vw 5vh 5vw;
+    width: 50%;
     border-radius: 2vw;
 }
 .form_cadastro h1{
-    margin-bottom: 4vh;
+    margin: 5vh;
     font-size: 3vw;
     text-align: center;
 }
@@ -82,53 +88,51 @@
 .colunas_cadastro {
     display: flex;
     flex-direction: column;
-    gap: 3vh;
+    gap: 4vh;
+    margin-bottom: 4vh;
 }
 .inputs {
     background-color: transparent;
     border-style: solid;
     width: 16vw;
-    margin-bottom: 5vh;
     border-width: 0vh 0 0.2vh 0;
-    z-index: 2;
+    margin-bottom: 3vh;
 }
-.labels {
-    position: absolute;
-    transition: .5s;
-    user-select: none;
-    z-index: 1;
-}
-.label_1 {
-    top:45vh;
-}
-.label_2 {
-    top: 56vh;
-}
-.label_3 {
-    top: 67vh;
-}
-input:focus + .label_1, 
-input:valid + .label_1{
-    top:42vh;
-}
-input:focus + .label_2,
-input:valid + .label_2{
-    top:53vh;
-}
-input:focus + .label_3,
-input:valid + .label_3{
-    top:64vh;
-}
-
 textarea:focus, input:focus, select:focus {
     box-shadow: 0 0 0 0;
     border-bottom-width: 0.2vh;
     outline: 0;
 } 
+.labels {
+    position: absolute;
+    transition: .5s;
+}
+.label_1 {
+    top:42vh;
+}
+.label_2 {
+    top: 51vh;
+}
+.label_3 {
+    top: 60vh;
+}
+input:focus + .label_1, 
+input:valid + .label_1{
+    top:40vh;
+}
+input:focus + .label_2,
+input:valid + .label_2{
+    top:49vh;
+}
+input:focus + .label_3,
+input:valid + .label_3{
+    top:58vh;
+}
 .area_botao {
     display: flex;
     justify-content: center;
-    margin-top: 0vh;
+    margin-bottom: 3vh;
+    margin-bottom: 1vw;
 }
 .botao_cadastro {
     background-color: #070E3C;
