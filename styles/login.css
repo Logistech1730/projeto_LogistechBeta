@@ -1,0 +1,178 @@
+body {
+    overflow-x: hidden;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* Navbar */
+.headerElements ul a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 800;
+    transition: 0.3s;
+}
+
+.headerElements ul a:hover {
+    color: #b4b4b4;
+    border-bottom: 1px solid #b4b4b4;
+}
+
+.headerElements ul {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 80px 20px 80px;
+    list-style-type: none;
+}
+
+.headerElements {
+    background-color: #070E3C;
+    display: flex;
+    justify-content: space-between;
+    /* position: fixed; */
+    width: 100%;
+    height: 15vh;
+}
+
+.logoImg {
+    width: 10%;
+    height: 100px;
+    background-image: url('../img/LogisTech.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 20px;
+}
+
+.logoImg:hover {
+    cursor: pointer;
+}
+
+.bannerImg {
+    background-image: url('../img/bannerImg.png');
+    height: var(--bannerSize);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.mainText {
+    color: #fff;
+    margin-left: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+    height: 85vh;
+}
+
+.mainText h1 {
+    font-size: 50px;
+}
+
+
+
+.mainText button {
+    border-radius: 20px;
+    border: none;
+    padding: 20px;
+    background-color: #0E3AC0;
+    color: #fff;
+    font-weight: 800;
+    transition: 0.3s;
+}
+
+.mainText button:hover {
+    cursor: pointer;
+    background-color: #0b2d94;
+    margin: 20px;
+}
+
+/* Container de login */
+.mainText .container {
+    /* Tamanho */
+    width: 40vw;
+    height: 70vh;
+
+
+    /* Posicionamento da div */
+    position: absolute;
+    right: 5rem;
+
+    /* Outros detalhes */
+    background-color: #D9D9D9;
+    border-radius: 10%;
+
+    /* Disposição dos elementos dentro do container */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+
+}
+
+.paragraph-login {
+    color: black;
+    height: fit-content;
+    font-size: 4rem;
+}
+
+.email,
+.senha,
+.container-senha {
+    width: 100%;
+
+}
+
+.email, .container-senha, .senha {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.email i, .container-senha i {
+    font-size: 1.8rem;
+}
+
+.email span {
+    align-self: end;
+}
+
+.email input,
+.senha .container-senha input {
+    width: inherit;
+    height: 3rem;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #8D8C8C;
+}
+
+.email input::placeholder, .senha .container-senha input {
+    font-size: 1.5rem;
+}
+
+.eye-icon, .eye-slash-icon {
+    cursor: pointer;
+    align-self: end;
+    font-size: 1.8rem;
+}
+
+.password-options {
+    width: 100%;
+}
+
+.password-options p {
+    color: black;
+}
