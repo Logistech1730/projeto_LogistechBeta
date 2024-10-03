@@ -3,6 +3,8 @@
 body {
     height: 600px;
     margin: 0;
+    background-image: url(../img/background_calculadora.jpg);
+    background-repeat: no-repeat;
 }
 
 .headerElements ul a {
