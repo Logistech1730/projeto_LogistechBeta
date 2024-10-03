@@ -35,7 +35,7 @@
                     monitoramento de processos de fabricação<br>
                     e destaque-se no mercado
                 </p>
-                <button>QUERO ME CADASTRAR</button>
+                <button id="cadastro" onclick="cadastar()">QUERO ME CADASTRAR</button>
 
             </div>
     </main>
@@ -55,7 +55,7 @@
                         <br><br>
                         Nossa missão é ajudar sua empresa a se destacar no mercado, utilizando tecnologia de ponta e insights valiosos para impulsionar a produtividade e a competitividade do seu negócio. Junte-se a nós e transforme seu processo de fabricação!
                     </p>
-                    <button>Saiba mais</button>
+                    <button id="btn_SaibaMais" onclick="Abrir_SaibaMais()">Saiba mais</button>
                 </div>
             </div>
             
@@ -76,3 +76,11 @@
 
 </body>
 </html>
+<script>
+    function Abrir_SaibaMais(){
+        window.location.href = 'sobrenós.html'
+    }
+    function cadastar (){
+        window.location.href = 'cadastro.html'
+    }
+</script>

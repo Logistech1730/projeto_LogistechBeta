@@ -173,7 +173,7 @@ body {
     height: 80%;
 }
 
-.alicerces .card {
+.alicerces1 .card {
     width: 33%;
     background-color: #D9D9D9;
     height: 50vh;
@@ -187,4 +187,13 @@ body {
 .alicerces .card p {
     font-size: 1.1rem;
     padding: 2rem;
+}
+
+footer {
+    background-color: #070E3C;
+    color: white;
+    text-align: center;
+    padding: 40px;
+    width: 100%;
+    font-size: 2ch;
 }
