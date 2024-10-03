@@ -35,7 +35,7 @@
 .logoImg{
     width: 10%;
     height: 100px;
-    background-image: url(./img/LogisTech.png);
+    background-image: url('../img/LogisTech.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -46,10 +46,17 @@
     cursor:pointer;
 }
 .background{
+<<<<<<< HEAD:Front-end/cadastro.css
     background-image: url(./img/bannerImg.png);
     height: var(--bannerSize);
     background-repeat: no-repeat;
     background-size: cover;
+=======
+    height: 83.65vh;
+    width: 98.75vw;
+    background-size: cover;
+    background-image: url('../img/bannerImg.png');
+>>>>>>> 0c77c95567f48fea2f9b0146c7d186a19fce63fe:styles/cadastro.css
     display: flex;
     flex-direction: column;
     justify-content: center;
