@@ -10,7 +10,9 @@
     font-weight: 800;
     transition: 0.3s;
 }
-
+:root{
+    --bannerSize: calc(100vh - 100px);
+}
 .headerElements ul a:hover{
     color: #b4b4b4;
     border-bottom: 1px solid #b4b4b4;
@@ -44,13 +46,15 @@
     cursor:pointer;
 }
 .background{
-    height: 83.65vh;
-    width: 98.75vw;
-    background-size: cover;
     background-image: url(./img/bannerImg.png);
+    height: var(--bannerSize);
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
+    background-position: center;
+    background-attachment: fixed;
 }
 .form_cadastro{
     background-color: #D9D9D9;
