@@ -112,6 +112,35 @@ body {
     padding-right: 5rem;
 }
 
+.espscamento{
+    width: 100vw;
+    height: 5vh;
+    background-color:#0E3AC0 ;
+    max-width: 100%;
+}
+
+.circle {
+    background-image: url('../img/LogisTech.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 300px;
+    border-radius: 50%;
+    padding: 20px;
+    background-color: #0B144A;
+    height: auto;
+    width: 35%;
+    margin: 40px;
+    box-shadow: 10px 10px 0px 5px #0E3AC0;
+}
+
+.alicerces1 {
+    width: 100vw;
+    height: 75vh;
+}
+
+
+
+/* vinicius oliveira*/
 .separacao {
     width: 100vw;
     height: 5vh;
@@ -119,25 +148,25 @@ body {
     max-width: 100%;
 }
 
-.alicerces {
+.alicerces1 {
     width: 100vw;
     height: 75vh;
 }
 
-.alicerces .titulo {
+.alicerces1 .titulo1 {
     font-size: 3rem;
     margin-top: 3rem;
     width: 100%;
     text-align: center;
 }
 
-.alicerces .subtitulo {
+.alicerces1 .subtitulo1 {
     width: 100%;
     font-size: 2rem;
     text-align: center;
 }
 
-.alicerces .cards {
+.alicerces1 .cards {
     display: flex;
     padding: 3rem;
     gap: 5rem;
