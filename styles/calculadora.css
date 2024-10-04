@@ -71,12 +71,13 @@ body {
     width: 250px;
     height: 20px;
     border-radius: 20px;
-    background-color: aquamarine;
+    background-color: #0300b9;
+    color: white;
 }
 
 ::placeholder{
     text-align: center;
-    color: black;
+    color: white;
 }
 .botao {
     display: flex;
@@ -89,11 +90,12 @@ body {
     border-radius: 20px;
     height: 40px;
     width: 150px;
-    background-color: aquamarine;
+    background-color: #0300b9;
+    color: white;
 }
 
 .botao button:hover {
-    background-color: rgb(221, 248, 239);
+    background-color: rgb(1, 217, 255);
 }
 
 .simulador .titulo {
