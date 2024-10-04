@@ -215,7 +215,6 @@ footer {
     font-size: 2ch;
 }
 
-<<<<<<< HEAD:Front-end/style.css
 .container-dash {
     display: flex;
 }
@@ -271,7 +270,8 @@ footer {
     padding: 5px;
     background-color: #d2d2d2;
     font-size: 14px;
-=======
+}
+
 /*Vinicius dantas */
 
 .funcao {
@@ -357,5 +357,4 @@ footer {
 .alicerces .card p {
     font-size: 1.1rem;
     padding: 2rem;
->>>>>>> 04db48bf3eec1dbe38a12c38fdcd44d4210f9405:styles/style.css
 }
