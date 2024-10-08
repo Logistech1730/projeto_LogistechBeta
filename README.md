@@ -6,6 +6,12 @@
 Nosso grupo foi formado para atender as soluções de tecnologia das empresas onde a linha de produção apresenta problemas de retrabalho, desvio indevido de material e necessidade de melhorias no processo.
 
 ## Colaboradores
+- Vinicius Oliveira Pedroso
+- Israel Coaquira Jumpiri
+- Gabriel Yuri Iwakura
+- Vitor Almeida da Silva
+- Matteo Garcia Rizzo
+- Vinícius dos Santos Dantas
 - Enrico D'Amaro
 - Guilgerme Ortiz de Camargo
 - Matheus Marques
