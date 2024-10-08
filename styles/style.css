@@ -9,6 +9,19 @@ body {
     overflow-x: hidden;
 }
 
+
+ /* Essas duas classes controlam a aparição do elemento na tela */
+.hidden-item {
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: 1.5s;
+}
+
+.show {
+    transform: translateX(0%);
+    opacity: 1;
+}
+
 :root {
     --bannerSize: calc(100vh - 100px);
 }
@@ -167,6 +180,7 @@ body {
 .sectionRight button:hover {
     cursor: pointer;
     background-color: #0b2d94;
+    transform: translateY(-30%);
 }
 
 

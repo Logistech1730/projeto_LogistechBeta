@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Logistech</title>
     <link rel="stylesheet" href="styles/style.css">
 </head>
+
 <body>
 
     <!-- Vitor -->
@@ -13,7 +15,7 @@
 
         <section class="logoImg"><a href="#home"></a></section>
 
-        <ul >
+        <ul>
             <li><a href="#home">Home</a></li>
             <li><a href="#aboutUs">Sobre nós</a></li>
             <li><a href="#solution">Serviços</a></li>
@@ -22,7 +24,7 @@
         </ul>
     </header>
 
-    <main>
+    <main class="hidden-item">
         <div id="home" class="bannerImg">
             <div class="mainText">
 
@@ -31,56 +33,92 @@
                     PARA A SUA EMPRESA
                 </h1>
                 <p>
-                    Conheça nossas soluções em  <br>
+                    Conheça nossas soluções em <br>
                     monitoramento de processos de fabricação<br>
                     e destaque-se no mercado
                 </p>
-                <button id="cadastro" onclick="cadastar()">QUERO ME CADASTRAR</button>
+                <button id="cadastro" onclick="cadastrar()">QUERO ME CADASTRAR</button>
 
             </div>
     </main>
 
-        <div id="aboutUs" class="secondSection">
-            <div class="sectionLeft">
-                <div class="circle"></div>
-            </div>
+    <div id="aboutUs" class="secondSection hidden-item">
+        <div class="sectionLeft">
+            <div class="circle"></div>
+        </div>
 
-            <div class="sectionRight">
-                <div class="textSection">
-                    <h2>Conheça um pouco mais sobre a
-                        Logistech</h2>
-                        <hr>
-                    <p>
-                        Na Logistech, oferecemos soluções inovadoras em monitoramento de processos de fabricação, que visam otimizar a eficiência e garantir a qualidade em cada etapa da produção. 
-                        <br><br>
-                        Nossa missão é ajudar sua empresa a se destacar no mercado, utilizando tecnologia de ponta e insights valiosos para impulsionar a produtividade e a competitividade do seu negócio. Junte-se a nós e transforme seu processo de fabricação!
-                    </p>
-                    <button id="btn_SaibaMais" onclick="Abrir_SaibaMais()">Saiba mais</button>
-                </div>
+        <div class="sectionRight">
+            <div class="textSection">
+                <h2>Conheça um pouco mais sobre a
+                    Logistech</h2>
+                <hr>
+                <p>
+                    Na Logistech, oferecemos soluções inovadoras em monitoramento de processos de fabricação, que visam
+                    otimizar a eficiência e garantir a qualidade em cada etapa da produção.
+                    <br><br>
+                    Nossa missão é ajudar sua empresa a se destacar no mercado, utilizando tecnologia de ponta e
+                    insights valiosos para impulsionar a produtividade e a competitividade do seu negócio. Junte-se a
+                    nós e transforme seu processo de fabricação!
+                </p>
+                <button id="btn_SaibaMais" onclick="Abrir_SaibaMais()">Saiba mais</button>
             </div>
-            
         </div>
+
+    </div>
+    </div>
+    <!-- Gabriel -->
+    <div id="solution" class="container-solucao hidden-item">
+        <div class="texto-solucao">
+            <h1>Conheça nossa solução</h1>
+            <p>Nossa solução baseia-se no monitoramento das esteiras de produção e posteriormenteo envio<br>
+                desses dados para gráficos que te ajudam a tomar a melhor decisão baseada em dados</p>
         </div>
-<!-- Gabriel -->
-        <div id="solution" class="container-solucao">
-            <div class="texto-solucao">
-                <h1>Conheça nossa solução</h1>
-                <p>Nossa solução baseia-se no monitoramento das esteiras de produção e posteriormenteo envio<br>
-                    desses dados para gráficos que te ajudam a tomar a melhor decisão baseada em dados</p>
-            </div>
-            <img src="./img/solutionDiagram.png" class="img-diagrama" alt="Diagrama de negócio">
-        </div>
-        <footer>
-            <p>Copyright © 2024 - Todos os direitos reservados Logistech</p>
-        </footer>
+        <img src="./img/solutionDiagram.png" class="img-diagrama" alt="Diagrama de negócio">
+    </div>
+    <footer>
+        <p>Copyright © 2024 - Todos os direitos reservados Logistech</p>
+    </footer>
 
 </body>
+
 </html>
 <script>
-    function Abrir_SaibaMais(){
+    function Abrir_SaibaMais() {
         window.location.href = 'sobrenós.html'
     }
-    function cadastar (){
+    function cadastrar() {
         window.location.href = 'cadastro.html'
     }
+
+
+    // Aqui eu crio um vetor e seleciono todos os elementos que possuem a classe .hidden-item no HTML
+    const hiddenItems = document.querySelectorAll('.hidden-item');
+    //Descomente a linha abaixo e abra o console para ver
+    // console.log(hiddenItems)
+
+    // Aqui eu chamo a função de "observar"
+    const observerCallback = (entries, observer) => {
+        entries.forEach(entry => {
+            // Aqui eu verifico se o objeto observado apareceu na tela
+            if (entry.isIntersecting) {
+                // caso sim, eu mudo a classe dele para "show"
+                entry.target.classList.add('show');
+                observer.unobserve(entry.target); // Para de observar o item após ele ficar visível
+            }
+        });
+    };
+
+    // Configuração do observer
+    const observerOptions = {
+        rootMargin: '0px',
+        threshold: 0.1 // Ativa quando 10% do item estiver visível
+    };
+
+    // Cria uma nova instância do IntersectionObserver
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    // Aplica o observer para cada item da lista
+    hiddenItems.forEach(item => {
+        observer.observe(item);
+    });
 </script>
