@@ -54,15 +54,14 @@ body {
 }
 
 .bannerImg {
-    background-image: url('../img/bannerImg.png');
+    background-image: url(../img/bannerImg.png);
     height: var(--bannerSize);
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-position: center;
-    background-attachment: fixed;
+    /* background-attachment: fi */
 }
 
 .mainText {
@@ -86,16 +85,17 @@ body {
     border-radius: 20px;
     border: none;
     padding: 20px;
-    background-color: #0E3AC0;
+    background-color: #070E3C;
     color: #fff;
     font-weight: 800;
     transition: 0.3s;
+    width: 50%;
+    font-size: 1.5rem;
 }
 
 .mainText button:hover {
     cursor: pointer;
     background-color: #0b2d94;
-    margin: 20px;
 }
 
 /* Container de login */
@@ -152,6 +152,7 @@ body {
 
 .email input,
 .senha .container-senha input {
+    font-size: 2rem;
     width: inherit;
     height: 3rem;
     background-color: transparent;
@@ -175,4 +176,15 @@ body {
 
 .password-options p {
     color: black;
+}
+
+.password-options a {
+   text-decoration: none;
+}
+
+#mensagem_erro {
+    margin: 0;
+    padding: 0;
+    color: red;
+    font-size: 1rem;
 }

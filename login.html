@@ -17,9 +17,9 @@
         <section class="logoImg"><a href="#home"></a></section>
 
         <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#aboutUs">Sobre nós</a></li>
-            <li><a href="#solution">Serviços</a></li>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="sobrenós.html">Sobre nós</a></li>
+            <li><a href="./index.html#solution">Serviços</a></li>
             <li><a href="#">Login</a></li>
             <li><a href="./cadastro.html">Cadastre-se</a></li>
 
@@ -36,6 +36,7 @@
                 </h1>
                 <div class="container">
                     <p class="paragraph-login">Login</p>
+                    <p id="mensagem_erro" style="display: none;"></p>
                     <div class="email">
                         <span style="color: #8D8C8C;">
                             <i class="fa-regular fa-user"></i>
@@ -57,11 +58,11 @@
                             <i class="fa-regular fa-eye"></i>
                         </span>
                     </div>
-                     <div class="password-options"> 
+                    <div class="password-options">
                         <p><a href="404.html">Esqueceu a senha?</a></p>
-                        <p>Não tem uma conta?<a href="cadastro.html">Crie agora.</a></p>
+                        <p>Não tem uma conta?<a href="cadastro.html"> Crie agora</a></p>
                     </div>
-                    <button>Acessar</button>
+                    <button onclick="login()">Acessar</button>
                 </div>
             </div>
     </main>
@@ -71,7 +72,6 @@
 </html>
 <script>
     function mudarTipoSenha() {
-
         if (olhofechado.style.display == "none") {
             // mostrar senha
             ipt_senha.type = "text";
@@ -82,5 +82,33 @@
             olhofechado.style.display = "none";
             olhoaberto.style.display = "block";
         }
+    }
+
+    function login() {
+        var login = ipt_email.value;
+        var senha = ipt_senha.value;
+        console.log(login, senha)
+
+        // validações
+        if (login != "" && senha != "") {
+            // Validação de autenticação (adicionar)
+            if (autenticar(login, senha)) {
+                window.location.href = "dashboard.html";
+            } else {
+                mensagem_erro.innerHTML = "Usuário ou senha incorretos, tente novamente.";
+                mensagem_erro.style.display = "block";
+            }
+
+        } else {
+            mensagem_erro.innerHTML = "Preencha todos os campos antes de acessar.";
+            mensagem_erro.style.display = "block";
+        }
+    }
+
+    function autenticar(login, senha) {
+        if (login == "admin" && senha == "admin") {
+            return true
+        }
+        return false;
     }
 </script>
