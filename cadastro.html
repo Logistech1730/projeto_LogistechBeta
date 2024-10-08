@@ -27,10 +27,10 @@
                     <span class="labels label_1" >Nome da Empresa</span>
                     <span id = "span_validar_nome" class="span_validacao"></span>
                     <input type="email" id="ipt_email" oninput="validarEmail()" class="inputs" required>
-                    <span class="labels label_2">Email</span>
+                    <span class="labels label_2">Email da Empresa</span>
                     <span id = "span_validar_email" class="span_validacao"></span>
                     <input type="password" id="ipt_senha" oninput="validarSenha()" class="inputs" required>
-                    <span class="labels label_3">Senha</span>
+                    <span class="labels label_3">Digite uma Senha</span>
                     <span id = "span_validar_senha" class="span_validacao"></span>
                 </div>
                 <div class="colunas_cadastro">
@@ -54,12 +54,12 @@
 <script>
     function validarNome() {
         var nome = ipt_nome.value;
-        if (nome != '') {
+        if (nome != '' && nome.length >= 3) {
             span_validar_nome.style.color = '#069206'
             span_validar_nome.innerHTML = `Nome validado com sucesso`;
         } else {
             span_validar_nome.style.color = 'red'
-            span_validar_nome.innerHTML = `Nome inválido, preencha corretamente`;
+            span_validar_nome.innerHTML = `O nome deve ter no mínimo 3 caracteres`;
         }
     }
     function validarEmail (){
@@ -67,13 +67,23 @@
         var tamanho_email = email.length;
         var possui_arroba = email.includes('@');
         var indice_arroba = email.indexOf('@') + 1;
+        var possui_extensao = email.includes('.');
+        var indice_extensao = email.indexOf('.')+1;
+        var possui_pontocom = email.includes('.com');
+        var indice_pontocom = email.indexOf('.com')+1;
+        console.log(indice_extensao)
         if (email != '') {
             if (possui_arroba == true) {
                 if (indice_arroba > 1) {
                     if (indice_arroba < tamanho_email) {
-                        span_validar_email.style.color = '#069206'
-                        span_validar_email.innerHTML = `email preenchido com sucesso`;
-                        email = email.toLowerCase();
+                        if (possui_extensao == true && indice_extensao > indice_arroba && indice_extensao < tamanho_email) {
+                            span_validar_email.style.color = '#069206'
+                            span_validar_email.innerHTML = `email preenchido com sucesso`;
+                            email = email.toLowerCase();
+                        } else {
+                            span_validar_email.style.color = 'red'
+                            span_validar_email.innerHTML = `Preecha a extensão corretamente`;
+                        }
                     } else {
                         span_validar_email.style.color = 'red'
                         span_validar_email.innerHTML = `O @ não pode ser o último caractere`;
