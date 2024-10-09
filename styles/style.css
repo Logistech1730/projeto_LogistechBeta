@@ -245,6 +245,11 @@ footer {
     text-align: center;
 }
 
+.barra-lateral span:hover{
+    cursor: pointer;
+    color: #b4b4b4;
+}
+
 .barra-lateral h4 {
     margin-bottom: 20px;
     margin-top: 10px;
