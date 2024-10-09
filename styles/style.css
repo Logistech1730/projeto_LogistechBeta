@@ -232,6 +232,7 @@ footer {
 
 .container-dash {
     display: flex;
+    height: 74.3vh;
 }
 
 .barra-lateral {
@@ -242,6 +243,11 @@ footer {
     padding: 20px;
     width: 200px;
     text-align: center;
+}
+
+.barra-lateral span:hover{
+    cursor: pointer;
+    color: #b4b4b4;
 }
 
 .barra-lateral h4 {
