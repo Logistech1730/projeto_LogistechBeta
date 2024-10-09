@@ -232,6 +232,7 @@ footer {
 
 .container-dash {
     display: flex;
+    height: 74.3vh;
 }
 
 .barra-lateral {
