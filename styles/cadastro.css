@@ -116,15 +116,15 @@ body{
 }
 input:focus + .label_1, 
 input:valid + .label_1{
-    bottom: 10vh;
+    bottom: 10.5vh;
 }
 input:focus + .label_2,
 input:valid + .label_2{
-    bottom: 10vh;
+    bottom: 10.5vh;
 }
 input:focus + .label_3,
 input:valid + .label_3{
-    bottom: 10vh;
+    bottom: 10.5vh;
 }
 
 textarea:focus, input:focus, select:focus {
