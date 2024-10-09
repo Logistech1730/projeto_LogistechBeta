@@ -60,7 +60,7 @@
             span_validar_nome.innerHTML = `Nome validado com sucesso`;
         } else {
             span_validar_nome.style.color = 'red'
-            span_validar_nome.innerHTML = `O nome deve ser de 3 a 64 caracteres`;
+            span_validar_nome.innerHTML = `O Nome deve ser de 3 a 64 caracteres`;
         }
     }
     function validarEmail (){
@@ -76,7 +76,7 @@
         console.log(indice_ponto_depois_arroba)
         console.log(indice_extensao)
         console.log(tamanho_email)
-        if (email != '' && possui_arroba == true && indice_arroba > 1 && indice_arroba < tamanho_email && possui_ponto_depois_arroba == true && indice_ponto_depois_arroba >= 3 && (indice_ponto_depois_arroba + indice_arroba+1) < tamanho_email) {
+        if (email != '' && possui_arroba == true && indice_arroba > 1 && indice_arroba < tamanho_email && possui_ponto_depois_arroba == true && indice_ponto_depois_arroba >= 2 && (indice_ponto_depois_arroba + indice_arroba+1) < tamanho_email) {
             span_validar_email.style.color = '#069206'
             span_validar_email.innerHTML = `email preenchido com sucesso`;
             email = email.toLowerCase();
@@ -87,15 +87,15 @@
             span_validar_email.style.color = 'red'
             span_validar_email.innerHTML = `O email precisa ter @`;
         } else if(indice_arroba == 1){
-                    span_validar_email.style.color = 'red'
-                    span_validar_email.innerHTML = `O @ não pode ser o primeiro caractere`;
+            span_validar_email.style.color = 'red'
+            span_validar_email.innerHTML = `O @ não pode ser o primeiro caractere`;
         } else if(indice_arroba == tamanho_email){
             span_validar_email.style.color = 'red'
             span_validar_email.innerHTML = `O @ não pode ser o último caractere`;
         } else if(possui_ponto_depois_arroba == false) {
             span_validar_email.style.color = 'red'
             span_validar_email.innerHTML = `O email precisa ter extensão após o @`;
-        } else if(indice_ponto_depois_arroba < 3) {
+        } else if(indice_ponto_depois_arroba < 2) {
             span_validar_email.style.color = 'red'
             span_validar_email.innerHTML = `A extensão tem de estar no mínimo a 3 caracteres do @`;
         } else if(indice_ponto_depois_arroba+indice_arroba +1 >= tamanho_email) {
@@ -138,15 +138,15 @@
         var tamanho_cnpj = cnpj.length
         var possui_caractere_especial = cnpj.includes('@') || cnpj.includes('!') || cnpj.includes("'") || cnpj.includes(`"`) || cnpj.includes('#') || cnpj.includes('$') || cnpj.includes('%') || cnpj.includes('¨') || cnpj.includes('&') || cnpj.includes('*') || cnpj.includes(`)`) || cnpj.includes(`(`) || cnpj.includes('_') || cnpj.includes('-') || cnpj.includes('=') || cnpj.includes('+') || cnpj.includes('§') || cnpj.includes('|') || cnpj.includes('\u005C') || cnpj.includes('`') || cnpj.includes('´') || cnpj.includes('[') || cnpj.includes(']') || cnpj.includes('{') || cnpj.includes('}') || cnpj.includes('^') || cnpj.includes('~') || cnpj.includes('ª') || cnpj.includes('º') || cnpj.includes('<') || cnpj.includes('>') || cnpj.includes(',') || cnpj.includes('.') || cnpj.includes(':') || cnpj.includes(';') || cnpj.includes('?') || cnpj.includes('/') || cnpj.includes('°') || cnpj.includes('¹') || cnpj.includes('²') || cnpj.includes('³') || cnpj.includes('£') || cnpj.includes('¢') || cnpj.includes('¬') ;
         if (cnpj != '' && possui_caractere_especial == false && tamanho_cnpj == 14) {
-            span_validar_telefone.style.color = '#069206'
-            span_validar_telefone.innerHTML = `Email preenchido com sucesso`;
+            span_validar_cnpj.style.color = '#069206'
+            span_validar_cnpj.innerHTML = `CNPJ preenchido com sucesso`;
         } else if(cnpj == ''){
             span_validar_cnpj.style.color = 'red'
-            span_validar_cnpj.innerHTML = `Preencha o cnpj da empresa para continuar`;
-        } else if(possui_caractere_especial == false){
+            span_validar_cnpj.innerHTML = `Preencha o CNPJ da empresa para continuar`;
+        } else if(possui_caractere_especial == true){
             span_validar_cnpj.style.color = 'red'
             span_validar_cnpj.innerHTML = `o CNPJ deve possuir apenas números e letras`;
-        } else if(tamanho_cnpj == 14){
+        } else if(tamanho_cnpj != 14){
             span_validar_cnpj.style.color = 'red'
             span_validar_cnpj.innerHTML = `o CNPJ deve possuir apenas números e letras`;
         }
@@ -165,8 +165,8 @@
             span_validar_telefone.style.color = 'red'
             span_validar_telefone.innerHTML = `Apenas números são permitidos`;
         } else if(tamanho_telefone != 11){
-                    span_validar_telefone.style.color = 'red'
-                    span_validar_telefone.innerHTML = `O Telefone tem de ter apenas 11 números`;
+            span_validar_telefone.style.color = 'red'
+            span_validar_telefone.innerHTML = `O Telefone tem de ter apenas 11 números`;
         }
 } 
             
