@@ -230,68 +230,7 @@ footer {
     font-size: 2ch;
 }
 
-.container-dash {
-    display: flex;
-    height: 74.3vh;
-}
 
-.barra-lateral {
-    display: flex;
-    flex-direction: column;
-    background-color: #1e2868;
-    color: #fff;
-    padding: 20px;
-    width: 200px;
-    text-align: center;
-}
-
-.barra-lateral span:hover{
-    cursor: pointer;
-    color: #b4b4b4;
-}
-
-.barra-lateral h4 {
-    margin-bottom: 20px;
-    margin-top: 10px;
-}
-
-.perfil-foto {
-    border-radius:100%;
-    width: 100px;
-    align-items: center;
-}
-
-.barra-lateral span {
-    display: block;
-    margin: 15px 0;
-    padding: 1px;
-    text-align: left; 
-    font-weight: 1000;
-}
-
-.filtros-dash {
-    display: flex;
-    justify-content: space-around ;
-    align-items: flex-start;
-    width: 100%;
-    margin-top: 40px;
-}
-
-.filtros-dash button{
-    border: none;
-    background-color: #0B144A;
-    color: white;
-    width: 130px;
-    padding: 5px;
-    font-size: 14px;
-}
-
-.filtros-dash select, 
-.filtros-dash input {
-    padding: 5px;
-    background-color: #d2d2d2;
-    font-size: 14px;
-}
 
 /*Vinicius dantas */
 

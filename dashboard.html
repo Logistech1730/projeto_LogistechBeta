@@ -4,42 +4,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nossos Serviços</title>
-    <link rel="stylesheet" href="./styles/style.css">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body>  
+<body>
     <header class="headerElements">
 
         <section class="logoImg"><a href="#home"></a></section>
     </header>
-        <div class="container-dash">
-            <div class="barra-lateral">
-                <div class="div-imagem-perfil">
-                    <img src="./img/perfilexemplo.png" class="perfil-foto" alt="foto de perfil">
-                </div>
-                <h4>EletronicGear Ltda.</h4>
-                <span>Dashboard</span>
-                <span>Histórico</span>
-                <span>Alertas</span>
-                <span>Configurações</span>
-                <span>Minha Conta</span>
-                <span>Sair</span>
-            </div> 
-            <div class="filtros-dash">
-                <select id="">
-                    <option value="sensor1">Sensor1</option>
-                    <option value="sensor2">Sensor2</option>
-                    <option value="sensor3">Sensor3</option>
-                </select>
-                <input type="date" id="data1">
-                <input type="date" id="data2">
-                <button>Aplicar Filtros</button>
+    <div class="container-dash">
+        <div class="barra-lateral">
+            <div class="div-imagem-perfil">
+                <img src="./img/perfilexemplo.png" class="perfil-foto" alt="foto de perfil">
             </div>
+            <h4>EletronicGear Ltda.</h4>
+            <div class="option">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Dashboard</span>
+            </div>
+            <div class="option">
+                <i class="fa-solid fa-book"></i>
+                <span>Histórico</span>
+            </div>
+            <div class="option">
+                <i class="fa-regular fa-bell"></i>
+                <span>Alertas</span>
+            </div>
+            <div class="option">
+                <i class="fa-solid fa-gear"></i>
+                <span>Configurações</span>
+            </div>
+            <div class="option">
+                <i class="fa-solid fa-user"></i>
+                <span>Minha Conta</span>
+            </div>
+            <div class="option">
+                <i class="fa-solid fa-door-open"></i>
+                <span>Sair</span>
+            </div>
+
+
+
+
+
+
         </div>
-        <footer>
-            <p>Copyright © 2024 - Todos os direitos reservados Logistech</p>
-        </footer>
+        <div class="filtros-dash">
+            <select id="">
+                <option value="sensor1">Sensor1</option>
+                <option value="sensor2">Sensor2</option>
+                <option value="sensor3">Sensor3</option>
+            </select>
+            <input type="date" id="data1">
+            <input type="date" id="data2">
+            <button>Aplicar Filtros</button>
+        </div>
+    </div>
+    <footer>
+        <p>Copyright © 2024 - Todos os direitos reservados Logistech</p>
+    </footer>
 </body>
 
 </html>

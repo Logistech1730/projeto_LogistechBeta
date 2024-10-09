@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    transition: 0.2s;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.headerElements ul a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 800;
+    transition: 0.3s;
+}
+
+.headerElements ul a:hover {
+    color: #b4b4b4;
+    border-bottom: 1px solid #b4b4b4;
+}
+
+.headerElements ul {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 80px 20px 80px;
+    list-style-type: none;
+}
+
+.headerElements {
+    background-color: #070E3C;
+    display: flex;
+    justify-content: space-between;
+    /* position: fixed; */
+    width: 100%;
+    height: 15vh;
+}
+
+.logoImg {
+    width: 10%;
+    height: 100px;
+    background-image: url('../img/LogisTech.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 20px;
+}
+
+.logoImg:hover {
+    cursor: pointer;
+}
+
+.container-dash {
+    display: flex;
+    height: 74.3vh;
+}
+
+.barra-lateral {
+    display: flex;
+    flex-direction: column;
+    background-color: #1e2868;
+    color: #fff;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+}
+
+.barra-lateral span:hover{
+    color: #b4b4b4;
+}
+
+.option i:hover {
+    color: #b4b4b4;
+}
+
+.barra-lateral h4 {
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.option{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.option:hover {
+    cursor: pointer;
+}
+
+.perfil-foto {
+    border-radius:100%;
+    width: 100px;
+    align-items: center;
+}
+
+.barra-lateral span {
+    display: block;
+    margin: 15px 0;
+    padding: 1px;
+    text-align: left; 
+    font-weight: 1000;
+}
+
+.filtros-dash {
+    display: flex;
+    justify-content: space-around ;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.filtros-dash button{
+    border: none;
+    background-color: #0B144A;
+    color: white;
+    width: 130px;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.filtros-dash select, 
+.filtros-dash input {
+    padding: 5px;
+    background-color: #d2d2d2;
+    font-size: 14px;
+}
+
+footer {
+    background-color: #070E3C;
+    color: white;
+    text-align: center;
+    padding: 40px;
+    width: 100%;
+    font-size: 2ch;
+}
