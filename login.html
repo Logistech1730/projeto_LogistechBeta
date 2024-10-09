@@ -17,11 +17,11 @@
         <section class="logoImg"><a href="#home"></a></section>
 
         <ul>
-            <li><a href="../index.html">Home</a></li>
+            <li><a href="index.html">Home</a></li>
             <li><a href="sobrenós.html">Sobre nós</a></li>
-            <li><a href="./index.html#solution">Serviços</a></li>
+            <li><a href="index.html#solution">Serviços</a></li>
             <li><a href="#">Login</a></li>
-            <li><a href="./cadastro.html">Cadastre-se</a></li>
+            <li><a href="cadastro.html">Cadastre-se</a></li>
 
         </ul>
     </header>
@@ -91,8 +91,8 @@
 
         // validações
         if (login != "" && senha != "") {
-            // Validação de autenticação (adicionar)
-            if (autenticar(login, senha)) {
+            // Validação de autenticação (adicionar após a implementação da API de comunicação com BD)
+            if (login == "admin" && senha == "admin") {
                 window.location.href = "dashboard.html";
             } else {
                 mensagem_erro.innerHTML = "Usuário ou senha incorretos, tente novamente.";
@@ -105,10 +105,12 @@
         }
     }
 
+
+    /*
     function autenticar(login, senha) {
         if (login == "admin" && senha == "admin") {
             return true
         }
         return false;
-    }
+    } */
 </script>
