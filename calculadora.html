@@ -9,13 +9,14 @@
 <body>
     <header class="headerElements">
 
-        <section class="logoImg"></section>
+        <section class="logoImg"><a href="#home"></a></section>
 
-        <ul >
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Sobre nós</a></li>
-            <li><a href="#">Serviços</a></li>
-            <li><a href="#">Login</a></li>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#aboutUs">Sobre nós</a></li>
+            <li><a href="#solution">Serviços</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="./cadastro.html">Cadastre-se</a></li>
         </ul>
     </header>
     <div class="simulador">
@@ -45,11 +46,11 @@ function analisar(){
     var rendaMensal = Number(ipt_renda.value);
     var rendaCalculada = (unidades * valor)
     if (rendaCalculada > rendaMensal){
-        div_mensagem.innerHTML = `sua renda mensal está <br> <b style=color:red> R$${rendaCalculada - rendaMensal} </b> <br> abaixo do que deveria, o que pode indicar possivel extravio de produtos de seu armazem <br> para averiguar esse possivel problema contrate nossos serviços.`
+        div_mensagem.innerHTML = `sua renda mensal está <br> <b style=color:red> R$${rendaCalculada - rendaMensal} </b> <br> abaixo do que deveria, o que pode indicar possivel extravio de produtos de seu armazem <br> <br> para averiguar esse possivel problema contrate nossos serviços.`
     } else if (rendaCalculada < rendaMensal){
         div_mensagem.innerHTML = `sua renda mensal está <br> <b style=color:red> R$${rendaMensal - rendaCalculada} </b> <br> acima do que deveria, <p style=color:green> o que pode ser uma boa noticia </p> <p style=color:red> ou algum erro grave no calculo da renda mensal </p> para averiguar esse possivel problema contrate nossos serviços`
     } else if (rendaCalculada == rendaMensal){
-        div_mensagem.innerHTML = `sua renda mensal está igual a que calculamos em nossa estimativa <br> <p style=color:green> o que indica que não na nenhum problema atualmente na detecção de entrada e saida de seus produtos </p> e para garantir que vai continuar assim contrate nossos serviços`
+        div_mensagem.innerHTML = `sua renda mensal está igual a que calculamos em nossa estimativa <br> <b style=color:green> o que indica que não na nenhum problema atualmente na detecção de entrada e saida de seus produtos </b> e para garantir que vai continuar assim contrate nossos serviços`
     }
 }
 </script>
