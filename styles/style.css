@@ -5,6 +5,8 @@
     transition: 0.2s;
 }
 
+
+
 body {
     overflow-x: hidden;
 }
@@ -51,7 +53,7 @@ body {
     display: flex;
     justify-content: space-between;
     /* position: fixed; */
-    width: 100%;
+    width: 100vw;
     height: 15vh;
 }
 
@@ -317,4 +319,124 @@ footer {
 .alicerces .card p {
     font-size: 1.1rem;
     padding: 2rem;
+}
+
+/*Israel - Página de cadastro*/
+
+.modal {
+    display: none;
+    position: absolute;
+    padding: 20vh;
+    color: #ffffff;
+    font-weight: 700;
+    background-color: #ffa7a7;
+    opacity: 1;
+    z-index: 3;
+    transition: .9s;
+}
+.form_cadastro::backdrop{
+    background-color: rgb(0, 0, 0);
+    opacity: 0.7;
+}
+.form_cadastro{
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    flex-direction: column;
+    background-color: #d9d9d9;
+    padding: 2vh 1vw 2vh 1vw;
+    border-radius: 1.5vw;
+    width: fit-content;
+}
+.form_cadastro h1{
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-bottom: 5vh;
+    font-size: 3vw;
+    text-align: center;
+}
+
+.div_inputs{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    gap: 5vw;
+}
+.cadastroParte1{
+    display: flex;
+    flex-direction: column;
+}
+.cadastroParte2_coluna1, .cadastroParte2_coluna2{
+    display: none;
+    flex-direction: column;
+}
+.cadastroParte3{
+    display: none;
+    flex-direction: column;
+}
+.inputs {
+    background-color: transparent;
+    border-style: solid;
+    width: 16vw;
+    margin-bottom: 5vh;
+    border-width: 0vh 0 0.2vh 0;
+    z-index: 2;
+}
+.labels {
+    position: relative;
+    transition: .5s;
+    user-select: none;
+    z-index: 1;
+}
+.label_1 {
+    bottom: 8vh;
+}
+.label_2 {
+    bottom: 8vh;
+}
+.label_3 {
+    bottom: 8vh;
+}
+.span_validacao{
+    height: 1vh;
+    position: relative;
+    bottom: 6vh;
+    color: #069206;
+    font-weight: bold;
+    font-size: 10px;
+}
+input:focus + .label_1, 
+input:valid + .label_1{
+    bottom: 10.5vh;
+}
+input:focus + .label_2,
+input:valid + .label_2{
+    bottom: 10.5vh;
+}
+input:focus + .label_3,
+input:valid + .label_3{
+    bottom: 10.5vh;
+}
+
+textarea:focus, input:focus, select:focus {
+    box-shadow: 0 0 0 0;
+    border-bottom-width: 0.2vh;
+    outline: 0;
+} 
+.area_botao {
+    display: flex;
+    gap: 30vw;
+    justify-content: center;
+}
+.botao_cadastro {
+    background-color: #070E3C;
+    color: #fff;
+    font-size: 1vw;
+    font-weight: 800;
+    padding: 2vh 1.5vw;
+    border: none;
+    border-radius: 0.5vw;
+    cursor: pointer;
 }

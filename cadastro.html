@@ -20,13 +20,51 @@
         </ul>
     </header>
     <div class="background">
-        <form action="" class="form_cadastro">
-            <h1>Cadastre-se</h1>
-            <div class="div_inputs">
-                <div class="colunas_cadastro">
-                    <input type="text" id="ipt_nome" oninput="validarNome()" class="inputs" required>
+        <div class="modal" id="modal">
+            <span>Digite suas informações corretamente</span>
+        </div>
+        <div id="area_cadastro">
+            <form action="" class="form_cadastro">
+                <h1>Cadastre-se</h1>
+                <div class="div_inputs">
+                    <div class="cadastroParte1" id="cadastroParte1">
+                        <input type="text" id="ipt_nome_empresa" oninput="validarNome()" class="inputs" required>
+                        <span class="labels label_1" >Nome da Empresa</span>
+                        <span id = "span_validar_nome" class="span_validacao"></span>
+                        <input type="text" id="ipt_cnpj" oninput="validarCNPJ()" class="inputs" required>
+                        <span class="labels label_1">CNPJ da Empresa</span>
+                        <span id = "span_validar_cnpj" class="span_validacao"></span>
+                        <input type="number" id="ipt_telefone_comercial" oninput="validarTelefone()" class="inputs" required>
+                        <span class="labels label_2">Telefone</span>
+                        <span id = "span_validar_telefone" class="span_validacao"></span>
+                    </div>
+                    <div class="cadastroParte2_coluna1" id="cadastroParte2_coluna1">
+                        <input type="text" id="ipt_cep" oninput="validarNome()" class="inputs" required>
                     <span class="labels label_1" >Nome da Empresa</span>
-                    <span id = "span_validar_nome" class="span_validacao"></span>
+                    <span id = "span_validar_empresa" class="span_validacao"></span>
+                    <input type="email" id="ipt_logradouro" oninput="validarEmail()" class="inputs" required>
+                    <span class="labels label_2">Email da Empresa</span>
+                    <span id = "span_validar_email" class="span_validacao"></span>
+                    <input type="password" id="ipt_uf" oninput="validarSenha()" class="inputs" required>
+                    <span class="labels label_3">Digite uma Senha</span>
+                    <span id = "span_validar_senha" class="span_validacao"></span>
+                </div>
+                <div class="cadastroParte2_coluna2" id="cadastroParte2_coluna2">
+                    <input type="text" id="ipt_numero" oninput="validarCNPJ()" class="inputs" required>
+                    <span class="labels label_1">CNPJ da Empresa</span>
+                    <span id = "span_validar_coisas" class="span_validacao"></span>
+                    <input type="number" id="ipt_complemento" oninput="validarTelefone()" class="inputs" required>
+                    <span class="labels label_2">Telefone</span>
+                    <span id = "span_validar_complemento" class="span_validacao"></span>
+                    <input type="password" id="ipt_cidade" oninput="validarConfirmacao()" class="inputs" required>
+                    <span class="labels label_3">Confirme a Senha</span>
+                    <span id = "span_validar_confirmacao" class="span_validacao"></span>
+                </div>
+                
+                <div class="cadastroParte3" id="cadastroParte3">
+                    <input type="text" id="ipt_representante" oninput="validarNome()" class="inputs" required>
+                    <span class="labels label_1" >Nome da Empresa</span>
+                    <span id = "span_validar_algumaCoisa" class="span_validacao"></span>
                     <input type="email" id="ipt_email" oninput="validarEmail()" class="inputs" required>
                     <span class="labels label_2">Email da Empresa</span>
                     <span id = "span_validar_email" class="span_validacao"></span>
@@ -34,157 +72,204 @@
                     <span class="labels label_3">Digite uma Senha</span>
                     <span id = "span_validar_senha" class="span_validacao"></span>
                 </div>
-                <div class="colunas_cadastro">
-                    <input type="text" id="ipt_cnpj" oninput="validarCNPJ()" class="inputs" required>
+                <div class="cadastroParte3" id="cadastroParte3">
+                    <input type="text" id="ipt_cpf" oninput="validarCNPJ()" class="inputs" required>
                     <span class="labels label_1">CNPJ da Empresa</span>
-                    <span id = "span_validar_cnpj" class="span_validacao"></span>
+                    <span id = "span_validar_cpf" class="span_validacao"></span>
                     <input type="number" id="ipt_telefone" oninput="validarTelefone()" class="inputs" required>
                     <span class="labels label_2">Telefone</span>
-                    <span id = "span_validar_telefone" class="span_validacao"></span>
+                    <span id = "span_validar_telefone_pessoal" class="span_validacao"></span>
                     <input type="password" id="ipt_confirme_senha" oninput="validarConfirmacao()" class="inputs" required>
                     <span class="labels label_3">Confirme a Senha</span>
                     <span id = "span_validar_confirmacao" class="span_validacao"></span>
                 </div>
             </div>
             <div class="area_botao">
-                <button class="botao_cadastro" onclick="validarTudo()">Cadastrar</button>
+                <button class="botao_cadastro" onclick="validarParte1()">Voltar</button>
+                <button class="botao_cadastro" onclick="validarParte1()">Cadastrar</button>
             </div>
         </form>
     </div>
+    </div>
 </body>
 <script>
+    var valor_nome_empresa = '';
+    var valor_email_empresa = '';
+    var valor_senha_empresa = '';
+    var valor_cnpj = '';
+    var valor_telefone_empresa = '';
+    
+    var nome_empresa_valido = false;
+    var email_valido = false;
+    var senha_valida = false;
+    var cnpj_valido = false;
+    var telefone_comercial_valido = false;
+
     function validarNome() {
-        var nome = ipt_nome.value;
-        if (nome != '' && nome.length >= 3 && nome.length <= 64) {
-            span_validar_nome.style.color = '#069206'
+        valor_nome_empresa = ipt_nome_empresa.value;
+        if (valor_nome_empresa != '' && valor_nome_empresa.length >= 3 && valor_nome_empresa.length <= 64) {
             span_validar_nome.innerHTML = `Nome validado com sucesso`;
+            span_validar_nome.style.color = '#069206';
+            nome_empresa_valido = true;
         } else {
             span_validar_nome.style.color = 'red'
             span_validar_nome.innerHTML = `O Nome deve ser de 3 a 64 caracteres`;
+            nome_empresa_valido = false;
         }
     }
     function validarEmail (){
-        var email = ipt_email.value;
-        var tamanho_email = email.length;
-        var possui_arroba = email.includes('@');
-        var indice_arroba = email.indexOf('@') + 1;
-        var possui_ponto_depois_arroba = email.includes('.', indice_arroba);
-        var indice_ponto_depois_arroba = email.indexOf('.', indice_arroba) - indice_arroba;
-        var possui_pontocom = email.includes('.com');
-        var indice_pontocom = email.indexOf('.com')+1;
+        valor_email_empresa = ipt_email.value;
+        var tamanho_email = valor_email_empresa.length;
+        var possui_arroba = valor_email_empresa.includes('@');
+        var indice_arroba = valor_email_empresa.indexOf('@') + 1;
+        var possui_ponto_depois_arroba = valor_email_empresa.includes('.', indice_arroba);
+        var indice_ponto_depois_arroba = valor_email_empresa.indexOf('.', indice_arroba) - indice_arroba;
+        var possui_pontocom = valor_email_empresa.includes('.com');
+        var indice_pontocom = valor_email_empresa.indexOf('.com')+1;
         var indice_extensao = indice_ponto_depois_arroba + indice_arroba;
         console.log(indice_ponto_depois_arroba)
         console.log(indice_extensao)
         console.log(tamanho_email)
-        if (email != '' && possui_arroba == true && indice_arroba > 1 && indice_arroba < tamanho_email && possui_ponto_depois_arroba == true && indice_ponto_depois_arroba >= 2 && (indice_ponto_depois_arroba + indice_arroba+1) < tamanho_email) {
+        if (valor_email_empresa != '' && possui_arroba == true && indice_arroba > 1 && indice_arroba < tamanho_email && possui_ponto_depois_arroba == true && indice_ponto_depois_arroba >= 2 && (indice_ponto_depois_arroba + indice_arroba+1) < tamanho_email) {
             span_validar_email.style.color = '#069206'
             span_validar_email.innerHTML = `email preenchido com sucesso`;
-            email = email.toLowerCase();
-        } else if(email == ''){
+            valor_email_empresa = valor_email_empresa.toLowerCase();
+            email_valido = true;
+        } else if(valor_email_empresa == ''){
             span_validar_email.style.color = 'red'
             span_validar_email.innerHTML = `Preencha o campo para continuar`;
+            email_valido = false;
         }  else if(possui_arroba == false) {
             span_validar_email.style.color = 'red'
             span_validar_email.innerHTML = `O email precisa ter @`;
+            email_valido = false;
         } else if(indice_arroba == 1){
             span_validar_email.style.color = 'red'
             span_validar_email.innerHTML = `O @ não pode ser o primeiro caractere`;
+            email_valido = false;
         } else if(indice_arroba == tamanho_email){
             span_validar_email.style.color = 'red'
             span_validar_email.innerHTML = `O @ não pode ser o último caractere`;
+            email_valido = false;
         } else if(possui_ponto_depois_arroba == false) {
             span_validar_email.style.color = 'red'
             span_validar_email.innerHTML = `O email precisa ter extensão após o @`;
+            email_valido = false;
         } else if(indice_ponto_depois_arroba < 2) {
             span_validar_email.style.color = 'red'
             span_validar_email.innerHTML = `A extensão tem de estar no mínimo a 3 caracteres do @`;
+            email_valido = false;
         } else if(indice_ponto_depois_arroba+indice_arroba +1 >= tamanho_email) {
             span_validar_email.style.color = 'red'
             span_validar_email.innerHTML = `O ponto não pode ser o último caractere`;
+            email_valido = false;
         }
     }
     
     function validarSenha() {
-        var senha = ipt_senha.value;
-        var tamanho_senha = senha.length;
-        var possui_caractere_especial = senha.includes('@') || senha.includes('!') || senha.includes("'") || senha.includes(`"`) || senha.includes('#') || senha.includes('$') || senha.includes('%') || senha.includes('¨') || senha.includes('&') || senha.includes('*') || senha.includes(`)`) || senha.includes(`(`) || senha.includes('_') || senha.includes('-') || senha.includes('=') || senha.includes('+') || senha.includes('§') || senha.includes('|') || senha.includes('\u005C') || senha.includes('`') || senha.includes('´') || senha.includes('[') || senha.includes(']') || senha.includes('{') || senha.includes('}') || senha.includes('^') || senha.includes('~') || senha.includes('ª') || senha.includes('º') || senha.includes('<') || senha.includes('>') || senha.includes(',') || senha.includes('.') || senha.includes(':') || senha.includes(';') || senha.includes('?') || senha.includes('/') || senha.includes('°') || senha.includes('¹') || senha.includes('²') || senha.includes('³') || senha.includes('£') || senha.includes('¢') || senha.includes('¬') ;
-        var possui_numeros = senha.includes('1') || senha.includes('2') || senha.includes('3') || senha.includes('4') || senha.includes('5') || senha.includes('6') || senha.includes('7') || senha.includes('8') || senha.includes('9') || senha.includes('0');
-        var SENHA_MAIUSCULA = senha.toUpperCase();
-        var senha_minuscula = senha.toLowerCase();
-        if (senha != '' && senha_minuscula != senha && SENHA_MAIUSCULA != senha && possui_caractere_especial == true && tamanho_senha >= 8) {
+        valor_senha_empresa = ipt_senha.value;
+        var tamanho_senha = valor_senha_empresa.length;
+        var possui_caractere_especial = valor_senha_empresa.includes('@') || valor_senha_empresa.includes('!') || valor_senha_empresa.includes("'") || valor_senha_empresa.includes(`"`) || valor_senha_empresa.includes('#') || valor_senha_empresa.includes('$') || valor_senha_empresa.includes('%') || valor_senha_empresa.includes('¨') || valor_senha_empresa.includes('&') || valor_senha_empresa.includes('*') || valor_senha_empresa.includes(`)`) || valor_senha_empresa.includes(`(`) || valor_senha_empresa.includes('_') || valor_senha_empresa.includes('-') || valor_senha_empresa.includes('=') || valor_senha_empresa.includes('+') || valor_senha_empresa.includes('§') || valor_senha_empresa.includes('|') || valor_senha_empresa.includes('\u005C') || valor_senha_empresa.includes('`') || valor_senha_empresa.includes('´') || valor_senha_empresa.includes('[') || valor_senha_empresa.includes(']') || valor_senha_empresa.includes('{') || valor_senha_empresa.includes('}') || valor_senha_empresa.includes('^') || valor_senha_empresa.includes('~') || valor_senha_empresa.includes('ª') || valor_senha_empresa.includes('º') || valor_senha_empresa.includes('<') || valor_senha_empresa.includes('>') || valor_senha_empresa.includes(',') || valor_senha_empresa.includes('.') || valor_senha_empresa.includes(':') || valor_senha_empresa.includes(';') || valor_senha_empresa.includes('?') || valor_senha_empresa.includes('/') || valor_senha_empresa.includes('°') || valor_senha_empresa.includes('¹') || valor_senha_empresa.includes('²') || valor_senha_empresa.includes('³') || valor_senha_empresa.includes('£') || valor_senha_empresa.includes('¢') || valor_senha_empresa.includes('¬') ;
+        var possui_numeros = valor_senha_empresa.includes('1') || valor_senha_empresa.includes('2') || valor_senha_empresa.includes('3') || valor_senha_empresa.includes('4') || valor_senha_empresa.includes('5') || valor_senha_empresa.includes('6') || valor_senha_empresa.includes('7') || valor_senha_empresa.includes('8') || valor_senha_empresa.includes('9') || valor_senha_empresa.includes('0');
+        var SENHA_MAIUSCULA = valor_senha_empresa.toUpperCase();
+        var senha_minuscula = valor_senha_empresa.toLowerCase();
+        if (valor_senha_empresa != '' && senha_minuscula != valor_senha_empresa && SENHA_MAIUSCULA != valor_senha_empresa && possui_caractere_especial == true && tamanho_senha >= 8) {
             span_validar_senha.style.color = '#069206'
             span_validar_senha.innerHTML = `Senha validada com sucesso`;
-        } else if(senha == '') {
+            senha_valida = true;
+        } else if(valor_senha_empresa == '') {
             span_validar_senha.style.color = 'red'
             span_validar_senha.innerHTML = `Preencha a senha para continuar`;
-        } else if(senha == senha_minuscula) {
+            senha_valida = false;
+        } else if(valor_senha_empresa == senha_minuscula) {
             span_validar_senha.style.color = 'red'
             span_validar_senha.innerHTML = `A senha deve conter pelo menos uma letra maiuscula`;
-        } else if(senha == SENHA_MAIUSCULA) {
+            senha_valida = false;
+        } else if(valor_senha_empresa == SENHA_MAIUSCULA) {
             span_validar_senha.style.color = 'red'
             span_validar_senha.innerHTML = `A senha deve conter pelo menos uma letra minuscula`;
+            senha_valida = false;
         } else if (possui_caractere_especial == false) {
             span_validar_senha.style.color = 'red'
             span_validar_senha.innerHTML = `A senha deve conter pelo menos um caractere especial`;
+            senha_valida = false;
         } else if (tamanho_senha < 8){
             span_validar_senha.style.color = 'red'
             span_validar_senha.innerHTML = `A senha deve conter no mínimo 8 caracteres`;
+            senha_valida = false;
         }                
     }
         
     
     function validarCNPJ() {
-        var cnpj = ipt_cnpj.value;
-        var tamanho_cnpj = cnpj.length
-        var possui_caractere_especial = cnpj.includes('@') || cnpj.includes('!') || cnpj.includes("'") || cnpj.includes(`"`) || cnpj.includes('#') || cnpj.includes('$') || cnpj.includes('%') || cnpj.includes('¨') || cnpj.includes('&') || cnpj.includes('*') || cnpj.includes(`)`) || cnpj.includes(`(`) || cnpj.includes('_') || cnpj.includes('-') || cnpj.includes('=') || cnpj.includes('+') || cnpj.includes('§') || cnpj.includes('|') || cnpj.includes('\u005C') || cnpj.includes('`') || cnpj.includes('´') || cnpj.includes('[') || cnpj.includes(']') || cnpj.includes('{') || cnpj.includes('}') || cnpj.includes('^') || cnpj.includes('~') || cnpj.includes('ª') || cnpj.includes('º') || cnpj.includes('<') || cnpj.includes('>') || cnpj.includes(',') || cnpj.includes('.') || cnpj.includes(':') || cnpj.includes(';') || cnpj.includes('?') || cnpj.includes('/') || cnpj.includes('°') || cnpj.includes('¹') || cnpj.includes('²') || cnpj.includes('³') || cnpj.includes('£') || cnpj.includes('¢') || cnpj.includes('¬') ;
-        if (cnpj != '' && possui_caractere_especial == false && tamanho_cnpj == 14) {
+        valor_cnpj = ipt_cnpj.value;
+        var tamanho_cnpj = valor_cnpj.length
+        var possui_caractere_especial = valor_cnpj.includes('@') || valor_cnpj.includes('!') || valor_cnpj.includes("'") || valor_cnpj.includes(`"`) || valor_cnpj.includes('#') || valor_cnpj.includes('$') || valor_cnpj.includes('%') || valor_cnpj.includes('¨') || valor_cnpj.includes('&') || valor_cnpj.includes('*') || valor_cnpj.includes(`)`) || valor_cnpj.includes(`(`) || valor_cnpj.includes('_') || valor_cnpj.includes('-') || valor_cnpj.includes('=') || valor_cnpj.includes('+') || valor_cnpj.includes('§') || valor_cnpj.includes('|') || valor_cnpj.includes('\u005C') || valor_cnpj.includes('`') || valor_cnpj.includes('´') || valor_cnpj.includes('[') || valor_cnpj.includes(']') || valor_cnpj.includes('{') || valor_cnpj.includes('}') || valor_cnpj.includes('^') || valor_cnpj.includes('~') || valor_cnpj.includes('ª') || valor_cnpj.includes('º') || valor_cnpj.includes('<') || valor_cnpj.includes('>') || valor_cnpj.includes(',') || valor_cnpj.includes('.') || valor_cnpj.includes(':') || valor_cnpj.includes(';') || valor_cnpj.includes('?') || valor_cnpj.includes('/') || valor_cnpj.includes('°') || valor_cnpj.includes('¹') || valor_cnpj.includes('²') || valor_cnpj.includes('³') || valor_cnpj.includes('£') || valor_cnpj.includes('¢') || valor_cnpj.includes('¬') ;
+        if (valor_cnpj != '' && possui_caractere_especial == false && tamanho_cnpj == 14) {
             span_validar_cnpj.style.color = '#069206'
             span_validar_cnpj.innerHTML = `CNPJ preenchido com sucesso`;
-        } else if(cnpj == ''){
+            cnpj_valido = true;
+        } else if(valor_cnpj == ''){
             span_validar_cnpj.style.color = 'red'
             span_validar_cnpj.innerHTML = `Preencha o CNPJ da empresa para continuar`;
+            cnpj_valido = false;
         } else if(possui_caractere_especial == true){
             span_validar_cnpj.style.color = 'red'
             span_validar_cnpj.innerHTML = `o CNPJ deve possuir apenas números e letras`;
+            cnpj_valido = false;
         } else if(tamanho_cnpj != 14){
             span_validar_cnpj.style.color = 'red'
             span_validar_cnpj.innerHTML = `o CNPJ deve possuir apenas números e letras`;
+            cnpj_valido = false;
         }
     }
     function validarTelefone() {
-        var telefone = ipt_telefone.value;
-        var tamanho_telefone = telefone.length
-        var possui_e = telefone.includes('e')
-        if (telefone != '' && possui_e == false && tamanho_telefone == 11) {
+        valor_telefone_empresa = ipt_telefone_comercial.value;
+        var tamanho_telefone = valor_telefone_empresa.length
+        var possui_e = valor_telefone_empresa.includes('e')
+        if (valor_telefone_empresa != '' && possui_e == false && tamanho_telefone == 11) {
             span_validar_telefone.style.color = '#069206'
             span_validar_telefone.innerHTML = `Telefone preenchido com sucesso`;
-        } else if(telefone == ''){
+            telefone_comercial_valido = true;
+        } else if(valor_telefone_empresa == ''){
             span_validar_telefone.style.color = 'red'
             span_validar_telefone.innerHTML = `Preencha o campo para continuar`;
+            telefone_comercial_valido = false;
         } else if(possui_e == true){
             span_validar_telefone.style.color = 'red'
             span_validar_telefone.innerHTML = `Apenas números são permitidos`;
+            telefone_comercial_valido = false;
         } else if(tamanho_telefone != 11){
             span_validar_telefone.style.color = 'red'
             span_validar_telefone.innerHTML = `O Telefone tem de ter apenas 11 números`;
+            telefone_comercial_valido = false;
         }
 } 
             
     
     function validarConfirmacao() {
-        var senha = ipt_senha.value
+        valor_senha_empresa = ipt_senha.value
         var confirmarSenha = ipt_confirme_senha.value;
-        if (confirmarSenha == senha) {
+        if (confirmarSenha == valor_senha_empresa) {
             span_validar_confirmacao.style.color = '#069206'
             span_validar_confirmacao.innerHTML = `senha confirmada com sucesso`;
+            senha_valida = true
         } else {
             span_validar_confirmacao.style.color = 'red'
             span_validar_confirmacao.innerHTML = `A senha está diferente`;
+            senha_valida = false;
         }
     }
         
         
-    function validarTudo() {
-        
+    function validarParte1() {
+        if (nome_empresa_valido == true && cnpj_valido == true && telefone_comercial_valido == true) {
+            cadastroParte1.style.display = 'none'
+            cadastroParte2_coluna1.style.display = 'flex'
+            cadastroParte2_coluna2.style.display = 'flex'
+        } else {
+            modal.style.display = 'flex'
+            
+        }
     }
 </script>
