@@ -7,26 +7,12 @@
     <title>Logistech</title>
     <link rel="stylesheet" href="styles/style.css">
 </head>
-
 <body>
-    <!-- Vitor -->
-    <header class="headerElements">
-        
-        <section class="logoImg"><a href="#home"></a></section>
-        
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#aboutUs">Sobre nós</a></li>
-            <li><a href="#solution">Serviços</a></li>
-            <li><a href="login.html">Login</a></li>
-            <li><a href="./cadastro.html">Cadastre-se</a></li>
-        </ul>
-    </header>
-    <!-- Seção de Cadastro -->
-    <form class="form_cadastro">
-             <h1>Cadastre-se</h1>
-             <div class="div_inputs">
-                 <div class="cadastroParte1" id="cadastroParte1">
+    <div class="area_form">
+        <form class="form_cadastro">
+            <h1>Cadastre-se</h1>
+            <div class="div_inputs">
+                <div class="cadastroParte1" id="cadastroParte1">
                      <input type="text" id="ipt_nome_empresa" oninput="validarNome()" class="inputs" required>
                      <span class="labels label_1" >Nome da Empresa</span>
                      <span id = "span_validar_nome" class="span_validacao"></span>
@@ -49,10 +35,10 @@
                         <span id = "span_validar_senha" class="span_validacao"></span>
                     </div>
                     <div class="cadastroParte2_coluna2" id="cadastroParte2_coluna2">
-                <input type="text" id="ipt_numero" oninput="validarCNPJ()" class="inputs" required>
-                <span class="labels label_1">CNPJ da Empresa</span>
-                <span id = "span_validar_coisas" class="span_validacao"></span>
-                <input type="number" id="ipt_complemento" oninput="validarTelefone()" class="inputs" required>
+                        <input type="text" id="ipt_numero" oninput="validarCNPJ()" class="inputs" required>
+                        <span class="labels label_1">CNPJ da Empresa</span>
+                        <span id = "span_validar_coisas" class="span_validacao"></span>
+                        <input type="number" id="ipt_complemento" oninput="validarTelefone()" class="inputs" required>
                 <span class="labels label_2">Telefone</span>
                 <span id = "span_validar_complemento" class="span_validacao"></span>
                 <input type="password" id="ipt_cidade" oninput="validarConfirmacao()" class="inputs" required>
@@ -88,9 +74,23 @@
             <button class="botao_cadastro" onclick="validarParte1()">Cadastrar</button>
         </div>
     </form>
-</div>
-
-    <main class="hidden-item">
+    
+    </div>
+    <!-- Vitor -->
+    <header class="headerElements">
+        
+        <section class="logoImg"><a href="#home"></a></section>
+        
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#aboutUs">Sobre nós</a></li>
+            <li><a href="#solution">Serviços</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="./cadastro.html">Cadastre-se</a></li>
+        </ul>
+    </header>
+    <!-- Seção de Cadastro -->
+<main class="hidden-item">
         <div id="home" class="bannerImg">
             <div class="mainText">
                 

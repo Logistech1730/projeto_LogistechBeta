@@ -334,13 +334,18 @@ footer {
     z-index: 3;
     transition: .9s;
 }
-.form_cadastro::backdrop{
-    background-color: rgb(0, 0, 0);
-    opacity: 0.7;
+.area_form {
+    position: fixed;
+    display: flex;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    background-color: #0000008a;
+    align-items: center;
+    justify-content: center;
 }
 .form_cadastro{
     display: flex;
-    position: absolute;
     align-items: center;
     justify-content: center;
     z-index: 2;
