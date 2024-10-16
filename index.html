@@ -6,26 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logistech</title>
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <div class="area_form">
-        <form class="form_cadastro">
-            <h1>Cadastre-se</h1>
-            <div class="div_inputs">
+    <div class="area_form" id="modalCadastro">
+        <div class="bloco_form">
+            <div class="bloco_info_cadastro">
+                <img src="./img/Logo_Logistech2.png" alt="logo Logistech" class="imgLogo">
+                <p class="textoCadastro"><strong>Nossa solução</strong> trará <strong>controle</strong> a suas linhas de produção.</p>
+            </div>
+            <i class="fa-solid fa-x" onclick="modalCadastro.style.display = 'none'"></i>
+            <form class="form_cadastro">
+                <h1>Cadastre-se</h1>
                 <div class="cadastroParte1" id="cadastroParte1">
-                     <input type="text" id="ipt_nome_empresa" oninput="validarNome()" class="inputs" required>
-                     <span class="labels label_1" >Nome da Empresa</span>
-                     <span id = "span_validar_nome" class="span_validacao"></span>
-                     <input type="text" id="ipt_cnpj" oninput="validarCNPJ()" class="inputs" required>
-                     <span class="labels label_1">CNPJ da Empresa</span>
-                     <span id = "span_validar_cnpj" class="span_validacao"></span>
-                     <input type="number" id="ipt_telefone_comercial" oninput="validarTelefone()" class="inputs" required>
-                     <span class="labels label_2">Telefone</span>
-                     <span id = "span_validar_telefone" class="span_validacao"></span>
+                    <div class="div_inputs">
+                        <input type="text" id="ipt_nome_empresa" oninput="validarNome()" class="inputs" required>
+                        <span class="labels labels_2" >Nome da Empresa</span>
+                        <span id = "span_validar_nome" class="span_validacao"></span>
+                        <input type="text" id="ipt_cnpj" oninput="validarCNPJ()" class="inputs" required>
+                        <span class="labels labels_2">CNPJ da Empresa</span>
+                        <span id = "span_validar_cnpj" class="span_validacao"></span>
+                        <input type="number" id="ipt_telefone_comercial" oninput="validarTelefone()" class="inputs" required>
+                        <span class="labels labels_2">Telefone</span>
+                        <span id = "span_validar_telefone" class="span_validacao"></span>
+                        <input type="text" id="ipt_ceps" oninput="validarCNPJ()" class="inputs" required>
+                        <span class="labels labels_2">CEP</span>
+                        <span id = "span_validar_cnpj" class="span_validacao"></span>
                     </div>
+                    <div class="area_botao">
+                         <button class="botao_cadastro" onclick="validarParte1()">Cadastrar</button>
+                         <button class="botao_cadastro" onclick="validarParte1()">Cadastrar</button>
+                    </div>
+                </div>
                     <div class="cadastroParte2_coluna1" id="cadastroParte2_coluna1">
                         <input type="text" id="ipt_cep" oninput="validarNome()" class="inputs" required>
-                        <span class="labels label_1" >Nome da Empresa</span>
+                        <span class="labels labels_2" >Nome da Empresa</span>
                         <span id = "span_validar_empresa" class="span_validacao"></span>
                         <input type="email" id="ipt_logradouro" oninput="validarEmail()" class="inputs" required>
                         <span class="labels label_2">Email da Empresa</span>
@@ -39,7 +56,7 @@
                         <span class="labels label_1">CNPJ da Empresa</span>
                         <span id = "span_validar_coisas" class="span_validacao"></span>
                         <input type="number" id="ipt_complemento" oninput="validarTelefone()" class="inputs" required>
-                <span class="labels label_2">Telefone</span>
+                <span class="labels label_2">Telefone Comercial</span>
                 <span id = "span_validar_complemento" class="span_validacao"></span>
                 <input type="password" id="ipt_cidade" oninput="validarConfirmacao()" class="inputs" required>
                 <span class="labels label_3">Confirme a Senha</span>
@@ -69,13 +86,10 @@
                 <span id = "span_validar_confirmacao" class="span_validacao"></span>
             </div>
         </div>
-        <div class="area_botao">
-            <button class="botao_cadastro" onclick="validarParte1()">Voltar</button>
-            <button class="botao_cadastro" onclick="validarParte1()">Cadastrar</button>
-        </div>
     </form>
+</div>
     
-    </div>
+</div>
     <!-- Vitor -->
     <header class="headerElements">
         
@@ -86,7 +100,7 @@
             <li><a href="#aboutUs">Sobre nós</a></li>
             <li><a href="#solution">Serviços</a></li>
             <li><a href="login.html">Login</a></li>
-            <li><a href="./cadastro.html">Cadastre-se</a></li>
+            <li><a onclick="modalCadastro.style.display = 'flex'">Cadastre-se</a></li>
         </ul>
     </header>
     <!-- Seção de Cadastro -->

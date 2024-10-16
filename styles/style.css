@@ -38,6 +38,7 @@ body {
 .headerElements ul a:hover {
     color: #b4b4b4;
     border-bottom: 1px solid #b4b4b4;
+    cursor: pointer;
 }
 
 .headerElements ul {
@@ -344,34 +345,66 @@ footer {
     align-items: center;
     justify-content: center;
 }
+.bloco_form{
+    display: flex;
+    width: 44vw;
+    height: fit-content;
+    justify-content: flex-end;
+    border-radius: 0.5vw;
+    background-color: #070E3C;
+}
+.fa-solid{
+    position: absolute;
+    z-index: 3;
+    margin-top: 0.5vh;
+    margin-right: 0.5vh;
+    font-size: 1vw;
+    cursor: pointer;
+}
+.bloco_info_cadastro{
+    display: flex;
+    flex-direction: column;
+    width: 22vw;
+    align-items: center;
+    justify-content: center;
+    background-image: url(../img/fundoCadastro.png);
+    background-size: cover;
+    border-top-left-radius: 0.5vw;
+    border-bottom-left-radius: 0.5vw;
+}
+.textoCadastro{
+    font-size: 1vw;
+    color: #D9D9D9;
+    margin-top: 1vh;
+    text-align: center;
+    width: 15vw;
+}
+.bloco_info_cadastro .imgLogo{
+    height: 20vh;
+}
 .form_cadastro{
     display: flex;
-    align-items: center;
     justify-content: center;
     z-index: 2;
     flex-direction: column;
     background-color: #d9d9d9;
-    padding: 2vh 1vw 2vh 1vw;
-    border-radius: 1.5vw;
+    padding: 6vh 0vw 2vh;
+    border-top-right-radius: 0.5vw;
+    border-bottom-right-radius: 0.5vw;
     width: fit-content;
 }
 .form_cadastro h1{
     margin-block-start: 0;
     margin-block-end: 0;
-    margin-bottom: 5vh;
-    font-size: 3vw;
+    margin-bottom: 8vh;
+    font-size: 1.2vw;
     text-align: center;
 }
 
 .div_inputs{
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    gap: 5vw;
-}
-.cadastroParte1{
     display: flex;
     flex-direction: column;
+    padding: 0vh 3vw;
 }
 .cadastroParte2_coluna1, .cadastroParte2_coluna2{
     display: none;
@@ -384,9 +417,9 @@ footer {
 .inputs {
     background-color: transparent;
     border-style: solid;
-    width: 16vw;
-    margin-bottom: 5vh;
-    border-width: 0vh 0 0.2vh 0;
+    width:16vw;
+    margin-bottom: 4vh;
+    border-width: 0 0 0.2vh 0;
     z-index: 2;
 }
 .labels {
@@ -394,35 +427,20 @@ footer {
     transition: .5s;
     user-select: none;
     z-index: 1;
-}
-.label_1 {
-    bottom: 8vh;
-}
-.label_2 {
-    bottom: 8vh;
-}
-.label_3 {
-    bottom: 8vh;
+    font-size: 0.7vw;
+    bottom: 6vh;
 }
 .span_validacao{
     height: 1vh;
     position: relative;
-    bottom: 6vh;
+    bottom: 5vh;
     color: #069206;
     font-weight: bold;
     font-size: 10px;
 }
-input:focus + .label_1, 
-input:valid + .label_1{
-    bottom: 10.5vh;
-}
-input:focus + .label_2,
-input:valid + .label_2{
-    bottom: 10.5vh;
-}
-input:focus + .label_3,
-input:valid + .label_3{
-    bottom: 10.5vh;
+input:focus + .labels, 
+input:valid + .labels{
+    bottom: 7.5vh;
 }
 
 textarea:focus, input:focus, select:focus {
@@ -432,15 +450,17 @@ textarea:focus, input:focus, select:focus {
 } 
 .area_botao {
     display: flex;
-    gap: 30vw;
-    justify-content: center;
+    gap: 0.5vw;
+    justify-content: end;
+    margin-top: 2vh;
+    margin-right: 2vw;
 }
 .botao_cadastro {
     background-color: #070E3C;
     color: #fff;
-    font-size: 1vw;
+    font-size: 0.7vw;
     font-weight: 800;
-    padding: 2vh 1.5vw;
+    padding: 1vh 0.8vw;
     border: none;
     border-radius: 0.5vw;
     cursor: pointer;
