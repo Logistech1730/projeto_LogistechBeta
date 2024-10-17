@@ -324,17 +324,6 @@ footer {
 
 /*Israel - Página de cadastro*/
 
-.modal {
-    display: none;
-    position: absolute;
-    padding: 20vh;
-    color: #ffffff;
-    font-weight: 700;
-    background-color: #ffa7a7;
-    opacity: 1;
-    z-index: 3;
-    transition: .9s;
-}
 .area_form {
     position: fixed;
     display: flex;
@@ -406,7 +395,11 @@ footer {
     flex-direction: column;
     padding: 0vh 3vw;
 }
-.cadastroParte2_coluna1, .cadastroParte2_coluna2{
+.cadastroParte1{
+    display: flex;
+    flex-direction: column;
+}
+.cadastroParte2{
     display: none;
     flex-direction: column;
 }
@@ -422,7 +415,29 @@ footer {
     border-width: 0 0 0.2vh 0;
     z-index: 2;
 }
-.labels {
+.input_cidade {
+    background-color: transparent;
+    border-style: solid;
+    width:13vw;
+    margin-bottom: 4vh;
+    border-width: 0 0 0.2vh 0;
+    z-index: 2;
+}
+.cidade_e_uf{
+    display: flex;
+    gap: 1vw;
+}
+.ipt_e_label_cidade{
+    display: flex;
+    flex-direction: column;
+}
+.selectUF{
+    height: 2vh;
+    width: 4.5vh;
+    background-color: #D9D9D9;
+    overflow: auto;
+}
+.labels, .label_cidade {
     position: relative;
     transition: .5s;
     user-select: none;
@@ -439,9 +454,12 @@ footer {
     font-size: 10px;
 }
 input:focus + .labels, 
-input:valid + .labels{
+input:valid + .labels,
+input:focus + .label_cidade, 
+input:valid + .label_cidade{
     bottom: 7.5vh;
 }
+
 
 textarea:focus, input:focus, select:focus {
     box-shadow: 0 0 0 0;
@@ -450,10 +468,9 @@ textarea:focus, input:focus, select:focus {
 } 
 .area_botao {
     display: flex;
-    gap: 0.5vw;
-    justify-content: end;
+    gap: 0.75vw;
+    justify-content: center;
     margin-top: 2vh;
-    margin-right: 2vw;
 }
 .botao_cadastro {
     background-color: #070E3C;
@@ -462,6 +479,16 @@ textarea:focus, input:focus, select:focus {
     font-weight: 800;
     padding: 1vh 0.8vw;
     border: none;
+    border-radius: 0.5vw;
+    cursor: pointer;
+}
+.botao_voltar  {
+    background-color: #dad9d9;
+    color: #070E3C;
+    font-size: 0.7vw;
+    font-weight: 800;
+    padding: 1vh 1.25vw;
+    border: none;/*0.2vw solid #070E3C ; */
     border-radius: 0.5vw;
     cursor: pointer;
 }
