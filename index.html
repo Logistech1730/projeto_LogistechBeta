@@ -41,16 +41,16 @@
                 </div> 
                     <div class="cadastroParte2" id="cadastroParte2">
                         <div class="div_inputs">
-                            <input type="text" id="ipt_logradouro" oninput="" class="inputs" required>
+                            <input type="text" id="ipt_logradouro" maxlength="100" oninput="validarLogradouro()" class="inputs" required>
                             <span class="labels">Logradouro</span>
                             <span id = "span_validar_logradouro" class="span_validacao"></span>
                             <div class="cidade_e_uf">
                                 <div class="ipt_e_label_cidade">
-                                    <input type="text" id="ipt_cidade" oninput="" class="input_cidade" required>
+                                    <input type="text" id="ipt_cidade" maxlength="36" oninput="validarCidade()" class="input_cidade" required>
                                     <span class="label_cidade">Cidade</span>
                                     <span id = "span_validar_cidade" class="span_validacao"></span>
                                 </div>
-                                <select class="selectUF" id="slt_uf" required>
+                                <select class="selectUF" id="slt_uf" oninput="validarEstado()" required>
                                     <option value="AC">AC</option>
                                     <option value="AL">AL</option>
                                     <option value="AP">AP</option>
@@ -80,36 +80,36 @@
                                     <option value="DF">DF</option>
                                 </select>
                             </div>
-                            <input type="text" id="ipt_numero" oninput="" class="inputs" required>
+                            <input type="text" id="ipt_numero" oninput="validarNumero()" class="inputs" required>
                             <span class="labels">Número</span>
                             <span id = "span_validar_numero" class="span_validacao"></span>
-                            <input type="text" id="ipt_complemento" oninput="" class="inputs" required>
+                            <input type="text" id="ipt_complemento" oninput="validarComplemento()" class="inputs" required>
                             <span class="labels">Complemento</span>
                             <span id = "span_validar_complemento" class="span_validacao"></span>
                         </div>
                         <div class="area_botao">
                             <button class="botao_voltar" onclick="voltarToParte1()">Voltar</button>
-                            <button class="botao_cadastro" onclick="validarParte1()">Seguinte</button>
+                            <button class="botao_cadastro" onclick="validarParte2()">Seguinte</button>
                         </div>
                     </div>
                     <div class="cadastroParte3" id="cadastroParte3">
                         <div class="div_inputs">
-                            <input type="text" id="ipt_nome_usuario" oninput="" class="inputs" required>
+                            <input type="text" id="ipt_nome_usuario" maxlength="64" oninput="validarNomeUsuario()" class="inputs" required>
                             <span class="labels ">Nome de Administrador</span>
                             <span id = "span_validar_nome_usuario" class="span_validacao"></span>
-                            <input type="number" id="ipt_email" oninput="validarTelefone()" class="inputs" required>
+                            <input type="text" id="ipt_email" maxlength="100" oninput="validarEmail()" class="inputs" required>
                             <span class="labels">Email do Administrador</span>
                             <span id = "span_validar_email" class="span_validacao"></span>
-                            <input type="password" id="ipt_senha_usuario" oninput="" class="inputs" required>
+                            <input type="password" id="ipt_senha_usuario" maxlength="40" oninput="validarSenha()" class="inputs" required>
                             <span class="labels">Digite sua Senha</span>
                             <span id = "span_validar_confirmacao" class="span_validacao"></span>
-                            <input type="password" id="ipt_confirme_senha" oninput="" class="inputs" required>
+                            <input type="password" id="ipt_confirme_senha" maxlength="40" oninput="validarConfirmacao()" class="inputs" required>
                             <span class="labels">Confirme a Senha</span>
                             <span id = "span_validar_confirmacao" class="span_validacao"></span>
                         </div>
                         <div class="area_botao">
-                            <button class="botao_voltar" onclick="validarParte1()">Voltar</button>
-                            <button class="botao_cadastro" onclick="validarParte1()">Cadastrar</button>
+                            <button class="botao_voltar" onclick="voltarToParte2()">Voltar</button>
+                            <button class="botao_cadastro" onclick="validarParte3()">Cadastrar</button>
                         </div>
                     </div>
                 </div>
@@ -190,18 +190,37 @@
 </html>
 <script>
     var valor_nome_empresa = '';
-    var valor_email_empresa = '';
-    var valor_senha_empresa = '';
     var valor_cnpj = '';
     var valor_telefone_empresa = '';
     var valor_cep_empresa = '';
+
+    var valor_logradouro = '';
+    var valor_cidade ='';
+    var valor_uf = '';
+    var valor_numero = '';
+    var valor_complemento = '';
+
+    var valor_nome_usuario = '';
+    var valor_email_usuario = '';
+    var valor_senha_usuario = '';
+    var valor_telefone_usuario = '';
     
     var nome_empresa_valido = false;
-    var email_valido = false;
-    var senha_valida = false;
     var cnpj_valido = false;
     var telefone_comercial_valido = false;
     var cep_valido = false;
+
+    var logradouro_valido = false;
+    var cidade_valida = false;
+    var uf_valido = false;
+    var numero_valido = false;
+    var complemento_valido = false;
+
+    var nome_usuario_valido = false;
+    var email_usuario_valido = false;
+    var senha_usuario_valida = false;
+    var confirmacao_usuario_valida = false;
+    var telefone_usuario_valido = false;
 
     function validarNomeEmpresa() {
         valor_nome_empresa = ipt_nome_empresa.value;
@@ -211,7 +230,7 @@
             nome_empresa_valido = true;
         } else {
             span_validar_nome_empresa.style.color = 'red'
-            span_validar_nome_empresa.innerHTML = `A Razão Social deve ter de 3 a 64 caracteres`;
+            span_validar_nome_empresa.innerHTML = `A Razão Social deve ter no mínimo 3 caracteres`;
             nome_empresa_valido = false;
         }
     }
@@ -233,7 +252,7 @@
             cnpj_valido = false;
         } else if(tamanho_cnpj != 14){
             span_validar_cnpj.style.color = 'red'
-            span_validar_cnpj.innerHTML = `o CNPJ deve possuir apenas números e letras`;
+            span_validar_cnpj.innerHTML = `o CNPJ deve possuir apenas 14 caracteres`;
             cnpj_valido = false;
         }
     }
@@ -277,7 +296,7 @@ function validarCEP() {
             cep_valido = false;
         } else if(tamanho_telefone != 11){
             span_validar_cep.style.color = 'red'
-            span_validar_cep.innerHTML = `O CEP tem de ter apenas 8 números`;
+            span_validar_cep.innerHTML = `O CEP tem de ter somente 8 números`;
             cep_valido = false;
         }
 } 
@@ -290,9 +309,87 @@ function validarCEP() {
             
         }
     }
+    function validarLogradouro() {
+        valor_logradouro = ipt_logradouro.value;
+        if (valor_logradouro != '' && valor_logradouro.length >= 3 && valor_logradouro.length <= 64) {
+            span_validar_logradouro.innerHTML = `Logradouro validado com sucesso`;
+            span_validar_logradouro.style.color = '#069206';
+            nome_empresa_valido = true;
+        } else {
+            span_validar_logradouro.style.color = 'red'
+            span_validar_logradouro.innerHTML = `A Razão Social deve ter de 3 a 64 caracteres`;
+            nome_empresa_valido = false;
+        }
+    }
+    function validarCidade() {
+        valor_cidade = ipt_cidade.value;
+        if (valor_cidade != '' && valor_cidade.length >= 3 && valor_cidade.length <= 64) {
+            span_validar_cidade.innerHTML = `Nome de cidade validado com sucesso`;
+            span_validar_cidade.style.color = '#069206';
+            cidade_valida = true;
+        } else {
+            span_validar_cidade.style.color = 'red'
+            span_validar_cidade.innerHTML = `O nome de cidade deve ter de 3 a 64 caracteres`;
+            cidade_valida = false;
+        }
+    }
+    function validarEstado() {
+        valor_estado = ipt_cidade.value;
+        uf_valido = true;
+    }
+    function validarNumero() {
+        valor_numero = ipt_numero.value;
+        var possui_e = valor_numero.includes('e')
+        if (valor_numero != '' && possui_e == false) {
+            span_validar_numero.style.color = '#069206'
+            span_validar_numero.innerHTML = `Número preenchido com sucesso`;
+            numero_valido = true;
+        } else if(valor_numero == ''){
+            span_validar_numero.style.color = 'red'
+            span_validar_numero.innerHTML = `Preencha o campo para continuar`;
+            numero_valido = false;
+        } else if(possui_e == true){
+            span_validar_numero.style.color = 'red'
+            span_validar_numero.innerHTML = `Apenas números são permitidos`;
+            numero_valido = false;
+        } 
+    }
+    function validarComplemento() {
+        valor_complemento = ipt_cidade.value;
+        if (valor_complemento != '' && valor_complemento.length >= 3) {
+            span_validar_complemento.innerHTML = `Complemento validado com sucesso`;
+            span_validar_complemento.style.color = '#069206';
+            complemento_valido = true;
+        } else {
+            span_validar_complemento.style.color = 'red'
+            span_validar_complemento.innerHTML = `O Complemento tem de ter no mínimo 6 caracteres`;
+            complemento_valido = false;
+        }
+    }
     function voltarToParte1() {
         cadastroParte1.style.display = 'flex'
         cadastroParte2.style.display = 'none'
+    }
+    function validarParte2() {
+        if (logradouro_valido == true && cidade_valida == true && uf_valido == true && numero_valido == true && complemento_valido == true) {
+            cadastroParte2.style.display = 'none'
+            cadastroParte3.style.display = 'flex'
+        } else {
+            console.log('Algo está errado')
+            
+        }
+    }
+    function validarNomeUsuario() {
+        valor_nome_usuario = ipt_nome_usuario.value;
+        if (valor_nome_usuario != '' && valor_nome_usuario.length >= 3 && valor_nome_usuario.length <= 64) {
+            span_validar_nome_usuario.innerHTML = `Razão Social validada com sucesso`;
+            span_validar_nome_usuario.style.color = '#069206';
+            nome_empresa_valido = true;
+        } else {
+            span_validar_nome_usuario.style.color = 'red'
+            span_validar_nome_usuario.innerHTML = `A Razão Social deve ter no mínimo 3 caracteres`;
+            nome = false;
+        }
     }
     function validarEmail (){
         valor_email_empresa = ipt_email.value;
@@ -387,6 +484,39 @@ function validarCEP() {
             span_validar_confirmacao.style.color = 'red'
             span_validar_confirmacao.innerHTML = `A senha está diferente`;
             senha_valida = false;
+        }
+    }
+    function validarTelefoneUsuario() {
+        valor_telefone_usuario = ipt_telefone_usuario.value;
+        var possui_e = valor_telefone_empresa.includes('e')
+        if (valor_telefone_usuario != '' && possui_e == false && valor_telefone_usuario.length == 11) {
+            span_validar_telefone.style.color = '#069206'
+            span_validar_telefone.innerHTML = `Telefone preenchido com sucesso`;
+            telefone_usuario_valido = true;
+        } else if(valor_telefone_usuario == ''){
+            span_validar_telefone.style.color = 'red'
+            span_validar_telefone.innerHTML = `Preencha o campo para continuar`;
+            telefone_usuario_valido = false;
+        } else if(possui_e == true){
+            span_validar_telefone.style.color = 'red'
+            span_validar_telefone.innerHTML = `Apenas números são permitidos`;
+            telefone_usuario_valido = false;
+        } else if(valor_telefone_usuario != 11){
+            span_validar_telefone.style.color = 'red'
+            span_validar_telefone.innerHTML = `O Telefone tem de ter apenas 11 números`;
+            telefone_usuario_valido = false;
+        }
+    }
+    function voltarToParte2() {
+        cadastroParte2.style.display = 'flex'
+        cadastroParte3.style.display = 'none'
+    }
+    function validarParte3() {
+        if (nome_usuario_valido == true && email_valido == true && senha_valida == true && confirmacao_usuario_valida == true && telefone_usuario_valido == true) {
+            window.location.href = 'dashboard.html'
+        } else {
+            console.log('Algo está errado')
+            
         }
     }
         

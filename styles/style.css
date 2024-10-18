@@ -418,7 +418,7 @@ footer {
 .input_cidade {
     background-color: transparent;
     border-style: solid;
-    width:13vw;
+    width:12.75vw;
     margin-bottom: 4vh;
     border-width: 0 0 0.2vh 0;
     z-index: 2;
@@ -434,6 +434,7 @@ footer {
 .selectUF{
     height: 2vh;
     width: 4.5vh;
+    border-width: 0 0 0.2vh 0;
     background-color: #D9D9D9;
     overflow: auto;
 }
