@@ -7,8 +7,11 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="styles/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -53,16 +56,54 @@
 
 
         </div>
-        <div class="filtros-dash">
-            <select id="">
-                <option value="sensor1">Sensor1</option>
-                <option value="sensor2">Sensor2</option>
-                <option value="sensor3">Sensor3</option>
-            </select>
-            <input type="date" id="data1">
-            <input type="date" id="data2">
-            <button id="botao-filtro">Aplicar Filtros</button>
+        <div class="dashboard">
+            <div class="filtros-dash">
+                <select id="">
+                    <option value="sensor1">Sensor1</option>
+                    <option value="sensor2">Sensor2</option>
+                    <option value="sensor3">Sensor3</option>
+                </select>
+                <input type="date" id="data1">
+                <input type="date" id="data2">
+                <button id="botao-filtro">Aplicar Filtros</button>
+            </div>
+            <div class="blocos">
+
+                <div class="bloco1">
+                    <div class="produtos-registrados">
+                        <i class="fa-solid fa-gear"></i>
+                        <p>70 produtos registrados no total</p>
+                    </div>
+                    <div class="grafico-porcentagem">
+                        <div class="porcentagem">
+                            <p>Porcentagem de produtos corretos</p>
+                            <p id="qtd_porcentagem" class="porcentagem-numero">99%</p>
+                            <p>99 Produtos corretos</p>
+                            <p>1 produto errôneo</p>
+                            <button>Ver alertas</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bloco2">
+                    <div class="status-esteiras">
+                        <p>Status das esteiras: <span style="color: green;">Conforme esperado</span></p>
+                    </div>
+                    <div class="grafico-barras">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="bloco3">
+                <div class="grafico-linha">
+                    <canvas id="grafico-tempo-real"></canvas>
+                </div>
+            </div>
         </div>
+
+
     </div>
     <footer>
         <p>Copyright © 2024 - Todos os direitos reservados Logistech</p>
@@ -70,3 +111,115 @@
 </body>
 
 </html>
+<!-- Import do ChartJS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('myChart');
+
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['12:00', '12:01', '12:02', '12:03', '12:04', '12:05'],
+            datasets: [{
+                label: 'Produtos corretos',
+                backgroundColor: '#229A00',
+                borderColor: '#204417',
+                data: [12, 12, 10, 11, 14, 12],
+                borderWidth: 3
+            },
+            {
+                label: 'Produtos errôneos',
+                backgroundColor: '#FF0000',
+                borderColor: '#AA3939',
+                data: [6, 6, 8, 7, 9, 5],
+                borderWidth: 3
+            },]
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Comparação de produtos errôneos e corretos no sensor em período determinado',
+                    font: {
+                        size: 20
+                    },
+                    color: '#000',
+                    padding: {
+                        top: 10,
+                        bottom: 30
+                    }
+                }
+            },
+
+
+
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+
+    var grafico_tempo_real = new Chart(document.getElementById('grafico-tempo-real'), {
+        type: 'line',
+        data: {
+            labels: ['12:00', '12:01', '12:02', '12:03', '12:04', '12:05'],
+            datasets: [
+                {
+                    label: 'Produtos errôneos',
+                    backgroundColor: '#FF0000',
+                    borderColor: '#FF0000',
+                    data: [10, 20, 15, 30, 25, 40],
+                    fill: false,
+                },
+                {
+                    label: 'Produtos corretos',
+                    backgroundColor: '#00FFFF',
+                    borderColor: '#00FFFF',
+                    data: [20, 40, 30, 60, 50, 80],
+                    fill: false,
+                },
+
+
+            ]
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Acompanhamento de produtos em tempo real',
+                    font: {
+                        size: 20
+                    },
+                    color: '#000',
+                    padding: {
+                        top: 10,
+                        bottom: 30
+                    }
+                },
+                legend: {
+                    display: true,
+                    position: 'bottom', 
+                }
+            }
+            ,
+            scales: {
+                x: {
+                    beginAtZero: true
+                },
+                y: {
+                    // title: {
+                    // display: true,
+                    // text: '(%)'
+                    // },
+                    beginAtZero: true,
+                },
+            },
+        }
+    });
+
+
+</script>
