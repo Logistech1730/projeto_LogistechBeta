@@ -139,6 +139,7 @@ body {
     cursor: pointer;
     background-color: #0b2d94;
     margin: 20px;
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
 }
 
 .secondSection {
@@ -184,6 +185,7 @@ body {
     cursor: pointer;
     background-color: #0b2d94;
     transform: translateY(-30%);
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
 }
 
 
