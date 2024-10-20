@@ -7,6 +7,7 @@
     <title>Logistech</title>
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="./styles/calculadora.css">
+    <link rel="stylesheet" href="./styles/cadastro.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -15,6 +16,7 @@
 </head>
 
 <body>
+    <!-- ModalCadastro -->
     <div class="area_form" id="modalCadastro">
         <div class="bloco_form">
             <div class="bloco_info_cadastro">
@@ -124,11 +126,10 @@
                         <button class="botao_cadastro" onclick="validarParte3()">Cadastrar</button>
                     </div>
                 </div>
+            </form>
         </div>
-        </form>
     </div>
 
-    </div>
     <!-- Vitor -->
     <header class="headerElements">
 
@@ -179,7 +180,7 @@
                     insights valiosos para impulsionar a produtividade e a competitividade do seu negócio. Junte-se a
                     nós e transforme seu processo de fabricação!
                 </p>
-                <button id="btn_SaibaMais" onclick="Abrir_SaibaMais()">Saiba mais</button>
+                <button id="btn_SaibaMais" onclick="window.location.href = './sobrenós.html'">Saiba mais</button>
             </div>
         </div>
     </div>
@@ -218,6 +219,7 @@
                 desses dados para gráficos que te ajudam a tomar a melhor decisão baseada em dados</p>
         </div>
         <img src="./img/solutionDiagram.png" class="img-diagrama" alt="Diagrama de negócio">
+        <button id="btn_SaibaMais" onclick="window.location.href = './servicos.html'">Saiba mais</button>
     </div>
     <footer>
         <p>Copyright © 2024 - Todos os direitos reservados Logistech</p>

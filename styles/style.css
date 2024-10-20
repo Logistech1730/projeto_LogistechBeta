@@ -326,7 +326,7 @@ footer {
 
 /*Israel - Página de cadastro*/
 
-.area_form {
+/* .area_form {
     position: fixed;
     display: flex;
     z-index: 1;
@@ -491,7 +491,7 @@ textarea:focus, input:focus, select:focus {
     font-size: 0.7vw;
     font-weight: 800;
     padding: 1vh 1.25vw;
-    border: none;/*0.2vw solid #070E3C ; */
+    border: none; 
     border-radius: 0.5vw;
     cursor: pointer;
-}
+} */
