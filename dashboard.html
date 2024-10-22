@@ -9,9 +9,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -58,10 +60,10 @@
         </div>
         <div class="dashboard">
             <div class="filtros-dash">
-                <select id="">
-                    <option value="sensor1">Sensor1</option>
-                    <option value="sensor2">Sensor2</option>
-                    <option value="sensor3">Sensor3</option>
+                <select id="slt_esteiras">
+                    <option value="sensor1">Esteira 1</option>
+                    <option value="sensor2">Esteira 2</option>
+                    <option value="sensor3">Esteira 3</option>
                 </select>
                 <input type="date" id="data1">
                 <input type="date" id="data2">
@@ -72,14 +74,14 @@
                 <div class="bloco1">
                     <div class="produtos-registrados">
                         <i class="fa-solid fa-gear"></i>
-                        <p>70 produtos registrados no total</p>
+                        <p><span id="span_qtd_produtos"></span> produtos registrados no total</p>
                     </div>
                     <div class="grafico-porcentagem">
                         <div class="porcentagem">
                             <p>Porcentagem de produtos corretos</p>
-                            <p id="qtd_porcentagem" class="porcentagem-numero">99%</p>
-                            <p>99 Produtos corretos</p>
-                            <p>1 produto errôneo</p>
+                            <p id="qtd_porcentagem" class="porcentagem-numero"></p>
+                            <p><span id="span_qtd_produtos_corretos"></span> produtos corretos</p>
+                            <p><span id="span_qtd_produtos_erroneos"></span> produtos errôneos</p>
                             <button>Ver alertas</button>
                         </div>
                     </div>
@@ -87,10 +89,10 @@
 
                 <div class="bloco2">
                     <div class="status-esteiras">
-                        <p>Status das esteiras: <span style="color: green;">Conforme esperado</span></p>
+                        <p>Status das esteiras: <span id="status_esteiras" style="color: green;">Conforme esperado</span></p>
                     </div>
                     <div class="grafico-barras">
-                        <canvas id="myChart"></canvas>
+                        <canvas id="grafico-barra"></canvas>
                     </div>
                 </div>
 
@@ -114,10 +116,8 @@
 <!-- Import do ChartJS -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const ctx = document.getElementById('myChart');
 
-
-    new Chart(ctx, {
+    var graficoBarra = new Chart(document.getElementById('grafico-barra'), {
         type: 'bar',
         data: {
             labels: ['12:00', '12:01', '12:02', '12:03', '12:04', '12:05'],
@@ -161,8 +161,6 @@
             }
         }
     });
-
-
     var grafico_tempo_real = new Chart(document.getElementById('grafico-tempo-real'), {
         type: 'line',
         data: {
@@ -172,14 +170,14 @@
                     label: 'Produtos errôneos',
                     backgroundColor: '#FF0000',
                     borderColor: '#FF0000',
-                    data: [10, 20, 15, 30, 25, 40],
+                    data: dados_produtos_erroneos,
                     fill: false,
                 },
                 {
                     label: 'Produtos corretos',
                     backgroundColor: '#00FFFF',
                     borderColor: '#00FFFF',
-                    data: [20, 40, 30, 60, 50, 80],
+                    data: dados_produtos_corretos,
                     fill: false,
                 },
 
@@ -187,6 +185,7 @@
             ]
         },
         options: {
+            responsive: true,
             plugins: {
                 title: {
                     display: true,
@@ -202,7 +201,7 @@
                 },
                 legend: {
                     display: true,
-                    position: 'bottom', 
+                    position: 'bottom',
                 }
             }
             ,
@@ -222,4 +221,90 @@
     });
 
 
+    var select_esteiras = document.getElementById('slt_esteiras');
+    var qtd_produtos_corretos = 0;
+    var qtd_produtos_erroneos = 0;
+
+    var dados_produtos_corretos = [];
+    var dados_produtos_erroneos = [];
+
+
+    // Função executada assim que a página for carregada
+    document.addEventListener('DOMContentLoaded', function () {
+        gerarQtdAleatoriaDeProdutos();
+    });
+
+    function gerarQtdAleatoriaDeProdutos() {
+        // produtos corretos
+        for (let i = 0; i < 6; i++) {
+            dados_produtos_corretos[i] = gerarAleatorio(200);
+        }
+        graficoBarra.data.datasets[0].data = dados_produtos_corretos;
+
+        // produtos erroneos
+        for (let i = 0; i < 6; i++) {
+            dados_produtos_erroneos[i] = gerarAleatorio(20);
+        }
+        graficoBarra.data.datasets[1].data = dados_produtos_erroneos;
+
+        graficoBarra.update();
+        gerarPorcentagemProdutos();
+        gerarQtdTotalProdutos();
+    }
+
+
+    // mudando dados do gráfico a partir da mudança do select
+    select_esteiras.addEventListener("change", () => {
+      gerarQtdAleatoriaDeProdutos();
+    })
+
+
+
+    // quando minha página carregar, modificar o total de produtos e calcular a porcentagem
+    function gerarPorcentagemProdutos() {
+       
+        qtd_produtos_corretos = gerarTotalProdutos(dados_produtos_corretos);
+        qtd_produtos_erroneos = gerarTotalProdutos(dados_produtos_erroneos);
+        span_qtd_produtos_corretos.innerHTML = qtd_produtos_corretos
+        span_qtd_produtos_erroneos.innerHTML = qtd_produtos_erroneos
+
+        var porcentagem = (qtd_produtos_corretos / (qtd_produtos_corretos + qtd_produtos_erroneos) * 100);
+
+        if (porcentagem > 95) {
+            status_esteiras.innerHTML = "Conforme esperado";
+            status_esteiras.style.color = "#0F6C00";
+            qtd_porcentagem.style.color = "#0F6C00";
+        } else if (porcentagem > 90) {
+            status_esteiras.innerHTML = "Alerta!";
+            status_esteiras.style.color = "#FFFF00";
+            qtd_porcentagem.style.color = "#FFFF00";
+        } else {
+            status_esteiras.innerHTML = "Abaixo do esperado";
+            status_esteiras.style.color = "#FF0000";
+            qtd_porcentagem.style.color = "#FF0000";
+        }
+
+        qtd_porcentagem.innerHTML = porcentagem.toFixed() + "%";
+    }
+
+    function gerarQtdTotalProdutos() {
+        var qtdTotalProdutos = gerarTotalProdutos(graficoBarra.data.datasets[0].data) + gerarTotalProdutos(graficoBarra.data.datasets[1].data);
+        span_qtd_produtos.innerHTML = qtdTotalProdutos
+        
+    }
+
+
+    function gerarTotalProdutos(quantidadeProdutos) {
+        var totalProdutos = 0;
+        for (let index = 0; index < quantidadeProdutos.length; index++) {
+            const element = quantidadeProdutos[index];
+            totalProdutos += element;
+        }
+        return totalProdutos;
+    }
+
+
+    function gerarAleatorio(intervalo) {
+        return Math.floor(Math.random() * intervalo);
+    }
 </script>
