@@ -17,10 +17,10 @@
 </head>
 
 <body>
-    <header class="headerElements">
+    <!-- <header class="headerElements">
 
         <section class="logoImg"><a href="#home"></a></section>
-    </header>
+    </header> -->
     <div class="container-dash">
         <div class="barra-lateral">
             <div class="div-imagem-perfil">
@@ -51,13 +51,8 @@
                 <i class="fa-solid fa-door-open"></i>
                 <span>Sair</span>
             </div>
-
-
-
-
-
-
         </div>
+
         <div class="dashboard">
             <div class="filtros-dash">
                 <select id="slt_esteiras">
@@ -100,16 +95,11 @@
             </div>
             <div class="bloco3">
                 <div class="grafico-linha">
-                    <canvas id="grafico-tempo-real"></canvas>
+                    <canvas id="grafico-tempo-real" ></canvas>
                 </div>
             </div>
         </div>
-
-
     </div>
-    <footer>
-        <p>Copyright © 2024 - Todos os direitos reservados Logistech</p>
-    </footer>
 </body>
 
 </html>
@@ -146,8 +136,8 @@
                     },
                     color: '#000',
                     padding: {
-                        top: 10,
-                        bottom: 30
+                        top: 5,
+                        bottom: 5
                     }
                 }
             },
@@ -186,6 +176,7 @@
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             plugins: {
                 title: {
                     display: true,

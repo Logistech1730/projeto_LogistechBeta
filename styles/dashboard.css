@@ -9,52 +9,9 @@ body {
     overflow-x: hidden;
 }
 
-.headerElements ul a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: 800;
-    transition: 0.3s;
-}
-
-.headerElements ul a:hover {
-    color: #b4b4b4;
-    border-bottom: 1px solid #b4b4b4;
-}
-
-.headerElements ul {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 20px 80px 20px 80px;
-    list-style-type: none;
-}
-
-.headerElements {
-    background-color: #070E3C;
-    display: flex;
-    justify-content: space-between;
-    /* position: fixed; */
-    width: 100%;
-    height: 10vh;
-}
-
-.logoImg {
-    width: 10%;
-    height: 100px;
-    background-image: url('../img/LogisTech.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    margin-left: 20px;
-}
-
-.logoImg:hover {
-    cursor: pointer;
-}
-
 .container-dash {
     display: flex;
-    height: 150vh;
+    height: 100vh;
 }
 
 .barra-lateral {
@@ -63,8 +20,9 @@ body {
     background-color: #1e2868;
     color: #fff;
     padding: 20px;
-    width: 200px;
+    width: 300px;
     text-align: center;
+    height: 100vh;
 }
 
 .barra-lateral span:hover{
@@ -111,15 +69,16 @@ body {
 .dashboard {
     display: flex;
     flex-direction: column;
-   
-    width: 100%;
+    width: 95%;
+    margin-right: 10%;
 }
 
 .dashboard .blocos {
     display: flex;
-    height: 40%;
+    height: 45%;
     padding: 2rem 3rem 0 3rem;
     gap: 1rem;
+    margin-bottom: 1%;
 }
 
 .dashboard .bloco1 {
@@ -127,6 +86,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    height: 20px;
 }
 
 .grafico-porcentagem {
@@ -164,7 +124,7 @@ body {
 
 .porcentagem-numero {
     color: #0F6C00;
-    font-size: 9rem;
+    font-size: 3.5rem;
     font-weight: bold;
 }
 
@@ -172,25 +132,36 @@ body {
     width: 60%;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.5rem;
 }
 
 .bloco2 .status-esteiras {
     display: flex;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: bold;
 }
 
 .dashboard .bloco3 {
     width: 100%;
     padding-top: 0px;
-    height: 50vh;
+    height: fit-content;
     padding: 0 3rem 3rem 3rem;
 }
 
-.bloco3 .grafico-linha {
+.grafico-barras{
+    height: 100%;
+    width: 100%;
+}
 
+.bloco3 .grafico-linha {
+    height: 350px;
+    width: 85vw;
+}
+
+.bloco .grafico-linha #grafico-tempo-real{
+    width: inherit;
+    border: 1px solid black;
 }
 
 
@@ -220,6 +191,7 @@ body {
     padding: 5px;
     font-size: 14px;
     cursor: pointer;
+    margin-right: 200px;
 }
 .filtros-dash button:hover{
     background-color: #2f3c85;
