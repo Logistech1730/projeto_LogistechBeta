@@ -23,7 +23,7 @@ body {
 }
 
 :root {
-    --bannerSize: calc(100vh - 100px);
+    --bannerSize: calc(90vh );
 }
 
 

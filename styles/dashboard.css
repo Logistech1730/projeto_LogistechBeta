@@ -25,6 +25,11 @@ body {
     height: 100vh;
 }
 
+.barra-lateral a{
+    text-decoration: none;
+    color: #fff;
+}
+
 .barra-lateral span:hover{
     color: #b4b4b4;
 }
@@ -71,6 +76,7 @@ body {
     flex-direction: column;
     width: 95%;
     margin-right: 10%;
+    height: inherit;
 }
 
 .dashboard .blocos {
@@ -146,7 +152,7 @@ body {
     width: 100%;
     padding-top: 0px;
     height: fit-content;
-    padding: 0 3rem 3rem 3rem;
+    padding: 0 3rem 0 3rem;
 }
 
 .grafico-barras{
