@@ -7,6 +7,7 @@
     <title>Login</title>
     <link rel="stylesheet" href="./styles/head_footer.css">
     <link href="styles/login.css" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/cadastro.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -38,6 +39,7 @@
                         <input type="number" id="ipt_cep" oninput="validarCEP()" class="inputs" required>
                         <span class="labels">CEP da Empresa</span>
                         <span id="span_validar_cep" class="span_validacao"></span>
+                        <span class="avisoLogin">Já possui uma conta? <strong>Faça Login</strong></span>
                     </div>
                     <div class="area_botao" id="areaBotao">
                         <button class="botao_cadastro" onclick="validarParte1()">Seguinte</button>
@@ -92,6 +94,7 @@
                         <input type="text" id="ipt_complemento" oninput="validarComplemento()" class="inputs" required>
                         <span class="labels">Complemento</span>
                         <span id="span_validar_complemento" class="span_validacao"></span>
+                        <span class="avisoLogin">Já possui uma conta? <strong>Faça Login</strong></span>
                     </div>
                     <div class="area_botao">
                         <button class="botao_voltar" onclick="voltarToParte1()">Voltar</button>
@@ -116,6 +119,7 @@
                             class="inputs" required>
                         <span class="labels">Confirme a Senha</span>
                         <span id="span_validar_confirmacao" class="span_validacao"></span>
+                        <span class="avisoLogin">Já possui uma conta? <strong style="cursor: pointer;" onclick="modalCadastro.style.display = 'none'; modalLogin.style.display = 'flex'">Faça Login</strong></span>
                     </div>
                     <div class="area_botao">
                         <button class="botao_voltar" onclick="voltarToParte2()">Voltar</button>
@@ -126,45 +130,36 @@
         </div>
     </div>
 
+    <div class="area_form" id="modalLogin">
+        <div class="bloco_login">
+            <div class="bloco_info_cadastro">
+                <img src="./img/Logo_Logistech2.png" alt="logo Logistech" class="imgLogo">
+                <p class="textoCadastro"><strong>Nossa solução</strong> trará <strong>controle</strong> a suas linhas de
+                    produção.</p>
+            </div>
+            <i class="fa-solid fa-x" onclick="modalLogin.style.display = 'none'"></i>
+            <form class="form_cadastro">
+                <h1>Login</h1>
+                <div class="cadastroParte1" id="cadastroParte1">
+                    <div class="div_inputs">
+                        <input type="text" id="ipt_nome_empresa" oninput="validarNomeEmpresa()" class="inputsLogin" required>
+                        <span class="labelsLogin">Razão Social</span>
+                        <span id="span_validar_login" class="span_validacao"></span>
+                        <input type="text" id="ipt_cnpj" oninput="validarCNPJ()" class="inputsLogin" required>
+                        <span class="labelsLogin">CNPJ da Empresa</span>
+                        <span id="span_validar_senha" class="span_validacao"></span>
+                        <span class="avisoLogin">Não possui uma conta? <strong style="cursor: pointer;" onclick= "modalLogin.style.display = 'none'; modalCadastro.style.display = 'flex'">Cadastre-se</strong></span>
+                    </div>
+                    <div class="area_botao" id="areaBotao">
+                        <button class="botao_cadastro" onclick="login()">Acessar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <main>
         <div id="home" class="bannerImg">
-            <div class="mainText">
-
-                <h1>
-                    ORGANIZAÇÃO, HOJE, <br>
-                    PARA A SUA EMPRESA
-                </h1>
-                <div class="container">
-                    <p class="paragraph-login">Login</p>
-                    <p id="mensagem_erro" style="display: none;"></p>
-                    <div class="email">
-                        <span style="color: #8D8C8C;">
-                            <i class="fa-solid fa-user"></i>
-                        </span>
-                        <input placeholder="E-mail" type="text" id="ipt_email">
-                    </div>
-                    <div class="senha">
-                        <div class="container-senha">
-                            <span style="color: #8D8C8C;">
-                                <i class="fa-solid fa-lock"></i>
-                            </span>
-                            <input placeholder="Senha" type="password" id="ipt_senha">
-                        </div>
-                        <span onclick="mudarTipoSenha()" id="olhofechado" class="eye-slash-icon"
-                            style="display: none; color: #8D8C8C;">
-                            <i class="fa-regular fa-eye-slash"></i>
-                        </span>
-                        <span onclick="mudarTipoSenha()" id="olhoaberto" class="eye-icon" style="color: #8D8C8C;">
-                            <i class="fa-regular fa-eye"></i>
-                        </span>
-                    </div>
-                    <div class="password-options">
-                        <p><a href="404.html">Esqueceu a senha?</a></p>
-                        <p>Não tem uma conta?<a href="cadastro.html"> Crie agora</a></p>
-                    </div>
-                    <button onclick="login()">Acessar</button>
-                </div>
-            </div>
     </main>
 
 </body>

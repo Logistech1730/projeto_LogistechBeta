@@ -1,7 +1,7 @@
 .area_form {
     position: fixed;
     display: none;
-    z-index: 1;
+    z-index: 3;
     width: 100vw;
     height: 100vh;
     background-color: #0000008a;
@@ -16,7 +16,7 @@
     border-radius: 0.5vw;
     background-color: #070E3C;
 }
-.fa-solid{
+.fa-x{
     position: absolute;
     z-index: 3;
     margin-top: 0.5vh;
@@ -166,4 +166,8 @@ textarea:focus, input:focus, select:focus {
     border: none; 
     border-radius: 0.5vw;
     cursor: pointer;
-} 
+}
+.avisoLogin{
+
+    font-size: 0.7vw;
+}
