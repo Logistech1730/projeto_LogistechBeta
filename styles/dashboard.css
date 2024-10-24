@@ -187,6 +187,8 @@ body {
     align-items: flex-start;
     width: 100%;
     margin-top: 1rem;
+    background-color: #0B144A;
+    padding: 10px;
 }
 
 .filtros-dash button{
