@@ -46,9 +46,9 @@ function analisar(){
     var rendaMensal = Number(ipt_renda.value);
     var rendaCalculada = (unidades * valor)
     if (rendaCalculada > rendaMensal){
-        div_mensagem.innerHTML = `sua renda mensal está <br> <b style=color:red> R$${rendaCalculada - rendaMensal} </b> <br> abaixo do que deveria, o que pode indicar possivel extravio de produtos de seu armazem <br> <br> para averiguar esse possivel problema contrate nossos serviços.`
+        div_mensagem.innerHTML = `sua renda mensal está <br> <b style=color:red> R$${(rendaCalculada - rendaMensal).toFixed(2)} </b> <br> abaixo do que deveria, o que pode indicar possivel extravio de produtos de seu armazem <br> <br> para averiguar esse possivel problema contrate nossos serviços.`
     } else if (rendaCalculada < rendaMensal){
-        div_mensagem.innerHTML = `sua renda mensal está <br> <b style=color:red> R$${rendaMensal - rendaCalculada} </b> <br> acima do que deveria, <p style=color:green> o que pode ser uma boa noticia </p> <p style=color:red> ou algum erro grave no calculo da renda mensal </p> para averiguar esse possivel problema contrate nossos serviços`
+        div_mensagem.innerHTML = `sua renda mensal está <br> <b style=color:red> R$${rendaMensal - rendaCalculada.toFixed(2)} </b> <br> acima do que deveria, <p style=color:green> o que pode ser uma boa noticia </p> <p style=color:red> ou algum erro grave no calculo da renda mensal </p> para averiguar esse possivel problema contrate nossos serviços`
     } else if (rendaCalculada == rendaMensal){
         div_mensagem.innerHTML = `sua renda mensal está igual a que calculamos em nossa estimativa <br> <b style=color:green> o que indica que não na nenhum problema atualmente na detecção de entrada e saida de seus produtos </b> e para garantir que vai continuar assim contrate nossos serviços`
     }
