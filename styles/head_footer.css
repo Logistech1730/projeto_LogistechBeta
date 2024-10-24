@@ -55,8 +55,37 @@ body {
 footer {
     background-color: #070E3C;
     color: white;
-    text-align: center;
     padding: 40px;
     width: 100%;
     font-size: 2ch;
+}
+
+footer p{
+    text-align: center;
+    padding-top: 10vh;
+}
+
+.contato-footer-assunto {
+    font-size: 20px;
+    font-weight:700;
+}
+
+.componentes-footer {
+    display: flex;
+    justify-content:space-around;
+}
+
+.contato-footer{
+    display: flex;
+    flex-direction: column;
+}
+
+.endereco-footer{
+    display: flex;
+    flex-direction: column;
+}
+
+.imagem-footer {
+    margin-bottom: -20px;
+    width: 100%;
 }

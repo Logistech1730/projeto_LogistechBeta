@@ -46,7 +46,7 @@ body {
 }
 
 .man-working, .analise-dashboard, .esteira-imagem {
-    width: 30%;
+    width: 40%;
 }
 
 .descricao-solucao {
@@ -58,10 +58,11 @@ body {
 }
 
 .descricao-solucao  p{
+    width: 60%;
     display: flex;
     flex-direction: column;
     font-size: 25px;
-    margin-top: 100px;
+    margin-top: 80px;
 }
 
 .descricao-solucao span{
@@ -72,19 +73,30 @@ body {
 .descricao-solucao-texto1{
     display: flex;
     flex-direction: row;
-    margin-left: 10%;
+    align-items: center;
+    border-bottom: 2px solid #0B144A;
+    border-top:  2px solid #0B144A;
 }
 
 .descricao-solucao-texto2 {
     display: flex;
     flex-direction: row;
-    margin-left: 10%;
+    align-items: center;
+    border-bottom: 2px solid #0B144A;
+    margin-top: 3%;
+    padding-bottom: 3%;
 }
 
 .descricao-solucao-texto3 {
     display: flex;
     flex-direction: row;
     margin-left: 10%;
+    align-items: center;
+    margin-top: 3%;
+}
+
+.span-realce {
+    color: #0b2d94;
 }
 
 
