@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="./styles/head_footer.css">
-    <link href="styles/login.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/login.css">
     <link rel="stylesheet" href="./styles/cadastro.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="script/cadastro.js"></script>
 </head>
 
 <body>
@@ -21,10 +22,10 @@
                 <p class="textoCadastro"><strong>Nossa solução</strong> trará <strong>controle</strong> a suas linhas de
                     produção.</p>
             </div>
-            <i class="fa-solid fa-x" onclick="modalCadastro.style.display = 'none'"></i>
+            <i class="fa-solid fa-house" id="iconCasa" onclick="window.location.href ='./index.html'"></i>
             <form class="form_cadastro">
                 <h1>Cadastre-se</h1>
-                <div class="cadastroParte1" id="cadastroParte1">
+                <div id="cadastroParte1">
                     <div class="div_inputs">
                         <input type="text" id="ipt_nome_empresa" oninput="validarNomeEmpresa()" class="inputs" required>
                         <span class="labels">Razão Social</span>
@@ -39,10 +40,10 @@
                         <input type="number" id="ipt_cep" oninput="validarCEP()" class="inputs" required>
                         <span class="labels">CEP da Empresa</span>
                         <span id="span_validar_cep" class="span_validacao"></span>
-                        <span class="avisoLogin">Já possui uma conta? <strong>Faça Login</strong></span>
                     </div>
                     <div class="area_botao" id="areaBotao">
-                        <button class="botao_cadastro" onclick="validarParte1()">Seguinte</button>
+                        <span class="avisoLogin">Já possui uma conta? <strong style="cursor: pointer;" onclick="redirecionarLogin()">Faça Login</strong></span>
+                        <button type="button" class="botao_cadastro" onclick="validarParte1()">Seguinte</button>
                     </div>
                 </div>
                 <div class="cadastroParte2" id="cadastroParte2">
@@ -87,6 +88,7 @@
                                 <option value="TO">TO</option>
                                 <option value="DF">DF</option>
                             </select>
+                            <span class="labels">Estado</span>
                         </div>
                         <input type="text" id="ipt_numero" oninput="validarNumero()" class="inputs" required>
                         <span class="labels">Número</span>
@@ -94,9 +96,9 @@
                         <input type="text" id="ipt_complemento" oninput="validarComplemento()" class="inputs" required>
                         <span class="labels">Complemento</span>
                         <span id="span_validar_complemento" class="span_validacao"></span>
-                        <span class="avisoLogin">Já possui uma conta? <strong>Faça Login</strong></span>
                     </div>
                     <div class="area_botao">
+                        <span class="avisoLogin">Já possui uma conta? <strong style="cursor: pointer;" onclick="redirecionarLogin()">Faça Login</strong></span>
                         <button class="botao_voltar" onclick="voltarToParte1()">Voltar</button>
                         <button class="botao_cadastro" onclick="validarParte2()">Seguinte</button>
                     </div>
@@ -119,9 +121,9 @@
                             class="inputs" required>
                         <span class="labels">Confirme a Senha</span>
                         <span id="span_validar_confirmacao" class="span_validacao"></span>
-                        <span class="avisoLogin">Já possui uma conta? <strong style="cursor: pointer;" onclick="modalCadastro.style.display = 'none'; modalLogin.style.display = 'flex'">Faça Login</strong></span>
                     </div>
                     <div class="area_botao">
+                        <span class="avisoLogin">Já possui uma conta? <strong style="cursor: pointer;" onclick="redirecionarLogin()">Faça Login</strong></span>
                         <button class="botao_voltar" onclick="voltarToParte2()">Voltar</button>
                         <button class="botao_cadastro" onclick="validarParte3()">Cadastrar</button>
                     </div>
@@ -132,29 +134,28 @@
 
     <div class="area_form" id="modalLogin">
         <div class="bloco_login">
-            <div class="bloco_info_cadastro">
-                <img src="./img/Logo_Logistech2.png" alt="logo Logistech" class="imgLogo">
-                <p class="textoCadastro"><strong>Nossa solução</strong> trará <strong>controle</strong> a suas linhas de
-                    produção.</p>
-            </div>
-            <i class="fa-solid fa-x" onclick="modalLogin.style.display = 'none'"></i>
-            <form class="form_cadastro">
+            <i class="fa-solid fa-house casaLogin" id="iconCasa" onclick="window.location.href ='./index.html'"></i>
+            <form class="form_login">
                 <h1>Login</h1>
-                <div class="cadastroParte1" id="cadastroParte1">
-                    <div class="div_inputs">
-                        <input type="text" id="ipt_nome_empresa" oninput="validarNomeEmpresa()" class="inputsLogin" required>
-                        <span class="labelsLogin">Razão Social</span>
-                        <span id="span_validar_login" class="span_validacao"></span>
-                        <input type="text" id="ipt_cnpj" oninput="validarCNPJ()" class="inputsLogin" required>
-                        <span class="labelsLogin">CNPJ da Empresa</span>
-                        <span id="span_validar_senha" class="span_validacao"></span>
-                        <span class="avisoLogin">Não possui uma conta? <strong style="cursor: pointer;" onclick= "modalLogin.style.display = 'none'; modalCadastro.style.display = 'flex'">Cadastre-se</strong></span>
+                <div class="loginContainer" id="cadastroParte1">
+                    <div class="div_inputs_login">
+                        <input type="text" id="ipt_login" class="inputsLogin" required>
+                            <span class="labelsLogin">Email</span>
+                            <i class="fa-solid fa-user"></i>
+                        <input type="text" id="ipt_senha_login" class="inputsLogin" required>
+                        <span class="labelsLogin">Senha</span>
+                        <i class="fa-solid fa-lock"></i>
                     </div>
-                    <div class="area_botao" id="areaBotao">
-                        <button class="botao_cadastro" onclick="login()">Acessar</button>
+                    <div class="area_botao_login" id="areaBotaoLogin">
+                        <span class="avisoLogin">Não possui uma conta? <strong style="cursor: pointer;" onclick= "redirecionarCadastro()">Cadastre-se</strong></span>
+                        <button class="botao_login" onclick="login()">Acessar</button>
                     </div>
                 </div>
             </form>
+            <div class="bloco_info_cadastro">
+                <img src="./img/Logo_Logistech2.png" alt="logo Logistech" class="imgLogo">
+                <p class="textoCadastro"><strong>Seja bem vindo de volta!</strong></p>
+            </div>
         </div>
     </div>
 
@@ -166,6 +167,7 @@
 
 </html>
 <script>
+    
     function mudarTipoSenha() {
         if (olhofechado.style.display == "none") {
             // mostrar senha

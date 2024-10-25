@@ -5,7 +5,7 @@ var valor_nome_empresa = '';
 
     var valor_logradouro = '';
     var valor_cidade ='';
-    var valor_uf = '';
+    var valor_uf = ''; 
     var valor_numero = '';
     var valor_complemento = '';
 
@@ -332,4 +332,14 @@ function validarCEP() {
 
     function cadastrar() {
         window.location.href = 'cadastro.html'
+    }
+
+    // Página de login
+    function redirecionarCadastro() {
+        modalLogin.style.display = 'none'
+        modalCadastro.style.display = 'flex'
+    }
+    function redirecionarLogin() {
+        modalCadastro.style.display = 'none'
+        modalLogin.style.display = 'flex'
     }

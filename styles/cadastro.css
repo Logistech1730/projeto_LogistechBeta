@@ -16,13 +16,16 @@
     border-radius: 0.5vw;
     background-color: #070E3C;
 }
-.fa-x{
+#iconCasa{
     position: absolute;
     z-index: 3;
     margin-top: 0.5vh;
     margin-right: 0.5vh;
     font-size: 1vw;
     cursor: pointer;
+}
+.casaLogin{
+    color: #D9D9D9;
 }
 .bloco_info_cadastro{
     display: flex;
@@ -69,15 +72,15 @@
     flex-direction: column;
     padding: 0vh 3vw;
 }
-.cadastroParte1{
+#cadastroParte1{
     display: flex;
     flex-direction: column;
 }
-.cadastroParte2{
+#cadastroParte2{
     display: none;
     flex-direction: column;
 }
-.cadastroParte3{
+#cadastroParte3{
     display: none;
     flex-direction: column;
 }
@@ -85,6 +88,7 @@
     background-color: transparent;
     border-style: solid;
     width:16vw;
+    font-size: 0.8vw;
     margin-bottom: 4vh;
     border-width: 0 0 0.2vh 0;
     z-index: 2;
@@ -143,8 +147,10 @@ textarea:focus, input:focus, select:focus {
 } 
 .area_botao {
     display: flex;
+    flex-direction: column;
     gap: 0.75vw;
     justify-content: center;
+    align-items: center;
     margin-top: 2vh;
 }
 .botao_cadastro {
