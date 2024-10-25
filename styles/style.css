@@ -63,6 +63,9 @@ body {
     flex-direction: column;
     font-size: 25px;
     margin-top: 80px;
+    background-color: #dbdbdb;
+    border-radius: 10px;
+    padding: 1%;
 }
 
 .descricao-solucao span{
@@ -74,24 +77,27 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    border-bottom: 2px solid #0B144A;
-    border-top:  2px solid #0B144A;
+    margin-left: 2%;
 }
 
 .descricao-solucao-texto2 {
     display: flex;
     flex-direction: row;
     align-items: center;
-    border-bottom: 2px solid #0B144A;
     margin-top: 3%;
     padding-bottom: 3%;
+    margin-right: 2%;
 }
 
 .descricao-solucao-texto3 {
     display: flex;
     flex-direction: row;
-    margin-left: 10%;
+    margin-left: 2%;
     align-items: center;
+    margin-top: 3%;
+}
+
+.img-diagrama {
     margin-top: 3%;
 }
 
@@ -99,6 +105,22 @@ body {
     color: #0b2d94;
 }
 
+.container-solucao button {
+    border-radius: 20px;
+    border: none;
+    padding: 20px;
+    background-color: #0E3AC0;
+    color: #fff;
+    font-weight: 800;
+    transition: 0.3s;
+}
+
+.container-solucao button:hover {
+    cursor: pointer;
+    background-color: #0b2d94;
+    margin: 5px;
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+}
 
 /* Gabriel */
 
