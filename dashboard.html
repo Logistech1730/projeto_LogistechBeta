@@ -55,13 +55,22 @@
 
         <div class="dashboard">
             <div class="filtros-dash">
-                <select id="slt_esteiras">
-                    <option value="sensor1">Esteira 1</option>
-                    <option value="sensor2">Esteira 2</option>
-                    <option value="sensor3">Esteira 3</option>
-                </select>
-                <input type="date" id="data1">
-                <input type="date" id="data2">
+                <div id="container-esteira">
+                    <label for="slt_esteiras">Esteira</label>
+                    <select id="slt_esteiras">
+                        <option value="sensor1">Esteira 1</option>
+                        <option value="sensor2">Esteira 2</option>
+                        <option value="sensor3">Esteira 3</option>
+                    </select>
+                </div>
+                <div id="container-dtInicio">
+                    <label for="container-dtInicio">Data de Início</label>
+                    <input type="date" id="data1">
+                </div>
+                <div class="container-dtTermino">
+                    <label for="container-dtTermino">Data de Término</label>
+                    <input type="date" id="data2">
+                </div>
                 <button id="botao-filtro">Aplicar Filtros</button>
             </div>
             <div class="blocos">
@@ -84,7 +93,8 @@
 
                 <div class="bloco2">
                     <div class="status-esteiras">
-                        <p>Status das esteiras: <span id="status_esteiras" style="color: green;">Conforme esperado</span></p>
+                        <p>Status das esteiras: <span id="status_esteiras" style="color: green;">Conforme
+                                esperado</span></p>
                     </div>
                     <div class="grafico-barras">
                         <canvas id="grafico-barra"></canvas>
@@ -95,7 +105,7 @@
             </div>
             <div class="bloco3">
                 <div class="grafico-linha">
-                    <canvas id="grafico-tempo-real" ></canvas>
+                    <canvas id="grafico-tempo-real"></canvas>
                 </div>
             </div>
         </div>
@@ -248,14 +258,14 @@
 
     // mudando dados do gráfico a partir da mudança do select
     select_esteiras.addEventListener("change", () => {
-      gerarQtdAleatoriaDeProdutos();
+        gerarQtdAleatoriaDeProdutos();
     })
 
 
 
     // quando minha página carregar, modificar o total de produtos e calcular a porcentagem
     function gerarPorcentagemProdutos() {
-       
+
         qtd_produtos_corretos = gerarTotalProdutos(dados_produtos_corretos);
         qtd_produtos_erroneos = gerarTotalProdutos(dados_produtos_erroneos);
         span_qtd_produtos_corretos.innerHTML = qtd_produtos_corretos
@@ -283,7 +293,7 @@
     function gerarQtdTotalProdutos() {
         var qtdTotalProdutos = gerarTotalProdutos(graficoBarra.data.datasets[0].data) + gerarTotalProdutos(graficoBarra.data.datasets[1].data);
         span_qtd_produtos.innerHTML = qtdTotalProdutos
-        
+
     }
 
 

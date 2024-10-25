@@ -12,6 +12,8 @@ body {
 .container-dash {
     display: flex;
     height: 100vh;
+    /* width: 80vw; */
+
 }
 
 .barra-lateral {
@@ -20,7 +22,7 @@ body {
     background-color: #1e2868;
     color: #fff;
     padding: 20px;
-    width: 300px;
+    width: 15vw;
     text-align: center;
     height: 100vh;
 }
@@ -74,9 +76,8 @@ body {
 .dashboard {
     display: flex;
     flex-direction: column;
-    width: 95%;
-    margin-right: 10%;
     height: inherit;
+    width: 85vw;
 }
 
 .dashboard .blocos {
@@ -149,7 +150,7 @@ body {
 }
 
 .dashboard .bloco3 {
-    width: 100%;
+    width: 80%;
     padding-top: 0px;
     height: fit-content;
     padding: 0 3rem 0 3rem;
@@ -162,11 +163,11 @@ body {
 
 .bloco3 .grafico-linha {
     height: 350px;
-    width: 85vw;
+    width: 100%;
 }
 
-.bloco .grafico-linha #grafico-tempo-real{
-    width: inherit;
+.bloco3 .grafico-linha #grafico-tempo-real{
+    width: 500px;
     border: 1px solid black;
 }
 
@@ -200,6 +201,7 @@ body {
     font-size: 14px;
     cursor: pointer;
     margin-right: 200px;
+    border-radius: 5px;
 }
 .filtros-dash button:hover{
     background-color: #2f3c85;
@@ -209,6 +211,12 @@ body {
 .filtros-dash input {
     padding: 5px;
     background-color: #d2d2d2;
+    font-size: 14px;
+    border-radius: 10px ;
+}
+
+.filtros-dash label{
+    color: white;
     font-size: 14px;
 }
 
