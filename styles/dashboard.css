@@ -51,6 +51,10 @@ body {
     gap: 1rem;
 }
 
+.option a {
+    text-decoration: none;
+}
+
 .option:last-child {
     justify-self: end;
 }
