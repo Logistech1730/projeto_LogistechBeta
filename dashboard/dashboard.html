@@ -5,8 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+<<<<<<< HEAD:dashboard.html
     <link rel="stylesheet" href="styles/dashboard.css">
     <link rel="stylesheet" href="./styles/barraLateral.css">
+=======
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <!-- Import de fontes -->
+>>>>>>> f455e10f90d161279ce95e70803ce920143e04bc:dashboard/dashboard.html
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -25,16 +30,28 @@
     <div class="container-dash">
         <div class="barra-lateral">
             <div class="div-imagem-perfil">
-                <img src="./img/perfilexemplo.png" class="perfil-foto" alt="foto de perfil">
+                <img src="../../img/perfilexemplo.png" class="perfil-foto" alt="foto de perfil">
             </div>
             <h4>EletronicGear Ltda.</h4>
-            <div class="option">
+            <div class="option selected">
                 <i class="fa-solid fa-chart-line"></i>
                 <span><a href="./dashboard.html">Dashboard</a></span>
             </div>
             <div class="option">
+                <i class="fa-solid fa-plus"></i>
+                <span>Nova esteira</span>
+            </div>
+            <div class="option">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span>Detalhamento</span>
+            </div>
+            <div class="option">
                 <i class="fa-solid fa-book"></i>
+<<<<<<< HEAD:dashboard.html
                 <span><a href="#">Histórico</a></span>
+=======
+                <span><a href="historico.html">Histórico</a></span>
+>>>>>>> f455e10f90d161279ce95e70803ce920143e04bc:dashboard/dashboard.html
             </div>
             <div class="option">
                 <i class="fa-regular fa-bell"></i>
@@ -63,6 +80,7 @@
                 <div id="container-esteira">
                     <label for="slt_esteiras">Esteira</label>
                     <select id="slt_esteiras">
+                        <option selected value="#">Todas as esteiras</option>
                         <option value="sensor1">Esteira 1</option>
                         <option value="sensor2">Esteira 2</option>
                         <option value="sensor3">Esteira 3</option>
@@ -78,29 +96,37 @@
                 </div>
                 <button id="botao-filtro">Aplicar Filtros</button>
             </div>
+            <div class="kpis">
+                <div class="produtos-registrados">
+                    <p>Total de produtos</p>
+                    <p id="span_qtd_produtos"></p>
+                </div>
+                <div class="esteira-mais-desvio">
+                    <p>Esteira com mais desvio</p>
+                    <p id="esteira-com-mais-desvio">Esteira 3</p>
+                </div>
+                <div class="status-esteiras">
+                    <p>Status das esteiras</p>
+                    <p id="status_esteiras" style="color: green;">Conforme
+                        esperado</p>
+                </div>
+            </div>
             <div class="blocos">
 
                 <div class="bloco1">
-                    <div class="produtos-registrados">
-                        <i class="fa-solid fa-gear"></i>
-                        <p><span id="span_qtd_produtos"></span> produtos registrados no total</p>
-                    </div>
-                    <div class="grafico-porcentagem">
-                        <div class="porcentagem">
-                            <p>Porcentagem de produtos corretos</p>
+
+
+                    <div style="width: 100%; height: 200px;" class="porcentagem">
+                        <!-- <p>Porcentagem de produtos corretos</p>
                             <p id="qtd_porcentagem" class="porcentagem-numero"></p>
                             <p><span id="span_qtd_produtos_corretos"></span> produtos corretos</p>
-                            <p><span id="span_qtd_produtos_erroneos"></span> produtos errôneos</p>
-                            <button>Ver alertas</button>
-                        </div>
+                            <p><span id="span_qtd_produtos_erroneos"></span> produtos errôneos</p> -->
+                        <canvas id="grafico-pizza"></canvas>
                     </div>
                 </div>
 
                 <div class="bloco2">
-                    <div class="status-esteiras">
-                        <p>Status das esteiras: <span id="status_esteiras" style="color: green;">Conforme
-                                esperado</span></p>
-                    </div>
+
                     <div class="grafico-barras">
                         <canvas id="grafico-barra"></canvas>
                     </div>
@@ -120,6 +146,8 @@
 </html>
 <!-- Import do ChartJS -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Import do pluguin de data label do ChartJS -->
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 <script>
 
     var graficoBarra = new Chart(document.getElementById('grafico-barra'), {
@@ -127,14 +155,14 @@
         data: {
             labels: ['12:00', '12:01', '12:02', '12:03', '12:04', '12:05'],
             datasets: [{
-                label: 'Produtos corretos',
+                label: 'Produtos válidos',
                 backgroundColor: '#229A00',
                 borderColor: '#204417',
                 data: [12, 12, 10, 11, 14, 12],
                 borderWidth: 3
             },
             {
-                label: 'Produtos errôneos',
+                label: 'Produtos inválidos',
                 backgroundColor: '#FF0000',
                 borderColor: '#AA3939',
                 data: [6, 6, 8, 7, 9, 5],
@@ -147,7 +175,7 @@
             plugins: {
                 title: {
                     display: true,
-                    text: 'Comparação de produtos errôneos e corretos no sensor em período determinado',
+                    text: 'Produtos válidos e inválidos em período determinado',
                     font: {
                         size: 20
                     },
@@ -174,16 +202,16 @@
             labels: ['12:00', '12:01', '12:02', '12:03', '12:04', '12:05'],
             datasets: [
                 {
-                    label: 'Produtos errôneos',
+                    label: 'Produtos inválidos',
                     backgroundColor: '#FF0000',
                     borderColor: '#FF0000',
                     data: dados_produtos_erroneos,
                     fill: false,
                 },
                 {
-                    label: 'Produtos corretos',
-                    backgroundColor: '#00FFFF',
-                    borderColor: '#00FFFF',
+                    label: 'Produtos válidos',
+                    backgroundColor: '#229A00',
+                    borderColor: '#229A00',
                     data: dados_produtos_corretos,
                     fill: false,
                 },
@@ -199,12 +227,12 @@
                     display: true,
                     text: 'Acompanhamento de produtos em tempo real',
                     font: {
-                        size: 20
+                        size: 10
                     },
                     color: '#000',
                     padding: {
-                        top: 10,
-                        bottom: 30
+                        top: 5,
+                        bottom: 5
                     }
                 },
                 legend: {
@@ -227,6 +255,50 @@
             },
         }
     });
+    var grafico_pizza = new Chart(document.getElementById('grafico-pizza'), {
+    type: 'pie',
+    data: {
+        labels: ['Válidos', 'Não válidos'],
+        datasets: [{
+            label: 'Valor',
+            data: [],
+            backgroundColor: ['#008000', '#FF0000']
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Produtos válidos VS inválidos',
+                font: {
+                    size: 10
+                },
+                color: '#000',
+                padding: {
+                    top: 5,
+                    bottom: 5
+                }
+            },
+            datalabels: {
+                color: '#fff',               
+                font: {
+                    weight: 'bold',
+                    size: 20
+                },
+                formatter: (value, ctx) => {
+                    return `${value}%`;       
+                },
+                anchor: 'center',             
+                align: 'center'               
+            }
+        }
+    },
+    plugins: [ChartDataLabels] // Ativando o plugin ChartDataLabels
+});
+
+
 
 
     var select_esteiras = document.getElementById('slt_esteiras');
@@ -245,7 +317,7 @@
     function gerarQtdAleatoriaDeProdutos() {
         // produtos corretos
         for (let i = 0; i < 6; i++) {
-            dados_produtos_corretos[i] = gerarAleatorio(200);
+            dados_produtos_corretos[i] = gerarAleatorio(100);
         }
         graficoBarra.data.datasets[0].data = dados_produtos_corretos;
 
@@ -273,26 +345,33 @@
 
         qtd_produtos_corretos = gerarTotalProdutos(dados_produtos_corretos);
         qtd_produtos_erroneos = gerarTotalProdutos(dados_produtos_erroneos);
-        span_qtd_produtos_corretos.innerHTML = qtd_produtos_corretos
-        span_qtd_produtos_erroneos.innerHTML = qtd_produtos_erroneos
+       // span_qtd_produtos_corretos.innerHTML = qtd_produtos_corretos
+       // span_qtd_produtos_erroneos.innerHTML = qtd_produtos_erroneos
 
         var porcentagem = (qtd_produtos_corretos / (qtd_produtos_corretos + qtd_produtos_erroneos) * 100);
+        // plotando no gráfico a porcentagem de produtos corretos
+        grafico_pizza.data.datasets[0].data[0] = Number(porcentagem.toFixed(1));
+        // com a diferença, plotaremos a quantidade de errados
+        grafico_pizza.data.datasets[0].data[1] = Number((100 - porcentagem).toFixed(1)) ;
+        // atualizando o gráfico
+        grafico_pizza.update();
 
         if (porcentagem > 95) {
             status_esteiras.innerHTML = "Conforme esperado";
             status_esteiras.style.color = "#0F6C00";
-            qtd_porcentagem.style.color = "#0F6C00";
+           
+         
         } else if (porcentagem > 90) {
             status_esteiras.innerHTML = "Alerta!";
             status_esteiras.style.color = "#FFFF00";
-            qtd_porcentagem.style.color = "#FFFF00";
+     
         } else {
             status_esteiras.innerHTML = "Abaixo do esperado";
             status_esteiras.style.color = "#FF0000";
-            qtd_porcentagem.style.color = "#FF0000";
+
         }
 
-        qtd_porcentagem.innerHTML = porcentagem.toFixed() + "%";
+        //qtd_porcentagem.innerHTML = porcentagem.toFixed() + "%";
     }
 
     function gerarQtdTotalProdutos() {

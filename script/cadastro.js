@@ -336,10 +336,10 @@ function validarCEP() {
 
     // Página de login
     function redirecionarCadastro() {
-        modalLogin.style.display = 'none'
-        modalCadastro.style.display = 'flex'
+        modalLogin.style.display = 'none';
+        modalCadastro.style.display = 'flex';
     }
     function redirecionarLogin() {
-        modalCadastro.style.display = 'none'
-        modalLogin.style.display = 'flex'
+        modalCadastro.style.display = 'none';
+        modalLogin.style.display = 'flex';
     }
