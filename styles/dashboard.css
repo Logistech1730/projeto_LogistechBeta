@@ -43,11 +43,14 @@ body {
 
 .kpis div :nth-child(2) {
     width: 100%;
-    background-color: #D9D9D9;
+    background-color: #384cd1;
     font-size: 1.5rem;
     font-weight: bold;
     align-self: center;
     text-align: center;
+    border-radius: 10px;
+    color: #fff;
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
 }
 
 .dashboard .blocos {
@@ -148,7 +151,7 @@ body {
 
 .filtros-dash button{
     border: none;
-    background-color: #0B144A;
+    background-color: #384CD1;
     color: white;
     width: 130px;
     padding: 5px;
@@ -156,17 +159,31 @@ body {
     cursor: pointer;
     margin-right: 200px;
     border-radius: 10px;
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+
 }
 .filtros-dash button:hover{
     background-color: #2f3c85;
+    cursor: pointer;
+    transform: translateY(-10%);
 }
 
 .filtros-dash select, 
 .filtros-dash input {
     padding: 5px;
-    background-color: #d2d2d2;
+    background-color: #384CD1;
     font-size: 14px;
+    border: none;
+    color: #fff;
     border-radius: 10px ;
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+
+}
+
+.filtros-dash select:hover{
+    background-color: #2f3c85;
+    cursor: pointer;
+    transform: translateY(-10%);
 }
 
 .filtros-dash label{
@@ -176,7 +193,19 @@ body {
 }
 
 #esteira-com-mais-desvio:hover {
-    background-color: #b1b1b1;
+    background-color: #4961fe;
+    cursor: pointer;
+    transform: translateY(-10%);
+}
+
+#status_esteiras:hover{
+    background-color: #4961fe;
+    cursor: pointer;
+    transform: translateY(-10%);
+}
+
+#span_qtd_produtos:hover{
+    background-color: #4961fe;
     cursor: pointer;
     transform: translateY(-10%);
 }

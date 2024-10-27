@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logistech</title>
     <link rel="stylesheet" href="../styles/barraLateral.css">
+    <link rel="stylesheet" href="../styles/cadastroEsteira.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="../script/cadastroEsteira.js" defer></script>
 </head>
 
 <body>
@@ -53,7 +55,35 @@
         </div>
 
         <div class="mainContent">
-            <label for=""></label>
+            <div class="container-title">
+                <label for="">Esteiras</label>
+            </div>
+            <div class="cadastroBtn">
+                <button class="btn-cadastro" data-modal="modal-1"><i class="fa-solid fa-circle-plus"></i>
+                    Cadastrar
+                    Esteira</button>
+            </div>
+            <dialog id="modal-1">
+                <div class="container-esteira">
+                    <div class="headerModal">
+                        <h1>Adicionar Esteira</h1>
+                        <button class="close-modal" data-modal="modal-1"> <i class="fa-solid fa-xmark"></i></button>
+
+                    </div>
+                    <div class="mainModal">
+                        <label for="inpNome">Nome</label>
+                        <input type="text" id="inpNome">
+
+                        <label for="inpDep">Departamento</label>
+                        <input type="text" id="inpDep">
+
+                        <label for="inpTamanho">Tamanho do produto</label>
+                        <input type="number" id="inpTamanho">
+                        <button>Cadastrar</button>
+                    </div>
+                </div>
+            </dialog>
+
         </div>
     </main>
 </body>
