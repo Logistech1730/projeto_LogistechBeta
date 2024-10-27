@@ -33,25 +33,18 @@
                 <span><a href="./dashboard.html">Dashboard</a></span>
             </div>
             <div class="option">
-                <i class="fa-solid fa-plus"></i>
-                <span>Nova esteira</span>
-            </div>
-            <div class="option">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <span>Detalhamento</span>
+                <i class="fa-solid fa-circle-plus"></i>
+                <span><a href="./cadastroEsteira.html">Esteira</a></span>
             </div>
             <div class="option">
                 <i class="fa-solid fa-book"></i>
-                <span><a href="#">Histórico</a></span>
+                <span><a href="./historico.html">Histórico</a></span>
             </div>
             <div class="option">
                 <i class="fa-regular fa-bell"></i>
                 <span><a href="#">Alertas</a></span>
             </div>
-            <div class="option">
-                <i class="fa-solid fa-circle-plus"></i>
-                <span><a href="./cadastroEsteira.html">Esteiras</a></span>
-            </div>
+
             <div class="option">
                 <i class="fa-solid fa-gear"></i>
                 <span><a href="#">Configurações</a></span>
@@ -140,6 +133,18 @@
 <!-- Import do pluguin de data label do ChartJS -->
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 <script>
+    var ctx = document.getElementById('grafico-barra').getContext('2d')
+
+    // Criar gradiente
+    var gradient = ctx.createLinearGradient(0, 0, 0, 400)
+    gradient.addColorStop(0, '#384cd1')
+    gradient.addColorStop(1, '#3999f4')
+
+    var gradient1 = ctx.createLinearGradient(0, 0, 0, 400)
+    gradient1.addColorStop(0, '#f90000')
+    gradient1.addColorStop(1, '#c36767')
+
+
 
     var graficoBarra = new Chart(document.getElementById('grafico-barra'), {
         type: 'bar',
@@ -147,17 +152,15 @@
             labels: ['12:00', '12:01', '12:02', '12:03', '12:04', '12:05'],
             datasets: [{
                 label: 'Produtos válidos',
-                backgroundColor: '#229A00',
-                borderColor: '#204417',
+                backgroundColor: gradient,
                 data: [12, 12, 10, 11, 14, 12],
-                borderWidth: 3
+                borderWidth: 0
             },
             {
                 label: 'Produtos inválidos',
-                backgroundColor: '#FF0000',
-                borderColor: '#AA3939',
+                backgroundColor: gradient1,
                 data: [6, 6, 8, 7, 9, 5],
-                borderWidth: 3
+                borderWidth: 0
             },]
         },
         options: {
@@ -186,7 +189,7 @@
                 }
             }
         }
-    });
+    })
     var grafico_tempo_real = new Chart(document.getElementById('grafico-tempo-real'), {
         type: 'line',
         data: {
@@ -194,20 +197,16 @@
             datasets: [
                 {
                     label: 'Produtos inválidos',
-                    backgroundColor: '#FF0000',
-                    borderColor: '#FF0000',
+                    backgroundColor: gradient1,
                     data: dados_produtos_erroneos,
                     fill: false,
                 },
                 {
                     label: 'Produtos válidos',
-                    backgroundColor: '#229A00',
-                    borderColor: '#229A00',
+                    backgroundColor: gradient,
                     data: dados_produtos_corretos,
                     fill: false,
                 },
-
-
             ]
         },
         options: {
@@ -245,88 +244,87 @@
                 },
             },
         }
-    });
+    })
     var grafico_pizza = new Chart(document.getElementById('grafico-pizza'), {
-    type: 'pie',
-    data: {
-        labels: ['Válidos', 'Não válidos'],
-        datasets: [{
-            label: 'Valor',
-            data: [],
-            backgroundColor: ['#008000', '#FF0000']
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            title: {
-                display: true,
-                text: 'Produtos válidos VS inválidos',
-                font: {
-                    size: 10
+        type: 'pie',
+        data: {
+            labels: ['Válidos', 'Não válidos'],
+            datasets: [{
+                label: 'Valor',
+                data: [],
+                backgroundColor: ['#384cd1', '#FF0000'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Produtos válidos VS inválidos',
+                    font: {
+                        size: 10
+                    },
+                    color: '#000',
+                    padding: {
+                        top: 5,
+                        bottom: 5
+                    }
                 },
-                color: '#000',
-                padding: {
-                    top: 5,
-                    bottom: 5
+                datalabels: {
+                    color: '#fff',
+                    font: {
+                        weight: 'bold',
+                        size: 20
+                    },
+                    formatter: (value, ctx) => {
+                        return `${value}%`
+                    },
+                    anchor: 'center',
+                    align: 'center'
                 }
-            },
-            datalabels: {
-                color: '#fff',               
-                font: {
-                    weight: 'bold',
-                    size: 20
-                },
-                formatter: (value, ctx) => {
-                    return `${value}%`;       
-                },
-                anchor: 'center',             
-                align: 'center'               
             }
-        }
-    },
-    plugins: [ChartDataLabels] // Ativando o plugin ChartDataLabels
-});
+        },
+        plugins: [ChartDataLabels] // Ativando o plugin ChartDataLabels
+    })
 
 
+    var select_esteiras = document.getElementById('slt_esteiras')
+    var qtd_produtos_corretos = 0
+    var qtd_produtos_erroneos = 0
 
-
-    var select_esteiras = document.getElementById('slt_esteiras');
-    var qtd_produtos_corretos = 0;
-    var qtd_produtos_erroneos = 0;
-
-    var dados_produtos_corretos = [];
-    var dados_produtos_erroneos = [];
+    var dados_produtos_corretos = []
+    var dados_produtos_erroneos = []
 
 
     // Função executada assim que a página for carregada
     document.addEventListener('DOMContentLoaded', function () {
-        gerarQtdAleatoriaDeProdutos();
-    });
+        gerarQtdAleatoriaDeProdutos()
+    })
 
     function gerarQtdAleatoriaDeProdutos() {
         // produtos corretos
         for (let i = 0; i < 6; i++) {
-            dados_produtos_corretos[i] = gerarAleatorio(100);
+            dados_produtos_corretos[i] = gerarAleatorio(100)
         }
-        graficoBarra.data.datasets[0].data = dados_produtos_corretos;
+        graficoBarra.data.datasets[0].data = dados_produtos_corretos
 
         // produtos erroneos
         for (let i = 0; i < 6; i++) {
-            dados_produtos_erroneos[i] = gerarAleatorio(20);
+            dados_produtos_erroneos[i] = gerarAleatorio(20)
         }
-        graficoBarra.data.datasets[1].data = dados_produtos_erroneos;
+        graficoBarra.data.datasets[1].data = dados_produtos_erroneos
 
-        graficoBarra.update();
-        gerarPorcentagemProdutos();
-        gerarQtdTotalProdutos();
+        graficoBarra.update()
+        gerarPorcentagemProdutos()
+        gerarQtdTotalProdutos()
     }
 
 
     // mudando dados do gráfico a partir da mudança do select
     select_esteiras.addEventListener("change", () => {
-        gerarQtdAleatoriaDeProdutos();
+        gerarQtdAleatoriaDeProdutos()
     })
 
 
@@ -334,31 +332,31 @@
     // quando minha página carregar, modificar o total de produtos e calcular a porcentagem
     function gerarPorcentagemProdutos() {
 
-        qtd_produtos_corretos = gerarTotalProdutos(dados_produtos_corretos);
-        qtd_produtos_erroneos = gerarTotalProdutos(dados_produtos_erroneos);
-       // span_qtd_produtos_corretos.innerHTML = qtd_produtos_corretos
-       // span_qtd_produtos_erroneos.innerHTML = qtd_produtos_erroneos
+        qtd_produtos_corretos = gerarTotalProdutos(dados_produtos_corretos)
+        qtd_produtos_erroneos = gerarTotalProdutos(dados_produtos_erroneos)
+        // span_qtd_produtos_corretos.innerHTML = qtd_produtos_corretos
+        // span_qtd_produtos_erroneos.innerHTML = qtd_produtos_erroneos
 
-        var porcentagem = (qtd_produtos_corretos / (qtd_produtos_corretos + qtd_produtos_erroneos) * 100);
+        var porcentagem = (qtd_produtos_corretos / (qtd_produtos_corretos + qtd_produtos_erroneos) * 100)
         // plotando no gráfico a porcentagem de produtos corretos
-        grafico_pizza.data.datasets[0].data[0] = Number(porcentagem.toFixed(1));
+        grafico_pizza.data.datasets[0].data[0] = Number(porcentagem.toFixed(1))
         // com a diferença, plotaremos a quantidade de errados
-        grafico_pizza.data.datasets[0].data[1] = Number((100 - porcentagem).toFixed(1)) ;
+        grafico_pizza.data.datasets[0].data[1] = Number((100 - porcentagem).toFixed(1))
         // atualizando o gráfico
-        grafico_pizza.update();
+        grafico_pizza.update()
 
         if (porcentagem > 95) {
-            status_esteiras.innerHTML = "Conforme esperado";
-            status_esteiras.style.color = "#0F6C00";
-           
-         
+            status_esteiras.innerHTML = "Conforme esperado"
+            status_esteiras.style.color = "#0F6C00"
+
+
         } else if (porcentagem > 90) {
-            status_esteiras.innerHTML = "Alerta!";
-            status_esteiras.style.color = "#FFFF00";
-     
+            status_esteiras.innerHTML = "Alerta!"
+            status_esteiras.style.color = "#FFFF00"
+
         } else {
-            status_esteiras.innerHTML = "Abaixo do esperado";
-            status_esteiras.style.color = "#FF0000";
+            status_esteiras.innerHTML = "Abaixo do esperado"
+            status_esteiras.style.color = "#FF0000"
 
         }
 
@@ -366,23 +364,23 @@
     }
 
     function gerarQtdTotalProdutos() {
-        var qtdTotalProdutos = gerarTotalProdutos(graficoBarra.data.datasets[0].data) + gerarTotalProdutos(graficoBarra.data.datasets[1].data);
+        var qtdTotalProdutos = gerarTotalProdutos(graficoBarra.data.datasets[0].data) + gerarTotalProdutos(graficoBarra.data.datasets[1].data)
         span_qtd_produtos.innerHTML = qtdTotalProdutos
 
     }
 
 
     function gerarTotalProdutos(quantidadeProdutos) {
-        var totalProdutos = 0;
+        var totalProdutos = 0
         for (let index = 0; index < quantidadeProdutos.length; index++) {
-            const element = quantidadeProdutos[index];
-            totalProdutos += element;
+            const element = quantidadeProdutos[index]
+            totalProdutos += element
         }
-        return totalProdutos;
+        return totalProdutos
     }
 
 
     function gerarAleatorio(intervalo) {
-        return Math.floor(Math.random() * intervalo);
+        return Math.floor(Math.random() * intervalo)
     }
 </script>
