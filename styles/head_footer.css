@@ -39,7 +39,7 @@ body {
 }
 .logoImg {
     width: 10%;
-    height: 100px;
+    height: 80px;
     background-image: url('../img/LogisTech.png');
     background-size: cover;
     background-repeat: no-repeat;
@@ -96,4 +96,10 @@ footer p{
 .imagem-footer {
     margin-bottom: -20px;
     width: 100%;
+}
+
+@media (max-width: 1450px){
+    .logoImg{
+        width: 15%;
+    }
 }

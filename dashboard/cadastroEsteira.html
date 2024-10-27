@@ -41,48 +41,81 @@
             </div>
 
             <div class="option">
-                <i class="fa-solid fa-gear"></i>
-                <span><a href="#">Configurações</a></span>
-            </div>
-            <div class="option">
-                <i class="fa-solid fa-user"></i>
-                <span><a href="#">Minha Conta</a></span>
-            </div>
-            <div class="option">
                 <i class="fa-solid fa-door-open"></i>
-                <span><a href="./index.html">Sair</a></span>
+                <span><a href="../index.html">Sair</a></span>
             </div>
         </div>
 
         <div class="mainContent">
             <div class="container-title">
-                <label for="">Esteiras</label>
+                <p>Esteiras</p>
             </div>
-            <div class="cadastroBtn">
-                <button class="btn-cadastro" data-modal="modal-1"><i class="fa-solid fa-circle-plus"></i>
-                    Cadastrar
-                    Esteira</button>
+            <hr>
+            <div class="container-text">
+                <p>Aqui você pode criar e visualizar todas as esteiras criadas e seus respectivos dados</p>
             </div>
-            <dialog id="modal-1">
-                <div class="container-esteira">
-                    <div class="headerModal">
-                        <h1>Adicionar Esteira</h1>
-                        <button class="close-modal" data-modal="modal-1"> <i class="fa-solid fa-xmark"></i></button>
-
+            <div class="containerFiltro">
+                <div class="container-btnCadastro">
+                    <button class="btn-cadastro" data-modal="modal-1"><i class="fa-solid fa-circle-plus"></i>
+                        Cadastrar
+                        Esteira</button>
+                </div>
+                <div class="filtrosEsteira">
+                    <ul>
+                        <li>Pesquisar <input type="text"> <i class="fa-solid fa-magnifying-glass"></i></li>
+                    </ul>
+                </div>
+            </div>
+            <h2>Esteiras cadastradas</h2>
+            <div class="containerEsteiras">
+                <div class="cardEsteira">
+                    <div class="leftContainer">
+                        <h6>Esteiras</h6>
+                        <p>Nome</p>
+                        <p>Esteira 1</p>
+                        <p>Departamento</p>
+                        <p>EletronicGear</p>
+                        <p>Tamanho do produto</p>
+                        <p>10</p>
+                        <p>Data de cadastro</p>
+                        <p>27/10/2024</p>
                     </div>
-                    <div class="mainModal">
-                        <label for="inpNome">Nome</label>
-                        <input type="text" id="inpNome">
-
-                        <label for="inpDep">Departamento</label>
-                        <input type="text" id="inpDep">
-
-                        <label for="inpTamanho">Tamanho do produto</label>
-                        <input type="number" id="inpTamanho">
-                        <button>Cadastrar</button>
+                    <div class="verticalLine"></div>
+                    <div class="rightContainer">
+                        <p>Produtos válidos registrados</p>
+                        <p>230</p>
+                        <p>Produtos inválidos registrados</p>
+                        <p>10</p>
+                        <p>Alertas gerados</p>
+                        <p>10</p>
+                        <p>Horário com mais desvio</p>
+                        <p>13:55</p>
                     </div>
                 </div>
-            </dialog>
+
+                <dialog id="modal-1">
+                    <div class="container-esteira">
+
+                        <div class="headerModal">
+                            <h1>Adicionar Esteira</h1>
+                            <button class="close-modal" data-modal="modal-1"> <i class="fa-solid fa-xmark"></i></button>
+                        </div>
+                        <div class="mainModal">
+                            <label for="inpNome">Nome</label>
+                            <input type="text" id="inpNome">
+
+                            <label for="inpDep">Departamento</label>
+                            <input type="text" id="inpDep">
+
+                            <label for="inpTamanho">Tamanho do produto</label>
+                            <input type="number" id="inpTamanho">
+                            <div id="container-aviso"></div>
+                            <button id="cadastroBtn">Cadastrar</button>
+                        </div>
+                    </div>
+                </dialog>
+            </div>
+
 
         </div>
     </main>
