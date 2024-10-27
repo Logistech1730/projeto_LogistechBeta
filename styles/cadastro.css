@@ -1,4 +1,4 @@
-.area_form {
+.areaMensagens {
     position: fixed;
     display: none;
     z-index: 3;
@@ -7,6 +7,101 @@
     background-color: #0000008a;
     align-items: center;
     justify-content: center;
+}
+.modalErro{
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    width: 18vw;
+    height: 48vh;
+    z-index: 5;
+    justify-content: flex-end;
+    border-radius: 0.5vw;
+    background-color: #d9d9d9;
+    align-items: center;
+    padding: 4vh 2vw;
+}
+.infoErro{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2vh;
+    margin-bottom: 3vh;
+}
+.iconErro{
+    font-size: 8vw;
+    color: #ed1616;
+}
+.mensagemErro{
+    text-align: center;
+    color: #ed1616;
+    font-weight: 900;
+    font-size: 1vw;
+}
+.botaoOK{
+    background-color: #0911a8;
+    color: #fff;
+    font-size: 0.7vw;
+    font-weight: 800;
+    padding: 2vh 1vw;
+    margin-top: 3vh;
+    border: none;
+    border-radius: 0.5vw;
+    cursor: pointer;
+}
+.modalCadastrado{
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    width: 22vw;
+    height: 56vh;
+    z-index: 5;
+    justify-content: flex-end;
+    border-radius: 0.5vw;
+    background-color: #170d40;
+    align-items: center;
+    padding: 4vh 2vw;
+}
+.infoCadastrado{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3vh;
+    gap: 2vh;
+}
+.logoCadastrado{
+    height: 26vh;
+}
+.mensagemCadastrado{
+    color: #D9D9D9;
+    font-weight: 900;
+    text-align: center;
+    font-size: 1vw;
+}
+.botaoConcluido{
+    background-color: #0b713b;
+    color: #fff;
+    font-size: 1vw;
+    font-weight: 800;
+    padding: 1.5vh 1.5vw;
+    margin-top: 1vh;
+    border: none;
+    border-radius: 0.5vw;
+    cursor: pointer;
+}
+.area_form {
+    position: fixed;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-image: url(../img/bannerImg.png);
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .bloco_form{
     display: flex;
@@ -111,12 +206,21 @@
 }
 .selectUF{
     height: 2vh;
-    width: 4.5vh;
+    width: 5vh;
+    font-size: 0.7vw;
     border-width: 0 0 0.2vh 0;
     background-color: #D9D9D9;
     overflow: auto;
 }
 .labels, .label_cidade {
+    position: relative;
+    transition: .5s;
+    user-select: none;
+    z-index: 1;
+    font-size: 0.7vw;
+    bottom: 7.5vh;
+}
+.label_estado{
     position: relative;
     transition: .5s;
     user-select: none;
@@ -130,21 +234,8 @@
     bottom: 5vh;
     color: #069206;
     font-weight: bold;
-    font-size: 10px;
+    font-size: 0.6vw;
 }
-input:focus + .labels, 
-input:valid + .labels,
-input:focus + .label_cidade, 
-input:valid + .label_cidade{
-    bottom: 7.5vh;
-}
-
-
-textarea:focus, input:focus, select:focus {
-    box-shadow: 0 0 0 0;
-    border-bottom-width: 0.2vh;
-    outline: 0;
-} 
 .area_botao {
     display: flex;
     flex-direction: column;

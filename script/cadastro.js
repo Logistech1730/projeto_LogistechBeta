@@ -1,4 +1,4 @@
-var valor_nome_empresa = '';
+    var valor_nome_empresa = '';
     var valor_cnpj = '';
     var valor_telefone_empresa = '';
     var valor_cep_empresa = '';
@@ -21,7 +21,7 @@ var valor_nome_empresa = '';
 
     var logradouro_valido = false;
     var cidade_valida = false;
-    var uf_valido = false;
+    var uf_valido = true;
     var numero_valido = false;
     var complemento_valido = false;
 
@@ -30,6 +30,8 @@ var valor_nome_empresa = '';
     var senha_usuario_valida = false;
     var confirmacao_usuario_valida = false;
     var telefone_usuario_valido = false;
+
+    var cadastro
 
     function validarNomeEmpresa() {
         valor_nome_empresa = ipt_nome_empresa.value;
@@ -107,15 +109,15 @@ function validarCEP() {
             span_validar_cep.style.color = 'red'
             span_validar_cep.innerHTML = `O CEP tem de ter somente 8 números`;
             cep_valido = false;
-        }
+        } 
 } 
     function validarParte1() {
         if (nome_empresa_valido == true && cnpj_valido == true && telefone_comercial_valido == true && cep_valido == true) {
             cadastroParte1.style.display = 'none'
             cadastroParte2.style.display = 'flex'
         } else {
-            console.log('Algo está errado')
-            
+            modal_mensagem.style.display = 'flex';
+            modal_erro.style.display = 'flex';
         }
     }
     function validarLogradouro() {
@@ -123,11 +125,11 @@ function validarCEP() {
         if (valor_logradouro != '' && valor_logradouro.length >= 3 && valor_logradouro.length <= 64) {
             span_validar_logradouro.innerHTML = `Logradouro validado com sucesso`;
             span_validar_logradouro.style.color = '#069206';
-            nome_empresa_valido = true;
+            logradouro_valido = true;
         } else {
             span_validar_logradouro.style.color = 'red'
             span_validar_logradouro.innerHTML = `A Razão Social deve ter de 3 a 64 caracteres`;
-            nome_empresa_valido = false;
+            logradouro_valido = false;
         }
     }
     function validarCidade() {
@@ -138,7 +140,7 @@ function validarCEP() {
             cidade_valida = true;
         } else {
             span_validar_cidade.style.color = 'red'
-            span_validar_cidade.innerHTML = `O nome de cidade deve ter de 3 a 64 caracteres`;
+            span_validar_cidade.innerHTML = `A cidade deve ter no mínimo 3 caracteres`;
             cidade_valida = false;
         }
     }
@@ -176,15 +178,16 @@ function validarCEP() {
         }
     }
     function voltarToParte1() {
-        cadastroParte1.style.display = 'flex'
         cadastroParte2.style.display = 'none'
+        cadastroParte1.style.display = 'flex'
     }
     function validarParte2() {
         if (logradouro_valido == true && cidade_valida == true && uf_valido == true && numero_valido == true && complemento_valido == true) {
             cadastroParte2.style.display = 'none'
             cadastroParte3.style.display = 'flex'
         } else {
-            console.log('Algo está errado')
+            modal_mensagem.style.display = 'flex';
+            modal_erro.style.display = 'flex';
             
         }
     }
@@ -193,11 +196,11 @@ function validarCEP() {
         if (valor_nome_usuario != '' && valor_nome_usuario.length >= 3 && valor_nome_usuario.length <= 64) {
             span_validar_nome_usuario.innerHTML = `Razão Social validada com sucesso`;
             span_validar_nome_usuario.style.color = '#069206';
-            nome_empresa_valido = true;
+            nome_usuario_valido = true;
         } else {
             span_validar_nome_usuario.style.color = 'red'
             span_validar_nome_usuario.innerHTML = `A Razão Social deve ter no mínimo 3 caracteres`;
-            nome = false;
+            nome_usuario_valido = false;
         }
     }
     function validarEmail (){
@@ -217,82 +220,82 @@ function validarCEP() {
             span_validar_email.style.color = '#069206'
             span_validar_email.innerHTML = `email preenchido com sucesso`;
             valor_email_empresa = valor_email_empresa.toLowerCase();
-            email_valido = true;
+            email_usuario_valido = true;
         } else if(valor_email_empresa == ''){
             span_validar_email.style.color = 'red'
             span_validar_email.innerHTML = `Preencha o campo para continuar`;
-            email_valido = false;
+            email_usuario_valido = false;
         }  else if(possui_arroba == false) {
             span_validar_email.style.color = 'red'
             span_validar_email.innerHTML = `O email precisa ter @`;
-            email_valido = false;
+            email_usuario_valido = false;
         } else if(indice_arroba == 1){
             span_validar_email.style.color = 'red'
             span_validar_email.innerHTML = `O @ não pode ser o primeiro caractere`;
-            email_valido = false;
+            email_usuario_valido = false;
         } else if(indice_arroba == tamanho_email){
             span_validar_email.style.color = 'red'
             span_validar_email.innerHTML = `O @ não pode ser o último caractere`;
-            email_valido = false;
+            email_usuario_valido = false;
         } else if(possui_ponto_depois_arroba == false) {
             span_validar_email.style.color = 'red'
             span_validar_email.innerHTML = `O email precisa ter extensão após o @`;
-            email_valido = false;
+            email_usuario_valido = false;
         } else if(indice_ponto_depois_arroba < 2) {
             span_validar_email.style.color = 'red'
             span_validar_email.innerHTML = `A extensão tem de estar no mínimo a 3 caracteres do @`;
-            email_valido = false;
+            email_usuario_valido = false;
         } else if(indice_ponto_depois_arroba+indice_arroba +1 >= tamanho_email) {
             span_validar_email.style.color = 'red'
             span_validar_email.innerHTML = `O ponto não pode ser o último caractere`;
-            email_valido = false;
+            email_usuario_valido = false;
         }
     }
     function validarSenha() {
-        valor_senha_empresa = ipt_senha.value;
-        var tamanho_senha = valor_senha_empresa.length;
-        var possui_caractere_especial = valor_senha_empresa.includes('@') || valor_senha_empresa.includes('!') || valor_senha_empresa.includes("'") || valor_senha_empresa.includes(`"`) || valor_senha_empresa.includes('#') || valor_senha_empresa.includes('$') || valor_senha_empresa.includes('%') || valor_senha_empresa.includes('¨') || valor_senha_empresa.includes('&') || valor_senha_empresa.includes('*') || valor_senha_empresa.includes(`)`) || valor_senha_empresa.includes(`(`) || valor_senha_empresa.includes('_') || valor_senha_empresa.includes('-') || valor_senha_empresa.includes('=') || valor_senha_empresa.includes('+') || valor_senha_empresa.includes('§') || valor_senha_empresa.includes('|') || valor_senha_empresa.includes('\u005C') || valor_senha_empresa.includes('`') || valor_senha_empresa.includes('´') || valor_senha_empresa.includes('[') || valor_senha_empresa.includes(']') || valor_senha_empresa.includes('{') || valor_senha_empresa.includes('}') || valor_senha_empresa.includes('^') || valor_senha_empresa.includes('~') || valor_senha_empresa.includes('ª') || valor_senha_empresa.includes('º') || valor_senha_empresa.includes('<') || valor_senha_empresa.includes('>') || valor_senha_empresa.includes(',') || valor_senha_empresa.includes('.') || valor_senha_empresa.includes(':') || valor_senha_empresa.includes(';') || valor_senha_empresa.includes('?') || valor_senha_empresa.includes('/') || valor_senha_empresa.includes('°') || valor_senha_empresa.includes('¹') || valor_senha_empresa.includes('²') || valor_senha_empresa.includes('³') || valor_senha_empresa.includes('£') || valor_senha_empresa.includes('¢') || valor_senha_empresa.includes('¬') ;
-        var possui_numeros = valor_senha_empresa.includes('1') || valor_senha_empresa.includes('2') || valor_senha_empresa.includes('3') || valor_senha_empresa.includes('4') || valor_senha_empresa.includes('5') || valor_senha_empresa.includes('6') || valor_senha_empresa.includes('7') || valor_senha_empresa.includes('8') || valor_senha_empresa.includes('9') || valor_senha_empresa.includes('0');
-        var SENHA_MAIUSCULA = valor_senha_empresa.toUpperCase();
-        var senha_minuscula = valor_senha_empresa.toLowerCase();
-        if (valor_senha_empresa != '' && senha_minuscula != valor_senha_empresa && SENHA_MAIUSCULA != valor_senha_empresa && possui_caractere_especial == true && tamanho_senha >= 8) {
+        valor_senha_usuario = ipt_senha_usuario.value;
+        var tamanho_senha = valor_senha_usuario.length;
+        var possui_caractere_especial = valor_senha_usuario.includes('@') || valor_senha_usuario.includes('!') || valor_senha_usuario.includes("'") || valor_senha_usuario.includes(`"`) || valor_senha_usuario.includes('#') || valor_senha_usuario.includes('$') || valor_senha_usuario.includes('%') || valor_senha_usuario.includes('¨') || valor_senha_usuario.includes('&') || valor_senha_usuario.includes('*') || valor_senha_usuario.includes(`)`) || valor_senha_usuario.includes(`(`) || valor_senha_usuario.includes('_') || valor_senha_usuario.includes('-') || valor_senha_usuario.includes('=') || valor_senha_usuario.includes('+') || valor_senha_usuario.includes('§') || valor_senha_usuario.includes('|') || valor_senha_usuario.includes('\u005C') || valor_senha_usuario.includes('`') || valor_senha_usuario.includes('´') || valor_senha_usuario.includes('[') || valor_senha_usuario.includes(']') || valor_senha_usuario.includes('{') || valor_senha_usuario.includes('}') || valor_senha_usuario.includes('^') || valor_senha_usuario.includes('~') || valor_senha_usuario.includes('ª') || valor_senha_usuario.includes('º') || valor_senha_usuario.includes('<') || valor_senha_usuario.includes('>') || valor_senha_usuario.includes(',') || valor_senha_usuario.includes('.') || valor_senha_usuario.includes(':') || valor_senha_usuario.includes(';') || valor_senha_usuario.includes('?') || valor_senha_usuario.includes('/') || valor_senha_usuario.includes('°') || valor_senha_usuario.includes('¹') || valor_senha_usuario.includes('²') || valor_senha_usuario.includes('³') || valor_senha_usuario.includes('£') || valor_senha_usuario.includes('¢') || valor_senha_usuario.includes('¬') ;
+        var possui_numeros = valor_senha_usuario.includes('1') || valor_senha_usuario.includes('2') || valor_senha_usuario.includes('3') || valor_senha_usuario.includes('4') || valor_senha_usuario.includes('5') || valor_senha_usuario.includes('6') || valor_senha_usuario.includes('7') || valor_senha_usuario.includes('8') || valor_senha_usuario.includes('9') || valor_senha_usuario.includes('0');
+        var SENHA_MAIUSCULA = valor_senha_usuario.toUpperCase();
+        var senha_minuscula = valor_senha_usuario.toLowerCase();
+        if (valor_senha_usuario != '' && senha_minuscula != valor_senha_usuario && SENHA_MAIUSCULA != valor_senha_usuario && possui_caractere_especial == true && tamanho_senha >= 8) {
             span_validar_senha.style.color = '#069206'
             span_validar_senha.innerHTML = `Senha validada com sucesso`;
-            senha_valida = true;
-        } else if(valor_senha_empresa == '') {
+            senha_usuario_valida = true;
+        } else if(valor_senha_usuario == '') {
             span_validar_senha.style.color = 'red'
             span_validar_senha.innerHTML = `Preencha a senha para continuar`;
-            senha_valida = false;
-        } else if(valor_senha_empresa == senha_minuscula) {
+            senha_usuario_valida = false;
+        } else if(valor_senha_usuario == senha_minuscula) {
             span_validar_senha.style.color = 'red'
             span_validar_senha.innerHTML = `A senha deve conter pelo menos uma letra maiuscula`;
-            senha_valida = false;
-        } else if(valor_senha_empresa == SENHA_MAIUSCULA) {
+            senha_usuario_valida = false;
+        } else if(valor_senha_usuario == SENHA_MAIUSCULA) {
             span_validar_senha.style.color = 'red'
             span_validar_senha.innerHTML = `A senha deve conter pelo menos uma letra minuscula`;
-            senha_valida = false;
+            senha_usuario_valida = false;
         } else if (possui_caractere_especial == false) {
             span_validar_senha.style.color = 'red'
             span_validar_senha.innerHTML = `A senha deve conter pelo menos um caractere especial`;
-            senha_valida = false;
+            senha_usuario_valida = false;
         } else if (tamanho_senha < 8){
             span_validar_senha.style.color = 'red'
             span_validar_senha.innerHTML = `A senha deve conter no mínimo 8 caracteres`;
-            senha_valida = false;
+            senha_usuario_valida = false;
         }                
     }
             
     function validarConfirmacao() {
-        valor_senha_empresa = ipt_senha.value
+        valor_senha_usuario = ipt_senha_usuario.value
         var confirmarSenha = ipt_confirme_senha.value;
-        if (confirmarSenha == valor_senha_empresa) {
+        if (confirmarSenha == valor_senha_usuario) {
             span_validar_confirmacao.style.color = '#069206'
             span_validar_confirmacao.innerHTML = `senha confirmada com sucesso`;
-            senha_valida = true
+            senha_usuario_valida = true
         } else {
             span_validar_confirmacao.style.color = 'red'
             span_validar_confirmacao.innerHTML = `A senha está diferente`;
-            senha_valida = false;
+            senha_usuario_valida = false;
         }
     }
     function validarTelefoneUsuario() {
@@ -317,23 +320,25 @@ function validarCEP() {
         }
     }
     function voltarToParte2() {
-        cadastroParte2.style.display = 'flex'
         cadastroParte3.style.display = 'none'
+        cadastroParte2.style.display = 'flex'
     }
     function validarParte3() {
         if (nome_usuario_valido == true && email_valido == true && senha_valida == true && confirmacao_usuario_valida == true && telefone_usuario_valido == true) {
-            window.location.href = 'dashboard.html'
+            modal_mensagem.style.display = 'flex';
+            modal_cadastrado.style.display = 'flex';
         } else {
-            console.log('Algo está errado')
-            
+            modal_mensagem.style.display = 'flex';
+            modal_erro.style.display = 'flex';
         }
-    }
-        
-
-    function cadastrar() {
+    } 
+    function concluirCadastro() {
         window.location.href = 'cadastro.html'
     }
-
+    function removerMensagem(){
+        modal_mensagem.style.display = 'none';
+        modal_erro.style.display = 'none';
+    }
     // Página de login
     function redirecionarCadastro() {
         modalLogin.style.display = 'none';
