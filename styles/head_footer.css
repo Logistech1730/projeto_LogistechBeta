@@ -16,7 +16,7 @@ body {
     transition: 0.3s;
 }
 
-.headerElements ul a:hover {
+.headerElements ul .menus:hover {
     color: #b4b4b4;
     border-bottom: 1px solid #b4b4b4;
     cursor: pointer;
@@ -37,7 +37,6 @@ body {
     width: 100vw;
     height: 10vh;
 }
-
 .logoImg {
     width: 10%;
     height: 100px;
@@ -50,6 +49,15 @@ body {
 
 .logoImg:hover {
     cursor: pointer;
+}
+.menuLogin{
+    border: 0.2vw solid white;
+    padding: 1vh 4vh;
+    border-radius: 2vh;
+}
+.headerElements ul .menuLogin:hover{
+    background-color: white;
+    color: #081465;
 }
 
 footer {

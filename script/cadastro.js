@@ -324,7 +324,7 @@ function validarCEP() {
         cadastroParte2.style.display = 'flex'
     }
     function validarParte3() {
-        if (nome_usuario_valido == true && email_valido == true && senha_valida == true && confirmacao_usuario_valida == true && telefone_usuario_valido == true) {
+        if (nome_usuario_valido == true && email_usuario_valido == true && senha_usuario_valida == true && confirmacao_usuario_valida == true && telefone_usuario_valido == true) {
             modal_mensagem.style.display = 'flex';
             modal_cadastrado.style.display = 'flex';
         } else {

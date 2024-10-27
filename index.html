@@ -23,11 +23,11 @@
         <section class="logoImg"><a href="#home"></a></section>
 
         <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#aboutUs">Sobre nós</a></li>
-            <li><a href="#solution">Serviços</a></li>
-            <li><a href="login.html">Login</a></li>
-            <li><a href="./login.html">Cadastre-se</a></li>
+            <li><a class="menus" href="#home">Home</a></li>
+            <li><a class="menus" href="#aboutUs">Sobre nós</a></li>
+            <li><a class="menus" href="#simuladorFinanceiro">Simulador</a></li>
+            <li><a class="menus" href="#solution">Serviços</a></li>
+            <li><a class="menus" class="menuLogin" href="./login.html">Login</a></li>
         </ul>
     </header>
     <!-- Seção de Cadastro -->
@@ -44,7 +44,7 @@
                     monitoramento de processos de fabricação<br>
                     e destaque-se no mercado
                 </p>
-                <button id="cadastro" onclick="modalCadastro.style.display = 'flex'">QUERO ME CADASTRAR</button>
+                <button id="cadastro" onclick="window.location.href = './login.html';">DESEJO ENTRAR</button>
 
             </div>
     </main>
@@ -72,7 +72,7 @@
         </div>
     </div>
 
-    <div class="container-calculadora">
+    <div class="container-calculadora" id="simuladorFinanceiro">
         <div class="simulador">
             <div class="titulo">
                 <h1>SIMULE AQUI!</h1>
