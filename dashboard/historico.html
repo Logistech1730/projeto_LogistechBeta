@@ -67,7 +67,7 @@
           <label for="container-dtFinal">Data final</label>
           <input type="date" id="data2">
         </div>
-        <button id="botao-filtro">Aplicar Filtros</button>
+        <button id="botao-filtro" onclick="aplicarFiltro()">Aplicar Filtros</button>
       </div>
       <div class="table-container">
         <table>
@@ -149,3 +149,13 @@
 </body>
 
 </html>
+<script>
+  function aplicarFiltro() {
+    // validação de data
+    var data_inicial = data1.value;
+    var data_final = data2.value;
+    if (data_inicial > data_final) {
+      alert("A data inicial não pode ser maior que a final!");
+    }
+  }
+</script>
