@@ -34,6 +34,37 @@ body {
 
 /*Vinicius dantas */
 
+.wallpaper {
+    width: 100vw;
+    height: 50vh;
+    background-image: url('../img/bannerImg.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.wallpaper h1 {
+    font-size: 3rem;
+    color: white;
+
+}
+
+.wallpaper p {
+    color: white;
+    font-weight: bold;
+}
+
+.wallpaper a {
+    font-size: 1rem;
+    color: white;
+    text-decoration: none;
+}
+
 .funcao {
     width: 100vw;
     display: flex;
@@ -73,10 +104,10 @@ body {
     text-justify: distribute;
 }
 
-.espscamento{
+.espscamento {
     width: 100vw;
     height: 5vh;
-    background-color:#0E3AC0 ;
+    background-color: #0E3AC0;
     max-width: 100%;
 }
 
@@ -132,7 +163,7 @@ body {
     padding: 3rem;
     gap: 5rem;
     height: 80%;
-    
+
 }
 
 .alicerces1 .card {
@@ -150,14 +181,63 @@ body {
 
 .alicerces1 .card:hover {
     transform: translateY(-10%);
-    -webkit-box-shadow: 9px 9px 5px 0px rgba(7,14,60,1);
--moz-box-shadow: 9px 9px 5px 0px rgba(7,14,60,1);
-box-shadow: 9px 9px 5px 0px rgba(7,14,60,1);
+    -webkit-box-shadow: 9px 9px 5px 0px rgba(7, 14, 60, 1);
+    -moz-box-shadow: 9px 9px 5px 0px rgba(7, 14, 60, 1);
+    box-shadow: 9px 9px 5px 0px rgba(7, 14, 60, 1);
 }
 
 .alicerces .card p {
     font-size: 1.1rem;
     padding: 2rem;
+}
+
+.time {
+    width: auto;
+    height: 150vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.time .titulo {
+    height: fit-content;
+    padding: 3rem 3rem 0rem 3rem;
+    text-align: center;
+    
+}
+
+.titulo h1 {
+    font-size: 3rem;
+}
+
+.titulo p {
+    font-size: 1.5rem;
+}
+
+.time .fotos {
+    
+    display: flex;
+    justify-content: center;
+
+    flex-wrap: wrap;
+}
+
+.fotos .colaborador {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 30%;
+    margin: 5rem 1rem 1rem 1rem;
+}
+
+.colaborador img {
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
+}
+
+.time .titulo h1 {
+    text-align: center;
 }
 
 footer {
