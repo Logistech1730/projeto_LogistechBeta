@@ -136,7 +136,7 @@ body {
 
 .containerEsteiras{
     width: 85vw;
-    height: 60vh;
+    height: fit-content;
     display: flex;
     align-items: flex-start;
     flex-wrap: wrap;
@@ -187,7 +187,8 @@ dialog {
     border: none;
     background-color: #D9D9D9;
     border-radius: 20px;
-    margin:  45% ;
+    margin-left:  45% ;
+    margin-top: 15%;
     min-width: 22%;
 }
 
@@ -310,3 +311,10 @@ dialog::backdrop {
     margin: 0;
     text-align: start;
 }
+
+/* @media (min-height: 600px) and (max-height: 960px){
+    .containerEsteiras{
+        height: fit-content;
+        background-color: blue;
+    }
+} */
