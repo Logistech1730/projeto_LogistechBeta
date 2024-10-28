@@ -143,7 +143,7 @@ body {
     align-items: flex-start;
     flex-wrap: wrap;
     border: 2px solid black;
-    border-radius: 20px;
+    border-radius: 10px;
     overflow-y: auto;
     scrollbar-color: #1E2868 transparent;
     box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
@@ -314,20 +314,21 @@ dialog::backdrop {
     text-align: start;
 }
 
-@media (min-height: 791px) and (max-height: 960px){
+@media (min-height: 550px) and (max-height: 960px){
     .containerEsteiras{
         margin-bottom: 20px;
     }
+
+    .cardEsteira{
+        width: 45%;
+        min-height: 25%;
+        margin: 20px;
+        height: fit-content;
+    }
+
+    .cardEsteira p{
+        font-size: 15px;
+        margin: 5px;
+    }
 }
 
-/* @media (min-height: 600px) and (max-height: 791px){
-    .containerEsteiras{
-        height: 100%;
-        max-height: 50%;
-        min-height: 30%;
-    }
-
-    .mainContent{
-        height: 90vh;
-    }
-} */
