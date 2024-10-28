@@ -142,7 +142,7 @@ body {
 
 .alicerces1 {
     width: 100vw;
-    height: 75vh;
+    height: 100vh;
 }
 
 .alicerces1 .titulo1 {
@@ -169,7 +169,7 @@ body {
 .alicerces1 .card {
     width: 33%;
     background-color: #D9D9D9;
-    height: 50vh;
+    height: 500px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -178,6 +178,31 @@ body {
     padding: 3rem;
     transition: 0.5s all;
 }
+
+@media (max-width: 1280px) {
+
+    .alicerces1 {
+        height: 200vh;
+    }
+      .alicerces1 .cards {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .card {
+        width: 70%; /* Ajuste a largura conforme necessário */
+        margin-bottom: 2rem; /* Espaçamento entre as linhas */
+      }
+      .card:nth-child(3) {
+        /* width: 100%; Terceiro card ocupa a linha completa */
+        text-align: center; /* Centraliza o conteúdo */
+      }
+
+      .alicerces .card p {
+        font-size: 1rem;
+    }
+    
+    }
+    
 
 .alicerces1 .card:hover {
     transform: translateY(-10%);
@@ -189,6 +214,12 @@ body {
 .alicerces .card p {
     font-size: 1.1rem;
     padding: 2rem;
+}
+
+
+
+.cards .card p {
+    font-size: 1.5rem;
 }
 
 .time {
