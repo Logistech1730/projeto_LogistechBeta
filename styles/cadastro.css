@@ -54,8 +54,8 @@
     position: fixed;
     display: none;
     flex-direction: column;
-    width: 22vw;
-    height: 56vh;
+    width:28vw;
+    height: 60vh;
     z-index: 5;
     justify-content: flex-end;
     border-radius: 0.5vw;
@@ -105,7 +105,7 @@
 }
 .bloco_form{
     display: flex;
-    width: 44vw;
+    width: 50vw;
     height: fit-content;
     justify-content: flex-end;
     border-radius: 0.5vw;
@@ -116,7 +116,7 @@
     z-index: 3;
     margin-top: 0.5vh;
     margin-right: 0.5vh;
-    font-size: 1vw;
+    font-size: 1.5vw;
     cursor: pointer;
 }
 .casaLogin{
@@ -125,7 +125,7 @@
 .bloco_info_cadastro{
     display: flex;
     flex-direction: column;
-    width: 22vw;
+    width: 24vw;
     align-items: center;
     justify-content: center;
     background-image: url(../img/fundoCadastro.png);
@@ -182,7 +182,7 @@
 .inputs {
     background-color: transparent;
     border-style: solid;
-    width:16vw;
+    width:20vw;
     font-size: 0.9vw;
     margin-bottom: 4.5vh;
     border-width: 0 0 0.2vh 0;
@@ -191,7 +191,8 @@
 .input_cidade {
     background-color: transparent;
     border-style: solid;
-    width:12.75vw;
+    width:16vw;
+    font-size: 0.9vw;
     margin-bottom: 4vh;
     border-width: 0 0 0.2vh 0;
     z-index: 2;
@@ -206,8 +207,8 @@
 }
 .selectUF{
     height: 2vh;
-    width: 5vh;
-    font-size: 0.7vw;
+    width: 6vh;
+    font-size: 0.9vw;
     border-width: 0 0 0.2vh 0;
     background-color: #D9D9D9;
     overflow: auto;
@@ -225,7 +226,7 @@
     transition: .5s;
     user-select: none;
     z-index: 1;
-    font-size: 0.7vw;
+    font-size: 0.9vw;
     bottom: 6vh;
 }
 .span_validacao{
@@ -247,7 +248,7 @@
 .botao_cadastro {
     background-color: #070E3C;
     color: #fff;
-    font-size: 0.7vw;
+    font-size: 0.9vw;
     font-weight: 800;
     padding: 1vh 0.8vw;
     border: none;
@@ -257,7 +258,7 @@
 .botao_voltar  {
     background-color: #dad9d9;
     color: #070E3C;
-    font-size: 0.7vw;
+    font-size: 0.9vw;
     font-weight: 800;
     padding: 1vh 1.25vw;
     border: none; 
@@ -266,5 +267,5 @@
 }
 .avisoLogin{
 
-    font-size: 0.7vw;
+    font-size: 0.8vw;
 }
