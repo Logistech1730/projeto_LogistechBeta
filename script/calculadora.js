@@ -4,7 +4,7 @@ function analisar(){
   var rendaMensal = Number(ipt_renda.value);
   var rendaCalculada = (unidades * valor)
   if (rendaCalculada > rendaMensal){
-      div_mensagem.innerHTML = `Sua renda mensal é de <br> <b style=color:red> R$${rendaCalculada - rendaMensal} </b> <br> Está abaixo do que deveria ser, o que pode indicar um possivel extravio de produtos em seu armazem <br> <br> Para averiguar o possível problema entre em contato conosco.`
+      div_mensagem.innerHTML = `Seu faturamento mensal é de <br> <b style=color:red> R$${rendaMensal} </b> <br> <span><b style=color:red>R$${rendaMensal - rendaCalculada} </b>abaixo do valor esperado </span> <br>Pode indicar um possivel extravio de produtos em seu armazem <br> <br> Para averiguar o possível problema entre em contato conosco.`
   } else if (rendaCalculada < rendaMensal){
       div_mensagem.innerHTML = `Sua renda mensal é de <br> <b style=color:red> R$${rendaMensal - rendaCalculada} </b> <br> Está acima do esperado, <p style=color:green> O que pode ser uma boa noticia </p> <p style=color:red> ou algum erro grave no calculo da renda mensal </p> para averiguar esse possivel problema entre em contato conosco`
   } else if (rendaCalculada == rendaMensal){

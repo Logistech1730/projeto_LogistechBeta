@@ -1,23 +1,26 @@
-const openButtons = document.querySelectorAll('.btn-cadastro');
-const closeButtons = document.querySelectorAll('.close-modal');
+//Seleciono o botão para abrir e fechar o modal
+const openButton = document.getElementById('btnCadastro')
+const closeButton = document.getElementById('closeButton')
 
-openButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const modalId = button.getAttribute('data-modal');
+//Adiciono um ouvinte de click no botão para abrir o modal
+    openButton.addEventListener('click', () => {
+        //O valor de data-modal é atribuido a constante modalId
+        const modalId = openButton.getAttribute('data-modal');
+        //O valor modal-1 está na tag dialog, sendo referenciado pelo valor que está dentro de data-modal
         const modal = document.getElementById(modalId);
+        //adiciona a classe show ao elemento modal
         modal.classList.add('show');
+        //função nativa do js que abre o modal
         modal.showModal();
     });
-});
 
-closeButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const modalId = button.getAttribute('data-modal');
+    closeButton.addEventListener('click', () => {
+        const modalId = closeButton.getAttribute('data-modal');
         const modal = document.getElementById(modalId);
         modal.classList.remove('show');
         modal.close();
     });
-});
+
 
 function dataAtual() {
     return new Date().toLocaleDateString('pt-BR');
