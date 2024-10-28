@@ -12,6 +12,56 @@ body {
 
 }
 
+.areaResultado {
+    position: fixed;
+    display: none;
+    z-index: 3;
+    width: 100vw;
+    height: 100vh;
+    background-color: #0000008a;
+    align-items: center;
+    justify-content: center;
+}
+.modalResultado{
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    padding: 2vw;
+    z-index: 5;
+    justify-content: flex-end;
+    border-radius: 0.5vw;
+    background-color: #0a1c53;
+    align-items: center;
+    padding: 4vh 2vw;
+}
+.infoResultado{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3vh;
+    gap: 2vh;
+}
+.logoResultado{
+    height: 26vh;
+}
+.mensagemResultado{
+    text-align: center;
+    color: #ed1616;
+    font-weight: 900;
+    font-size: 1vw;
+}
+.botaoOK{
+    background-color: #0911a8;
+    color: #fff;
+    font-size: 0.7vw;
+    font-weight: 800;
+    padding: 2vh 1vw;
+    margin-top: 3vh;
+    border: none;
+    border-radius: 0.5vw;
+    cursor: pointer;
+}
 .hidden-item {
     transform: translateX(-50%);
     opacity: 0;
@@ -42,7 +92,7 @@ body {
     width: 80%;
     margin: auto;
     padding: 20px;
-}
+} 
 
 .texto-solucao h1 {
     font-size: 5ch;

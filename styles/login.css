@@ -79,7 +79,7 @@ textarea:focus, input:focus, select:focus {
     padding: 6vh 0vw 2vh;
     border-top-right-radius: 0.5vw;
     border-bottom-right-radius: 0.5vw;
-    width: fit-content;
+    width: fit-content; 
 }
 .form_login h1{
     margin-block-start: 0;
