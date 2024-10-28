@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alertas</title>
+  <link rel="stylesheet" href="../styles/barraLateral.css">
+  <link rel="stylesheet" href="../styles/alertas.css">
+  <!-- Import de fontes -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <div class="container-dash">
+    <div class="barra-lateral">
+        <div class="div-imagem-perfil">
+            <img src="../../img/perfilexemplo.png" class="perfil-foto" alt="foto de perfil">
+        </div>
+        <h4>EletronicGear Ltda.</h4>
+        <div class="option selected">
+            <i class="fa-solid fa-chart-line"></i>
+            <span><a href="./dashboard.html">Dashboard</a></span>
+        </div>
+        <div class="option">
+            <i class="fa-solid fa-circle-plus"></i>
+            <span><a href="./cadastroEsteira.html">Esteira</a></span>
+        </div>
+        <div class="option">
+            <i class="fa-solid fa-book"></i>
+            <span><a href="./historico.html">Histórico</a></span>
+        </div>
+        <div class="option">
+            <i class="fa-regular fa-bell"></i>
+            <span><a href="./alertas.html">Alertas</a></span>
+        </div>
+
+        <div class="option">
+            <i class="fa-solid fa-user"></i>
+            <span><a href="#">Cadastrar Funcionário</a></span>
+        </div>
+        <div class="option">
+            <i class="fa-solid fa-door-open"></i>
+            <span><a href="../index.html">Sair</a></span>
+        </div>
+    </div>
+    <div class="alertas">
+      <h1>Alertas</h1>
+      <p>Aqui são listados todos os alertas capturados pelos sensores</p>
+      <div class="filtros">
+        <div class="ver-vistos">
+           <p>Ver não vistos</p>
+            <input type="checkbox" id="chk_vistos">
+        </div>
+        <div id="container-dtInicio">
+          <label for="container-dtInicio">Data de Início</label>
+          <input type="date" id="data1">
+        </div>
+        <div id="container-dtFinal">
+          <label for="container-dtFinal">Data final</label>
+          <input type="date" id="data2">
+        </div>
+        <button id="botao-filtro" onclick="aplicarFiltro()">Aplicar Filtros</button>
+      </div>
+      <div class="table-container">
+        <table id="tabela">
+            <thead>
+              <tr>
+                <th>Sensor</th>
+                <th>Altura detectada</th>
+                <th>Data</th>
+                <th>Visto</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Sensor 1</td>
+                <td>10 cm</td>
+                <td>20/10/2024</td>
+                <td><input checked type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 2</td>
+                <td>12 cm</td>
+                <td>20/10/2024</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 3</td>
+                <td>7 cm</td>
+                <td>20/10/2024</td>
+                <td><input checked type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 4</td>
+                <td>10 cm</td>
+                <td>20/10/2024</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 5</td>
+                <td>10 cm</td>
+                <td>20/10/2024</td>
+                <td><input checked type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 1</td>
+                <td>10 cm</td>
+                <td>20/10/2024</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 2</td>
+                <td>10 cm</td>
+                <td>20/10/2024</td>
+                <td><input checked type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 6</td>
+                <td>15 cm</td>
+                <td>21/10/2024</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 7</td>
+                <td>8 cm</td>
+                <td>21/10/2024</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 8</td>
+                <td>11 cm</td>
+                <td>21/10/2024</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 9</td>
+                <td>9 cm</td>
+                <td>21/10/2024</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 10</td>
+                <td>13 cm</td>
+                <td>21/10/2024</td>
+                <td><input type="checkbox"></td>
+              </tr>
+            </tbody>
+          </table>
+          
+      </div>
+
+
+    </div>
+  </div>
+</body>
+
+</html>
+<script>
+  function aplicarFiltro() {
+    // validação de data
+    var data_inicial = data1.value;
+    var data_final = data2.value;
+
+    var chk_visto = chk_vistos;
+
+    
+
+
+    if (data_inicial > data_final) {
+      alert("A data inicial não pode ser maior que a final!");
+    } else if (chk_visto.checked){
+        tabela.innerHTML = `
+         <thead>
+              <tr>
+                <th>Sensor</th>
+                <th>Altura detectada</th>
+                <th>Data</th>
+                <th>Visto</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Sensor 2</td>
+                <td>12 cm</td>
+                <td>20/10/2024</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 4</td>
+                <td>10 cm</td>
+                <td>20/10/2024</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 6</td>
+                <td>15 cm</td>
+                <td>21/10/2024</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 7</td>
+                <td>8 cm</td>
+                <td>21/10/2024</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 8</td>
+                <td>11 cm</td>
+                <td>21/10/2024</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 9</td>
+                <td>9 cm</td>
+                <td>21/10/2024</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 10</td>
+                <td>13 cm</td>
+                <td>21/10/2024</td>
+                <td><input type="checkbox"></td>
+              </tr>
+            </tbody>
+        `;
+    } else {
+        tabela.innerHTML = `
+        <thead>
+              <tr>
+                <th>Sensor</th>
+                <th>Altura detectada</th>
+                <th>Data</th>
+                <th>Visto</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Sensor 1</td>
+                <td>10 cm</td>
+                <td>20/10/2024</td>
+                <td><input checked type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 2</td>
+                <td>12 cm</td>
+                <td>20/10/2024</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 3</td>
+                <td>7 cm</td>
+                <td>20/10/2024</td>
+                <td><input checked type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 4</td>
+                <td>10 cm</td>
+                <td>20/10/2024</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 5</td>
+                <td>10 cm</td>
+                <td>20/10/2024</td>
+                <td><input checked type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 1</td>
+                <td>10 cm</td>
+                <td>20/10/2024</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 2</td>
+                <td>10 cm</td>
+                <td>20/10/2024</td>
+                <td><input checked type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 6</td>
+                <td>15 cm</td>
+                <td>21/10/2024</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 7</td>
+                <td>8 cm</td>
+                <td>21/10/2024</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 8</td>
+                <td>11 cm</td>
+                <td>21/10/2024</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 9</td>
+                <td>9 cm</td>
+                <td>21/10/2024</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>Sensor 10</td>
+                <td>13 cm</td>
+                <td>21/10/2024</td>
+                <td><input type="checkbox"></td>
+              </tr>
+            </tbody>
+        `;
+    }
+  }
+</script>

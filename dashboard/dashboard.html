@@ -194,12 +194,14 @@
                 {
                     label: 'Produtos inválidos',
                     backgroundColor: gradient1,
+                    borderColor: gradient1,
                     data: dados_produtos_erroneos,
                     fill: false,
                 },
                 {
                     label: 'Produtos válidos',
                     backgroundColor: gradient,
+                    borderColor: gradient,
                     data: dados_produtos_corretos,
                     fill: false,
                 },
@@ -241,6 +243,8 @@
             },
         }
     })
+
+    
     var grafico_pizza = new Chart(document.getElementById('grafico-pizza'), {
         type: 'pie',
         data: {
@@ -305,14 +309,17 @@
             dados_produtos_corretos[i] = gerarAleatorio(200)
         }
         graficoBarra.data.datasets[0].data = dados_produtos_corretos
+        grafico_tempo_real.data.datasets[1].data = dados_produtos_corretos;
 
         // produtos erroneos
         for (let i = 0; i < 6; i++) {
             dados_produtos_erroneos[i] = gerarAleatorio(20)
         }
         graficoBarra.data.datasets[1].data = dados_produtos_erroneos
+        grafico_tempo_real.data.datasets[0].data = dados_produtos_erroneos;
 
         graficoBarra.update()
+        grafico_tempo_real.update();
         gerarPorcentagemProdutos()
         gerarQtdTotalProdutos()
     }
