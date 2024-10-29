@@ -33,6 +33,7 @@ body {
     background-color: #0a1c53;
     align-items: center;
     padding: 4vh 2vw;
+    border: 6px solid black;
 }
 .infoResultado{
     display: flex;
@@ -47,7 +48,7 @@ body {
 }
 .mensagemResultado{
     text-align: center;
-    color: #ed1616;
+    color: #E9EAEF;
     font-weight: 900;
     font-size: 1vw;
 }
@@ -87,21 +88,20 @@ body {
 }
 
 .texto-solucao {
-    background-color: #dbdbdb;
-    border-radius: 15px;
-    width: 80%;
+    width: 70%;
     margin: auto;
-    padding: 20px;
 } 
 
 .texto-solucao h1 {
-    font-size: 5ch;
-    font-weight: 2000;
+    font-size: 12vh;
+    font-weight: 900;
+    margin:0
 }
 
 .texto-solucao p {
-    color: rgb(73, 73, 73);
-    font-size: 3ch;
+    border-top: 0.25vh solid #765348;
+    color: #0e0e0e;
+    font-size: 3.5vh;
 }
 
 .man-working, .analise-dashboard, .esteira-imagem {
@@ -227,9 +227,10 @@ body {
 .container-solucao button {
     border-radius: 20px;
     border: none;
-    padding: 20px;
+    padding: 20px 80px;
     background-color: #0E3AC0;
     color: #fff;
+    font-size: 3vh;
     font-weight: 800;
     transition: 0.3s;
 }
