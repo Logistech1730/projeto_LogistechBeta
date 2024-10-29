@@ -33,6 +33,7 @@ body {
     background-color: #0a1c53;
     align-items: center;
     padding: 4vh 2vw;
+    border: 6px solid black;
 }
 .infoResultado{
     display: flex;
@@ -47,7 +48,7 @@ body {
 }
 .mensagemResultado{
     text-align: center;
-    color: #ed1616;
+    color: #E9EAEF;
     font-weight: 900;
     font-size: 1vw;
 }
