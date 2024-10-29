@@ -92,7 +92,7 @@
                 <div class="bloco1">
 
 
-                    <div style="width: 100%; height: 200px;" class="porcentagem">
+                    <div style="width: 100%; height: 100%;" class="porcentagem">
                         <!-- <p>Porcentagem de produtos corretos</p>
                             <p id="qtd_porcentagem" class="porcentagem-numero"></p>
                             <p><span id="span_qtd_produtos_corretos"></span> produtos corretos</p>
@@ -111,7 +111,7 @@
 
             </div>
             <div class="bloco3">
-                <div class="grafico-linha">
+                <div style="width: 100%; height: 100%;" class="grafico-linha">
                     <canvas id="grafico-tempo-real"></canvas>
                 </div>
             </div>
@@ -141,7 +141,7 @@
     var graficoBarra = new Chart(document.getElementById('grafico-barra'), {
         type: 'bar',
         data: {
-            labels: ['12:00', '12:01', '12:02', '12:03', '12:04', '12:05'],
+            labels: ['25/10', '26/10', '27/10', '28/10', '29/10', '30/10'],
             datasets: [{
                 label: 'Produtos válidos',
                 backgroundColor: gradient,
@@ -177,7 +177,17 @@
 
             scales: {
                 y: {
+                    title: {
+                        display: true,
+                        text: 'Quantidade de produtos'
+                    },
                     beginAtZero: true
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Período'
+                    }
                 }
             }
         }
@@ -226,21 +236,24 @@
             }
             ,
             scales: {
-                x: {
+                x: {    title: {
+                    display: true,
+                    text: 'Período'
+                     },
                     beginAtZero: true
                 },
                 y: {
-                    // title: {
-                    // display: true,
-                    // text: '(%)'
-                    // },
+                     title: {
+                    display: true,
+                    text: 'Quantidade de produtos'
+                     },
                     beginAtZero: true,
                 },
             },
         }
     })
 
-    
+
     var grafico_pizza = new Chart(document.getElementById('grafico-pizza'), {
         type: 'pie',
         data: {
