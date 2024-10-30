@@ -32,7 +32,8 @@
     function validarNomeEmpresa() {
         valor_nome_empresa = ipt_nome_empresa.value;
         var empresa_lower = valor_nome_empresa.toLowerCase();
-        var possui_letras = empresa_lower != valor_nome_empresa;
+        var empresa_upper = valor_nome_empresa.toUpperCase();
+        var possui_letras = empresa_lower != empresa_upper;
         if (valor_nome_empresa != '' && possui_letras == true && valor_nome_empresa.length >= 3 && valor_nome_empresa.length <= 64) {
             span_validar_nome_empresa.innerHTML = `Razão Social validada com sucesso`;
             span_validar_nome_empresa.style.color = '#069206';
@@ -126,7 +127,8 @@ function validarCEP() {
     function validarLogradouro() {
         valor_logradouro = ipt_logradouro.value;
         var logradouro_lower = valor_logradouro.toLowerCase();
-        var possui_letras = logradouro_lower != valor_logradouro;
+        var logradouro_upper = valor_logradouro.toUpperCase();
+        var possui_letras = logradouro_lower != logradouro_upper;
         var possui_caractere_especial = valor_logradouro.includes('@') || valor_logradouro.includes('!') || valor_logradouro.includes("'") || valor_logradouro.includes(`"`) || valor_logradouro.includes('#') || valor_logradouro.includes('$') || valor_logradouro.includes('%') || valor_logradouro.includes('¨') || valor_logradouro.includes('&') || valor_logradouro.includes('*') || valor_logradouro.includes(`)`) || valor_logradouro.includes(`(`) || valor_logradouro.includes('_') || valor_logradouro.includes('-') || valor_logradouro.includes('=') || valor_logradouro.includes('+') || valor_logradouro.includes('§') || valor_logradouro.includes('|') || valor_logradouro.includes('\u005C') || valor_logradouro.includes('[') || valor_logradouro.includes(']') || valor_logradouro.includes('{') || valor_logradouro.includes('}') || valor_logradouro.includes('^') || valor_logradouro.includes('<') || valor_logradouro.includes('>') || valor_logradouro.includes(':') || valor_logradouro.includes(';') || valor_logradouro.includes('?') || valor_logradouro.includes('/') || valor_logradouro.includes('°') || valor_logradouro.includes('¹') || valor_logradouro.includes('²') || valor_logradouro.includes('³') || valor_logradouro.includes('£') || valor_logradouro.includes('¢') || valor_logradouro.includes('¬') ;
         if (valor_logradouro != '' && valor_logradouro.length >= 3 && valor_logradouro.length <= 64 && possui_letras == true && possui_caractere_especial == false) {
             span_validar_logradouro.innerHTML = `Logradouro validado com sucesso`;
@@ -137,7 +139,7 @@ function validarCEP() {
             span_validar_logradouro.style.color = 'red'
             span_validar_logradouro.innerHTML = `Preencha o campo para continuar`;
             logradouro_valido = false;
-        }  else if (valor_logradouro.length < 3 && valor_logradouro.length > 64){
+        }  else if (valor_logradouro.length < 3 || valor_logradouro.length > 64){
             span_validar_logradouro.style.color = 'red'
             span_validar_logradouro.innerHTML = `O Logradouro deve ter de 3 a 64 caracteres`;
             logradouro_valido = false;
@@ -155,7 +157,8 @@ function validarCEP() {
     function validarCidade() {
         valor_cidade = ipt_cidade.value;
         var cidade_lower = valor_cidade.toLowerCase();
-        var possui_letras = cidade_lower != valor_cidade;
+        var cidade_upper = valor_cidade.toUpperCase();
+        var possui_letras = cidade_lower != cidade_upper;
         var possui_numeros = valor_cidade.includes('1') || valor_cidade.includes('2') || valor_cidade.includes("3") || valor_cidade.includes(`4`) || valor_cidade.includes('5') || valor_cidade.includes('6') || valor_cidade.includes('7') || valor_cidade.includes('8') || valor_cidade.includes('9') || valor_cidade.includes('0');
         var possui_caractere_especial = valor_cidade.includes('@') || valor_cidade.includes('!') || valor_cidade.includes("'") || valor_cidade.includes(`"`) || valor_cidade.includes('#') || valor_cidade.includes('$') || valor_cidade.includes('%') || valor_cidade.includes('¨') || valor_cidade.includes('&') || valor_cidade.includes('*') || valor_cidade.includes(`)`) || valor_cidade.includes(`(`) || valor_cidade.includes('_') || valor_cidade.includes('-') || valor_cidade.includes('=') || valor_cidade.includes('+') || valor_cidade.includes('§') || valor_cidade.includes('|') || valor_cidade.includes('\u005C') || valor_cidade.includes('[') || valor_cidade.includes(']') || valor_cidade.includes('{') || valor_cidade.includes('}') || valor_cidade.includes('<') || valor_cidade.includes('>') || valor_cidade.includes(':') || valor_cidade.includes(';') || valor_cidade.includes('?') || valor_cidade.includes('/') || valor_cidade.includes('°') || valor_cidade.includes('¹') || valor_cidade.includes('²') || valor_cidade.includes('³') || valor_cidade.includes('£') || valor_cidade.includes('¢') || valor_cidade.includes('¬') ;
         if (valor_cidade != '' && valor_cidade.length >= 3 && possui_numeros == false && possui_letras == true && possui_caractere_especial == false && valor_cidade.length <= 64) {
@@ -235,10 +238,12 @@ function validarCEP() {
     function validarNomeUsuario() {
         valor_nome_usuario = ipt_nome_usuario.value;
         var nome_usuario_lower = valor_nome_usuario.toLowerCase();
-        var possui_letras = nome_usuario_lower != valor_nome_usuario;
+        var nome_usuario_upper = valor_nome_usuario.toUpperCase();
+        var inclui_espaco = valor_nome_usuario.includes(' ');
+        var possui_letras = nome_usuario_lower != nome_usuario_upper;
         var possui_numeros = valor_nome_usuario.includes('1') || valor_nome_usuario.includes('2') || valor_nome_usuario.includes("3") || valor_nome_usuario.includes(`4`) || valor_nome_usuario.includes('5') || valor_nome_usuario.includes('6') || valor_nome_usuario.includes('7') || valor_nome_usuario.includes('8') || valor_nome_usuario.includes('9') || valor_nome_usuario.includes('0');
         var possui_caractere_especial = valor_nome_usuario.includes('@') || valor_nome_usuario.includes('!') || valor_nome_usuario.includes("'") || valor_nome_usuario.includes(`"`) || valor_nome_usuario.includes('#') || valor_nome_usuario.includes('$') || valor_nome_usuario.includes('%') || valor_nome_usuario.includes('¨') || valor_nome_usuario.includes('&') || valor_nome_usuario.includes('*') || valor_nome_usuario.includes(`)`) || valor_nome_usuario.includes(`(`) || valor_nome_usuario.includes('_') || valor_nome_usuario.includes('-') || valor_nome_usuario.includes('=') || valor_nome_usuario.includes('+') || valor_nome_usuario.includes('§') || valor_nome_usuario.includes('|') || valor_nome_usuario.includes('\u005C') || valor_nome_usuario.includes('[') || valor_nome_usuario.includes(']') || valor_nome_usuario.includes('{') || valor_nome_usuario.includes('}') || valor_nome_usuario.includes('^') || valor_nome_usuario.includes('<') || valor_nome_usuario.includes('>') || valor_nome_usuario.includes(':') || valor_nome_usuario.includes(';') || valor_nome_usuario.includes('?') || valor_nome_usuario.includes('/') || valor_nome_usuario.includes('°') || valor_nome_usuario.includes('¹') || valor_nome_usuario.includes('²') || valor_nome_usuario.includes('³') || valor_nome_usuario.includes('£') || valor_nome_usuario.includes('¢') || valor_nome_usuario.includes('¬') ;
-        if (valor_nome_usuario != '' && valor_nome_usuario.length >= 3 && possui_letras == true && possui_caractere_especial == false && possui_numeros == false && valor_nome_usuario.length <= 64) {
+        if (valor_nome_usuario != '' && valor_nome_usuario.length >= 3 && possui_letras == true && possui_caractere_especial == false && possui_numeros == false && valor_nome_usuario.length <= 64 && inclui_espaco == true) {
             span_validar_nome_usuario.innerHTML = `Nome de usuário validado com sucesso`;
             span_validar_nome_usuario.style.color = '#069206';
             valor_nome_usuario = valor_nome_usuario.toLowerCase()
@@ -255,19 +260,23 @@ function validarCEP() {
             span_validar_nome_usuario.style.color = 'red'
             span_validar_nome_usuario.innerHTML = `O nome deve ter no mínimo 3 caracteres`;
             nome_usuario_valido = false;
+        } else if (possui_letras == false){
+            span_validar_nome_usuario.style.color = 'red'
+            span_validar_nome_usuario.innerHTML = `O nome deve ter apenas letras`;
+            nome_usuario_valido = false;
         }
     }
     function validarEmail (){
         valor_email_usuario = ipt_email.value;
-        var email_usuario_lower = valor_email_usuario.toLowerCase();
-        var possui_letras = email_usuario_lower != valor_email_usuario;
+        var email_usuario_upper = valor_email_usuario.toUpperCase();
+        var possui_apenas_minusculas = email_usuario_upper != valor_email_usuario;
         var tamanho_email = valor_email_usuario.length;
         var possui_arroba = valor_email_usuario.includes('@');
         var indice_arroba = valor_email_usuario.indexOf('@') + 1;
         var possui_caractere_especial = valor_email_usuario.includes('!') || valor_email_usuario.includes("'") || valor_email_usuario.includes(`"`) || valor_email_usuario.includes('#') || valor_email_usuario.includes('$') || valor_email_usuario.includes('%') || valor_email_usuario.includes('¨') || valor_email_usuario.includes('&') || valor_email_usuario.includes('*') || valor_email_usuario.includes(`)`) || valor_email_usuario.includes(`(`) || valor_email_usuario.includes('_') || valor_email_usuario.includes('-') || valor_email_usuario.includes('=') || valor_email_usuario.includes('+') || valor_email_usuario.includes('§') || valor_email_usuario.includes('|') || valor_email_usuario.includes('\u005C') || valor_email_usuario.includes('`') || valor_email_usuario.includes('´') || valor_email_usuario.includes('[') || valor_email_usuario.includes(']') || valor_email_usuario.includes('{') || valor_email_usuario.includes('}') || valor_email_usuario.includes('^') || valor_email_usuario.includes('~') || valor_email_usuario.includes('ª') || valor_email_usuario.includes('º') || valor_email_usuario.includes('<') || valor_email_usuario.includes('>') || valor_email_usuario.includes(',') || valor_email_usuario.includes(':') || valor_email_usuario.includes(';') || valor_email_usuario.includes('?') || valor_email_usuario.includes('/') || valor_email_usuario.includes('°') || valor_email_usuario.includes('¹') || valor_email_usuario.includes('²') || valor_email_usuario.includes('³') || valor_email_usuario.includes('£') || valor_email_usuario.includes('¢') || valor_email_usuario.includes('¬') ;
         var possui_ponto_depois_arroba = valor_email_usuario.includes('.', indice_arroba);
         var indice_ponto_depois_arroba = valor_email_usuario.indexOf('.', indice_arroba) - indice_arroba;
-        if (valor_email_usuario != '' && possui_letras == true && possui_arroba == true && indice_arroba > 1 && indice_arroba < tamanho_email && possui_ponto_depois_arroba == true && possui_caractere_especial == false && indice_ponto_depois_arroba >= 2 && (indice_ponto_depois_arroba + indice_arroba+1) < tamanho_email &&  (indice_ponto_depois_arroba + indice_arroba+1) < (tamanho_email - 2)) {
+        if (valor_email_usuario != '' && possui_apenas_minusculas == true && possui_arroba == true && indice_arroba > 1 && indice_arroba < tamanho_email && possui_ponto_depois_arroba == true && possui_caractere_especial == false && indice_ponto_depois_arroba >= 2 && (indice_ponto_depois_arroba + indice_arroba+1) < tamanho_email &&  (indice_ponto_depois_arroba + indice_arroba+1) < (tamanho_email - 2)) {
             span_validar_email.style.color = '#069206'
             span_validar_email.innerHTML = `endereço de email preenchido com sucesso`;
             valor_email_usuario = valor_email_usuario.toLowerCase();
@@ -286,7 +295,7 @@ function validarCEP() {
             email_usuario_valido = false;
         }else if(possui_letras == false) {
             span_validar_email.style.color = 'red'
-            span_validar_email.innerHTML = `O email precisa ter letras.`;
+            span_validar_email.innerHTML = `O email deve ter apenas letras minusculas.`;
             email_usuario_valido = false;
         } else if(possui_arroba == false) {
             span_validar_email.style.color = 'red'
