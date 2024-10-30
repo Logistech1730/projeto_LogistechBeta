@@ -6,21 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logistech</title>
     <link rel="stylesheet" href="../styles/barraLateral.css">
-    <link rel="stylesheet" href="../styles/cadastroEsteira.css">
+    <link rel="stylesheet" href="../styles/cadastrofuncionarios.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="../script/cadastroEsteira.js" defer></script>
+    <script src="../script/cadastroFuncionario.js" defer></script>
 </head>
 
 <body>
     <main class="container-main">
         <div class="barra-lateral">
             <div class="div-imagem-perfil">
-                <img src="../../img/perfilexemplo.png" class="perfil-foto" alt="foto de perfil">
+                <img src="../img/perfilexemplo.png" class="perfil-foto" alt="foto de perfil">
             </div>
             <h4>EletronicGear Ltda.</h4>
             <div class="option selected">
@@ -56,18 +56,18 @@
 
         <div class="mainContent">
             <div class="container-title">
-                <p>Esteiras</p>
+                <p>Funcionários</p>
             </div>
             <hr>
             <div class="container-text">
-                <p>Neste seção você pode criar e visualizar todas as esteiras criadas e seus respectivos dados</p>
+                <p>Neste seção você pode criar e visualizar todas os funcionário cadastrados e seus respectivos dados</p>
             </div>
             <div class="containerFiltro">
                 <div class="container-btnCadastro">
                     <button id="btnCadastro" class="btn-cadastro" data-modal="modal-1"><i
                             class="fa-solid fa-circle-plus"></i>
                         Cadastrar
-                        Esteira</button>
+                        funcionário</button>
                 </div>
                 <div class="filtrosEsteira">
                     <ul>
@@ -75,30 +75,27 @@
                     </ul>
                 </div>
             </div>
-            <h2>Esteiras cadastradas</h2>
-            <div class="containerEsteiras">
+            <h2>Funcionários cadastrados</h2>
+            <div id="div_containerEsteiras" class="containerEsteiras">
                 <div class="cardEsteira">
                     <div class="leftContainer">
-                        <h6>Esteiras</h6>
+                        <div class="titulo">
+                            <h6>Vinicius Oliveira</h6>
+                            <div class="icons">
+                                <i class="fa-solid fa-trash"></i>
+                                <i class="fa-solid fa-pencil"></i>
+                            </div>
+                        </div>
+                        
+       
                         <p>Nome</p>
-                        <p>Esteira 1</p>
-                        <p>Departamento</p>
-                        <p>EletronicGear</p>
-                        <p>Tamanho do produto</p>
-                        <p>10 cm</p>
+                        <p>Vinicius Oliveira</p>
+                        <p>Email</p>
+                        <p>vinicius@email.com</p>
+                        <p>Telefone</p>
+                        <p>(11) 97890-7691</p>
                         <p>Data de cadastro</p>
-                        <p>27/10/2024</p>
-                    </div>
-                    <div class="verticalLine"></div>
-                    <div class="rightContainer">
-                        <p>Produtos válidos registrados</p>
-                        <p>230</p>
-                        <p>Produtos inválidos registrados</p>
-                        <p>10</p>
-                        <p>Alertas gerados</p>
-                        <p>10</p>
-                        <p>Horário com mais desvio</p>
-                        <p>13:55</p>
+                        <p>30/10/2024</p>
                     </div>
                 </div>
 
@@ -106,7 +103,7 @@
                     <div class="container-esteira">
 
                         <div class="headerModal">
-                            <h1>Adicionar Esteira</h1>
+                            <h1>Adicionar funcionário</h1>
                             <button id="closeButton" class="close-modal" data-modal="modal-1"> <i
                                     class="fa-solid fa-xmark"></i></button>
                         </div>
@@ -114,11 +111,13 @@
                             <label for="inpNome">Nome</label>
                             <input type="text" id="inpNome">
 
-                            <label for="inpDep">Departamento</label>
-                            <input type="text" id="inpDep">
+                            <label for="inpDep">E-mail</label>
+                            <input type="text" id="inpEmail">
 
-                            <label for="inpTamanho">Tamanho do produto</label>
-                            <input type="number" id="inpTamanho">
+                            <label for="inpTamanho">Senha</label>
+                            <input type="password" id="inpSenha">
+                            <label for="inpTamanho">Telefone</label>
+                            <input type="number" id="inpTelefone">
                             <div id="container-aviso"></div>
                             <button id="cadastroBtn">Cadastrar</button>
                         </div>

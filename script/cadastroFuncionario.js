@@ -53,26 +53,27 @@ document.getElementById('cadastroBtn').addEventListener('click', () => {
      const modal = document.getElementById(modalId);
 
 
-    const nomeMetrica = document.getElementById('inpNome').value;
-    const valorMinimo = document.getElementById('inpValorMinimo').value;
-    const valorMaximo = document.getElementById('inpValorMaximo').value;
-    const cor = document.getElementById('inpCor').value;
+    const nomeFuncionario = document.getElementById('inpNome').value;
+    const email = document.getElementById('inpEmail').value;
+    const senha = document.getElementById('inpSenha').value;
+    const telefone = document.getElementById('inpTelefone').value;
 
     let containerAviso = document.getElementById('container-aviso')
     let conteudoExistente = containerAviso.querySelectorAll('p').length
 
-    if((nomeMetrica.value === '' ||  valorMinimo.value === ''  || valorMaximo.value === '' || cor === '') && conteudoExistente < 1){
+    if((nomeFuncionario.value === '' ||  email.value === ''  || senha.value === '' || telefone === '') && conteudoExistente < 1){
         let aviso = document.createElement('p')
         aviso.textContent = 'Preencha os campos'
         aviso.style.color = 'red'
         containerAviso.appendChild(aviso)
         return
     }else{
+        console.log("cadastrei")
         div_containerEsteiras.innerHTML += `
          <div class="cardEsteira">
                     <div class="leftContainer">
                         <div class="titulo">
-                            <h6 style="color: ${cor};">${nomeMetrica}</h6>
+                            <h6>${nomeFuncionario}</h6>
                             <div class="icons">
                                 <i class="fa-solid fa-trash"></i>
                                 <i class="fa-solid fa-pencil"></i>
@@ -80,15 +81,13 @@ document.getElementById('cadastroBtn').addEventListener('click', () => {
                         </div>
                         
                         <p>Nome</p>
-                        <p>${nomeMetrica}</p>
-                        <p>Valor mínimo</p>
-                        <p>${valorMinimo}%</p>
-                        <p>Valor Máximo</p>
-                        <p>${valorMaximo}%</p>
+                        <p>${nomeFuncionario}</p>
+                        <p>Email</p>
+                        <p>${email}%</p>
+                        <p>Telefone</p>
+                        <p>${telefone}</p>
                         <p>Data de cadastro</p>
                         <p>30/10/2024</p>
-                        <p>Cor</p>
-                        <p>${cor}</p>
                 </div>
 
         `;
