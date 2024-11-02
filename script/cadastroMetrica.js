@@ -51,7 +51,7 @@ document.getElementById('cadastroBtn').addEventListener('click', () => {
      const modalId = openButton.getAttribute('data-modal');
      //O valor modal-1 está na tag dialog, sendo referenciado pelo valor que está dentro de data-modal
      const modal = document.getElementById(modalId);
-
+ 
 
     const nomeMetrica = document.getElementById('inpNome').value;
     const valorMinimo = document.getElementById('inpValorMinimo').value;
@@ -61,7 +61,7 @@ document.getElementById('cadastroBtn').addEventListener('click', () => {
     let containerAviso = document.getElementById('container-aviso')
     let conteudoExistente = containerAviso.querySelectorAll('p').length
 
-    if((nomeMetrica.value === '' ||  valorMinimo.value === ''  || valorMaximo.value === '' || cor === '') && conteudoExistente < 1){
+    if((nomeMetrica.value === '' ||  valorMinimo.value === ''  || valorMaximo.value === '' || cor === '') && conteudoExistente < 10){
         let aviso = document.createElement('p')
         aviso.textContent = 'Preencha os campos'
         aviso.style.color = 'red'
