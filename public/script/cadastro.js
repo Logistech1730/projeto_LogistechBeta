@@ -1,3 +1,19 @@
+    // criação de objeto da empresa para cadastro
+    var empresa = {
+
+    }  ; 
+
+    // Criação de um objeto de endereço da empresa para cadastro 
+    var endereco = {
+
+    }
+
+    // criação de um objeto para o usuário
+    var usuario = {
+
+    }
+    
+    
     var valor_nome_empresa = '';
     var valor_cnpj = '';
     var valor_telefone_empresa = '';
@@ -117,6 +133,12 @@ function validarCEP() {
 } 
     function validarParte1() {
         if (nome_empresa_valido == true && cnpj_valido == true && telefone_comercial_valido == true && cep_valido == true) {
+            // caso as validações tenham sido cumpridas, armazenamos os valores dentro do objeto de usuário
+            empresa.razaoSocial = valor_nome_empresa;
+            empresa.cnpj = valor_cnpj;
+            empresa.telefone = valor_telefone_empresa;
+            endereco.cep = valor_cep_empresa;
+            // exibição da parte 2 do cadastro
             cadastroParte1.style.display = 'none'
             cadastroParte2.style.display = 'flex'
         } else {
@@ -227,6 +249,14 @@ function validarCEP() {
     }
     function validarParte2() {
         if (logradouro_valido == true && cidade_valida == true && uf_valido == true && numero_valido == true && complemento_valido == true) {
+           // caso as validações tenham sido cumpridas, armazenamos os valores dentro do objeto de usuário
+           endereco.logradouro = valor_logradouro;
+           endereco.cidade = valor_cidade;
+           endereco.uf = valor_uf;
+           endereco.numero = valor_numero;
+           endereco.complemento = valor_complemento;
+
+           // exibição da parte 3 do cadastro
             cadastroParte2.style.display = 'none'
             cadastroParte3.style.display = 'flex'
         } else {
@@ -387,21 +417,55 @@ function validarCEP() {
     }
     function validarParte3() {
         if (nome_usuario_valido == true && email_usuario_valido == true && senha_usuario_valida == true && confirmacao_usuario_valida == true) {
+             // caso as validações tenham sido cumpridas, armazenamos os valores dentro do objeto de usuário
+             usuario.nome = valor_nome_usuario;
+             usuario.email = valor_email_usuario;
+             usuario.senha = valor_senha_usuario;
+
+
+           /* Com todas as informações coletadas, devemos inserí-las no banco de dados. 
+              Para isso, usaremos o método .fetch() para fazer uma requisição para nosso backend.
+              De acordo com a modelagem, precisamos fazer 3 cadastros:
+              1. Empresa
+              2. Endereço
+              3. Usuário
+              Logo, são 3 requisições diferentes.
+           */
+
+            /* O método fetch exige que enviemos 2 informações para ele: 
+            A primeira é a rota onde enviaremos nossa requisição, nesse caso é na /empresa/cadastrar, definido no app.js e em routes/empresa.js 
+            A segunda informação são as configurações da requisição, como por exemplo: tipo de requisição (POST, GET, etc..), o conteúdo dessa requisição (afinal, se vamos cadastrar algo no banco, precisamos informar o que queremos cadastrar) 
+            
+            */
+          fetch("/empresas/cadastrar", {
+            // Como dito anteriormente, aqui definimos o tipo da requisição
+            method: "POST",
+            // Aqui definimos os "cabeçalhos" da requisição, como por exemplo qual tipo de conteúdo (content-type) que estamos enviando (no caso, enviaremos um json)
+            headers: {
+                "Content-Type": "application/json",
+            },
+            // Aqui definimos qual é o conteúdo que enviaremos para essa requisição (no caso, estamos transformando em JSON o conteúdo da empresa (que capturamos durante o cadastro))
+            body: JSON.stringify(empresa)
+          })
+          /* Logo após temos 2 estruturas de controle da requisição: .then() e .catch() 
+          .then() servirá para lidarmos com a resposta da requisição 
+          .catch() servirá para lidarmos com possíveis erros durante a requisição
+          */
+          
+          .then((resposta) => {
+            console.log(resposta);
             modal_mensagem_cadastrado.style.display = 'flex';
             modal_cadastrado.style.display = 'flex';
             mensagem_cadastrado.innerHTML = `Seu cadastro foi concluído com sucesso! <br>Seja Bem vindo(a) ${valor_nome_empresa}! <br>Nós da Logistech estaremos fazendo a ativação da sua conta e comunicando através do email!`
-            console.log(valor_nome_empresa)
-            console.log(valor_cnpj)
-            console.log(valor_telefone_empresa)
-            console.log(valor_cep_empresa)
-            console.log(valor_logradouro)
-            console.log(valor_cidade)
-            console.log(valor_uf)
-            console.log(valor_numero)
-            console.log(valor_complemento)
-            console.log(valor_nome_usuario)
-            console.log(valor_email_usuario)
-            console.log(valor_senha_usuario)
+            
+          })
+          // Aqui indico que caso haja algum erro, printe-o no console.
+          .catch((erro) => {
+            console.log(erro)
+          })
+           
+
+            
         } else {
             modal_mensagem_erro.style.display = 'flex';
             modal_erro.style.display = 'flex';

@@ -4,7 +4,7 @@ USE logistech;
 CREATE TABLE empresa(
 idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
 cnpj CHAR(14),
-telefone CHAR(9),
+telefone CHAR(11),
 nomeFantasia VARCHAR(45),
 isAtivo TINYINT,
 CONSTRAINT chk_ativo CHECK(isAtivo IN(0, 1))
