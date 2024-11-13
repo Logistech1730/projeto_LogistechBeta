@@ -6,7 +6,7 @@ idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
 cnpj CHAR(14),
 telefone CHAR(11),
 nomeFantasia VARCHAR(45),
-isAtivo TINYINT,
+isAtivo TINYINT DEFAULT 0,
 CONSTRAINT chk_ativo CHECK(isAtivo IN(0, 1))
 );
 
@@ -15,7 +15,6 @@ idUsuario INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(45),
 email VARCHAR(45),
 senha VARCHAR(45),
-telefone VARCHAR(45),
 fkEmpresa INT,
 CONSTRAINT fkUsuarioEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
 );

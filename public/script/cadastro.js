@@ -453,10 +453,19 @@ function validarCEP() {
           */
           
           .then((resposta) => {
-            console.log(resposta);
-            modal_mensagem_cadastrado.style.display = 'flex';
-            modal_cadastrado.style.display = 'flex';
-            mensagem_cadastrado.innerHTML = `Seu cadastro foi concluído com sucesso! <br>Seja Bem vindo(a) ${valor_nome_empresa}! <br>Nós da Logistech estaremos fazendo a ativação da sua conta e comunicando através do email!`
+            resposta.json()
+            .then((resultado) => {
+                // Aqui, guardo o ID da empresa cadastrada (precisamos disso para associar ao endereço, já que no endereço existe o campo "fkEmpresa")
+                var fkEmpresa = resultado.insertId;
+                cadastrarEndereco(fkEmpresa);
+               
+                // Logo após cadastrar a empresa, devemos cadastrar o endereço
+            })
+            .catch((erro) => {
+                console.log(erro);
+            })
+                
+          
             
           })
           // Aqui indico que caso haja algum erro, printe-o no console.
@@ -486,4 +495,52 @@ function validarCEP() {
     function redirecionarLogin() {
         modalCadastro.style.display = 'none';
         modalLogin.style.display = 'flex';
+    }
+
+
+    // Fetch's
+    function cadastrarEndereco(fkEmpresa) {
+        endereco.fkEmpresa = fkEmpresa;
+        fetch("/enderecos/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(endereco)
+        })
+        .then((resposta => {
+            if (resposta.status == 200) {
+                console.log("Endereço cadastrado com sucesso;");
+                // Agora, por fim, vamos cadastrar o usuário final
+                cadastrarUsuario(fkEmpresa)
+
+            }
+        }))
+        .catch((erro) => {
+            console.log(erro);
+        })
+
+    }
+
+    function cadastrarUsuario(fkEmpresa) {
+        usuario.fkEmpresa = fkEmpresa;
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(usuario)
+        })
+        .then((resposta => {
+            if (resposta.status == 200) {
+                console.log("Usuário cadastrado com sucesso;");
+                modal_mensagem_cadastrado.style.display = 'flex';
+                modal_cadastrado.style.display = 'flex';
+                mensagem_cadastrado.innerHTML = `Seu cadastro foi concluído com sucesso! <br>Seja Bem vindo(a) ${valor_nome_empresa}! <br>Nós da Logistech estaremos fazendo a ativação da sua conta e comunicando através do email!`
+            }
+        }))
+        .catch((erro) => {
+            console.log(erro);
+        })
+
     }
