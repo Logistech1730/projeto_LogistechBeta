@@ -2,8 +2,8 @@ var usuarioModel = require("../models/usuarioModel");
 
 
 function autenticar(req, res) {
-    var email = req.body.emailServer;
-    var senha = req.body.senhaServer;
+    var email = req.body.login;
+    var senha = req.body.senha;
 
     if (email == undefined) {
         res.status(400).send("Seu email está undefined!");
@@ -18,7 +18,7 @@ function autenticar(req, res) {
                     console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
 
                     if (resultadoAutenticar.length == 1) {
-                        console.log(resultadoAutenticar);
+                        res.status(200).json(resultadoAutenticar);
 
                         
                     } else if (resultadoAutenticar.length == 0) {
