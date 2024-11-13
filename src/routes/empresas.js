@@ -10,5 +10,9 @@ router.post("/cadastrar", function (req, res) {
     empresaController.cadastrar(req, res);
 })
 
+router.get("/listar/:id", function (req, res) {
+    empresaController.listarPorId(req, res);
+})
+
 
 module.exports = router;

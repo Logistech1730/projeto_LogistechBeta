@@ -11,6 +11,15 @@ function cadastrar(razaoSocial, cnpj, telefone) {
     return database.executar(instrucaoSql);
 }
 
+function listarPorId(idEmpresa) {
+    var instrucaoSql = `
+    SELECT * FROM Empresa where idEmpresa = ${idEmpresa};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
-    cadastrar
+    cadastrar,
+    listarPorId
 };

@@ -21,7 +21,18 @@ function cadastrar(nome, email, senha, fkEmpresa) {
     return database.executar(instrucaoSql);
 }
 
+function listarPorEmpresa(idEmpresa) {
+    var instrucaoSql = `
+    SELECT Usuario.* FROM Usuario 
+    JOIN Empresa ON fkEmpresa = idEmpresa
+    WHERE idEmpresa = ${idEmpresa}; 
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    listarPorEmpresa
 };

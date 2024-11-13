@@ -36,6 +36,33 @@ function cadastrar(req, res) {
     }
 }
 
+function listarPorId(req, res) {
+    // Recebendo parametro da URL 
+    var idEmpresa = req.params.id;
+
+    if (idEmpresa == undefined) {
+        res.status(400).send("ID da empresa indefinido");
+     } else {
+        empresaModel.listarPorId(idEmpresa)
+        .then(
+            function (resultado) {
+                res.status(200).json(resultado);
+            }
+        )
+        .catch(function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao realizar o cadastro de empresa! Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        })
+     }
+
+
+}
+
 module.exports = {
-    cadastrar
+    cadastrar,
+    listarPorId
 }

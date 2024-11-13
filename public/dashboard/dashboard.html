@@ -1,422 +1,442 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
-    <link rel="stylesheet" href="../styles/dashboard.css">
-    <link rel="stylesheet" href="../styles/barraLateral.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../styles/dashboard.css" />
+    <link rel="stylesheet" href="../styles/barraLateral.css" />
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-        rel="stylesheet">
-</head>
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
+  <body>
     <div class="container-dash">
-        <div class="barra-lateral">
-            <div class="div-imagem-perfil">
-                <img src="../img/perfilexemplo.png" class="perfil-foto" alt="foto de perfil">
-            </div>
-            <h4>EletronicGear Ltda.</h4>
-            <div class="option selected">
-                <i class="fa-solid fa-chart-line"></i>
-                <span><a href="./dashboard.html">Dashboard</a></span>
-            </div>
-            <div class="option">
-                <i class="fa-solid fa-circle-plus"></i>
-                <span><a href="./cadastroEsteira.html">Esteira</a></span>
-            </div>
-            <div class="option">
-                <i class="fa-solid fa-book"></i>
-                <span><a href="./historico.html">Histórico</a></span>
-            </div>
-            <div class="option">
-                <i class="fa-regular fa-bell"></i>
-                <span><a href="./alertas.html">Alertas</a></span>
-            </div>
-
-            <div class="option">
-                <i class="fa-solid fa-gauge"></i>
-                <span><a href="./metricas.html">Métricas</a></span>
-            </div>
-
-            <div class="option">
-                <i class="fa-solid fa-user"></i>
-                <span><a href="./cadastroFuncionario.html">Funcionários</a></span>
-            </div>
-            <div class="option">
-                <i class="fa-solid fa-door-open"></i>
-                <span><a href="../index.html">Sair</a></span>
-            </div>
+      <div class="barra-lateral">
+        <div class="div-imagem-perfil">
+          <img
+            src="../img/perfilexemplo.png"
+            class="perfil-foto"
+            alt="foto de perfil"
+          />
+        </div>
+        <h4 id="nomeEmpresa"></h4>
+        <div class="option selected">
+          <i class="fa-solid fa-chart-line"></i>
+          <span><a href="./dashboard.html">Dashboard</a></span>
+        </div>
+        <div class="option">
+          <i class="fa-solid fa-circle-plus"></i>
+          <span><a href="./cadastroEsteira.html">Esteira</a></span>
+        </div>
+        <div class="option">
+          <i class="fa-solid fa-book"></i>
+          <span><a href="./historico.html">Histórico</a></span>
+        </div>
+        <div class="option">
+          <i class="fa-regular fa-bell"></i>
+          <span><a href="./alertas.html">Alertas</a></span>
         </div>
 
-        <div class="dashboard">
-            <div class="filtros-dash">
-                <div id="container-esteira">
-                    <label for="slt_esteiras">Esteira</label>
-                    <select id="slt_esteiras">
-                        <option selected value="#">Todas as esteiras</option>
-                        <option value="sensor1">Esteira 1</option>
-                        <option value="sensor2">Esteira 2</option>
-                        <option value="sensor3">Esteira 3</option>
-                    </select>
-                </div>
-                <div id="container-dtInicio">
-                    <label for="container-dtInicio">Data de Início</label>
-                    <input type="date" id="data1" >
-                </div>
-                <div class="container-dtTermino">
-                    <label for="container-dtTermino">Data de Término</label>
-                    <input type="date" id="data2">
-                </div>
-                <button id="botao-filtro">Aplicar Filtros</button>
-            </div>
-            <div class="kpis">
-                <div class="produtos-registrados">
-                    <p>Total de produtos</p>
-                    <p id="span_qtd_produtos"></p>
-                </div>
-                <div class="esteira-mais-desvio">
-                    <p>Esteira com mais desvio</p>
-                    <p id="esteira-com-mais-desvio">Esteira 3</p>
-                </div>
-                <div class="status-esteiras">
-                    <p>Status das esteiras</p>
-                    <p id="status_esteiras" style="color: green;">Conforme
-                        esperado</p>
-                </div>
-            </div>
-            <div class="blocos">
+        <div class="option">
+          <i class="fa-solid fa-gauge"></i>
+          <span><a href="./metricas.html">Métricas</a></span>
+        </div>
 
-                <div class="bloco1">
+        <div class="option">
+          <i class="fa-solid fa-user"></i>
+          <span><a href="./cadastroFuncionario.html">Funcionários</a></span>
+        </div>
+        <div class="option">
+          <i class="fa-solid fa-door-open"></i>
+          <span><a href="../index.html">Sair</a></span>
+        </div>
+      </div>
 
-
-                    <div style="width: 100%; height: 100%;" class="porcentagem">
-                        <!-- <p>Porcentagem de produtos corretos</p>
+      <div class="dashboard">
+        <div class="filtros-dash">
+          <div id="container-esteira">
+            <label for="slt_esteiras">Esteira</label>
+            <select id="slt_esteiras">
+              <option selected value="#">Todas as esteiras</option>
+              <option value="sensor1">Esteira 1</option>
+              <option value="sensor2">Esteira 2</option>
+              <option value="sensor3">Esteira 3</option>
+            </select>
+          </div>
+          <div id="container-dtInicio">
+            <label for="container-dtInicio">Data de Início</label>
+            <input type="date" id="data1" />
+          </div>
+          <div class="container-dtTermino">
+            <label for="container-dtTermino">Data de Término</label>
+            <input type="date" id="data2" />
+          </div>
+          <button id="botao-filtro">Aplicar Filtros</button>
+        </div>
+        <div class="kpis">
+          <div class="produtos-registrados">
+            <p>Total de produtos</p>
+            <p id="span_qtd_produtos"></p>
+          </div>
+          <div class="esteira-mais-desvio">
+            <p>Esteira com mais desvio</p>
+            <p id="esteira-com-mais-desvio">Esteira 3</p>
+          </div>
+          <div class="status-esteiras">
+            <p>Status das esteiras</p>
+            <p id="status_esteiras" style="color: green">Conforme esperado</p>
+          </div>
+        </div>
+        <div class="blocos">
+          <div class="bloco1">
+            <div style="width: 100%; height: 100%" class="porcentagem">
+              <!-- <p>Porcentagem de produtos corretos</p>
                             <p id="qtd_porcentagem" class="porcentagem-numero"></p>
                             <p><span id="span_qtd_produtos_corretos"></span> produtos corretos</p>
                             <p><span id="span_qtd_produtos_erroneos"></span> produtos errôneos</p> -->
-                        <canvas id="grafico-pizza"></canvas>
-                    </div>
-                </div>
-
-                <div class="bloco2">
-
-                    <div class="grafico-barras">
-                        <canvas id="grafico-barra"></canvas>
-                    </div>
-                </div>
-
-
+              <canvas id="grafico-pizza"></canvas>
             </div>
-            <div class="bloco3">
-                <div style="width: 100%; height: 100%;" class="grafico-linha">
-                    <canvas id="grafico-tempo-real"></canvas>
-                </div>
+          </div>
+
+          <div class="bloco2">
+            <div class="grafico-barras">
+              <canvas id="grafico-barra"></canvas>
             </div>
+          </div>
         </div>
+        <div class="bloco3">
+          <div style="width: 100%; height: 100%" class="grafico-linha">
+            <canvas id="grafico-tempo-real"></canvas>
+          </div>
+        </div>
+      </div>
     </div>
-</body>
-
+  </body>
 </html>
 <!-- Import do ChartJS -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <!-- Import do pluguin de data label do ChartJS -->
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 <script>
-    var ctx = document.getElementById('grafico-barra').getContext('2d')
+  // Carregando nome da empresa
+  carregarNomeEmpresa();
+ 
 
-    // Criar gradiente
-    var gradient = ctx.createLinearGradient(0, 0, 0, 400)
-    gradient.addColorStop(0, '#384cd1')
-    gradient.addColorStop(1, '#3999f4')
+  var ctx = document.getElementById("grafico-barra").getContext("2d");
 
-    var gradient1 = ctx.createLinearGradient(0, 0, 0, 400)
-    gradient1.addColorStop(0, '#f90000')
-    gradient1.addColorStop(1, '#c36767')
+  // Criar gradiente
+  var gradient = ctx.createLinearGradient(0, 0, 0, 400);
+  gradient.addColorStop(0, "#384cd1");
+  gradient.addColorStop(1, "#3999f4");
 
+  var gradient1 = ctx.createLinearGradient(0, 0, 0, 400);
+  gradient1.addColorStop(0, "#f90000");
+  gradient1.addColorStop(1, "#c36767");
 
+  var graficoBarra = new Chart(document.getElementById("grafico-barra"), {
+    type: "bar",
+    data: {
+      labels: ["25/10", "26/10", "27/10", "28/10", "29/10", "30/10"],
+      datasets: [
+        {
+          label: "Produtos válidos",
+          backgroundColor: gradient,
+          data: [12, 12, 10, 11, 14, 12],
+          borderWidth: 0,
+        },
+        {
+          label: "Produtos inválidos",
+          backgroundColor: gradient1,
+          data: [6, 6, 8, 7, 9, 5],
+          borderWidth: 0,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        title: {
+          display: true,
+          text: "Produtos válidos e inválidos em período determinado",
+          font: {
+            size: 16,
+          },
+          color: "#000",
+          padding: {
+            top: 5,
+            bottom: 5,
+          },
+        },
+      },
 
-    var graficoBarra = new Chart(document.getElementById('grafico-barra'), {
-        type: 'bar',
-        data: {
-            labels: ['25/10', '26/10', '27/10', '28/10', '29/10', '30/10'],
-            datasets: [{
-                label: 'Produtos válidos',
-                backgroundColor: gradient,
-                data: [12, 12, 10, 11, 14, 12],
-                borderWidth: 0
+      scales: {
+        y: {
+          title: {
+            display: true,
+            text: "Quantidade de produtos",
+            font: {
+              size: 16,
+              weight: 700,
             },
-            {
-                label: 'Produtos inválidos',
-                backgroundColor: gradient1,
-                data: [6, 6, 8, 7, 9, 5],
-                borderWidth: 0
-            },]
+          },
+          beginAtZero: true,
         },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Produtos válidos e inválidos em período determinado',
-                    font: {
-                        size:16,
-                    },
-                    color: '#000',
-                    padding: {
-                        top: 5,
-                        bottom: 5
-                    }
-                }
+        x: {
+          title: {
+            display: true,
+            text: "Período",
+            font: {
+              size: 16,
+              weight: 700,
             },
-
-
-
-            scales: {
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Quantidade de produtos',
-                        font: {
-                        size:16,
-                        weight: 700
-                    },
-                    },
-                    beginAtZero: true
-                },
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Período',
-                        font: {
-                        size:16,
-                        weight: 700
-                    },
-                    }
-                }
-            }
-        }
-    })
-    var grafico_tempo_real = new Chart(document.getElementById('grafico-tempo-real'), {
-        type: 'line',
-        data: {
-            labels: ['12:00', '12:01', '12:02', '12:03', '12:04', '12:05'],
-            datasets: [
-                {
-                    label: 'Produtos inválidos',
-                    backgroundColor: gradient1,
-                    borderColor: gradient1,
-                    data: dados_produtos_erroneos,
-                    fill: false,
-                },
-                {
-                    label: 'Produtos válidos',
-                    backgroundColor: gradient,
-                    borderColor: gradient,
-                    data: dados_produtos_corretos,
-                    fill: false,
-                },
-            ]
+          },
         },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Acompanhamento de produtos',
-                    font: {
-                        size: 15
-                    },
-                    color: '#000',
-                    padding: {
-                        top: 5,
-                        bottom: 5
-                    }
-                },
-                legend: {
-                    display: true,
-                    position: 'bottom',
-                }
-            }
-            ,
-            scales: {
-                x: {    title: {
-                    display: true,
-                    text: 'Período',
-                    font: {
-                        size:16,
-                        weight: 700,
-                    },
-                     },
-                    beginAtZero: true
-                },
-                y: {
-                     title: {
-                    display: true,
-                    text: 'Quantidade de produtos',
-                    font: {
-                        size: 13,
-                        weight: 700,
-                    },
-                     },
-                    beginAtZero: true,
-                },
+      },
+    },
+  });
+  var grafico_tempo_real = new Chart(
+    document.getElementById("grafico-tempo-real"),
+    {
+      type: "line",
+      data: {
+        labels: ["12:00", "12:01", "12:02", "12:03", "12:04", "12:05"],
+        datasets: [
+          {
+            label: "Produtos inválidos",
+            backgroundColor: gradient1,
+            borderColor: gradient1,
+            data: dados_produtos_erroneos,
+            fill: false,
+          },
+          {
+            label: "Produtos válidos",
+            backgroundColor: gradient,
+            borderColor: gradient,
+            data: dados_produtos_corretos,
+            fill: false,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: true,
+            text: "Acompanhamento de produtos",
+            font: {
+              size: 15,
             },
-        }
-    })
-
-
-    var grafico_pizza = new Chart(document.getElementById('grafico-pizza'), {
-        type: 'pie',
-        data: {
-            labels: ['Válidos', 'Não válidos'],
-            datasets: [{
-                label: 'Valor',
-                data: [],
-                backgroundColor: ['#384cd1', '#FF0000'],
-                borderWidth: 1
-            }]
+            color: "#000",
+            padding: {
+              top: 5,
+              bottom: 5,
+            },
+          },
+          legend: {
+            display: true,
+            position: "bottom",
+          },
         },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Produtos válidos VS inválidos',
-                    font: {
-                        size: 20
-                    },
-                    color: '#000',
-                    padding: {
-                        top: 5,
-                        bottom: 5
-                    }
-                },
-                datalabels: {
-                    color: '#fff',
-                    font: {
-                        weight: 'bold',
-                        size: 20
-                    },
-                    formatter: (value, ctx) => {
-                        return `${value}%`
-                    },
-                    anchor: 'center',
-                    align: 'center'
-                }
-            }
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Período",
+              font: {
+                size: 16,
+                weight: 700,
+              },
+            },
+            beginAtZero: true,
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Quantidade de produtos",
+              font: {
+                size: 13,
+                weight: 700,
+              },
+            },
+            beginAtZero: true,
+          },
         },
-        plugins: [ChartDataLabels] // Ativando o plugin ChartDataLabels
+      },
+    }
+  );
+
+  var grafico_pizza = new Chart(document.getElementById("grafico-pizza"), {
+    type: "pie",
+    data: {
+      labels: ["Válidos", "Não válidos"],
+      datasets: [
+        {
+          label: "Valor",
+          data: [],
+          backgroundColor: ["#384cd1", "#FF0000"],
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        title: {
+          display: true,
+          text: "Produtos válidos VS inválidos",
+          font: {
+            size: 20,
+          },
+          color: "#000",
+          padding: {
+            top: 5,
+            bottom: 5,
+          },
+        },
+        datalabels: {
+          color: "#fff",
+          font: {
+            weight: "bold",
+            size: 20,
+          },
+          formatter: (value, ctx) => {
+            return `${value}%`;
+          },
+          anchor: "center",
+          align: "center",
+        },
+      },
+    },
+    plugins: [ChartDataLabels], // Ativando o plugin ChartDataLabels
+  });
+
+  var select_esteiras = document.getElementById("slt_esteiras");
+  var qtd_produtos_corretos = 0;
+  var qtd_produtos_erroneos = 0;
+
+  var dados_produtos_corretos = [];
+  var dados_produtos_erroneos = [];
+
+  // Função executada assim que a página for carregada
+  document.addEventListener("DOMContentLoaded", function () {
+    gerarQtdAleatoriaDeProdutos();
+  });
+
+  function gerarQtdAleatoriaDeProdutos() {
+    // produtos corretos
+    for (let i = 0; i < 6; i++) {
+      dados_produtos_corretos[i] = gerarAleatorio(200);
+    }
+    graficoBarra.data.datasets[0].data = dados_produtos_corretos;
+    grafico_tempo_real.data.datasets[1].data = dados_produtos_corretos;
+
+    // produtos erroneos
+    for (let i = 0; i < 6; i++) {
+      dados_produtos_erroneos[i] = gerarAleatorio(20);
+    }
+    graficoBarra.data.datasets[1].data = dados_produtos_erroneos;
+    grafico_tempo_real.data.datasets[0].data = dados_produtos_erroneos;
+
+    graficoBarra.update();
+    grafico_tempo_real.update();
+    gerarPorcentagemProdutos();
+    gerarQtdTotalProdutos();
+  }
+
+  // mudando dados do gráfico a partir da mudança do select
+  select_esteiras.addEventListener("change", () => {
+    gerarQtdAleatoriaDeProdutos();
+  });
+
+  // quando minha página carregar, modificar o total de produtos e calcular a porcentagem
+  function gerarPorcentagemProdutos() {
+    qtd_produtos_corretos = gerarTotalProdutos(dados_produtos_corretos);
+    qtd_produtos_erroneos = gerarTotalProdutos(dados_produtos_erroneos);
+    // span_qtd_produtos_corretos.innerHTML = qtd_produtos_corretos
+    // span_qtd_produtos_erroneos.innerHTML = qtd_produtos_erroneos
+
+    var porcentagem =
+      (qtd_produtos_corretos /
+        (qtd_produtos_corretos + qtd_produtos_erroneos)) *
+      100;
+    // plotando no gráfico a porcentagem de produtos corretos
+    grafico_pizza.data.datasets[0].data[0] = Number(porcentagem.toFixed(1));
+    // com a diferença, plotaremos a quantidade de errados
+    grafico_pizza.data.datasets[0].data[1] = Number(
+      (100 - porcentagem).toFixed(1)
+    );
+    // atualizando o gráfico
+    grafico_pizza.update();
+
+    if (porcentagem > 95) {
+      status_esteiras.innerHTML = "Conforme esperado";
+      status_esteiras.style.color = "#fff";
+      status_esteiras.style.backgroundColor = "#0F6C00";
+    } else if (porcentagem > 90) {
+      status_esteiras.innerHTML = "Alerta!";
+      status_esteiras.style.color = "#fff";
+      status_esteiras.style.backgroundColor = "#ffb600";
+    } else {
+      status_esteiras.innerHTML = "Abaixo do esperado";
+      status_esteiras.style.color = "#fff";
+      status_esteiras.style.backgroundColor = "#D83F3F";
+    }
+
+    //qtd_porcentagem.innerHTML = porcentagem.toFixed() + "%";
+  }
+
+  function gerarQtdTotalProdutos() {
+    var qtdTotalProdutos =
+      gerarTotalProdutos(graficoBarra.data.datasets[0].data) +
+      gerarTotalProdutos(graficoBarra.data.datasets[1].data);
+    span_qtd_produtos.innerHTML = qtdTotalProdutos;
+  }
+
+  function gerarTotalProdutos(quantidadeProdutos) {
+    var totalProdutos = 0;
+    for (let index = 0; index < quantidadeProdutos.length; index++) {
+      const element = quantidadeProdutos[index];
+      totalProdutos += element;
+    }
+    return totalProdutos;
+  }
+
+  function gerarAleatorio(intervalo) {
+    return Math.floor(Math.random() * intervalo);
+  }
+
+  function carregarNomeEmpresa() {
+    var idEmpresa = sessionStorage.getItem("idEmpresa");
+    fetch(`/empresas/listar/${idEmpresa}`, {
+      method: "GET",
     })
-
-
-    var select_esteiras = document.getElementById('slt_esteiras')
-    var qtd_produtos_corretos = 0
-    var qtd_produtos_erroneos = 0
-
-    var dados_produtos_corretos = []
-    var dados_produtos_erroneos = []
-
-
-    // Função executada assim que a página for carregada
-    document.addEventListener('DOMContentLoaded', function () {
-        gerarQtdAleatoriaDeProdutos()
-    })
-
-    function gerarQtdAleatoriaDeProdutos() {
-        // produtos corretos
-        for (let i = 0; i < 6; i++) {
-            dados_produtos_corretos[i] = gerarAleatorio(200)
-        }
-        graficoBarra.data.datasets[0].data = dados_produtos_corretos
-        grafico_tempo_real.data.datasets[1].data = dados_produtos_corretos;
-
-        // produtos erroneos
-        for (let i = 0; i < 6; i++) {
-            dados_produtos_erroneos[i] = gerarAleatorio(20)
-        }
-        graficoBarra.data.datasets[1].data = dados_produtos_erroneos
-        grafico_tempo_real.data.datasets[0].data = dados_produtos_erroneos;
-
-        graficoBarra.update()
-        grafico_tempo_real.update();
-        gerarPorcentagemProdutos()
-        gerarQtdTotalProdutos()
-    }
-
-
-    // mudando dados do gráfico a partir da mudança do select
-    select_esteiras.addEventListener("change", () => {
-        gerarQtdAleatoriaDeProdutos()
-    })
-
-
-
-    // quando minha página carregar, modificar o total de produtos e calcular a porcentagem
-    function gerarPorcentagemProdutos() {
-
-        qtd_produtos_corretos = gerarTotalProdutos(dados_produtos_corretos)
-        qtd_produtos_erroneos = gerarTotalProdutos(dados_produtos_erroneos)
-        // span_qtd_produtos_corretos.innerHTML = qtd_produtos_corretos
-        // span_qtd_produtos_erroneos.innerHTML = qtd_produtos_erroneos
-
-        var porcentagem = (qtd_produtos_corretos / (qtd_produtos_corretos + qtd_produtos_erroneos) * 100)
-        // plotando no gráfico a porcentagem de produtos corretos
-        grafico_pizza.data.datasets[0].data[0] = Number(porcentagem.toFixed(1))
-        // com a diferença, plotaremos a quantidade de errados
-        grafico_pizza.data.datasets[0].data[1] = Number((100 - porcentagem).toFixed(1))
-        // atualizando o gráfico
-        grafico_pizza.update()
-
-        if (porcentagem > 95) {
-            status_esteiras.innerHTML = "Conforme esperado"
-            status_esteiras.style.color = "#fff"
-            status_esteiras.style.backgroundColor = "#0F6C00"
-
-        } else if (porcentagem > 90) {
-            status_esteiras.innerHTML = "Alerta!"
-            status_esteiras.style.color = "#fff"
-            status_esteiras.style.backgroundColor = "#ffb600"
-
-
-        } else {
-            status_esteiras.innerHTML = "Abaixo do esperado"
-            status_esteiras.style.color = "#fff"
-            status_esteiras.style.backgroundColor = "#D83F3F"
-
-        }
-
-        //qtd_porcentagem.innerHTML = porcentagem.toFixed() + "%";
-    }
-
-    function gerarQtdTotalProdutos() {
-        var qtdTotalProdutos = gerarTotalProdutos(graficoBarra.data.datasets[0].data) + gerarTotalProdutos(graficoBarra.data.datasets[1].data)
-        span_qtd_produtos.innerHTML = qtdTotalProdutos
-
-    }
-
-
-    function gerarTotalProdutos(quantidadeProdutos) {
-        var totalProdutos = 0
-        for (let index = 0; index < quantidadeProdutos.length; index++) {
-            const element = quantidadeProdutos[index]
-            totalProdutos += element
-        }
-        return totalProdutos
-    }
-
-
-    function gerarAleatorio(intervalo) {
-        return Math.floor(Math.random() * intervalo)
-    }
+      .then((resposta) => {
+        resposta
+          .json()
+          .then((resultado) => {
+            nomeEmpresa.innerHTML = resultado[0].nomeFantasia;
+          })
+          .catch((erro) => {
+            console.log(erro);
+          });
+      })
+      .catch((erro) => {
+        console.log(erro);
+      });
+  }
 </script>

@@ -16,6 +16,7 @@ nome VARCHAR(45),
 email VARCHAR(45),
 senha VARCHAR(45),
 fkEmpresa INT,
+dataCadastro DATETIME DEFAULT CURRENT_TIMESTAMP(),
 CONSTRAINT fkUsuarioEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
 );
 

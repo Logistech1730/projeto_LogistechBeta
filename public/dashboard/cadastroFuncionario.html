@@ -1,133 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Logistech</title>
-    <link rel="stylesheet" href="../styles/barraLateral.css">
-    <link rel="stylesheet" href="../styles/cadastrofuncionarios.css">
+    <link rel="stylesheet" href="../styles/barraLateral.css" />
+    <link rel="stylesheet" href="../styles/cadastrofuncionarios.css" />
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <script src="../script/cadastroFuncionario.js" defer></script>
-</head>
+  </head>
 
-<body> 
+  <body>
     <main class="container-main">
-        <div class="barra-lateral">
-            <div class="div-imagem-perfil">
-                <img src="../img/perfilexemplo.png" class="perfil-foto" alt="foto de perfil">
-            </div>
-            <h4>EletronicGear Ltda.</h4>
-            <div class="option selected">
-                <i class="fa-solid fa-chart-line"></i>
-                <span><a href="./dashboard.html">Dashboard</a></span>
-            </div>
-            <div class="option">
-                <i class="fa-solid fa-circle-plus"></i>
-                <span><a href="./cadastroEsteira.html">Esteira</a></span>
-            </div>
-            <div class="option">
-                <i class="fa-solid fa-book"></i>
-                <span><a href="./historico.html">Histórico</a></span>
-            </div>
-            <div class="option">
-                <i class="fa-regular fa-bell"></i>
-                <span><a href="./alertas.html">Alertas</a></span>
-            </div>
-            <div class="option">
-                <i class="fa-solid fa-gauge"></i>
-                <span><a href="./metricas.html">Métricas</a></span>
-            </div>
-
-            <div class="option">
-                <i class="fa-solid fa-user"></i>
-                <span><a href="./cadastroFuncionario.html">Funcionários</a></span>
-            </div>
-            <div class="option">
-                <i class="fa-solid fa-door-open"></i>
-                <span><a href="../index.html">Sair</a></span>
-            </div>
+      <div class="barra-lateral">
+        <div class="div-imagem-perfil">
+          <img
+            src="../img/perfilexemplo.png"
+            class="perfil-foto"
+            alt="foto de perfil"
+          />
+        </div>
+        <h4 id="nomeEmpresa">EletronicGear Ltda.</h4>
+        <div class="option selected">
+          <i class="fa-solid fa-chart-line"></i>
+          <span><a href="./dashboard.html">Dashboard</a></span>
+        </div>
+        <div class="option">
+          <i class="fa-solid fa-circle-plus"></i>
+          <span><a href="./cadastroEsteira.html">Esteira</a></span>
+        </div>
+        <div class="option">
+          <i class="fa-solid fa-book"></i>
+          <span><a href="./historico.html">Histórico</a></span>
+        </div>
+        <div class="option">
+          <i class="fa-regular fa-bell"></i>
+          <span><a href="./alertas.html">Alertas</a></span>
+        </div>
+        <div class="option">
+          <i class="fa-solid fa-gauge"></i>
+          <span><a href="./metricas.html">Métricas</a></span>
         </div>
 
-        <div class="mainContent">
-            <div class="container-title">
-                <p>Funcionários</p>
-            </div>
-            <hr>
-            <div class="container-text">
-                <p>Neste seção você pode criar e visualizar todas os funcionário cadastrados e seus respectivos dados</p>
-            </div>
-            <div class="containerFiltro">
-                <div class="container-btnCadastro">
-                    <button id="btnCadastro" class="btn-cadastro" data-modal="modal-1"><i
-                            class="fa-solid fa-circle-plus"></i>
-                        Cadastrar
-                        funcionário</button>
-                </div>
-                <div class="filtrosEsteira">
-                    <ul>
-                        <li>Pesquisar <input type="text"> <i class="fa-solid fa-magnifying-glass"></i></li>
-                    </ul>
-                </div>
-            </div>
-            <h2>Funcionários cadastrados</h2>
-            <div id="div_containerEsteiras" class="containerEsteiras">
-                <div class="cardEsteira">
-                    <div class="leftContainer">
-                        <div class="titulo">
-                            <h6>Vinicius Oliveira</h6>
-                            <div class="icons">
-                                <i class="fa-solid fa-trash"></i>
-                                <i class="fa-solid fa-pencil"></i>
-                            </div>
-                        </div>
-                        
-       
-                        <p>Nome</p>
-                        <p>Vinicius Oliveira</p>
-                        <p>Email</p>
-                        <p>vinicius@email.com</p>
-                        <p>Telefone</p>
-                        <p>(11) 97890-7691</p>
-                        <p>Data de cadastro</p>
-                        <p>30/10/2024</p>
-                    </div>
-                </div>
-
-                <dialog id="modal-1">
-                    <div class="container-esteira">
-
-                        <div class="headerModal">
-                            <h1>Adicionar funcionário</h1>
-                            <button id="closeButton" class="close-modal" data-modal="modal-1"> <i
-                                    class="fa-solid fa-xmark"></i></button>
-                        </div>
-                        <div class="mainModal">
-                            <label for="inpNome">Nome</label>
-                            <input type="text" id="inpNome">
-
-                            <label for="inpDep">E-mail</label>
-                            <input type="text" id="inpEmail">
-
-                            <label for="inpTamanho">Senha</label>
-                            <input type="password" id="inpSenha">
-                            <label for="inpTamanho">Telefone</label>
-                            <input type="number" id="inpTelefone">
-                            <div id="container-aviso"></div>
-                            <button id="cadastroBtn">Cadastrar</button>
-                        </div>
-                    </div>
-                </dialog>
-            </div>
-
-
+        <div class="option">
+          <i class="fa-solid fa-user"></i>
+          <span><a href="./cadastroFuncionario.html">Funcionários</a></span>
         </div>
+        <div class="option">
+          <i class="fa-solid fa-door-open"></i>
+          <span><a href="../index.html">Sair</a></span>
+        </div>
+      </div>
+
+      <div class="mainContent">
+        <div class="container-title">
+          <p>Funcionários</p>
+        </div>
+        <hr />
+        <div class="container-text">
+          <p>
+            Neste seção você pode criar e visualizar todas os funcionário
+            cadastrados e seus respectivos dados
+          </p>
+        </div>
+        <div class="containerFiltro">
+          <div class="container-btnCadastro">
+            <button id="btnCadastro" class="btn-cadastro" data-modal="modal-1">
+              <i class="fa-solid fa-circle-plus"></i> Cadastrar funcionário
+            </button>
+          </div>
+          <div class="filtrosEsteira">
+            <ul>
+              <li>
+                Pesquisar <input type="text" />
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <h2>Funcionários cadastrados</h2>
+        <div id="div_containerEsteiras" class="containerEsteiras">
+          <div class="cardEsteira">
+            <div class="leftContainer">
+              <div class="titulo">
+                <h6>Vinicius Oliveira</h6>
+                <div class="icons">
+                  <i class="fa-solid fa-trash"></i>
+                  <i class="fa-solid fa-pencil"></i>
+                </div>
+              </div>
+
+              <p>Nome</p>
+              <p>Vinicius Oliveira</p>
+              <p>Email</p>
+              <p>vinicius@email.com</p>
+              <p>Telefone</p>
+              <p>(11) 97890-7691</p>
+              <p>Data de cadastro</p>
+              <p>30/10/2024</p>
+            </div>
+            
+          </div>
+          
+          
+
+         
+        </div>
+      </div>
     </main>
-</body>
-
+  </body>
 </html>
+<script>
+  // Carregar todos os usuários daquela empresa quando a página carrega
+  carregarNomeEmpresa();
+  var idEmpresa = sessionStorage.getItem("idEmpresa");
+  fetch(`/usuarios/listarPorEmpresa/${idEmpresa}`, {
+    method: "GET",
+  })
+    .then((resposta) => {
+        console.log(resposta)
+      resposta
+        .json()
+        .then((resultado) => {
+            var conteudo = "";
+            for (var i = 0; i < resultado.length; i++) {
+                conteudo += `
+                 <div class="cardEsteira">
+            <div class="leftContainer">
+              <div class="titulo">
+                <h6>${resultado[i].nome}</h6>
+                <div class="icons">
+                  <i class="fa-solid fa-trash"></i>
+                  <i class="fa-solid fa-pencil"></i>
+                </div>
+              </div>
+
+              <p>Nome</p>
+              <p>${resultado[i].nome}</p>
+              <p>Email</p>
+              <p>${resultado[i].email}</p>
+              <p>Data de cadastro</p>
+              <p>${(resultado[i].dataCadastro).substr(0, 10)}</p>
+            </div>
+          </div>
+`;
+            }
+
+            
+
+            div_containerEsteiras.innerHTML = conteudo;
+            div_containerEsteiras.innerHTML += ` <dialog id="modal-1">
+            <div class="container-esteira">
+              <div class="headerModal">
+                <h1>Adicionar funcionário</h1>
+                <button
+                  id="closeButton"
+                  class="close-modal"
+                  data-modal="modal-1"
+                >
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+              <div class="mainModal">
+                <label for="inpNome">Nome</label>
+                <input type="text" id="inpNome" />
+
+                <label for="inpDep">E-mail</label>
+                <input type="text" id="inpEmail" />
+
+                <label for="inpTamanho">Senha</label>
+                <input type="password" id="inpSenha" />
+                <div id="container-aviso"></div>
+                <button id="cadastroBtn" onclick="cadastrar()">Cadastrar</button>
+              </div>
+            </div>
+          </dialog>`
+        })
+        .catch((erro) => {
+          console.log(erro);
+        });
+    })
+    .catch((erro) => {
+      console.log(erro);
+    });
+
+    function carregarNomeEmpresa() {
+    var idEmpresa = sessionStorage.getItem("idEmpresa");
+    fetch(`/empresas/listar/${idEmpresa}`, {
+      method: "GET",
+    })
+      .then((resposta) => {
+        resposta
+          .json()
+          .then((resultado) => {
+            nomeEmpresa.innerHTML = resultado[0].nomeFantasia;
+          })
+          .catch((erro) => {
+            console.log(erro);
+          });
+      })
+      .catch((erro) => {
+        console.log(erro);
+      });
+  }
+
+
+  function cadastrar() {
+    fetch(`/usuarios/cadastrar`, {
+        method: "POST",
+        headers: {
+                "Content-Type": "application/json",
+            },
+        body: JSON.stringify({
+            nome: inpNome.value,
+            email: inpEmail.value,
+            senha: inpSenha.value,
+            fkEmpresa: idEmpresa
+        })})
+        .then((resposta) => {
+            console.log(resposta)
+            if(resposta.status == 200) {
+                alert("Usuário cadastrado com sucesso.");
+                window.location.reload();
+            }
+        })
+        .catch((erro) => {
+            console.error(erro);
+        })
+
+    }
+</script>
