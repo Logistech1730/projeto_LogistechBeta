@@ -76,59 +76,137 @@
                 </div>
             </div>
             <h2>Esteiras cadastradas</h2>
-            <div class="containerEsteiras">
+            <div class="containerEsteiras" id="containerEsteiras">
+
+
                 <div class="cardEsteira">
                     <div class="leftContainer">
-                        <h6>Esteiras</h6>
-                        <p>Nome</p>
-                        <p>Esteira 1</p>
-                        <p>Departamento</p>
-                        <p>EletronicGear</p>
-                        <p>Tamanho do produto</p>
-                        <p>10 cm</p>
-                        <p>Data de cadastro</p>
-                        <p>27/10/2024</p>
-                    </div>
-                    <div class="verticalLine"></div>
-                    <div class="rightContainer">
-                        <p>Produtos válidos registrados</p>
-                        <p>230</p>
-                        <p>Produtos inválidos registrados</p>
-                        <p>10</p>
-                        <p>Alertas gerados</p>
-                        <p>10</p>
-                        <p>Horário com mais desvio</p>
-                        <p>13:55</p>
+
+                        <dialog id="modal-1">
+                            <div class="container-esteira">
+
+                                <div class="headerModal">
+                                    <h1>Adicionar Esteira</h1>
+                                    <button id="closeButton" class="close-modal" data-modal="modal-1"> <i
+                                            class="fa-solid fa-xmark"></i></button>
+                                </div>
+                                <div class="mainModal" id="modal-form">
+                                    <label for="inpDep">Departamento</label>
+                                    <input type="text" id="inpDep">
+
+                                    <label for="inpLoc">Localização</label>
+                                    <input type="text" id="inpLoc">
+
+                                    <label for="inpTamanho">Tamanho do produto</label>
+                                    <input type="number" id="inpTamanho">
+                                    <div id="container-aviso"></div>
+                                    <button id="cadastroBtn" onclick="cadastrar()">Cadastrar</button>
+                                </div>
+                            </div>
+                        </dialog>
+                        
                     </div>
                 </div>
-
-                <dialog id="modal-1">
-                    <div class="container-esteira">
-
-                        <div class="headerModal">
-                            <h1>Adicionar Esteira</h1>
-                            <button id="closeButton" class="close-modal" data-modal="modal-1"> <i
-                                    class="fa-solid fa-xmark"></i></button>
-                        </div>
-                        <div class="mainModal">
-                            <label for="inpNome">Nome</label>
-                            <input type="text" id="inpNome">
-
-                            <label for="inpDep">Departamento</label>
-                            <input type="text" id="inpDep">
-
-                            <label for="inpTamanho">Tamanho do produto</label>
-                            <input type="number" id="inpTamanho">
-                            <div id="container-aviso"></div>
-                            <button id="cadastroBtn">Cadastrar</button>
-                        </div>
-                    </div>
-                </dialog>
-            </div>
-
-
-        </div>
     </main>
 </body>
 
 </html>
+<script>
+    var idEmpresa = sessionStorage.getItem("idEmpresa");
+    function cadastrar() {
+        fetch(`/esteiras/cadastrar`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                departamento: inpDep.value,
+                localizacao: inpLoc.value,
+                distanciaEsperada: inpTamanho.value,
+                fkEmpresa: idEmpresa
+            })
+        })
+            .then((resposta) => {
+                console.log(resposta)
+                if (resposta.status == 200) {
+                    alert("Esteira cadastrada com sucesso.");
+                    window.location.reload();
+                }
+            })
+            .catch((erro) => {
+                console.error(erro);
+            })
+    }
+    function listarTodasEsteiras(fkEmpresa) {
+        fetch(`/esteiras/listar/${idEmpresa}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                if (response.ok) {
+
+                    return response.json();
+                } else {
+                    throw new Error('Erro ao buscar as esteiras.');
+                }
+            })
+            .then((esteiras) => {
+                console.log("Esteiras recebidas:", esteiras);
+                exibirEsteiras(esteiras);
+            })
+            .catch((erro) => {
+                console.error('Erro ao listar esteiras:', erro);
+                alert('Erro ao listar esteiras.');
+            });
+    }
+
+    function exibirEsteiras(esteiras) {
+        const containerEsteiras = document.getElementById('containerEsteiras');
+        containerEsteiras.innerHTML = '';
+
+        if (esteiras.length === 0) {
+            containerEsteiras.innerHTML = '<p>Nenhuma esteira cadastrada ainda.</p>';
+            return;
+        }
+
+        esteiras.forEach((esteira) => {
+            const card = document.createElement('div');
+            card.classList.add('cardEsteira');
+
+            card.innerHTML = `
+                <div class="leftContainer">
+                    <h3>Departamento: ${esteira.departamento}</h3>
+                    <p><strong>Localização:</strong> ${esteira.localizacao}</p>
+                    <p><strong>Distância Esperada:</strong> ${esteira.distanciaEsperada} metros</p>
+                    <p><strong>Empresa:</strong> ${esteira.nomeFantasia}</p>
+                </div>
+            `;
+
+            containerEsteiras.appendChild(card);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        listarTodasEsteiras();
+
+        const btnCadastro = document.querySelector('.btn-cadastro');
+        const modal = document.getElementById('modal-1');
+        const closeButton = document.getElementById('closeButton');
+
+        if (btnCadastro) {
+            btnCadastro.addEventListener('click', () => {
+                if (modal) modal.showModal();
+            });
+        }
+
+        if (closeButton) {
+            closeButton.addEventListener('click', () => {
+                if (modal) modal.close();
+            });
+        }
+    });
+
+
+</script>
