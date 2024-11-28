@@ -23,8 +23,8 @@ function cadastrar(nome, email, senha, fkEmpresa) {
 
 function listarPorEmpresa(idEmpresa) {
     var instrucaoSql = `
-    SELECT Usuario.* FROM Usuario 
-    JOIN Empresa ON fkEmpresa = idEmpresa
+    SELECT usuario.* FROM usuario 
+    JOIN empresa ON fkEmpresa = idEmpresa
     WHERE idEmpresa = ${idEmpresa}; 
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
