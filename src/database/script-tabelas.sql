@@ -127,3 +127,9 @@ SELECT r.idRegistro, r.distancia, r.dataRegistro, s.idSensor FROM registro r
 SELECT es.idEsteira, es.departamento, es.localizacao, s.idSensor, s.dataInstalacao FROM esteira es
 	LEFT JOIN sensor s ON es.idEsteira = s.fkEsteira
 	WHERE es.fkEmpresa = 1;  
+
+create view registros as SELECT esteira.departamento AS Esteira, registro.distancia AS AlturaDetectada, registro.dataRegistro AS DataRegistro 
+FROM esteira JOIN sensor ON sensor.fkEsteira = esteira.idEsteira JOIN registro ON registro.fkSensor = sensor.idSensor 
+JOIN empresa ON esteira.fkEmpresa = empresa.idEmpresa WHERE empresa.idEmpresa = 1 ORDER BY registro.dataRegistro;
+
+ select * from registros;
