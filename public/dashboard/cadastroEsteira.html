@@ -18,6 +18,29 @@
 
 <body>
     <main class="container-main">
+        <div class="area_bg_modal" id="area_modal">
+        <div id="modal_1">
+            <div class="container-esteira">
+                <div class="headerModal">
+                    <h1>Adicionar Esteira</h1>
+                    <button id="closeButton" class="close-modal"> <i
+                             class="fa-solid fa-xmark" onclick="fecharCadastro()"></i></button>
+                </div>
+                <div class="mainModal" id="modal-form">
+                    <label for="inpDep">Departamento</label>
+                    <input type="text" id="inpDep">
+
+                    <label for="inpLoc">Localização</label>
+                    <input type="text" id="inpLoc">
+
+                    <label for="inpTamanho">Tamanho do produto</label>
+                    <input type="number" id="inpTamanho">
+                    <div id="container-aviso"></div>
+                    <button id="cadastroBtn" onclick="cadastrar()">Cadastrar</button>
+                </div>
+            </div>
+            </div>
+        </div>
         <div class="barra-lateral">
             <div class="div-imagem-perfil">
                 <img src="../img/perfilexemplo.png" class="perfil-foto" alt="foto de perfil">
@@ -64,7 +87,7 @@
             </div>
             <div class="containerFiltro">
                 <div class="container-btnCadastro">
-                    <button id="btnCadastro" class="btn-cadastro" data-modal="modal-1"><i
+                    <button id="btnCadastro" class="btn-cadastro" onclick="abrirCadastro()"><i
                             class="fa-solid fa-circle-plus"></i>
                         Cadastrar
                         Esteira</button>
@@ -77,36 +100,12 @@
             </div>
             <h2>Esteiras cadastradas</h2>
             <div class="containerEsteiras" id="containerEsteiras">
-
-
                 <div class="cardEsteira">
                     <div class="leftContainer">
-
-                        <dialog id="modal-1">
-                            <div class="container-esteira">
-
-                                <div class="headerModal">
-                                    <h1>Adicionar Esteira</h1>
-                                    <button id="closeButton" class="close-modal" data-modal="modal-1"> <i
-                                            class="fa-solid fa-xmark"></i></button>
-                                </div>
-                                <div class="mainModal" id="modal-form">
-                                    <label for="inpDep">Departamento</label>
-                                    <input type="text" id="inpDep">
-
-                                    <label for="inpLoc">Localização</label>
-                                    <input type="text" id="inpLoc">
-
-                                    <label for="inpTamanho">Tamanho do produto</label>
-                                    <input type="number" id="inpTamanho">
-                                    <div id="container-aviso"></div>
-                                    <button id="cadastroBtn" onclick="cadastrar()">Cadastrar</button>
-                                </div>
-                            </div>
-                        </dialog>
-                        
                     </div>
                 </div>
+            </div>
+        </div>
     </main>
 </body>
 
@@ -188,25 +187,24 @@
         });
     }
 
-    document.addEventListener('DOMContentLoaded', function () {
+    // document.addEventListener('DOMContentLoaded', function () {
         listarTodasEsteiras();
 
-        const btnCadastro = document.querySelector('.btn-cadastro');
-        const modal = document.getElementById('modal-1');
-        const closeButton = document.getElementById('closeButton');
+        var btnCadastro = document.querySelector('.btn-cadastro');
+        var modal = document.getElementById('modal_1');
+        var closeButton = document.getElementById('closeButton');
+        console.log("btnCadastro:", btnCadastro);
+        console.log("modal:", modal);
+        console.log("closeButton:", closeButton);
 
-        if (btnCadastro) {
-            btnCadastro.addEventListener('click', () => {
-                if (modal) modal.showModal();
-            });
+        function abrirCadastro(){
+            area_modal.style.display = 'flex';
+        }
+        function fecharCadastro(){
+            area_modal.style.display = 'none';
         }
 
-        if (closeButton) {
-            closeButton.addEventListener('click', () => {
-                if (modal) modal.close();
-            });
-        }
-    });
+    // });
 
 
 </script>
