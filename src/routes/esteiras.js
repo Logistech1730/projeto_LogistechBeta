@@ -18,5 +18,4 @@ router.get("/deletarEsteira/:idEsteira", function (req, res) {
     esteiraController.deletarEsteira(req, res);
 })
 
-
 module.exports = router;
