@@ -18,7 +18,7 @@
     rel="stylesheet">
 </head>
 
-<body>
+<body onload="listarRegistros()">
   <div class="container-dash">
     <div class="barra-lateral">
       <div class="div-imagem-perfil">
@@ -76,10 +76,10 @@
             <tr>
               <th>Esteira</th>
               <th>Altura detectada</th>
-              <th>Data</th>
+              <th>Data e Horário</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="tabela_registros">
             <tr>
               <td>Esteira 1</td>
               <td>10 cm</td>
@@ -140,6 +140,11 @@
               <td>13 cm</td>
               <td>21/10/2024 09:17:29</td>
             </tr>
+            <tr>
+              <td>Teste</td>
+              <td>69 cm</td>
+              <td>69/69/2024 09:17:29</td>
+            </tr>
             
           </tbody>
         </table>
@@ -160,4 +165,42 @@
       alert("A data inicial não pode ser maior que a final!");
     }
   }
+  function listarRegistros() {
+        fetch(`/registros/listar/${sessionStorage.idEmpresa}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                if (response.ok) {
+
+                    return response.json();
+                } else {
+                    throw new Error('Erro ao buscar as esteiras.');
+                }
+            })
+            .then((esteiras) => {
+                console.log("Esteiras recebidas:", esteiras);
+                var conteudo_tabela = ""
+                for (var contador = 0; contador < esteiras.length; contador++) {
+                  var nomeEsteira = esteiras[contador].Esteira;
+                  var AlturaDetectada = esteiras[contador].AlturaDetectada;
+                  var DataRegistro = esteiras[contador].DataRegistro;
+                  var data = new Date(DataRegistro);
+                  var dataFormatada = data.toLocaleString('pt-BR');
+                  conteudo_tabela += `
+                  <tr>
+                    <td>${nomeEsteira}</td>
+                    <td>${AlturaDetectada}</td>
+                    <td>${dataFormatada}</td>
+                  </tr>`
+                }
+                tabela_registros.innerHTML = conteudo_tabela;
+            })
+            .catch((erro) => {
+                console.error('Erro ao listar esteiras:', erro);
+                alert('Erro ao listar esteiras.');
+            });
+    }
 </script>

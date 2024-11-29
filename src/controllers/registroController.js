@@ -1,4 +1,4 @@
-var esteiraModel = require("../models/esteiraModel");
+var registroModel = require("../models/registroModel");
 
 function listarTodosRegistros(req, res) {
     var fkEmpresa = req.params.fkEmpresa;
@@ -6,7 +6,7 @@ function listarTodosRegistros(req, res) {
     if (fkEmpresa == undefined) {
         res.status(400).send("ID da empresa indefinido");
      } else {
-        esteiraModel.listarTodosRegistros(fkEmpresa)
+        registroModel.listarTodosRegistros(fkEmpresa)
         .then(
             function (resultado) {
                 res.status(200).json(resultado);
@@ -25,5 +25,5 @@ function listarTodosRegistros(req, res) {
 
 }
 module.exports = {
-    listarTodasEsteiras
+    listarTodosRegistros
 }
