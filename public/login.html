@@ -19,7 +19,8 @@
         <div class="modalErro" id="modal_erro">
             <div class="infoErro">
                 <i class="fa-solid fa-circle-xmark iconErro"></i>
-                <span class="mensagemErro">As informações não foram preechidas corretamente. Corriga para prosseguir!</span>
+                <span class="mensagemErro">As informações não foram preechidas corretamente. Corriga para
+                    prosseguir!</span>
             </div>
             <button type="button" class="botaoOK" onclick="removerMensagem()">ENTENDIDO</button>
         </div>
@@ -28,7 +29,8 @@
         <div class="modalCadastrado" id="modal_cadastrado">
             <div class="infoCadastrado">
                 <img src="./img/Logo_Logistech2.png" alt="logo Logistech" class="logoCadastrado">
-                <span class="mensagemCadastrado" id="mensagem_cadastrado">Seu cadastro foi concluído com sucesso! <br>Seja Bem vindo(a) Nome Empresa!</span>
+                <span class="mensagemCadastrado" id="mensagem_cadastrado">Seu cadastro foi concluído com sucesso!
+                    <br>Seja Bem vindo(a) Nome Empresa!</span>
             </div>
             <button type="button" class="botaoConcluido" onclick="concluirCadastro()">ENTENDIDO</button>
         </div>
@@ -59,7 +61,8 @@
                         <span id="span_validar_cep" class="span_validacao"></span>
                     </div>
                     <div class="area_botao" id="areaBotao">
-                        <span class="avisoLogin">Já possui uma conta? <strong style="cursor: pointer;" onclick="redirecionarLogin()">Faça Login</strong></span>
+                        <span class="avisoLogin">Já possui uma conta? <strong style="cursor: pointer;"
+                                onclick="redirecionarLogin()">Faça Login</strong></span>
                         <button type="button" class="botao_cadastro" onclick="validarParte1()">Seguinte</button>
                     </div>
                 </div>
@@ -71,8 +74,7 @@
                         <span id="span_validar_logradouro" class="span_validacao"></span>
                         <div class="cidade_e_uf">
                             <div class="ipt_e_label_cidade">
-                                <input type="text" id="ipt_cidade" oninput="validarCidade()"
-                                    class="input_cidade">
+                                <input type="text" id="ipt_cidade" oninput="validarCidade()" class="input_cidade">
                                 <span class="label_cidade">Cidade</span>
                                 <span id="span_validar_cidade" class="span_validacao"></span>
                             </div>
@@ -110,7 +112,7 @@
                                 <span class="label_estado">Estado</span>
                             </div>
                         </div>
-                        <input type="number" id="ipt_numero"oninput="validarNumero()" class="inputs">
+                        <input type="number" id="ipt_numero" oninput="validarNumero()" class="inputs">
                         <span class="labels">Número</span>
                         <span id="span_validar_numero" class="span_validacao"></span>
                         <input type="text" id="ipt_complemento" oninput="validarComplemento()" class="inputs">
@@ -118,7 +120,8 @@
                         <span id="span_validar_complemento" class="span_validacao"></span>
                     </div>
                     <div class="area_botao">
-                        <span class="avisoLogin">Já possui uma conta? <strong style="cursor: pointer;" onclick="redirecionarLogin()">Faça Login</strong></span>
+                        <span class="avisoLogin">Já possui uma conta? <strong style="cursor: pointer;"
+                                onclick="redirecionarLogin()">Faça Login</strong></span>
                         <div>
                             <button type="button" class="botao_voltar" onclick="voltarToParte1()">Voltar</button>
                             <button type="button" class="botao_cadastro" onclick="validarParte2()">Seguinte</button>
@@ -127,24 +130,22 @@
                 </div>
                 <div id="cadastroParte3">
                     <div class="div_inputs">
-                        <input type="text" id="ipt_nome_usuario" oninput="validarNomeUsuario()"
-                            class="inputs" required>
+                        <input type="text" id="ipt_nome_usuario" oninput="validarNomeUsuario()" class="inputs" required>
                         <span class="labels ">Nome de Administrador</span>
                         <span id="span_validar_nome_usuario" class="span_validacao"></span>
                         <input type="text" id="ipt_email" maxlength="100" oninput="validarEmail()" class="inputs">
                         <span class="labels">Email do Administrador</span>
                         <span id="span_validar_email" class="span_validacao"></span>
-                        <input type="password" id="ipt_senha_usuario" oninput="validarSenha()"
-                            class="inputs">
+                        <input type="password" id="ipt_senha_usuario" oninput="validarSenha()" class="inputs">
                         <span class="labels">Digite sua Senha</span>
                         <span id="span_validar_senha" class="span_validacao"></span>
-                        <input type="password" id="ipt_confirme_senha" oninput="validarConfirmacao()"
-                            class="inputs">
+                        <input type="password" id="ipt_confirme_senha" oninput="validarConfirmacao()" class="inputs">
                         <span class="labels">Confirme a Senha</span>
                         <span id="span_validar_confirmacao" class="span_validacao"></span>
                     </div>
                     <div class="area_botao">
-                        <span class="avisoLogin">Já possui uma conta? <strong style="cursor: pointer;" onclick="redirecionarLogin()">Faça Login</strong></span>
+                        <span class="avisoLogin">Já possui uma conta? <strong style="cursor: pointer;"
+                                onclick="redirecionarLogin()">Faça Login</strong></span>
                         <div>
                             <button type="button" class="botao_voltar" onclick="voltarToParte2()">Voltar</button>
                             <button type="button" class="botao_cadastro" onclick="validarParte3()">Cadastrar</button>
@@ -163,15 +164,16 @@
                 <div class="loginContainer" id="loginSpace">
                     <div class="div_inputs_login">
                         <input type="text" id="ipt_login" class="inputsLogin">
-                            <span class="labelsLogin">Email</span>
-                            <i class="fa-solid fa-user"></i>
+                        <span class="labelsLogin">Email</span>
+                        <i class="fa-solid fa-user"></i>
                         <input type="password" id="ipt_senha_login" class="inputsLogin">
                         <span class="labelsLogin">Senha</span>
                         <i class="fa-solid fa-lock"></i>
                     </div>
                     <div class="area_botao_login" id="areaBotaoLogin">
-                        <span class="avisoLogin">Não possui uma conta? <strong style="cursor: pointer;" onclick= "redirecionarCadastro()">Cadastre-se</strong></span>
-                        <button class="botao_login" type="button"  onclick="login()">Acessar</button>
+                        <span class="avisoLogin">Não possui uma conta? <strong style="cursor: pointer;"
+                                onclick="redirecionarCadastro()">Cadastre-se</strong></span>
+                        <button class="botao_login" type="button" onclick="login()">Acessar</button>
                     </div>
                 </div>
             </form>
@@ -190,7 +192,7 @@
 
 </html>
 <script>
-     
+
     function mudarTipoSenha() {
         if (olhofechado.style.display == "none") {
             // mostrar senha
@@ -209,34 +211,37 @@
         var senha = ipt_senha_login.value;
 
         // validações
-            // Validação de autenticação (adicionar após a implementação da API de comunicação com BD)
-            fetch("/usuarios/autenticar", {
-                method: "POST",
-                headers: {
+        // Validação de autenticação (adicionar após a implementação da API de comunicação com BD)
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
                 login: login,
                 senha: senha
             })
-            })
+        })
 
             .then((resposta) => {
                 if (resposta.status == 200) {
                     resposta.json()
-                .then((resultado) => {
-                    // caso a empresa esteja com o cadastro ativo, vamos redirecionar para a dashboard, caso não
-                    if (resultado[0].isAtivo == 1) {
-            // armazenando os dados do usuário logado no SessionStorage
-            sessionStorage.setItem("idEmpresa", resultado[0].fkEmpresa);
-            window.location.href = "./dashboard/dashboard.html";
-                    } else {
-                        alert("Sua empresa não está com cadastro ativo ainda!");
-                    }     
-                })
-                .catch((erro) => {
-                    // console.log(erro);
-                })
+                        .then((resultado) => {
+                            // caso a empresa esteja com o cadastro ativo, vamos redirecionar para a dashboard, caso não
+                            if (resultado[0].isAtivo == 1) {
+                                // armazenando os dados do usuário logado no SessionStorage
+                                sessionStorage.setItem("idEmpresa", resultado[0].fkEmpresa);
+                                // verificando nível de usuário e o direcionando para a tela certa
+                                window.location.href = "./dashboard/dashboard.html";
+                            } else if (resultado[0].nivel == 1) {
+                                window.location.href = "./suporte/suporte.html";
+                            } else {
+                                alert("Sua empresa não está com cadastro ativo ainda!");
+                            }
+                        })
+                        .catch((erro) => {
+                            // console.log(erro);
+                        })
                 } else if (resposta.status == 403) {
                     // usuario ou senha incorretos
                     modal_mensagem_erro.style.display = 'flex';
@@ -244,12 +249,12 @@
                 } else {
                     console.error("Erro inesperado ao logar", resposta)
                 }
-                
+
             })
             .catch((erro) => {
                 console.log(erro);
             })
-          
+
     }
 
 

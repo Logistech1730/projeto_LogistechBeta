@@ -18,6 +18,7 @@ senha VARCHAR(45),
 fkEmpresa INT,
 dataCadastro DATETIME DEFAULT CURRENT_TIMESTAMP(),
 CONSTRAINT fkUsuarioEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
+nivel INT default 0
 );
 
 CREATE TABLE endereco(
