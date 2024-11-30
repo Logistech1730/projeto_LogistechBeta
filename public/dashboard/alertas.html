@@ -21,46 +21,46 @@
 <body>
   <div class="container-dash">
     <div class="barra-lateral">
-        <div class="div-imagem-perfil">
-            <img src="../img/perfilexemplo.png" class="perfil-foto" alt="foto de perfil">
-        </div>
-        <h4>EletronicGear Ltda.</h4>
-        <div class="option selected">
-            <i class="fa-solid fa-chart-line"></i>
-            <span><a href="./dashboard.html">Dashboard</a></span>
-        </div>
-        <div class="option">
-            <i class="fa-solid fa-circle-plus"></i>
-            <span><a href="./cadastroEsteira.html">Esteira</a></span>
-        </div>
-        <div class="option">
-            <i class="fa-solid fa-book"></i>
-            <span><a href="./historico.html">Histórico</a></span>
-        </div>
-        <div class="option">
-            <i class="fa-regular fa-bell"></i>
-            <span><a href="./alertas.html">Alertas</a></span>
-        </div>
-        <div class="option">
-          <i class="fa-solid fa-gauge"></i>
-          <span><a href="./metricas.html">Métricas</a></span>
+      <div class="div-imagem-perfil">
+        <img src="../img/perfilexemplo.png" class="perfil-foto" alt="foto de perfil">
       </div>
-        <div class="option">
-            <i class="fa-solid fa-user"></i>
-            <span><a href="./cadastroFuncionario.html">Funcionários</a></span>
-        </div>
-        <div class="option">
-            <i class="fa-solid fa-door-open"></i>
-            <span><a href="../index.html">Sair</a></span>
-        </div>
+      <h4>EletronicGear Ltda.</h4>
+      <div class="option selected">
+        <i class="fa-solid fa-chart-line"></i>
+        <span><a href="./dashboard.html">Dashboard</a></span>
+      </div>
+      <div class="option">
+        <i class="fa-solid fa-circle-plus"></i>
+        <span><a href="./cadastroEsteira.html">Esteira</a></span>
+      </div>
+      <div class="option">
+        <i class="fa-solid fa-book"></i>
+        <span><a href="./historico.html">Histórico</a></span>
+      </div>
+      <div class="option">
+        <i class="fa-regular fa-bell"></i>
+        <span><a href="./alertas.html">Alertas</a></span>
+      </div>
+      <div class="option">
+        <i class="fa-solid fa-gauge"></i>
+        <span><a href="./metricas.html">Métricas</a></span>
+      </div>
+      <div class="option">
+        <i class="fa-solid fa-user"></i>
+        <span><a href="./cadastroFuncionario.html">Funcionários</a></span>
+      </div>
+      <div class="option">
+        <i class="fa-solid fa-door-open"></i>
+        <span><a href="../index.html">Sair</a></span>
+      </div>
     </div>
     <div class="alertas">
       <h1>Alertas</h1>
       <p>Aqui são listados todos os alertas capturados pelos Esteiras</p>
       <div class="filtros">
         <div class="ver-vistos">
-           <p>Ver não vistos</p>
-            <input type="checkbox" id="chk_vistos">
+          <p>Ver não vistos</p>
+          <input type="checkbox" id="chk_vistos">
         </div>
         <div id="container-dtInicio">
           <label for="container-dtInicio">Data de Início</label>
@@ -74,77 +74,104 @@
       </div>
       <div class="table-container">
         <table id="tabela">
-
-            <thead>
-              <tr>
-                <th>Esteira</th>
-                <th>Altura detectada</th>
-                <th>Data</th>
-                <th>Visto</th>
-              </tr>
-            </thead>
-
-            <tbody></tbody>
-
-          </table>
-          
+          <thead>
+            <tr>
+              <th>Esteira</th>
+              <th>Altura detectada</th>
+              <th>Data</th>
+              <th>Visto</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
       </div>
-
-
     </div>
   </div>
 </body>
 
 </html>
+
 <script>
   function listarAlertas() {
-      fetch(`/alertas/listar/${sessionStorage.idEmpresa}`, {
-          method: 'GET',
-          headers: {
-              'Content-Type': 'application/json',
-          },
+    fetch(`/alertas/listar/${sessionStorage.idEmpresa}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Erro ao buscar os alertas.');
+        }
       })
-          .then((response) => {
-              if (response.ok) {
-                  return response.json();
-              } else {
-                  throw new Error('Erro ao buscar os alertas.');
-              }
-          })
-          .then((alertas) => {
-              console.log("Alertas recebidos:", alertas);
-              let conteudo_tabela = "";
+      .then((alertas) => {
+        let conteudo_tabela = "";
 
-              if (alertas.length === 0) {
-                  conteudo_tabela = `
-                      <tr>
-                          <td colspan="4">Nenhum alerta encontrado.</td>
-                      </tr>`;
-              } else {
-                  for (let contador = 0; contador < alertas.length; contador++) {
-                      const { Esteira, distancia, Data, Visto } = alertas[contador];
-                      const data = new Date(Data);
-                      const dataFormatada = data.toLocaleString('pt-BR');
-                      const checkboxVisto = Visto === "Sim" ? "checked" : "";
+        if (alertas.length === 0) {
+          conteudo_tabela = `
+            <tr>
+                <td colspan="4">Nenhum alerta encontrado.</td>
+            </tr>`;
+        } else {
+          for (let contador = 0; contador < alertas.length; contador++) {
+            const { Esteira, distancia, Data, Visto, idAlerta, fkRegistro } = alertas[contador];
+            const data = new Date(Data);
+            const dataFormatada = data.toLocaleString('pt-BR');
+            const checkboxVisto = Visto === "Sim" ? "checked" : "";
 
-                      conteudo_tabela += `
-                      <tr>
-                          <td>${Esteira}</td>
-                          <td>${distancia} cm</td>
-                          <td>${dataFormatada}</td>
-                          <td><input type="checkbox" ${checkboxVisto}></td>
-                      </tr>`;
-                  }
-              }
+            conteudo_tabela += `
+            <tr>
+                <td>${Esteira}</td>
+                <td>${distancia} cm</td>
+                <td>${dataFormatada}</td>
+                <td><input type="checkbox" id="checkbox-${idAlerta}" ${checkboxVisto} onchange="atualizarVisto(${idAlerta}, ${fkRegistro})" data-fkRegistro="${fkRegistro}"></td>
+            </tr>`;
+          }
+        }
 
-              const tabelaRegistros = document.querySelector("#tabela tbody");
-              tabelaRegistros.innerHTML = conteudo_tabela;
-          })
-          .catch((erro) => {
-              console.error('Erro ao listar alertas:', erro);
-              alert('Erro ao listar alertas.');
-          });
+        const tabelaRegistros = document.querySelector("#tabela tbody");
+        tabelaRegistros.innerHTML = conteudo_tabela;
+      })
+      .catch((erro) => {
+        console.error('Erro ao listar alertas:', erro);
+        alert('Erro ao listar alertas.');
+      });
   }
 
+  function atualizarVisto(idAlerta, fkRegistro) {
+
+    const visto = document.querySelector(`#checkbox-${idAlerta}`).checked ? 1 : 0;
+    console.log(`Atualizando alerta ${idAlerta}: Visto = ${visto}, fkRegistro = ${fkRegistro}`);
+    
+    const body = {
+      idAlerta: idAlerta,
+      visto: visto, 
+      fkRegistro: fkRegistro,
+    };
+
+    console.log("Enviando body para atualização:", body);
+
+    fetch('/alertas/atualizar', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log(`Alerta ${idAlerta} atualizado com sucesso para visto: ${visto}`);
+          listarAlertas(); 
+        } else {
+          throw new Error('Erro ao atualizar o status do alerta.');
+        }
+      })
+      .catch((erro) => {
+        console.error('Erro ao atualizar o status do alerta:', erro);
+        alert('Erro ao atualizar o status do alerta.');
+      });
+  }
   document.addEventListener("DOMContentLoaded", listarAlertas);
 </script>
