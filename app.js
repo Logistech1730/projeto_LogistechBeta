@@ -22,6 +22,7 @@ var empresaRouter = require("./src/routes/empresas")
 var enderecoRouter = require("./src/routes/enderecos");
 var esteiraRouter = require("./src/routes/esteiras");
 var registroRouter = require("./src/routes/registros");
+var alertaRouter = require("./src/routes/alertas");
 
 
 app.use(express.json());
@@ -36,7 +37,9 @@ app.use("/usuarios", usuarioRouter);
 app.use("/empresas", empresaRouter);
 app.use("/enderecos", enderecoRouter);
 app.use("/esteiras", esteiraRouter);
-app.use("/registros", registroRouter)
+app.use("/registros", registroRouter);
+app.use("/alertas", alertaRouter);
+
 
 app.listen(PORTA_APP, function () {
     console.log(`
