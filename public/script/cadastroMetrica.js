@@ -12,6 +12,8 @@ const closeButton = document.getElementById('closeButton')
         modal.classList.add('show');
         //função nativa do js que abre o modal
         modal.showModal();
+        editBtn.style.display = 'none';
+        cadastroBtn.style.display = 'block';
     });
 
     closeButton.addEventListener('click', () => {
@@ -47,6 +49,8 @@ function horarioAleatorio(){
 
 document.getElementById('cadastroBtn').addEventListener('click', () => {
 
+  
+
      //O valor de data-modal é atribuido a constante modalId
      const modalId = openButton.getAttribute('data-modal');
      //O valor modal-1 está na tag dialog, sendo referenciado pelo valor que está dentro de data-modal
@@ -59,39 +63,53 @@ document.getElementById('cadastroBtn').addEventListener('click', () => {
     const cor = document.getElementById('inpCor').value;
 
     let containerAviso = document.getElementById('container-aviso')
-    let conteudoExistente = containerAviso.querySelectorAll('p').length
 
-    if((nomeMetrica.value === '' ||  valorMinimo.value === ''  || valorMaximo.value === '' || cor === '') && conteudoExistente < 10){
+    console.log(nomeMetrica, valorMaximo, valorMinimo)
+
+    if(nomeMetrica === "" ||  valorMinimo === ""  || valorMaximo === ""){
         let aviso = document.createElement('p')
         aviso.textContent = 'Preencha os campos'
         aviso.style.color = 'red'
+        containerAviso.innerHTML = "";
         containerAviso.appendChild(aviso)
-        return
+        return;
     }else{
-        div_containerEsteiras.innerHTML += `
-         <div class="cardEsteira">
-                    <div class="leftContainer">
-                        <div class="titulo">
-                            <h6 style="color: ${cor};">${nomeMetrica}</h6>
-                            <div class="icons">
-                                <i class="fa-solid fa-trash"></i>
-                                <i class="fa-solid fa-pencil"></i>
-                            </div>
-                        </div>
-                        
-                        <p>Nome</p>
-                        <p>${nomeMetrica}</p>
-                        <p>Valor mínimo</p>
-                        <p>${valorMinimo}%</p>
-                        <p>Valor Máximo</p>
-                        <p>${valorMaximo}%</p>
-                        <p>Data de cadastro</p>
-                        <p>30/10/2024</p>
-                        <p>Cor</p>
-                        <p>${cor}</p>
-                </div>
+        var esteiraSelecionada = Number(slt_esteiras.value);
+        var body = {
+            nome: inpNome.value,
+            valorMinimo: Number(inpValorMinimo.value),
+            valorMaximo: Number(inpValorMaximo.value),
+            cor: (inpCor.value).replace('#', ''),
+            fkEsteira: esteiraSelecionada
+        }
+        console.log(body);
 
-        `;
+        fetch(`/metricas/cadastrar`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body)
+        })
+        .then((resposta) => {
+            console.log(resposta)
+            if(resposta.status == 200) {
+                alert("Métrica cadastrado com sucesso.");
+                window.location.reload();
+            } else if (resposta.status == 400) {
+               resposta.json()
+                .then((erro) => {
+                    console.log(erro)
+                })
+                .catch((erro) => {
+                    console.log(erro)
+                })
+                
+            }
+        })
+        .catch(erro => {
+            console.log(erro)
+        })
 
         // depois que cadastrei, devo desaparecer com o modal de cadastro
         const modalId = closeButton.getAttribute('data-modal');

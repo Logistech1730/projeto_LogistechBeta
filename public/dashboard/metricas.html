@@ -65,9 +65,6 @@
             <div class="containerFiltro">
                 <div id="container-esteira">
                     <select id="slt_esteiras">
-                        <option value="sensor1">Esteira 1</option>
-                        <option value="sensor2">Esteira 2</option>
-                        <option value="sensor3">Esteira 3</option>
                     </select>
                 </div>
                 <div class="container-btnCadastro">
@@ -87,7 +84,7 @@
                 <div class="container-esteira">
 
                     <div class="headerModal">
-                        <h1>Adicionar Métrica</h1>
+                        <h1 id="titulo_modal">Adicionar/Editar Métrica</h1>
                         <button id="closeButton" class="close-modal" data-modal="modal-1"> <i
                                 class="fa-solid fa-xmark"></i></button>
                     </div>
@@ -105,97 +102,210 @@
                         <input type="color" id="inpCor">
                         <div id="container-aviso"></div>
                         <button id="cadastroBtn">Cadastrar</button>
+                        <button style="display: none;" id="editBtn">Editar</button>
                     </div>
                 </div>
             </dialog>
             <div id="div_containerEsteiras" class="containerEsteiras">
-                <div class="cardEsteira">
 
-                    <div class="leftContainer">
-                        <div class="titulo">
-                            <h6 style="color: #0F6C00;">Conforme esperado</h6>
-                            <div class="icons">
-                                <i class="fa-solid fa-trash"></i>
-                                <i class="fa-solid fa-pencil"></i>
-                            </div>
-                        </div>
-                        
-                        <p>Nome</p>
-                        <p>Conforme esperado</p>
-                        <p>Valor mínimo</p>
-                        <p>95%</p>
-                        <p>Valor Máximo</p>
-                        <p>100%</p>
-                        <p>Data de cadastro</p>
-                        <p>27/10/2024</p>
-                        <p>Cor</p>
-                        <p>#0F6C00</p>
-                </div>
+                <p>Selecione uma esteira</p>
 
-           
-            
-            
             </div>
-
-            <div class="cardEsteira">
-
-                <div class="leftContainer">
-                    <div class="titulo">
-                        <h6 style="color: #ffb600;">Alerta!</h6>
-                        <div class="icons">
-                            <i class="fa-solid fa-trash"></i>
-                            <i class="fa-solid fa-pencil"></i>
-                        </div>
-                    </div>
-                    
-                    <p>Nome</p>
-                    <p>Alerta</p>
-                    <p>Valor mínimo</p>
-                    <p>90%</p>
-                    <p>Valor Máximo</p>
-                    <p>95%</p>
-                    <p>Data de cadastro</p>
-                    <p>27/10/2024</p>
-                    <p>Cor</p>
-                    <p>#FFB600</p>
-            </div>
-
-            
-        
-        
-        </div>
-
-        <div class="cardEsteira">
-
-            <div class="leftContainer">
-                <div class="titulo">
-                    <h6 style="color: #d83f3f;">Abaixo do esperado.</h6>
-                    <div class="icons">
-                        <i class="fa-solid fa-trash"></i>
-                        <i class="fa-solid fa-pencil"></i>
-                    </div>
-                </div>
-                
-                <p>Nome</p>
-                <p>Abaixo do esperado</p>
-                <p>Valor mínimo</p>
-                <p>0%</p>
-                <p>Valor Máximo</p>
-                <p>90%</p>
-                <p>Data de cadastro</p>
-                <p>27/10/2024</p>
-                <p>Cor</p>
-                <p>#d83f3f</p>
-        </div>
-
-       
-    
-    
-    </div>
-        
-
-        </div>
     </main>
 </body>
 
 </html>
+<script>
+    // Carregando todas as esteiras e populando o <select>
+    listarEsteiras(sessionStorage.getItem('idEmpresa'));
+
+    // adicionando evento onchange em cada <option>
+    slt_esteiras.addEventListener("change", () => {
+        div_containerEsteiras.innerHTML = "";
+        console.log(slt_esteiras.value)
+        carregarMetricas(slt_esteiras.value)
+        sessionStorage.setItem('esteira', slt_esteiras.value)
+    })
+
+
+    function carregarMetricas(idEsteira) {
+        fetch(`/metricas/listar/esteira/${idEsteira}`, {
+            method: "GET"
+        })
+            .then((resposta) => {
+                if (resposta.ok) {
+                    resposta.json()
+                        .then((dados) => {
+                            // populando os cards com as métricas
+                            for (var i = 0; i < dados.length; i++) {
+                                div_containerEsteiras.innerHTML += `
+        <div class="cardEsteira">
+            <div class="leftContainer">
+                <div class="titulo">
+                    <h6 style="color: #${dados[i].cor};">${dados[i].nomeMetrica}</h6>
+                    <div class="icons">
+                        <i onclick="deletarMetrica(${dados[i].idMetrica})" class="fa-solid fa-trash"></i>
+                        <i onclick="editarMetrica(${dados[i].idMetrica})" class="fa-solid fa-pencil"></i>
+                    </div>
+                </div>
+                
+                <p>Nome</p>
+                <p>${dados[i].nomeMetrica}</p>
+                <p>Valor mínimo</p>
+                <p>${dados[i].valorMinimo}%</p>
+                <p>Valor Máximo</p>
+                <p>${dados[i].valorMaximo}%</p>
+                <p>Data de cadastro</p>
+                <p>${formatarData(dados[i].dataCadastro)}</p>
+                <p>Cor</p>
+                <p>#${dados[i].cor}</p>
+        </div>
+    </div>`;
+                            }
+                        })
+                        .catch((erro) => {
+                            console.log("Erro ao converter JSON: ", erro);
+                        })
+                }
+            })
+            .catch((erro => {
+                console.log("Erro ao enviar requisição: ", erro);
+            }))
+    }
+
+    function listarEsteiras(fkEmpresa) {
+        fetch(`/esteiras/listar/${fkEmpresa}`, {
+            method: "GET"
+        })
+            .then((resposta) => {
+                if (resposta.ok) {
+                    resposta.json()
+                        .then((dados) => {
+                            // populando <select> com as esteiras
+                            for (var i = 0; i < dados.length; i++) {
+                                slt_esteiras.innerHTML += `<option value=${dados[i].idEsteira}>${dados[i].departamento}</option>`;
+                            }
+                        })
+                        .catch((erro) => {
+                            console.log("Erro ao converter JSON: ", erro);
+                        })
+                }
+            })
+            .catch((erro => {
+                console.log("Erro ao enviar requisição: ", erro);
+            }))
+    }
+
+    function editarMetrica(idMetrica) {
+        
+       // console.log(JSON.parse(metrica))
+        const modalId = openButton.getAttribute('data-modal');
+        const modal = document.getElementById(modalId);
+        modal.classList.add('show');
+        modal.showModal();
+
+        editBtn.style.display = 'block';
+        cadastroBtn.style.display = 'none';
+
+        // atribuindo o click para mandar requisição de post
+     document.getElementById('editBtn').addEventListener('click', () => enviarRequisicao(idMetrica)
+    )
+        fetch(`/metricas/listar/metrica/${idMetrica}`, {
+            method: "GET"
+        })
+            .then((resposta) => {
+                if (resposta.ok) {
+                    resposta.json()
+                     .then(dados => {
+                       inpNome.value = dados[0].nomeMetrica;
+                       inpValorMinimo.value = dados[0].valorMinimo;
+                       inpValorMaximo.value = dados[0].valorMaximo;
+                       inpCor.value = "#" + dados[0].cor;
+                     })
+                        .catch((erro) => {
+                            console.log("Erro ao converter JSON: ", erro);
+                        })
+                }
+            })
+            .catch((erro => {
+                console.log("Erro ao enviar requisição: ", erro);
+            }))
+    }
+
+    function enviarRequisicao(idMetrica) {
+        var nome = inpNome.value;
+        var valorMaximo = Number(inpValorMaximo.value);
+        var valorMinimo = Number(inpValorMinimo.value);
+        var cor = inpCor.value;
+       var body = {
+        nome: nome,
+        valorMaximo: valorMaximo,
+        valorMinimo: valorMinimo,
+        cor: cor.replace('#', ''),
+        idMetrica: idMetrica,
+        fkEsteira: sessionStorage.getItem('esteira')
+       }
+       fetch("/metricas/atualizar", {
+        method: "PUT",
+        headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body)
+       })
+       .then((resposta) => {
+        if (resposta.status == 200) {
+            alert("Métrica atualizada com sucesso!");
+            window.location.reload();
+        } else if (resposta.status == 400) {
+            resposta.json().then(dados => {
+               alert(dados.message)
+            })
+        }
+       })
+       .catch((erro) => {
+        console.log(erro)
+       })
+       
+       
+    }
+
+    function deletarMetrica(idMetrica) {
+    // Verificar se o ID da métrica foi fornecido
+    if (!idMetrica) {
+        console.error("ID da métrica não foi fornecido!");
+        return;
+    }
+
+    if (!confirm("Tem certeza de que deseja excluir esta métrica?")) {
+        return;
+    }
+
+    fetch(`/metricas/deletarMetrica/${idMetrica}`, {
+        method: "DELETE",
+    })
+        .then((resposta) => {
+            if (resposta.ok) {
+                alert("Métrica deletada com sucesso!");
+                // Atualizar a página ou a lista de métricas
+                window.location.reload();
+            } else {
+                return resposta.json().then((erro) => {
+                    throw new Error(erro.mensagem || "Erro ao deletar a métrica.");
+                });
+            }
+        })
+        .catch((erro) => {
+            console.error("Erro ao deletar métrica:", erro.message);
+            alert(`Erro ao deletar métrica: ${erro.message}`);
+        });
+}
+
+function formatarData(data) {
+    const date = new Date(data); 
+    const dia = date.getDate().toString().padStart(2, "0");
+    const mes = (date.getMonth() + 1).toString().padStart(2, "0");
+    const ano = date.getFullYear(); 
+
+    return `${dia}/${mes}/${ano}`;
+}
+</script>
