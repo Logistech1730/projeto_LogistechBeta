@@ -1,6 +1,6 @@
 //Seleciono o botão para abrir e fechar o modal
 const openButton = document.getElementById('btnCadastro')
-const closeButton = document.getElementById('closeButton')
+// const closeButton = document.getElementById('closeButton')
 
 //Adiciono um ouvinte de click no botão para abrir o modal
     openButton.addEventListener('click', () => {

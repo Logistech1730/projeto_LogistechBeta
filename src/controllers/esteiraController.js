@@ -84,8 +84,35 @@ function deletarEsteira(req, res) {
     }
 }
 
+function editarEsteira(req, res){
+    var idEsteira = req.params.idEsteira
+    var departamento = req.body.departamento
+    var localizacao = req.body.localizacao
+    var distanciaEsperada = req.body.distanciaEsperada
+
+    if(idEsteira === undefined){
+        res.status(400).send("ID da esteira indefinido");
+    }else{
+        esteiraModel.editarEsteira(idEsteira, departamento, localizacao, distanciaEsperada)
+        .then(
+            function (resultado) {
+                res.status(200).json(resultado);
+            }
+        )
+        .catch(function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao atualizar a esteira! Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        })
+    }
+}
+
 module.exports = {
     cadastrar,
     listarTodasEsteiras,
     deletarEsteira,
+    editarEsteira
 }

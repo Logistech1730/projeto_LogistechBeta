@@ -14,8 +14,13 @@ router.get("/listar/:fkEmpresa", function (req, res) {
     esteiraController.listarTodasEsteiras(req, res);
 })
 
-router.get("/deletarEsteira/:idEsteira", function (req, res) {
+router.delete("/deletar/:idEsteira", function (req, res) {
     esteiraController.deletarEsteira(req, res);
 })
+
+router.put('/editar/:idEsteira', function (req, res){
+    esteiraController.editarEsteira(req, res)
+})
+
 
 module.exports = router;
