@@ -11,6 +11,10 @@ router.get("/listarValidosInvalidosTotalEmpresa/:fkEmpresa", function (req, res)
     registroController.listarProdutosValidosInvalidosTotalEmpresa(req, res);
 })
 
+router.get("/listarValidosInvalidosPorSemanaEmpresa/:fkEmpresa", function (req, res) {
+    registroController.listarProdutosValidosInvalidosPorSemanaEmpresa(req, res);
+})
+
 router.post("/listarPorData/:fkEmpresa", function (req, res) {
     registroController.listarRegistrosPorData(req, res);
 })

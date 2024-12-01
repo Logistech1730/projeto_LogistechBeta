@@ -21,7 +21,7 @@
     />
   </head>
 
-  <body onload="gerarPorcentagemProdutos(); gerarQtdTotalProdutos();">
+  <body onload="gerarPorcentagemProdutos()">
     <div class="container-dash">
       <div class="barra-lateral">
         <div class="div-imagem-perfil">
@@ -120,12 +120,14 @@
   var qtdInvalidosTotal = 5;
   var qtdProdutosTotal = qtdInvalidosTotal + qtdInvalidosTotal;
   
-  var qtd_validos_7_dias = [20,32,41,23,40,23,34];
-  var qtd_invalidos_7_dias = [5,2,3,5,1,5,6];
+  var qtd_validos_7_dias = [];
+  var qtd_invalidos_7_dias = [];
+  var datas_ultimos_7_dias = [];
 
   var qtdValidosTempoReal = [60,40,50,49,39,51];
   var qtdInvalidosTempoReal = [10,20,10,9,19,11];
   var grafico_pizza;
+  var graficoBarra;
 
 function atualizarGraficoPizza(registros) {
     qtdValidosTotal = Number(registros[0].ProdutosValidos);
@@ -146,12 +148,13 @@ function atualizarGraficoPizza(registros) {
                         label: "Valor",
                         data: [qtdValidosTotal, qtdInvalidosTotal],
                         backgroundColor: ["#384cd1", "#FF0000"],
-                        borderWidth: 1,
+                        borderWidth: 0,
                     },
                 ],
             },
             options: {
                 responsive: true,
+                // cutout: '30%',
                 maintainAspectRatio: false,
                 plugins: {
                     title: {
@@ -186,6 +189,94 @@ function atualizarGraficoPizza(registros) {
     }
 }
 
+function atualizarGraficoBarra(registros) {
+    for (var contador = 0; contador < registros.length; contador++) {
+      var dataAtual = registros[contador].data;
+      var objeto_data = new Date(dataAtual)
+      var diaAtual = objeto_data.getUTCDate().toString().padStart(2, '0'); 
+      var mesAtual = (objeto_data.getUTCMonth() + 1).toString().padStart(2, '0');
+      var dataFormatada = `${diaAtual}/${mesAtual}`
+
+      var produtoValidoAtual = Number(registros[contador].ProdutosValidos);
+      var produtoInvalidoAtual = Number(registros[contador].ProdutosInvalidos);
+      
+      datas_ultimos_7_dias.push(dataFormatada);
+      qtd_validos_7_dias.push(produtoValidoAtual);
+      qtd_invalidos_7_dias.push(produtoInvalidoAtual);
+    }
+    console.log(qtd_invalidos_7_dias)
+    console.log(qtd_validos_7_dias)
+    console.log(datas_ultimos_7_dias)
+
+    if (graficoBarra) {
+        graficoBarra.data.datasets[0].data = qtd_validos_7_dias;
+        graficoBarra.data.datasets[1].data = qtd_invalidos_7_dias;
+        graficoBarra.update();
+    } else {
+      graficoBarra = new Chart(document.getElementById("grafico-barra"), {
+        type: "bar",
+        data: {
+          labels: datas_ultimos_7_dias,
+          datasets: [
+            {
+              label: "Produtos válidos",
+              backgroundColor: gradient,
+              data: qtd_validos_7_dias,
+              borderWidth: 0,
+            },
+            {
+              label: "Produtos inválidos",
+              backgroundColor: gradient1,
+              data: qtd_invalidos_7_dias,
+              borderWidth: 0,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            title: {
+              display: true,
+              text: "Produtos válidos e inválidos dos últimos 7 dias",
+              font: {
+                size: 16,
+              },
+              color: "#000",
+              padding: {
+                top: 5,
+                bottom: 5,
+              },
+            },
+          },
+
+         scales: {
+            y: {
+              title: {
+                display: true,
+                text: "Quantidade de produtos",
+                font: {
+                  size: 16,
+                  weight: 700,
+                },
+              },
+              beginAtZero: true,
+            },
+            x: {
+              title: {
+                display: true,
+                text: "Período",
+                font: {
+                  size: 16,
+                  weight: 700,
+                },
+              },
+            },
+          },
+        },
+      });
+        }
+    }
 
 function buscarRegistrosGraficoPizza() { 
     fetch(`/registros/listarValidosInvalidosTotalEmpresa/${sessionStorage.idEmpresa}`, { 
@@ -205,8 +296,31 @@ function buscarRegistrosGraficoPizza() {
             alert('Erro ao listar registros.'); 
           });
         }
-          buscarRegistrosGraficoPizza();
-          var buscarRegistrosGraficoPizzaConstantemente = setInterval(buscarRegistrosGraficoPizza, 1000);
+
+function buscarRegistrosGraficoBarra() { 
+    fetch(`/registros/listarValidosInvalidosPorSemanaEmpresa/${sessionStorage.idEmpresa}`, { 
+      method: 'GET', 
+    }) 
+        .then((response) => { 
+          if (response.ok) { 
+            return response.json(); 
+          } else { 
+            throw new Error('Erro ao buscar as registros.'); 
+          } }) 
+          .then((registros) => { 
+            console.log("registros recebidas:", registros); 
+            atualizarGraficoBarra(registros); 
+          }) .catch((erro) => { 
+            console.error('Erro ao listar registros:', erro); 
+            alert('Erro ao listar registros.'); 
+          });
+        }
+  
+  buscarRegistrosGraficoPizza();
+  var buscarRegistrosGraficoPizzaConstantemente = setInterval(buscarRegistrosGraficoPizza, 1000);
+  
+  buscarRegistrosGraficoBarra();
+  var buscarRegistrosGraficoBarraDiariamente = setInterval(buscarRegistrosGraficoBarra, (1000 * 60 * 60 * 24));
   // Criar gradiente
   var gradient = ctx.createLinearGradient(0, 0, 0, 400);
   gradient.addColorStop(0, "#384cd1");
@@ -216,68 +330,6 @@ function buscarRegistrosGraficoPizza() {
   gradient1.addColorStop(0, "#f90000");
   gradient1.addColorStop(1, "#c36767");
 
-  var graficoBarra = new Chart(document.getElementById("grafico-barra"), {
-    type: "bar",
-    data: {
-      labels: ["25/10", "26/10", "27/10", "28/10", "29/10", "30/10"],
-      datasets: [
-        {
-          label: "Produtos válidos",
-          backgroundColor: gradient,
-          data: qtd_validos_7_dias,
-          borderWidth: 0,
-        },
-        {
-          label: "Produtos inválidos",
-          backgroundColor: gradient1,
-          data: qtd_invalidos_7_dias,
-          borderWidth: 0,
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        title: {
-          display: true,
-          text: "Produtos válidos e inválidos dos últimos 7 dias",
-          font: {
-            size: 16,
-          },
-          color: "#000",
-          padding: {
-            top: 5,
-            bottom: 5,
-          },
-        },
-      },
-
-      scales: {
-        y: {
-          title: {
-            display: true,
-            text: "Quantidade de produtos",
-            font: {
-              size: 16,
-              weight: 700,
-            },
-          },
-          beginAtZero: true,
-        },
-        x: {
-          title: {
-            display: true,
-            text: "Período",
-            font: {
-              size: 16,
-              weight: 700,
-            },
-          },
-        },
-      },
-    },
-  });
   var grafico_tempo_real = new Chart(
     document.getElementById("grafico-tempo-real"),
     {
