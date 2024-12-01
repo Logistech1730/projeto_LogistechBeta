@@ -140,10 +140,36 @@ function editarUsuario(req, res){
 
 }
 
+function listarPorId(req, res) {
+    // Recebendo parametro da URL 
+    var idUsuario = req.params.idUsuario;
+
+    if (idUsuario == undefined) {
+        res.status(400).send("ID do usuário indefinido");
+     } else {
+        usuarioModel.listarPorId(idUsuario)
+        .then(
+            function (resultado) {
+                res.status(200).json(resultado);
+            }
+        )
+        .catch(function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao realizar a listagem do usuário Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        })
+     }
+
+}
+
 module.exports = {
   autenticar,
   cadastrar,
   listarPorEmpresa,
   deletarUsuario,
-  editarUsuario
+  editarUsuario,
+  listarPorId
 };

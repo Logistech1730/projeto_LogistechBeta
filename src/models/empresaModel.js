@@ -19,7 +19,28 @@ function listarPorId(idEmpresa) {
     return database.executar(instrucaoSql);
 }
 
+function listarInativas() {
+    var instrucaoSql = `SELECT * FROM empresa WHERE isAtivo = 0;`;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function aprovarEmpresa(idEmpresa) {
+    var instrucaoSql = `update empresa set isAtivo = 1 WHERE idEmpresa = ${idEmpresa}`;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function reprovarEmpresa(idEmpresa) {
+    var instrucaoSql = `delete from empresa WHERE idEmpresa = ${idEmpresa}`;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     cadastrar,
-    listarPorId
+    listarPorId,
+    listarInativas,
+    aprovarEmpresa,
+    reprovarEmpresa
 };

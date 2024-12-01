@@ -62,7 +62,67 @@ function listarPorId(req, res) {
 
 }
 
+function listarInativas(req, res) {
+    empresaModel.listarInativas()
+    .then(resultado => {
+        res.status(200).json(resultado);
+    })
+    .catch(function (erro) {
+        console.log(erro);
+        console.log(
+            "\nHouve um erro ao realizar a listagem de empresa inativa! Erro: ",
+            erro.sqlMessage
+        );
+        res.status(500).json(erro.sqlMessage);
+    })
+}
+
+function aprovarEmpresa(req, res) {
+    var idEmpresa = req.params.idEmpresa;
+
+    if (idEmpresa == undefined) {
+        res.status(400).send("Id da empresa indefinido")
+    }
+
+    empresaModel.aprovarEmpresa(idEmpresa)
+    .then(resultado => {
+        res.status(200).json(resultado);
+    })
+    .catch(function (erro) {
+        console.log(erro);
+        console.log(
+            "\nHouve um erro ao realizar a listagem de empresa inativa! Erro: ",
+            erro.sqlMessage
+        );
+        res.status(500).json(erro.sqlMessage);
+    })
+}
+
+function reprovarEmpresa(req, res) {
+    var idEmpresa = req.params.idEmpresa;
+
+    if (idEmpresa == undefined) {
+        res.status(400).send("Id da empresa indefinido")
+    }
+
+    empresaModel.reprovarEmpresa(idEmpresa)
+    .then(resultado => {
+        res.status(200).json(resultado);
+    })
+    .catch(function (erro) {
+        console.log(erro);
+        console.log(
+            "\nHouve um erro ao realizar a listagem de empresa inativa! Erro: ",
+            erro.sqlMessage
+        );
+        res.status(500).json(erro.sqlMessage);
+    })
+}
+
 module.exports = {
     cadastrar,
-    listarPorId
+    listarPorId,
+    listarInativas,
+    aprovarEmpresa,
+    reprovarEmpresa
 }

@@ -14,5 +14,17 @@ router.get("/listar/:id", function (req, res) {
     empresaController.listarPorId(req, res);
 })
 
+router.get("/listarInativas", (req, res) => {
+    empresaController.listarInativas(req, res)
+})
+
+router.patch("/aprovar/:idEmpresa", (req, res) => {
+    empresaController.aprovarEmpresa(req, res)
+})
+
+router.delete("/reprovar/:idEmpresa", (req, res) => {
+    empresaController.reprovarEmpresa(req, res)
+})
+
 
 module.exports = router;

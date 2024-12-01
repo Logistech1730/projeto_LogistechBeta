@@ -6,9 +6,11 @@ idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
 cnpj CHAR(14),
 telefone CHAR(9),
 nomeFantasia VARCHAR(45),
+dataCadastro DATETIME DEFAULT current_timestamp,
 isAtivo TINYINT,
 CONSTRAINT chk_ativo CHECK(isAtivo IN(0, 1))
 );
+
 
 CREATE TABLE usuario(
 idUsuario INT PRIMARY KEY AUTO_INCREMENT,
@@ -16,9 +18,12 @@ nome VARCHAR(45),
 email VARCHAR(45),
 senha VARCHAR(45),
 telefone VARCHAR(45),
+nivel INT default 0,
 fkEmpresa INT,
 CONSTRAINT fkUsuarioEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
+ON DELETE CASCADE
 );
+
 
 CREATE TABLE endereco(
 idEndereco INT PRIMARY KEY AUTO_INCREMENT,
@@ -30,6 +35,8 @@ numero CHAR(5),
 complemento VARCHAR(50),
 fkEmpresa INT,
 CONSTRAINT fkEnderecoEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
+ON DELETE CASCADE
+
 );
 
 CREATE TABLE esteira(
@@ -39,6 +46,7 @@ localizacao VARCHAR(50),
 distanciaEsperada INT,
 fkEmpresa INT,
 CONSTRAINT fkEsteiraEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
+ON DELETE CASCADE
 );
 
 CREATE TABLE metrica (
@@ -50,6 +58,7 @@ dataCadastro DATE,
 cor CHAR(6),
 fkEsteira INT,
 CONSTRAINT fkMetricaEsteira FOREIGN KEY (fkEsteira) REFERENCES esteira (idEsteira)
+ON DELETE CASCADE
 );
 
 CREATE TABLE sensor(
@@ -58,6 +67,7 @@ dataInstalacao DATE,
 ultimaManutencao DATE,
 fkEsteira INT,
 CONSTRAINT fkSensorEsteira FOREIGN KEY (fkEsteira) REFERENCES esteira(idEsteira)
+ON DELETE CASCADE
 );
 
 CREATE TABLE registro(
@@ -68,6 +78,7 @@ isProdutoViavel TINYINT,
 CONSTRAINT chkProduto CHECK(isProdutoViavel IN(0,1)),
 fkSensor INT,
 CONSTRAINT fkRegistroSensor FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor)
+ON DELETE CASCADE
 );
 
 CREATE TABLE Alerta
@@ -76,6 +87,7 @@ fkRegistro INT,
 visto BIT DEFAULT 0,
 PRIMARY KEY (IdAlerta, fkRegistro),
 CONSTRAINT fkRegistroAlerta FOREIGN KEY (fkRegistro) REFERENCES registro (idRegistro)
+ON DELETE CASCADE
 );
 
 -- Inserções na tabela 'empresa'

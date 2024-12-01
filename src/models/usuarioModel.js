@@ -47,10 +47,19 @@ function editarUsuario(idUsuario, nome, email, senha){
     return database.executar(instrucaoSql)
 }
 
+function listarPorId(idUsuario) {
+    var instrucaoSql = `
+    SELECT * FROM usuario where idUsuario = ${idUsuario} 
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     autenticar,
     cadastrar,
     listarPorEmpresa,
     deletarUsuario,
-    editarUsuario
+    editarUsuario,
+    listarPorId
 };

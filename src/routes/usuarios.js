@@ -14,6 +14,10 @@ router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });
 
+router.get("/listarPorId/:idUsuario", (req, res) => {
+    usuarioController.listarPorId(req, res);
+})
+
 router.get("/listarPorEmpresa/:idEmpresa", function(req, res) {
     usuarioController.listarPorEmpresa(req, res);
 });
