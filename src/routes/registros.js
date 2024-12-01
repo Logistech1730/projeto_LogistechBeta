@@ -7,4 +7,9 @@ router.get("/listar/:fkEmpresa", function (req, res) {
     registroController.listarTodosRegistros(req, res);
 })
 
+router.post("/listarPorData/:fkEmpresa", function (req, res) {
+    registroController.listarRegistrosPorData(req, res);
+})
+
+
 module.exports = router;

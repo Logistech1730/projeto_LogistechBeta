@@ -69,6 +69,7 @@
           <input type="date" id="data2">
         </div>
         <button id="botao-filtro" onclick="aplicarFiltro()">Aplicar Filtros</button>
+        <button id="botao-filtro" onclick="window.location.reload()">Limpar filtros</button>
       </div>
       <div class="table-container">
         <table>
@@ -99,18 +100,56 @@
     var data_final = data2.value;
     if (data_inicial > data_final) {
       alert("A data inicial não pode ser maior que a final!");
+      return;
     }
+
+    fetch(`/registros/listarPorData/${sessionStorage.idEmpresa}`, {
+      method: "POST",
+      headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              dataInicial: data_inicial,
+              dataFinal: data_final
+            })
+    })
+    .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erro ao buscar as esteiras.');
+                }
+            })
+            .then((esteiras) => {
+                console.log("Esteiras recebidas:", esteiras);
+                var conteudo_tabela = ""
+                for (var contador = 0; contador < esteiras.length; contador++) {
+                  var nomeEsteira = esteiras[contador].Esteira;
+                  var AlturaDetectada = esteiras[contador].AlturaDetectada;
+                  var DataRegistro = esteiras[contador].DataRegistro;
+                  var data = new Date(DataRegistro);
+                  var dataFormatada = data.toLocaleString('pt-BR');
+                  conteudo_tabela += `
+                  <tr>
+                    <td>${nomeEsteira}</td>
+                    <td>${AlturaDetectada} cm</td>
+                    <td>${dataFormatada}</td>
+                  </tr>`
+                }
+                tabela_registros.innerHTML = conteudo_tabela;
+            })
+    .catch((erro) => {
+                console.error('Erro ao listar esteiras:', erro);
+                alert('Erro ao listar esteiras.');
+            });
   }
   function listarRegistros() {
         fetch(`/registros/listar/${sessionStorage.idEmpresa}`, {
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            
         })
             .then((response) => {
                 if (response.ok) {
-
                     return response.json();
                 } else {
                     throw new Error('Erro ao buscar as esteiras.');
