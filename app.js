@@ -1,3 +1,7 @@
+
+
+
+
 // var ambiente_processo = 'producao';
 var ambiente_processo = 'desenvolvimento';
 
@@ -24,6 +28,7 @@ var esteiraRouter = require("./src/routes/esteiras");
 var registroRouter = require("./src/routes/registros");
 var alertaRouter = require("./src/routes/alertas");
 var metricasRouter = require("./src/routes/metricas");
+var bobIaRouter = require("./src/routes/bobia")
 
 
 app.use(express.json());
@@ -42,6 +47,7 @@ app.use("/registros", registroRouter);
 app.use("/metricas", metricasRouter);
 app.use("/registros", registroRouter);
 app.use("/alertas", alertaRouter);
+app.use("/bobia", bobIaRouter)
 
 
 app.listen(PORTA_APP, function () {
