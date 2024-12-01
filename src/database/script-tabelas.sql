@@ -4,12 +4,14 @@ USE logistech;
 CREATE TABLE empresa(
 idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
 cnpj CHAR(14),
-telefone CHAR(9),
+telefone CHAR(12),
 nomeFantasia VARCHAR(45),
 dataCadastro DATETIME DEFAULT current_timestamp,
-isAtivo TINYINT,
+isAtivo TINYINT DEFAULT 0,
 CONSTRAINT chk_ativo CHECK(isAtivo IN(0, 1))
 );
+
+
 
 
 CREATE TABLE usuario(

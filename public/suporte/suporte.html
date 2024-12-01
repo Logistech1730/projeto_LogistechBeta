@@ -14,7 +14,7 @@
 
 <body>
     <div class="container">
-        <div class="barra-lateral">
+         <div id="barralateral" class="barra-lateral">
             <div class="div-imagem-perfil">
                 <img src="../img/perfilexemplo.png" class="perfil-foto" alt="foto de perfil" />
             </div>
@@ -29,11 +29,11 @@
             </div>
             <div class="option">
                 <i class="fa-solid fa-ticket"></i>
-                <span><a href="./historico.html">Ferramenta de suporte</a></span>
+                <span><a href="https://desk.zoho.com/agent/logistech/logistech/tickets">Ferramenta de suporte</a></span>
             </div>
             <div class="option">
                 <i class="fa-solid fa-door-open"></i>
-                <span><a href="../index.html">Sair</a></span>
+                <span><a onclick="deslogar()">Sair</a></span>
             </div>
         </div>
         <div class="suporte">
@@ -146,4 +146,13 @@
         console.log(erro);
       });
   }
+  if (!sessionStorage.getItem("idUsuario")) {
+    window.location.href = "/login.html"
+}
+
+
+  function deslogar() {
+    sessionStorage.clear();
+    window.location.reload()
+}
 </script>

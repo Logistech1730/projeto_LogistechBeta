@@ -11,11 +11,11 @@ function autenticar(email, senha) {
 }
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
-function cadastrar(nome, email, senha, fkEmpresa) {
+function cadastrar(nome, email, senha, fkEmpresa, nivel) {
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucaoSql = `
-        INSERT INTO usuario (nome, email, senha, fkEmpresa) VALUES ('${nome}', '${email}', '${senha}', ${fkEmpresa});
+        INSERT INTO usuario (nome, email, senha, fkEmpresa, nivel) VALUES ('${nome}', '${email}', '${senha}', ${fkEmpresa}, ${nivel});
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

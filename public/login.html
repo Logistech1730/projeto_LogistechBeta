@@ -234,7 +234,7 @@
                                 sessionStorage.setItem("idEmpresa", resultado[0].fkEmpresa)
                                 // verificando nível de usuário e o direcionando para a tela certa
                                 window.location.href = "./dashboard/dashboard.html"
-                            } else if (resultado[0].nivel == 1) {
+                            } else if (resultado[0].nivel == 2) {
                                 window.location.href = "./suporte/suporte.html"
                             } else {
                                 alert("Sua empresa não está com cadastro ativo ainda!")

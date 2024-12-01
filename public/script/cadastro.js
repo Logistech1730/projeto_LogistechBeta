@@ -10,6 +10,7 @@
 
     // criação de um objeto para o usuário
     var usuario = {
+        isSupervisor: true
 
     }
     

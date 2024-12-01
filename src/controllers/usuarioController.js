@@ -40,6 +40,7 @@ function cadastrar(req, res) {
   var email = req.body.email;
   var senha = req.body.senha;
   var fkEmpresa = req.body.fkEmpresa;
+  var isSupervisor = (req.body.isSupervisor == undefined? false: true);
 
   // Faça as validações dos valores
   if (nome == undefined) {
@@ -51,9 +52,13 @@ function cadastrar(req, res) {
   } else if (fkEmpresa == undefined) {
     res.status(400).send("Sua empresa a vincular está undefined!");
   } else {
-    // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-    usuarioModel
-      .cadastrar(nome, email, senha, fkEmpresa)
+    var nivel = 0;
+
+    if (isSupervisor) {
+      nivel = 1;
+    }
+
+      usuarioModel.cadastrar(nome, email, senha, fkEmpresa, nivel)
       .then(function (resultado) {
         res.json(resultado);
       })
@@ -65,6 +70,10 @@ function cadastrar(req, res) {
         );
         res.status(500).json(erro.sqlMessage);
       });
+
+
+
+    
   }
 }
 
