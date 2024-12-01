@@ -165,11 +165,35 @@ function listarPorId(req, res) {
 
 }
 
+function pesquisarUsuario(req, res){
+  var idEmpresa = req.params.idEmpresa
+  var email = req.params.email
+  if (idEmpresa == undefined) {
+    res.status(400).send("ID da empresa indefinido");
+ } else {
+    usuarioModel.pesquisarUsuario(idEmpresa, email)
+    .then(
+        function (resultado) {
+            res.status(200).json(resultado);
+        }
+    )
+    .catch(function (erro) {
+        console.log(erro);
+        console.log(
+            "\nHouve um erro ao realizar a filtragem do usuário Erro: ",
+            erro.sqlMessage
+        );
+        res.status(500).json(erro.sqlMessage);
+    })
+ }
+}
+
 module.exports = {
   autenticar,
   cadastrar,
   listarPorEmpresa,
   deletarUsuario,
   editarUsuario,
-  listarPorId
+  listarPorId,
+  pesquisarUsuario
 };

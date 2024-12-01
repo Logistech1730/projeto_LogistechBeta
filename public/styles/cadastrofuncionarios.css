@@ -44,6 +44,28 @@ body {
     background-color: #0f26b9;
 }
 
+.btn-limparPesquisa{
+    background-color: #1E2868;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    font-size: 15px;
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    margin-top: 5%;
+}
+
+.containerBtnLimpar{
+    height: 1%;
+    display: flex;
+    justify-content: end;
+}
+
+.btn-limparPesquisa:hover{
+    cursor: pointer;
+    background-color: #0f26b9;
+}
+
 #modal-1{
     display: fixed;
     align-self: center;
@@ -123,7 +145,6 @@ body {
 
 }
 
-
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -188,17 +209,11 @@ ul{
     padding: 2px;
 }
 
-
-
-
-
 hr {
     border: none;
     border-top: 2px solid #2c2c2cc0;
     width: 95%;
 }
-
-
 
 .hidden{
     transition: 0.2s;

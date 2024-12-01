@@ -19,6 +19,7 @@ email VARCHAR(45),
 senha VARCHAR(45),
 telefone VARCHAR(45),
 nivel INT default 0,
+dataCadastro DATETIME DEFAULT current_timestamp,
 fkEmpresa INT,
 CONSTRAINT fkUsuarioEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
 ON DELETE CASCADE
@@ -36,7 +37,6 @@ complemento VARCHAR(50),
 fkEmpresa INT,
 CONSTRAINT fkEnderecoEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
 ON DELETE CASCADE
-
 );
 
 CREATE TABLE esteira(

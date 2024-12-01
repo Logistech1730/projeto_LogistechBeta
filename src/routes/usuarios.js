@@ -30,4 +30,8 @@ router.put('/editar/:idUsuario', function (req, res){
     usuarioController.editarUsuario(req, res)
 })
 
+router.get("/pesquisarUsuario/:idEmpresa/:email", function(req, res) {
+    usuarioController.pesquisarUsuario(req, res);
+});
+
 module.exports = router;

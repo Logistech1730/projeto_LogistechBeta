@@ -55,11 +55,20 @@ function listarPorId(idUsuario) {
     return database.executar(instrucaoSql);
 }
 
+function pesquisarUsuario(idEmpresa, email){
+    var instrucaoSql = `
+    SELECT * FROM usuario WHERE fkEmpresa = ${idEmpresa} AND email LIKE '%${email}%'
+    `
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql)
+}
+
 module.exports = {
     autenticar,
     cadastrar,
     listarPorEmpresa,
     deletarUsuario,
     editarUsuario,
-    listarPorId
+    listarPorId,
+    pesquisarUsuario
 };

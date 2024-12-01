@@ -127,8 +127,11 @@
         <div class="filtrosEsteira">
           <ul>
             <li>
-              Pesquisar <input type="text" />
-              <i class="fa-solid fa-magnifying-glass"></i>
+              Pesquisar por email <input type="text" id="inpPesquisa" />
+              <i class="fa-solid fa-magnifying-glass" onclick="pesquisarUsuario()"></i>
+            </li>
+            <li class="containerBtnLimpar">
+              <button class="btn-limparPesquisa" onclick="limparPesquisa()">Limpar pesquisa</button>
             </li>
           </ul>
         </div>
@@ -181,15 +184,8 @@
         <td class='tableIcons deletarUser'><i class="fa-solid fa-trash"  onclick='deletar(${resultado[i].idUsuario})'></i></td>
         </tr>
         `
-            // if (resultado[i].idUsuario == sessionStorage.idUsuario) {
-            //   deletarUser.innerHTML = ''
-            //   console.log('Estou no if')
-            // }
-          }
-
-          var deletarUserElements = document.querySelectorAll('.deletarUser')
-          for (var i = 0; i < resultado.length; i++) {
             if (resultado[i].idUsuario == sessionStorage.idUsuario) {
+              var deletarUserElements = document.querySelectorAll('.deletarUser')
               deletarUserElements[i].innerHTML = ''
             }
           }
@@ -260,6 +256,43 @@
         console.error(erro)
       })
 
+  }
+
+  function pesquisarUsuario() {
+    var idEmpresa = sessionStorage.idEmpresa
+    bodyTabela.innerHTML = ''
+    var emailPesquisa = document.getElementById('inpPesquisa').value
+
+    fetch(`/usuarios/pesquisarUsuario/${idEmpresa}/${emailPesquisa}`)
+      .then((resposta) => {
+        if (resposta.ok) {
+          resposta.json().then((resultado) => {
+            for (var i = 0; i < resultado.length; i++) {
+              console.log('Email ', resultado[i].email)
+              bodyTabela.innerHTML += `
+                <tr>
+                <td>${resultado[i].nome}</td>
+                <td>${resultado[i].email}</td>
+                <td>${(resultado[i].dataCadastro).substr(0, 10)}</td>
+                <td class='tableIcons'> <i class="fa-solid fa-pencil" onclick="editarFuncionario(${resultado[i].idUsuario}, '${resultado[i].nome}', '${resultado[i].email}', '${resultado[i].senha}')" ></i></td>
+                <td class='tableIcons deletarUser'><i class="fa-solid fa-trash"  onclick='deletar(${resultado[i].idUsuario})'></i></td>
+                </tr>
+                `
+
+              if (resultado[i].idUsuario == sessionStorage.idUsuario) {
+                var deletarUserElements = document.querySelectorAll('.deletarUser')
+                deletarUserElements[i].innerHTML = ''
+              }
+            }
+          })
+        }
+      }).catch((erro => {
+        console.log("Erro ao enviar requisição: ", erro)
+      }))
+  }
+
+  function limparPesquisa() {
+    window.location.reload()
   }
 
   function editarFuncionario(idUsuario, nome, email, senha) {
