@@ -4,9 +4,9 @@ USE logistech;
 CREATE TABLE empresa(
 idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
 cnpj CHAR(14),
-telefone CHAR(11),
+telefone CHAR(9),
 nomeFantasia VARCHAR(45),
-isAtivo TINYINT DEFAULT 0,
+isAtivo TINYINT,
 CONSTRAINT chk_ativo CHECK(isAtivo IN(0, 1))
 );
 
@@ -15,10 +15,9 @@ idUsuario INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(45),
 email VARCHAR(45),
 senha VARCHAR(45),
+telefone VARCHAR(45),
 fkEmpresa INT,
-dataCadastro DATETIME DEFAULT CURRENT_TIMESTAMP(),
 CONSTRAINT fkUsuarioEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
-nivel INT default 0
 );
 
 CREATE TABLE endereco(
@@ -42,6 +41,17 @@ fkEmpresa INT,
 CONSTRAINT fkEsteiraEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
 );
 
+CREATE TABLE metrica (
+idMetrica INT PRIMARY KEY AUTO_INCREMENT,
+nomeMetrica VARCHAR(50),
+valorMinimo DOUBLE,
+valorMaximo DOUBLE,
+dataCadastro DATE,
+cor CHAR(6),
+fkEsteira INT,
+CONSTRAINT fkMetricaEsteira FOREIGN KEY (fkEsteira) REFERENCES esteira (idEsteira)
+);
+
 CREATE TABLE sensor(
 idSensor INT PRIMARY KEY AUTO_INCREMENT,
 dataInstalacao DATE,
@@ -52,10 +62,20 @@ CONSTRAINT fkSensorEsteira FOREIGN KEY (fkEsteira) REFERENCES esteira(idEsteira)
 
 CREATE TABLE registro(
 idRegistro INT PRIMARY KEY AUTO_INCREMENT,
-distancia INT,
+distancia DOUBLE,
 dataRegistro DATETIME DEFAULT CURRENT_TIMESTAMP(),
+isProdutoViavel TINYINT,
+CONSTRAINT chkProduto CHECK(isProdutoViavel IN(0,1)),
 fkSensor INT,
 CONSTRAINT fkRegistroSensor FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor)
+);
+
+CREATE TABLE Alerta
+(idAlerta INT AUTO_INCREMENT,
+fkRegistro INT,
+visto BIT DEFAULT 0,
+PRIMARY KEY (IdAlerta, fkRegistro),
+CONSTRAINT fkRegistroAlerta FOREIGN KEY (fkRegistro) REFERENCES registro (idRegistro)
 );
 
 -- Inserções na tabela 'empresa'
@@ -85,10 +105,10 @@ INSERT INTO endereco (cep, logradouro, cidade, UF, numero, complemento, fkEmpres
 -- Inserções na tabela 'esteira'
 INSERT INTO esteira (departamento, localizacao, distanciaEsperada, fkEmpresa) VALUES 
 ('Logística', 'Depósito A', 100, 1),
-('Produção', 'Depósito B', 200, 2),
-('Expedição', 'Depósito C', 150, 3),
-('Armazenagem', 'Depósito D', 250, 4),
-('Distribuição', 'Depósito E', 300, 5);
+('Produção', 'Depósito B', 200, 1),
+('Expedição', 'Depósito C', 150, 2),
+('Armazenagem', 'Depósito D', 250, 2),
+('Distribuição', 'Depósito E', 300, 2);
 
 -- Inserções na tabela 'sensor'
 INSERT INTO sensor (dataInstalacao, ultimaManutencao, fkEsteira) VALUES 
@@ -98,13 +118,38 @@ INSERT INTO sensor (dataInstalacao, ultimaManutencao, fkEsteira) VALUES
 ('2024-06-10', '2024-09-10', 4),
 ('2023-03-30', '2024-03-30', 5);
 
--- Inserções na tabela 'registro' - Será feito pela API - Somente para Visualização
+SELECT 
+    esteira.departamento AS 'Esteira', registro.distancia as 'distancia', registro.dataRegistro AS 'Data',
+    CASE 
+        WHEN Alerta.visto = 1 THEN 'Sim'
+        ELSE 'Não'
+    END AS 'Visto' FROM Alerta 
+    JOIN registro ON Alerta.fkRegistro = registro.idRegistro
+	JOIN sensor ON registro.fkSensor = sensor.idSensor
+	JOIN esteira ON sensor.fkEsteira = esteira.idEsteira
+    JOIN empresa on esteira.fkEmpresa = empresa.idEmpresa
+    WHERE empresa.idEmpresa = 1
+    ORDER BY registro.dataRegistro DESC;
+-- Inserções na tabela 'registro'
 INSERT INTO registro (distancia, fkSensor) VALUES 
-(120, 1),
-(210, 2),
-(140, 3),
-(260, 4),
-(320, 5);
+(10, 1),
+(10, 1),
+(10, 1),
+(10, 1),
+(10, 1),
+(10, 1),
+(10, 2),
+(10, 2),
+(10, 2),
+(10, 2),
+(12, 2),
+(12, 2);
+
+-- Inserções na tabela alertas
+INSERT INTO Alerta (fkRegistro, visto) VALUES
+(1, 1), 
+(2, 0); 
+
 
 -- 1. Listar todas as empresas ativas
 SELECT idEmpresa, nomeFantasia, cnpj, telefone FROM empresa WHERE isAtivo = 1;
@@ -118,6 +163,7 @@ SELECT s.idSensor, s.dataInstalacao, s.ultimaManutencao, e.nomeFantasia AS Empre
 	JOIN esteira es ON s.fkEsteira = es.idEsteira
 	JOIN empresa e ON es.fkEmpresa = e.idEmpresa
 	WHERE e.idEmpresa = 1; 
+    
 
 -- 4. Exibir registros de sensores com data e hora
 SELECT r.idRegistro, r.distancia, r.dataRegistro, s.idSensor FROM registro r
@@ -128,9 +174,53 @@ SELECT r.idRegistro, r.distancia, r.dataRegistro, s.idSensor FROM registro r
 SELECT es.idEsteira, es.departamento, es.localizacao, s.idSensor, s.dataInstalacao FROM esteira es
 	LEFT JOIN sensor s ON es.idEsteira = s.fkEsteira
 	WHERE es.fkEmpresa = 1;  
+    
+UPDATE registro SET isProdutoViavel = 1 WHERE distancia = 15;
 
-create view registros as SELECT esteira.departamento AS Esteira, registro.distancia AS AlturaDetectada, registro.dataRegistro AS DataRegistro 
-FROM esteira JOIN sensor ON sensor.fkEsteira = esteira.idEsteira JOIN registro ON registro.fkSensor = sensor.idSensor 
-JOIN empresa ON esteira.fkEmpresa = empresa.idEmpresa WHERE empresa.idEmpresa = 1 ORDER BY registro.dataRegistro;
+SELECT idRegistro, distancia, dataRegistro, CASE WHEN isProdutoViavel = 1 THEN 'Produto Viável' ELSE 'Produto inViável' END AS 'Produto Válido' FROM registro;
 
- select * from registros;
+
+SELECT * FROM Registro;
+-- Select de quantidade de produtos válidos
+SELECT COUNT(idRegistro) AS 'Produtos válidos' FROM registro WHERE distancia = 10;
+-- Select de quantidade de produtos inválidos
+SELECT COUNT(idRegistro) AS 'Produtos inválidos' FROM registro WHERE distancia != 10;
+
+-- SELECT da porcentagem de produtos válidos VS inválidos
+SELECT CONCAT(((SELECT COUNT(idRegistro) AS 'Produtos válidos' FROM registro WHERE distancia = 10) 
+/
+(SELECT COUNT(idRegistro) FROM registro)) * 100, '%')  AS 'Porcentagem de produtos válidos';
+
+ -- select de porcentagem de produtos inválidos
+ SELECT CONCAT(((SELECT COUNT(idRegistro) AS 'Produtos inválidos' FROM registro WHERE distancia != 10) 
+/
+(SELECT COUNT(idRegistro) FROM registro)) * 100, '%')  AS 'Porcentagem de produtos inválidos';
+
+-- SELECT DE TOTAL DE Produtos por esteira
+SELECT esteira.localizacao, COUNT(idRegistro) as 'Quantidade de produtos' FROM Registro 
+JOIN Sensor on fkSensor = idSensor
+JOIN Esteira on fkEsteira = idEsteira
+WHERE fkEsteira = 1;
+
+-- SELECT TOTAL DE PRODUTOS DE MAIS DE 1 ESTEIRA
+SELECT COUNT(idRegistro) as 'Quantidade de produtos' FROM Registro 
+JOIN Sensor on fkSensor = idSensor
+JOIN Esteira on fkEsteira = idEsteira
+WHERE fkEsteira = 1 OR fkEsteira = 2;
+
+-- SELECT Alertas 
+select * from Alerta;
+
+-- SELECT Alertas não vistos
+SELECT * FROM Alerta WHERE visto = 0;
+
+-- Selecionar alertas não vistos e suas respectivas esteiras
+SELECT idAlerta, visto, dataRegistro, esteira.localizacao FROM Alerta
+JOIN Registro on fkRegistro = idRegistro
+JOIN Sensor on fkSensor = idSensor
+JOIN esteira ON fkEsteira = idEsteira
+WHERE visto = 0;
+
+
+
+

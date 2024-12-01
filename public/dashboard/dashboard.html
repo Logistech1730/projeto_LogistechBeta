@@ -21,7 +21,7 @@
     />
   </head>
 
-  <body>
+  <body onload="gerarPorcentagemProdutos(); gerarQtdTotalProdutos();">
     <div class="container-dash">
       <div class="barra-lateral">
         <div class="div-imagem-perfil">
@@ -136,6 +136,14 @@
  
 
   var ctx = document.getElementById("grafico-barra").getContext("2d");
+  var qtdValidosTotal = 20
+  var qtdInvalidosTotal = 5
+  
+  var qtd_validos_7_dias = [20,32,41,23,40,23,34];
+  var qtd_invalidos_7_dias = [5,2,3,5,1,5,6];
+
+  var qtdValidosTempoReal = [60,40,50,49,39,51];
+  var qtdInvalidosTempoReal = [10,20,10,9,19,11];
 
   // Criar gradiente
   var gradient = ctx.createLinearGradient(0, 0, 0, 400);
@@ -154,13 +162,13 @@
         {
           label: "Produtos válidos",
           backgroundColor: gradient,
-          data: [12, 12, 10, 11, 14, 12],
+          data: qtd_validos_7_dias,
           borderWidth: 0,
         },
         {
           label: "Produtos inválidos",
           backgroundColor: gradient1,
-          data: [6, 6, 8, 7, 9, 5],
+          data: qtd_invalidos_7_dias,
           borderWidth: 0,
         },
       ],
@@ -171,7 +179,7 @@
       plugins: {
         title: {
           display: true,
-          text: "Produtos válidos e inválidos em período determinado",
+          text: "Produtos válidos e inválidos dos últimos 7 dias",
           font: {
             size: 16,
           },
@@ -219,14 +227,14 @@
             label: "Produtos inválidos",
             backgroundColor: gradient1,
             borderColor: gradient1,
-            data: dados_produtos_erroneos,
+            data: qtdInvalidosTempoReal,
             fill: false,
           },
           {
             label: "Produtos válidos",
             backgroundColor: gradient,
             borderColor: gradient,
-            data: dados_produtos_corretos,
+            data: qtdValidosTempoReal,
             fill: false,
           },
         ],
@@ -287,7 +295,7 @@
       datasets: [
         {
           label: "Valor",
-          data: [],
+          data: [qtdValidosTotal,qtdInvalidosTotal],
           backgroundColor: ["#384cd1", "#FF0000"],
           borderWidth: 1,
         },
@@ -326,69 +334,13 @@
     plugins: [ChartDataLabels], // Ativando o plugin ChartDataLabels
   });
 
-  var select_esteiras = document.getElementById("slt_esteiras");
-  var qtd_produtos_corretos = 0;
-  var qtd_produtos_erroneos = 0;
-
-  var dados_produtos_corretos = [];
-  var dados_produtos_erroneos = [];
-
-  // Função executada assim que a página for carregada
-  document.addEventListener("DOMContentLoaded", function () {
-    gerarQtdAleatoriaDeProdutos();
-  });
-
-  function gerarQtdAleatoriaDeProdutos() {
-    // produtos corretos
-    for (let i = 0; i < 6; i++) {
-      dados_produtos_corretos[i] = gerarAleatorio(200);
-    }
-    graficoBarra.data.datasets[0].data = dados_produtos_corretos;
-    grafico_tempo_real.data.datasets[1].data = dados_produtos_corretos;
-
-    // produtos erroneos
-    for (let i = 0; i < 6; i++) {
-      dados_produtos_erroneos[i] = gerarAleatorio(20);
-    }
-    graficoBarra.data.datasets[1].data = dados_produtos_erroneos;
-    grafico_tempo_real.data.datasets[0].data = dados_produtos_erroneos;
-
-    graficoBarra.update();
-    grafico_tempo_real.update();
-    gerarPorcentagemProdutos();
-    gerarQtdTotalProdutos();
-  }
-
-  // mudando dados do gráfico a partir da mudança do select
-  select_esteiras.addEventListener("change", () => {
-    gerarQtdAleatoriaDeProdutos();
-  });
-
   // quando minha página carregar, modificar o total de produtos e calcular a porcentagem
   function gerarPorcentagemProdutos() {
-    qtd_produtos_corretos = gerarTotalProdutos(dados_produtos_corretos);
-    qtd_produtos_erroneos = gerarTotalProdutos(dados_produtos_erroneos);
-    // span_qtd_produtos_corretos.innerHTML = qtd_produtos_corretos
-    // span_qtd_produtos_erroneos.innerHTML = qtd_produtos_erroneos
-
-    var porcentagem =
-      (qtd_produtos_corretos /
-        (qtd_produtos_corretos + qtd_produtos_erroneos)) *
-      100;
-    // plotando no gráfico a porcentagem de produtos corretos
-    grafico_pizza.data.datasets[0].data[0] = Number(porcentagem.toFixed(1));
-    // com a diferença, plotaremos a quantidade de errados
-    grafico_pizza.data.datasets[0].data[1] = Number(
-      (100 - porcentagem).toFixed(1)
-    );
-    // atualizando o gráfico
-    grafico_pizza.update();
-
-    if (porcentagem > 95) {
+    if (qtdValidosTotal > 95) {
       status_esteiras.innerHTML = "Conforme esperado";
       status_esteiras.style.color = "#fff";
       status_esteiras.style.backgroundColor = "#0F6C00";
-    } else if (porcentagem > 90) {
+    } else if (qtdValidosTotal > 90) {
       status_esteiras.innerHTML = "Alerta!";
       status_esteiras.style.color = "#fff";
       status_esteiras.style.backgroundColor = "#ffb600";
@@ -397,29 +349,8 @@
       status_esteiras.style.color = "#fff";
       status_esteiras.style.backgroundColor = "#D83F3F";
     }
-
-    //qtd_porcentagem.innerHTML = porcentagem.toFixed() + "%";
   }
 
-  function gerarQtdTotalProdutos() {
-    var qtdTotalProdutos =
-      gerarTotalProdutos(graficoBarra.data.datasets[0].data) +
-      gerarTotalProdutos(graficoBarra.data.datasets[1].data);
-    span_qtd_produtos.innerHTML = qtdTotalProdutos;
-  }
-
-  function gerarTotalProdutos(quantidadeProdutos) {
-    var totalProdutos = 0;
-    for (let index = 0; index < quantidadeProdutos.length; index++) {
-      const element = quantidadeProdutos[index];
-      totalProdutos += element;
-    }
-    return totalProdutos;
-  }
-
-  function gerarAleatorio(intervalo) {
-    return Math.floor(Math.random() * intervalo);
-  }
 
   function carregarNomeEmpresa() {
     var idEmpresa = sessionStorage.getItem("idEmpresa");
@@ -440,4 +371,17 @@
         console.log(erro);
       });
   }
+  function gerarQtdTotalProdutos() {
+        var qtdTotalProdutos = gerarTotalProdutos(graficoBarra.data.datasets[0].data) + gerarTotalProdutos(graficoBarra.data.datasets[1].data)
+        span_qtd_produtos.innerHTML = qtdTotalProdutos
+
+    }
+    function gerarTotalProdutos(quantidadeProdutos) {
+        var totalProdutos = 0
+        for (let index = 0; index < quantidadeProdutos.length; index++) {
+            const element = quantidadeProdutos[index]
+            totalProdutos += element
+        }
+        return totalProdutos
+    }
 </script>
