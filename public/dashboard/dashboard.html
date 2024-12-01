@@ -136,15 +136,96 @@
  
 
   var ctx = document.getElementById("grafico-barra").getContext("2d");
-  var qtdValidosTotal = 20
-  var qtdInvalidosTotal = 5
+  var qtdValidosTotal = 20;
+  var qtdInvalidosTotal = 5;
+  var qtdProdutosTotal = qtdInvalidosTotal + qtdInvalidosTotal;
   
   var qtd_validos_7_dias = [20,32,41,23,40,23,34];
   var qtd_invalidos_7_dias = [5,2,3,5,1,5,6];
 
   var qtdValidosTempoReal = [60,40,50,49,39,51];
   var qtdInvalidosTempoReal = [10,20,10,9,19,11];
+  var grafico_pizza;
 
+function atualizarGraficoPizza(registros) {
+    qtdValidosTotal = Number(registros[0].ProdutosValidos);
+    qtdInvalidosTotal = Number(registros[0].ProdutosInvalidos);
+    qtdProdutosTotal = qtdInvalidosTotal + qtdValidosTotal;
+
+    if (grafico_pizza) {
+        grafico_pizza.data.datasets[0].data = [qtdValidosTotal, qtdInvalidosTotal];
+        grafico_pizza.update();
+    } else {
+        grafico_pizza = new Chart(document.getElementById("grafico-pizza"), {
+            type: "pie",
+            data: {
+                labels: ["Válidos", "Não válidos"],
+                datasets: [
+                    {
+                        label: "Valor",
+                        data: [qtdValidosTotal, qtdInvalidosTotal],
+                        backgroundColor: ["#384cd1", "#FF0000"],
+                        borderWidth: 1,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: "Produtos válidos VS inválidos",
+                        font: {
+                            size: 20,
+                        },
+                        color: "#000",
+                        padding: {
+                            top: 5,
+                            bottom: 5,
+                        },
+                    },
+                    datalabels: {
+                        color: "#fff",
+                        font: {
+                            weight: "bold",
+                            size: 20,
+                        },
+                        formatter: (value, ctx) => {
+                            var porcentagens = (value / qtdProdutosTotal) * 100;
+                            return `${Math.round (porcentagens)}%`;
+                        },
+                        anchor: "center",
+                        align: "center",
+                    },
+                },
+            },
+            plugins: [ChartDataLabels], // Ativando o plugin ChartDataLabels
+        });
+    }
+}
+
+
+function buscarRegistrosGraficoPizza() { 
+    fetch(`/registros/listarValidosInvalidosTotalEmpresa/${sessionStorage.idEmpresa}`, { 
+      method: 'GET', 
+    }) 
+        .then((response) => { 
+          if (response.ok) { 
+            return response.json(); 
+          } else { 
+            throw new Error('Erro ao buscar as registros.'); 
+          } }) 
+          .then((registros) => { 
+            console.log("registros recebidas:", registros); 
+            atualizarGraficoPizza(registros); 
+          }) .catch((erro) => { 
+            console.error('Erro ao listar registros:', erro); 
+            alert('Erro ao listar registros.'); 
+          });
+        }
+          buscarRegistrosGraficoPizza();
+          var buscarRegistrosGraficoPizzaConstantemente = setInterval(buscarRegistrosGraficoPizza, 1000);
   // Criar gradiente
   var gradient = ctx.createLinearGradient(0, 0, 0, 400);
   gradient.addColorStop(0, "#384cd1");
@@ -288,51 +369,7 @@
     }
   );
 
-  var grafico_pizza = new Chart(document.getElementById("grafico-pizza"), {
-    type: "pie",
-    data: {
-      labels: ["Válidos", "Não válidos"],
-      datasets: [
-        {
-          label: "Valor",
-          data: [qtdValidosTotal,qtdInvalidosTotal],
-          backgroundColor: ["#384cd1", "#FF0000"],
-          borderWidth: 1,
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        title: {
-          display: true,
-          text: "Produtos válidos VS inválidos",
-          font: {
-            size: 20,
-          },
-          color: "#000",
-          padding: {
-            top: 5,
-            bottom: 5,
-          },
-        },
-        datalabels: {
-          color: "#fff",
-          font: {
-            weight: "bold",
-            size: 20,
-          },
-          formatter: (value, ctx) => {
-            return `${value}%`;
-          },
-          anchor: "center",
-          align: "center",
-        },
-      },
-    },
-    plugins: [ChartDataLabels], // Ativando o plugin ChartDataLabels
-  });
+  
 
   // quando minha página carregar, modificar o total de produtos e calcular a porcentagem
   function gerarPorcentagemProdutos() {
