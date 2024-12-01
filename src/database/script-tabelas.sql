@@ -41,6 +41,7 @@ ON DELETE CASCADE
 
 CREATE TABLE esteira(
 idEsteira INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(50),
 departamento VARCHAR(50),
 localizacao VARCHAR(50),
 distanciaEsperada INT,

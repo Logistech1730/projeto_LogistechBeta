@@ -5,19 +5,20 @@ var esteiraModel = require("../models/esteiraModel");
 
 function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo login.html (note o nome após o ".body")
+    var nome = req.body.nome
     var departamento = req.body.departamento;
     var localizacao = req.body.localizacao;
     var distanciaEsperada = req.body.distanciaEsperada;
     var fkEmpresa = req.body.fkEmpresa;
 
     // Faça as validações dos valores
-    if (departamento == undefined || localizacao == undefined || distanciaEsperada == undefined || fkEmpresa == undefined) {
+    if (nome == undefined ||departamento == undefined || localizacao == undefined || distanciaEsperada == undefined || fkEmpresa == undefined) {
         // Caso algum valor vier como indefinido, devolvo a requisição sem efetuá-la
         res.status(400).send("Alguma informação veio como undefined!")
     }
     else {
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        esteiraModel.cadastrar(departamento, localizacao, distanciaEsperada, fkEmpresa)
+        esteiraModel.cadastrar(nome, departamento, localizacao, distanciaEsperada, fkEmpresa)
             .then(
                 function (resultado) {
                     console.log("RESULTADO: ", resultado)
@@ -86,6 +87,7 @@ function deletarEsteira(req, res) {
 
 function editarEsteira(req, res){
     var idEsteira = req.params.idEsteira
+    var nome = req.body.nome
     var departamento = req.body.departamento
     var localizacao = req.body.localizacao
     var distanciaEsperada = req.body.distanciaEsperada
@@ -93,7 +95,7 @@ function editarEsteira(req, res){
     if(idEsteira === undefined){
         res.status(400).send("ID da esteira indefinido");
     }else{
-        esteiraModel.editarEsteira(idEsteira, departamento, localizacao, distanciaEsperada)
+        esteiraModel.editarEsteira(idEsteira, nome, departamento, localizacao, distanciaEsperada)
         .then(
             function (resultado) {
                 res.status(200).json(resultado);

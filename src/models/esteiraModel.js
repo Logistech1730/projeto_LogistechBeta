@@ -3,18 +3,18 @@ var database = require("../database/config")
 
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
-function cadastrar(departamento, localizacao, distanciaEsperada, fkEmpresa) {
+function cadastrar(nome, departamento, localizacao, distanciaEsperada, fkEmpresa) {
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucaoSql = `
-        INSERT INTO esteira (departamento, localizacao, distanciaEsperada, fkEmpresa) VALUES ('${departamento}', '${localizacao}', '${distanciaEsperada}', '${fkEmpresa}');`;
+        INSERT INTO esteira (nome, departamento, localizacao, distanciaEsperada, fkEmpresa) VALUES ('${nome}' ,'${departamento}', '${localizacao}', ${distanciaEsperada}, '${fkEmpresa}');`;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
 function listarTodasEsteiras(fkEmpresa) {
     var instrucaoSql = `
-    SELECT idEsteira, departamento, localizacao, distanciaEsperada, nomeFantasia FROM esteira JOIN empresa ON fkEmpresa = idEmpresa WHERE fkEmpresa = ${fkEmpresa};
+    SELECT idEsteira, nome, departamento, localizacao, distanciaEsperada, nomeFantasia FROM esteira JOIN empresa ON fkEmpresa = idEmpresa WHERE fkEmpresa = ${fkEmpresa};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -29,10 +29,10 @@ function deletarEsteira(idEsteira) {
     return database.executar(instrucaoSql);
 }
 
-function editarEsteira(idEsteira, departamento, localizacao, distanciaEsperada){
+function editarEsteira(idEsteira, nome, departamento, localizacao, distanciaEsperada){
     var instrucaoSql = `
     UPDATE esteira
-    SET departamento = '${departamento}', localizacao = '${localizacao}', distanciaEsperada = ${distanciaEsperada}
+    SET nome = '${nome}', departamento = '${departamento}', localizacao = '${localizacao}', distanciaEsperada = ${distanciaEsperada}
     WHERE idEsteira = ${idEsteira};
     ` 
     return database.executar(instrucaoSql)

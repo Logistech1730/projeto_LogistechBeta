@@ -268,7 +268,6 @@
         if (resposta.ok) {
           resposta.json().then((resultado) => {
             for (var i = 0; i < resultado.length; i++) {
-              console.log('Email ', resultado[i].email)
               bodyTabela.innerHTML += `
                 <tr>
                 <td>${resultado[i].nome}</td>

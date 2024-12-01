@@ -27,6 +27,9 @@
                                 onclick="fecharCadastro()"></i></button>
                     </div>
                     <div class="mainModal" id="modal-form">
+                        <label for="inpNome">Nome</label>
+                        <input type="text" id="inpNome">
+
                         <label for="inpDep">Departamento</label>
                         <input type="text" id="inpDep">
 
@@ -50,15 +53,18 @@
                                 onclick="fecharEdicao()"></i></button>
                     </div>
                     <div class="mainModal" id="modal-form">
-                        <label for="inpDep">Departamento</label>
+                        <label for="inpNomeEdt">Nome</label>
+                        <input type="text" id="inpNomeEdt">
+
+                        <label for="inpDepEdt">Departamento</label>
                         <input type="text" id="inpDepEdt">
 
-                        <label for="inpLoc">Localização</label>
+                        <label for="inpLocEdt">Localização</label>
                         <input type="text" id="inpLocEdt">
 
-                        <label for="inpTamanho">Tamanho do produto</label>
+                        <label for="inpTamanhoEdt">Tamanho do produto</label>
                         <input type="number" id="inpTamanhoEdt">
-                        <div id="container-aviso"></div>
+                        <div id="container-aviso2"></div>
                         <button id="edicaoBtn">Salvar</button>
                     </div>
                 </div>
@@ -124,10 +130,24 @@
             </div>
             <h2>Esteiras cadastradas</h2>
             <div class="containerEsteiras" id="containerEsteiras">
-                <div class="cardEsteira">
-                    <div class="leftContainer">
-                    </div>
-                </div>
+                <table id="tabelaEsteiras">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Departamento</th>
+                            <th>Distancia esperada</th>
+                            <th>Localização</th>
+                            <th>Produtos válidos</th>
+                            <th>Produtos inválidos</th>
+                            <th>Alertas</th>
+                            <th>Editar</th>
+                            <th>Excluir</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bodyTabela">
+
+                    </tbody>
+                </table>
             </div>
         </div>
     </main>
@@ -137,23 +157,41 @@
 <script>
     var idEmpresa = sessionStorage.getItem("idEmpresa")
     function cadastrar() {
+        let divMensagem = document.getElementById('container-aviso')
+
+        if (inpNome.value == '' || inpDep.value == '' || inpLoc.value == '' || inpTamanho.value == null) {
+            // alert('Preencha todos os campos')
+            divMensagem.style.color = 'red'
+            divMensagem.innerText = 'Preencha os campos'
+            return false
+        }
+
+        setTimeout(() => {
+            divMensagem.innerHTML = ''
+        }, 1000)
+
         fetch(`/esteiras/cadastrar`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
+                nome: inpNome.value,
                 departamento: inpDep.value,
                 localizacao: inpLoc.value,
-                distanciaEsperada: inpTamanho.value,
+                distanciaEsperada: Number(inpTamanho.value),
                 fkEmpresa: idEmpresa
             })
         })
             .then((resposta) => {
                 console.log(resposta)
                 if (resposta.status == 200) {
-                    alert("Esteira cadastrada com sucesso.")
-                    window.location.reload()
+                    divMensagem.style.color = 'blue'
+                    divMensagem.innerText = 'Esteira cadastrada com sucesso'
+
+                    setTimeout(() => {
+                        window.location.reload()
+                    }, 1000)
                 }
             })
             .catch((erro) => {
@@ -187,54 +225,34 @@
 
     function exibirEsteiras(esteiras) {
         const containerEsteiras = document.getElementById('containerEsteiras')
-        containerEsteiras.innerHTML = ''
+        // containerEsteiras.innerHTML = ''
+        let bodyTabela = document.getElementById('bodyTabela')
 
         if (esteiras.length === 0) {
             containerEsteiras.innerHTML = '<p>Nenhuma esteira cadastrada ainda.</p>'
             return
         }
 
-        esteiras.forEach((esteira, indice) => {
-            const card = document.createElement('div')
-            card.classList.add('cardEsteira')
+        for (var i = 0; i < esteiras.length; i++) {
 
-            // card.innerHTML = `
-            //     <div class="leftContainer">
-            //         <h3>Departamento: ${esteira.departamento}</h3>
-            //         <p><strong>Localização:</strong> ${esteira.localizacao}</p>
-            //         <p><strong>Distância Esperada:</strong> ${esteira.distanciaEsperada} metros</p>
-            //         <p><strong>Empresa:</strong> ${esteira.nomeFantasia}</p>
-            //     </div>
-            // `;
 
-            console.log("idEsteira ", esteira.idEsteira)
-            card.innerHTML = `<div class="leftContainer">
-      <h6>Esteira</h6>
-      <p class="esteiraNome">${esteira.nomeFantasia}</p>
-      <h3>Departamento</h3>
-      <p>${esteira.departamento}</p>
-      <p><b>Distância esperada</b></p>
-      <p>${esteira.distanciaEsperada} cm</p>
-      <p><b>Localização</b></p>
-      <p>${esteira.localizacao}</p>
+            // console.log("idEsteira ", esteira.idEsteira)
 
-    </div>
-    <div class="verticalLine"></div>
-    <div class="rightContainer">
-        <div class="icons">
-            <i class="fa-solid fa-trash" onclick="deletarEsteira(${esteira.idEsteira})"></i>
-            <i class="fa-solid fa-pencil" onclick="editarEsteira(${esteira.idEsteira}, '${esteira.departamento}', '${esteira.localizacao}', ${esteira.distanciaEsperada})"></i>
-        </div>
-      <p><b>Produtos válidos registrados</b></p>
-      <p>0</p>
-      <p><b>Produtos inválidos registrados</b></p>
-      <p>0</p>
-      <p><b>Alertas gerados</b></p>
-      <p>0</p>
-    </div>`
+            bodyTabela.innerHTML += `
+            <tr>
+                <td>${esteiras[i].nome}</td>
+                <td>${esteiras[i].nomeFantasia}</td>
+                <td>${esteiras[i].distanciaEsperada}</td>
+                <td>${esteiras[i].localizacao}</td>
+                <td>${esteiras[i].validos}</td>
+                <td>${esteiras[i].invalidos}</td>
+                <td>${esteiras[i].alertas}</td>
+                <td class='tableIcons'> <i class="fa-solid fa-pencil" onclick="editarEsteira(${esteiras[i].idEsteira}, '${esteiras[i].nome}', '${esteiras[i].departamento}', '${esteiras[i].localizacao}', ${esteiras[i].distanciaEsperada})"></i></td>
+                <td class='tableIcons'><i class="fa-solid fa-trash tableIcons" onclick="deletarEsteira(${esteiras[i].idEsteira})"></i></td>
+            </tr>
+    `
 
-            containerEsteiras.appendChild(card)
-        })
+        }
     }
 
     // document.addEventListener('DOMContentLoaded', function () {
@@ -251,11 +269,17 @@
         area_modal.style.display = 'flex'
     }
     function fecharCadastro() {
+        let divMensagem = document.getElementById('container-aviso')
         area_modal.style.display = 'none'
+        divMensagem.innerHTML = ''
+
     }
 
     function fecharEdicao() {
+        let divMensagem2 = document.getElementById('container-aviso2')
         area_modal2.style.display = 'none'
+        divMensagem2.innerHTML = ''
+
     }
 
     // });
@@ -276,11 +300,19 @@
             })
     }
 
-    function editarEsteira(idEsteira, departamento, localizacao, distanciaEsperada) {
+    function editarEsteira(idEsteira, nome, departamento, localizacao, distanciaEsperada) {
         area_modal2.style.display = 'flex'
+
+
+        let divMensagem = document.getElementById('container-aviso')
+        inpNomeEdt.value = nome
         inpDepEdt.value = departamento
         inpLocEdt.value = localizacao
         inpTamanhoEdt.value = distanciaEsperada
+
+
+
+        console.log(distanciaEsperada)
 
         document.getElementById('edicaoBtn').addEventListener('click', function () {
             salvarEsteira(idEsteira)
@@ -289,9 +321,25 @@
     }
 
     function salvarEsteira(idEsteira) {
+        let divMensagem2 = document.getElementById('container-aviso2')
+
+        let attNome = inpNomeEdt.value
         let attDepartamento = inpDepEdt.value
         let attLoc = inpLocEdt.value
         let attTamanho = Number(inpTamanhoEdt.value)
+
+
+        if (attNome == '' || attDepartamento == '' || attLoc == '' || attTamanho == null) {
+            // alert('Preencha todos os campos')
+            divMensagem2.style.color = 'red'
+            divMensagem2.innerText = 'Preencha os campos'
+            return false
+        }
+
+        setTimeout(() => {
+            divMensagem2.innerHTML = ''
+        }, 1000)
+
 
         fetch(`/esteiras/editar/${idEsteira}`, {
             method: "PUT",
@@ -299,14 +347,20 @@
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
+                nome: attNome,
                 departamento: attDepartamento,
                 localizacao: attLoc,
                 distanciaEsperada: attTamanho
             }),
         }).then((resposta) => {
             if (resposta.status === 200) {
-                alert('Esteira alterada com sucesso!')
-                window.location.reload()
+                // alert('Esteira alterada com sucesso!')
+                divMensagem2.style.color = 'blue'
+                divMensagem2.innerText = 'Esteira atualizada com sucesso'
+
+                setTimeout(() => {
+                    window.location.reload()
+                }, 1000)
             } else {
                 console.log(resposta)
             }
