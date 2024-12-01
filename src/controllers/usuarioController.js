@@ -90,8 +90,60 @@ function listarPorEmpresa(req, res) {
   }
 }
 
+function deletarUsuario(req, res) {
+  var idUsuario = req.params.idUsuario;
+
+  if (idUsuario == undefined) {
+      res.status(400).send("ID do usuario indefinido");
+  } else {
+      usuarioModel.deletarUsuario(idUsuario)
+          .then(
+              function (resultado) {
+                  res.status(200).json(resultado);
+              }
+          )
+          .catch(function (erro) {
+              console.log(erro);
+              console.log(
+                  "\nHouve um erro ao deletar o usuário! Erro: ",
+                  erro.sqlMessage
+              );
+              res.status(500).json(erro.sqlMessage);
+          })
+  }
+}
+
+function editarUsuario(req, res){
+  var idUsuario = req.params.idUsuario;
+  var nome = req.body.nome
+  var email = req.body.email
+  var senha = req.body.senha
+
+  if (idUsuario == undefined) {
+    res.status(400).send("ID do usuario indefinido");
+} else {
+    usuarioModel.editarUsuario(idUsuario, nome, email, senha)
+        .then(
+            function (resultado) {
+                res.status(200).json(resultado);
+            }
+        )
+        .catch(function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao editar o usuário! Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        })
+}
+
+}
+
 module.exports = {
   autenticar,
   cadastrar,
-  listarPorEmpresa
+  listarPorEmpresa,
+  deletarUsuario,
+  editarUsuario
 };

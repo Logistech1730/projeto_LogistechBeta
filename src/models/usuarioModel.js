@@ -31,8 +31,26 @@ function listarPorEmpresa(idEmpresa) {
     return database.executar(instrucaoSql);
 }
 
+function deletarUsuario(idUsuario){
+    var instrucaoSql = `
+    DELETE FROM usuario WHERE idUsuario = ${idUsuario} 
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function editarUsuario(idUsuario, nome, email, senha){
+    var instrucaoSql = `
+    UPDATE usuario SET nome = '${nome}', email = '${email}', senha = '${senha}' 
+    WHERE idUsuario = ${idUsuario}
+    `
+    return database.executar(instrucaoSql)
+}
+
 module.exports = {
     autenticar,
     cadastrar,
-    listarPorEmpresa
+    listarPorEmpresa,
+    deletarUsuario,
+    editarUsuario
 };

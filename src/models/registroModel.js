@@ -42,7 +42,7 @@ function listarProdutosValidosInvalidosPorSemanaEmpresa(fkEmpresa) {
     SUM(CASE WHEN r.distancia <> e.distanciaEsperada THEN 1 ELSE 0 END) AS ProdutosInvalidos
     FROM registro AS r JOIN sensor AS s ON r.fkSensor = s.idSensor JOIN esteira AS e ON s.fkEsteira = e.idEsteira 
     JOIN empresa AS emp ON e.fkEmpresa = emp.idEmpresa WHERE emp.idEmpresa = 1 
-    AND DATE(r.dataRegistro) >= (CURRENT_DATE() - INTERVAL 6 DAY) GROUP BY DATE(r.dataRegistro) ORDER BY DATE(r.dataRegistro);
+    AND DATE(r.dataRegistro) >= CURRENT_DATE() - INTERVAL 6 DAY AND DATE(r.dataRegistro) < CURDATE() + INTERVAL 1 DAY GROUP BY DATE(r.dataRegistro) ORDER BY DATE(r.dataRegistro);
 `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql); 

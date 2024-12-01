@@ -18,4 +18,12 @@ router.get("/listarPorEmpresa/:idEmpresa", function(req, res) {
     usuarioController.listarPorEmpresa(req, res);
 });
 
+router.delete("/deletar/:idUsuario", function (req, res) {
+    usuarioController.deletarUsuario(req, res);
+})
+
+router.put('/editar/:idUsuario', function (req, res){
+    usuarioController.editarUsuario(req, res)
+})
+
 module.exports = router;
