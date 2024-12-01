@@ -23,6 +23,7 @@ body {
     flex-direction: column;
     height: inherit;
     width: 85vw;
+    /* margin-top: 5vh; */
 }
 
 .kpis {
@@ -219,7 +220,7 @@ body {
     .dashboard .bloco3 {
         width: 100%;
         padding-top: 0px;
-        height: 30vh;
+        height: 40vh;
         padding: 0 3rem 0 3rem;
     }
 }
