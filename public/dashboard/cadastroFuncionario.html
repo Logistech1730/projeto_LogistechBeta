@@ -178,11 +178,19 @@
         <td>${resultado[i].email}</td>
         <td>${(resultado[i].dataCadastro).substr(0, 10)}</td>
         <td class='tableIcons'> <i class="fa-solid fa-pencil" onclick="editarFuncionario(${resultado[i].idUsuario}, '${resultado[i].nome}', '${resultado[i].email}', '${resultado[i].senha}')" ></i></td>
-        <td class='tableIcons' id='deletarUser'><i class="fa-solid fa-trash"  onclick='deletar(${resultado[i].idUsuario})'></i></td>
+        <td class='tableIcons deletarUser'><i class="fa-solid fa-trash"  onclick='deletar(${resultado[i].idUsuario})'></i></td>
         </tr>
         `
+            // if (resultado[i].idUsuario == sessionStorage.idUsuario) {
+            //   deletarUser.innerHTML = ''
+            //   console.log('Estou no if')
+            // }
+          }
+
+          var deletarUserElements = document.querySelectorAll('.deletarUser')
+          for (var i = 0; i < resultado.length; i++) {
             if (resultado[i].idUsuario == sessionStorage.idUsuario) {
-              deletarUser.innerHTML = ''
+              deletarUserElements[i].innerHTML = ''
             }
           }
         })
