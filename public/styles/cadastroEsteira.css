@@ -169,7 +169,7 @@ body {
 
 .containerEsteiras{
     width: 85vw;
-    /* height: 80%; */
+    height: 65vh;
     margin-bottom: 10px;
     display: flex;
     align-items: flex-start;

@@ -150,7 +150,7 @@
     function carregarMetricas(idEsteira) {
         let bodyTabela = document.getElementById('bodyTabela')
         if (idEsteira == "#") {
-            bodyTabela.innerHTML = "";
+            bodyTabela.innerHTML = ""
             return
         }
         fetch(`/metricas/listar/esteira/${idEsteira}`, {
@@ -161,9 +161,9 @@
                     resposta.json()
                         .then((dados) => {
                             if (dados.length == 0) {
-                                bodyTabela.innerHTML = "";
+                                bodyTabela.innerHTML = ""
                             } else {
-                                bodyTabela.innerHTML = "";
+                                bodyTabela.innerHTML = ""
                                 // populando os cards com as métricas
                                 for (var i = 0; i < dados.length; i++) {
 
@@ -178,34 +178,6 @@
                                             <td class='tableIcons'><i onclick="deletarMetrica(${dados[i].idMetrica})" class="fa-solid fa-trash"></i></td>
                                         </tr>
                                         `
-
-
-
-                                    //                                 div_containerEsteiras.innerHTML += `
-                                    //     <div class="cardEsteira">
-                                    //         <div class="leftContainer">
-                                    //             <div class="titulo">
-                                    //                 <h6 style="color: #${dados[i].cor};">${dados[i].nomeMetrica}</h6>
-                                    //                 <div class="icons">
-                                    //                     <i onclick="deletarMetrica(${dados[i].idMetrica})" class="fa-solid fa-trash"></i>
-                                    //                     <i onclick="editarMetrica(${dados[i].idMetrica})" class="fa-solid fa-pencil"></i>
-                                    //                 </div>
-                                    //             </div>
-
-                                    //             <p>Nome</p>
-                                    //             <p>${dados[i].nomeMetrica}</p>
-                                    //             <p>Valor mínimo</p>
-                                    //             <p>${dados[i].valorMinimo}%</p>
-                                    //             <p>Valor Máximo</p>
-                                    //             <p>${dados[i].valorMaximo}%</p>
-                                    //             <p>Data de cadastro</p>
-                                    //             <p>${formatarData(dados[i].dataCadastro)}</p>
-                                    //             <p>Cor</p>
-                                    //             <p>#${dados[i].cor}</p>
-                                    //     </div>
-                                    // </div>`
-
-
                                 }
                             }
 

@@ -144,9 +144,6 @@
                             <th>Departamento</th>
                             <th>Distancia esperada</th>
                             <th>Localização</th>
-                            <th>Produtos válidos</th>
-                            <th>Produtos inválidos</th>
-                            <th>Alertas</th>
                             <th>Editar</th>
                             <th>Excluir</th>
                         </tr>
@@ -162,13 +159,6 @@
 
 </html>
 <script>
-    // document.addEventListener('DOMContentLoaded', function () {
-    //     var idEmpresa = sessionStorage.getItem("idEmpresa")
-
-    //     registrosProdutosValidosInvalidos(idEmpresa).then(() => {
-    //         listarTodasEsteiras(idEmpresa)
-    //     })
-    // })
     var idEmpresa = sessionStorage.getItem("idEmpresa")
     function cadastrar() {
         let divMensagem = document.getElementById('container-aviso')
@@ -249,18 +239,12 @@
 
         for (var i = 0; i < esteiras.length; i++) {
 
-
-            // console.log("idEsteira ", esteira.idEsteira)
-
             bodyTabela.innerHTML += `
             <tr>
                 <td>${esteiras[i].nome}</td>
                 <td>${esteiras[i].departamento}</td>
                 <td>${esteiras[i].distanciaEsperada}</td>
                 <td>${esteiras[i].localizacao}</td>
-                <td>${esteiras[i].produtosValidos}</td>
-                <td>${esteiras[i].produtosInvalidos}</td>
-                <td>${esteiras[i].alertas}</td>
                 <td class='tableIcons'> <i class="fa-solid fa-pencil" onclick="editarEsteira(${esteiras[i].idEsteira}, '${esteiras[i].nome}', '${esteiras[i].departamento}', '${esteiras[i].localizacao}', ${esteiras[i].distanciaEsperada})"></i></td>
                 <td class='tableIcons'><i class="fa-solid fa-trash tableIcons" onclick="deletarEsteira(${esteiras[i].idEsteira})"></i></td>
             </tr>
