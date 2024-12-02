@@ -22,5 +22,13 @@ router.put('/editar/:idEsteira', function (req, res){
     esteiraController.editarEsteira(req, res)
 })
 
+router.get('/listarInvalidosPorEsteira/:idEmpresa', function (req, res){
+    esteiraController.listarInvalidosPorEsteira(req, res)
+})
+
+router.get('/listarValidosPorEsteira/:idEmpresa', function (req, res){
+    esteiraController.listarValidosPorEsteira(req, res)
+})
+
 
 module.exports = router;

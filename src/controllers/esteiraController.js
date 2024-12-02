@@ -112,9 +112,57 @@ function editarEsteira(req, res){
     }
 }
 
+function listarValidosPorEsteira(req, res){
+    var idEmpresa = req.params.idEmpresa
+
+    if(idEmpresa === undefined){
+        res.status(400).send("ID da esteira indefinido");
+    }else{
+        esteiraModel.listarValidosPorEsteira(idEmpresa)
+        .then(
+            function (resultado) {
+                res.status(200).json(resultado);
+            }
+        )
+        .catch(function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao listar os produtos da esteira! Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        })
+    }
+}
+
+function listarInvalidosPorEsteira(req, res){
+    var idEmpresa = req.params.idEmpresa
+
+    if(idEmpresa === undefined){
+        res.status(400).send("ID da esteira indefinido");
+    }else{
+        esteiraModel.listarInvalidosPorEsteira(idEmpresa)
+        .then(
+            function (resultado) {
+                res.status(200).json(resultado);
+            }
+        )
+        .catch(function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao listar os produtos da esteira! Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        })
+    }
+}
+
 module.exports = {
     cadastrar,
     listarTodasEsteiras,
     deletarEsteira,
-    editarEsteira
+    editarEsteira,
+    listarValidosPorEsteira,
+    listarInvalidosPorEsteira
 }
