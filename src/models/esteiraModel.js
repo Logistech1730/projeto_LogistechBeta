@@ -38,9 +38,39 @@ function editarEsteira(idEsteira, nome, departamento, localizacao, distanciaEspe
     return database.executar(instrucaoSql)
 }
 
+function listarValidosPorEsteira(idEmpresa){
+    var instrucaoSql = `
+        SELECT e.nome AS Esteira, 
+            IFNULL(SUM(CASE WHEN r.distancia <= e.distanciaEsperada THEN 1 ELSE 0 END), 0) AS ProdutosValidos
+        FROM esteira e 
+        LEFT JOIN sensor s ON e.idEsteira = s.fkEsteira 
+        LEFT JOIN registro r ON s.idSensor = r.fkSensor 
+        WHERE e.fkEmpresa = ${idEmpresa}
+        GROUP BY e.nome;
+    ` 
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql)
+}
+
+function listarInvalidosPorEsteira(idEmpresa){
+    var instrucaoSql = `
+        SELECT e.nome AS Esteira, 
+            IFNULL(SUM(CASE WHEN r.distancia > e.distanciaEsperada THEN 1 ELSE 0 END), 0) AS ProdutosInvalidos
+        FROM esteira e 
+        LEFT JOIN sensor s ON e.idEsteira = s.fkEsteira 
+        LEFT JOIN registro r ON s.idSensor = r.fkSensor 
+        WHERE e.fkEmpresa = ${idEmpresa}
+        GROUP BY e.nome;
+    ` 
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql)
+}
+
 module.exports = {
     cadastrar,
     listarTodasEsteiras,
     deletarEsteira,
-    editarEsteira
+    editarEsteira,
+    listarValidosPorEsteira,
+    listarInvalidosPorEsteira
 };

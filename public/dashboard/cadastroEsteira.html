@@ -72,47 +72,47 @@
             </div>
         </div>
 
-         <div id="barralateral" class="barra-lateral">
+        <div id="barralateral" class="barra-lateral">
             <div class="div-imagem-perfil">
-              <img src="../img/perfilexemplo.png" class="perfil-foto" alt="foto de perfil" />
+                <img src="../img/perfilexemplo.png" class="perfil-foto" alt="foto de perfil" />
             </div>
             <h4 id="nomeFuncionario">Fernando Brandão</h4>
             <h4 id="nomeEmpresa"></h4>
             <div class="option selected">
-              <i class="fa-solid fa-chart-line"></i>
-              <span><a href="./dashboard.html">Dashboard</a></span>
+                <i class="fa-solid fa-chart-line"></i>
+                <span><a href="./dashboard.html">Dashboard</a></span>
             </div>
             <div class="option">
-              <i class="fa-solid fa-circle-plus"></i>
-              <span><a href="./cadastroEsteira.html">Esteira</a></span>
+                <i class="fa-solid fa-circle-plus"></i>
+                <span><a href="./cadastroEsteira.html">Esteira</a></span>
             </div>
             <div class="option">
-              <i class="fa-solid fa-book"></i>
-              <span><a href="./historico.html">Histórico</a></span>
+                <i class="fa-solid fa-book"></i>
+                <span><a href="./historico.html">Histórico</a></span>
             </div>
             <div class="option">
-              <i class="fa-regular fa-bell"></i>
-              <span><a href="./alertas.html">Alertas</a></span>
+                <i class="fa-regular fa-bell"></i>
+                <span><a href="./alertas.html">Alertas</a></span>
             </div>
-      
+
             <div class="option">
-              <i class="fa-solid fa-gauge"></i>
-              <span><a href="./metricas.html">Métricas</a></span>
+                <i class="fa-solid fa-gauge"></i>
+                <span><a href="./metricas.html">Métricas</a></span>
             </div>
-      
+
             <div class="option">
-              <i class="fa-solid fa-user"></i>
-              <span><a href="./cadastroFuncionario.html">Funcionários</a></span>
-            </div>
-            <div class="option">
-              <i class="fa-solid fa-headset"></i>
-              <span><a href="./atendimento.html">Suporte</a></span>
+                <i class="fa-solid fa-user"></i>
+                <span><a href="./cadastroFuncionario.html">Funcionários</a></span>
             </div>
             <div class="option">
-              <i class="fa-solid fa-door-open"></i>
-              <span><a onclick="deslogar()">Sair</a></span>
+                <i class="fa-solid fa-headset"></i>
+                <span><a href="./atendimento.html">Suporte</a></span>
             </div>
-          </div>
+            <div class="option">
+                <i class="fa-solid fa-door-open"></i>
+                <span><a onclick="deslogar()">Sair</a></span>
+            </div>
+        </div>
 
         <div class="mainContent">
             <div class="container-title">
@@ -162,6 +162,17 @@
 
 </html>
 <script>
+    // document.addEventListener('DOMContentLoaded', function () {
+    //     var idEmpresa = sessionStorage.getItem("idEmpresa")
+
+    //     registrosProdutosValidosInvalidos(idEmpresa).then(() => {
+    //         listarTodasEsteiras(idEmpresa)
+    //     })
+    // })
+
+
+
+
     var idEmpresa = sessionStorage.getItem("idEmpresa")
     function cadastrar() {
         let divMensagem = document.getElementById('container-aviso')
@@ -251,8 +262,8 @@
                 <td>${esteiras[i].departamento}</td>
                 <td>${esteiras[i].distanciaEsperada}</td>
                 <td>${esteiras[i].localizacao}</td>
-                <td>${esteiras[i].validos}</td>
-                <td>${esteiras[i].invalidos}</td>
+                <td>${esteiras[i].produtosValidos}</td>
+                <td>${esteiras[i].produtosInvalidos}</td>
                 <td>${esteiras[i].alertas}</td>
                 <td class='tableIcons'> <i class="fa-solid fa-pencil" onclick="editarEsteira(${esteiras[i].idEsteira}, '${esteiras[i].nome}', '${esteiras[i].departamento}', '${esteiras[i].localizacao}', ${esteiras[i].distanciaEsperada})"></i></td>
                 <td class='tableIcons'><i class="fa-solid fa-trash tableIcons" onclick="deletarEsteira(${esteiras[i].idEsteira})"></i></td>
@@ -261,8 +272,6 @@
 
         }
     }
-
-    // document.addEventListener('DOMContentLoaded', function () {
     listarTodasEsteiras()
 
     var btnCadastro = document.querySelector('.btn-cadastro')
@@ -288,8 +297,6 @@
         divMensagem2.innerHTML = ''
 
     }
-
-    // });
 
     function deletarEsteira(idEsteira) {
         console.log('Esteira deletada ', idEsteira)
@@ -326,6 +333,9 @@
         })
 
     }
+
+
+
 
     function salvarEsteira(idEsteira) {
         let divMensagem2 = document.getElementById('container-aviso2')
