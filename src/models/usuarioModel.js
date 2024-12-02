@@ -47,6 +47,12 @@ function editarUsuario(idUsuario, nome, email, senha){
     return database.executar(instrucaoSql)
 }
 
+function verificarEmailExistente(email) {
+    var instrucaoSql = `SELECT * from usuario where email = '${email}'`;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 function listarPorId(idUsuario) {
     var instrucaoSql = `
     SELECT usuario.nome, usuario.nivel, empresa.nomeFantasia FROM usuario LEFT JOIN empresa ON fkEmpresa = idEmpresa WHERE idUsuario = ${idUsuario};
@@ -70,5 +76,6 @@ module.exports = {
     deletarUsuario,
     editarUsuario,
     listarPorId,
-    pesquisarUsuario
+    pesquisarUsuario,
+    verificarEmailExistente
 };

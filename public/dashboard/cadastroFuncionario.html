@@ -219,6 +219,11 @@
         if (resposta.status == 200) {
           alert("Usuário cadastrado com sucesso.")
           window.location.reload()
+        } else if (resposta.status == 400) {
+          resposta.text()
+          .then(texto => {
+            alert(texto)
+          })
         }
       })
       .catch((erro) => {

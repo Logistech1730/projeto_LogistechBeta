@@ -58,19 +58,38 @@ function cadastrar(req, res) {
       nivel = 1;
     }
 
-      usuarioModel.cadastrar(nome, email, senha, fkEmpresa, nivel)
-      .then(function (resultado) {
-        res.json(resultado);
-      })
-      .catch(function (erro) {
-        console.log(erro);
-        console.log(
-          "\nHouve um erro ao realizar o cadastro! Erro: ",
-          erro.sqlMessage
-        );
-        res.status(500).json(erro.sqlMessage);
-      });
+    // verificando e-mail existente
+    usuarioModel.verificarEmailExistente(email)
+    .then(resultado => {
+      // não existe usuario cadastrado com esse e-mail
+      if (resultado.length == 0) {
+        usuarioModel.cadastrar(nome, email, senha, fkEmpresa, nivel)
+        .then(function (resultado) {
+          res.json(resultado);
+        })
+        .catch(function (erro) {
+          console.log(erro);
+          console.log(
+            "\nHouve um erro ao realizar o cadastro! Erro: ",
+            erro.sqlMessage
+          );
+          res.status(500).json(erro.sqlMessage);
+        });
+  
+      } else {
+        res.status(400).send("E-mail já está em uso, tente novamente.");
+      }
+    })
+    .catch(function (erro) {
+      console.log(erro);
+      console.log(
+        "\nHouve um erro ao realizar o cadastro! Erro: ",
+        erro.sqlMessage
+      );
+      res.status(500).json(erro.sqlMessage);
+    });
 
+      
 
 
     

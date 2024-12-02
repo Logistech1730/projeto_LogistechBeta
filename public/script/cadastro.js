@@ -540,7 +540,12 @@ function validarCEP() {
                 modal_mensagem_cadastrado.style.display = 'flex';
                 modal_cadastrado.style.display = 'flex';
                 mensagem_cadastrado.innerHTML = `Seu cadastro foi concluído com sucesso! <br>Seja Bem vindo(a) ${valor_nome_empresa}! <br>Nós da Logistech estaremos fazendo a ativação da sua conta e comunicando através do email!`
-            }
+            }  else if (resposta.status == 400) {
+                resposta.text()
+                .then(texto => {
+                  alert(texto)
+                })
+              }
         }))
         .catch((erro) => {
             console.log(erro);
