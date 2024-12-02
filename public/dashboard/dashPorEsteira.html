@@ -525,8 +525,8 @@ function atualizarGraficoLinha(registros) {
 
   if (grafico_tempo_real) {
       grafico_tempo_real.data.labels = lista_horarios;
-      grafico_tempo_real.data.datasets[0].data = lista_ultimos_6_validos;
-      grafico_tempo_real.data.datasets[1].data = lista_ultimos_6_invalidos;
+      grafico_tempo_real.data.datasets[0].data = lista_ultimos_6_invalidos;
+      grafico_tempo_real.data.datasets[1].data = lista_ultimos_6_validos;
       grafico_tempo_real.update();
   } else {
     grafico_tempo_real = new Chart(
