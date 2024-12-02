@@ -87,6 +87,19 @@ function listarProdutosValidosInvalidosPorSemanaEsteiraEmpresa(fkEmpresa, idEste
     return database.executar(instrucaoSql); 
 }
 
+function listarProdutosValidosInvalidosTempoReal(fkEmpresa, idEsteira) {
+    var instrucaoSql = `
+    SELECT r.dataRegistro,
+    SUM(CASE WHEN r.distancia = e.distanciaEsperada THEN 1 ELSE 0 END) AS ProdutosValidos, 
+    SUM(CASE WHEN r.distancia <> e.distanciaEsperada THEN 1 ELSE 0 END) AS ProdutosInvalidos 
+    FROM registro AS r JOIN sensor AS s ON r.fkSensor = s.idSensor JOIN esteira AS e ON 
+    s.fkEsteira = e.idEsteira JOIN empresa AS emp ON e.fkEmpresa = emp.idEmpresa 
+    WHERE emp.idEmpresa = ${fkEmpresa} AND e.idEsteira = ${idEsteira} GROUP BY r.dataRegistro ORDER BY r.dataRegistro DESC LIMIT 6;
+`;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql); 
+}
+
 module.exports = {
     listarTodosRegistros,
     listarRegistrosPorData,
@@ -94,5 +107,6 @@ module.exports = {
     listarProdutosValidosInvalidosPorSemanaEmpresa,
     listarValidosInvalidosTodasEsteirasEmpresa,
     listarProdutosValidosInvalidosTotalEsteiraEmpresa,
-    listarProdutosValidosInvalidosPorSemanaEsteiraEmpresa
+    listarProdutosValidosInvalidosPorSemanaEsteiraEmpresa,
+    listarProdutosValidosInvalidosTempoReal
 };

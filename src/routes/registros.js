@@ -17,7 +17,9 @@ router.get("/listarValidosInvalidosPorSemanaEmpresa/:fkEmpresa", function (req, 
 router.get("/listarValidosInvalidosTodasEsteirasEmpresa/:fkEmpresa", function (req, res) {
     registroController.listarValidosInvalidosTodasEsteirasEmpresa(req, res);
 })
-
+router.get("/listarProdutosValidosInvalidosTempoReal/:fkEmpresa/:idEsteira", (req, res) => {
+    registroController.listarProdutosValidosInvalidosTempoReal(req, res);
+})
 router.get("/listarProdutosValidosInvalidosTotalEsteiraEmpresa/:fkEmpresa/:idEsteira", function (req, res) {
     registroController.listarProdutosValidosInvalidosTotalEsteiraEmpresa(req, res);
 })

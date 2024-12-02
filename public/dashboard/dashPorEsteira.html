@@ -84,7 +84,7 @@
           </div>
           <div class="status-esteiras" id="container_status_esteira">
             <p><b>Status das esteiras</b></p>
-            <p id="status_esteiras" >Cadastre métricas</p>
+            <p id="status_esteiras" style="background-color: black;">Cadastre métricas</p>
           </div>
         </div>
         <div class="blocos">
@@ -130,11 +130,93 @@
   var qtd_invalidos_7_dias = [];
   var datas_ultimos_7_dias = [];
 
+  var lista_ultimos_6_validos = [];
+  var lista_ultimos_6_invalidos = [];
+  var lista_horarios = ["00:00", "00:01", "00:02", "00:03", "00:04", "00:05"];
+
   var porcentagem_Validos = 0;
   var porcentagem_Invalidos = 0;
 
   var qtdValidosTempoReal = [60,40,50,49,39,51];
   var qtdInvalidosTempoReal = [10,20,10,9,19,11];
+  var gradient = ctx.createLinearGradient(0, 0, 0, 400);
+  gradient.addColorStop(0, "#384cd1");
+  gradient.addColorStop(1, "#3999f4");
+
+  var gradient1 = ctx.createLinearGradient(0, 0, 0, 400);
+  gradient1.addColorStop(0, "#f90000");
+  gradient1.addColorStop(1, "#c36767");
+  var grafico_tempo_real = new Chart(
+    document.getElementById("grafico-tempo-real"),
+    {
+      type: "line",
+      data: {
+        labels: lista_horarios,
+        datasets: [
+          {
+            label: "Produtos inválidos",
+            backgroundColor: gradient1,
+            borderColor: gradient1,
+            data: lista_ultimos_6_invalidos,
+            fill: false,
+          },
+          {
+            label: "Produtos válidos",
+            backgroundColor: gradient,
+            borderColor: gradient,
+            data: lista_ultimos_6_validos,
+            fill: false,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: true,
+            text: "Acompanhamento de produtos",
+            font: {
+              size: 15,
+            },
+            color: "#000",
+            padding: {
+              top: 5,
+              bottom: 5,
+            },
+          },
+          legend: {
+            display: true,
+            position: "bottom",
+          },
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Período",
+              font: {
+                size: 16,
+                weight: 700,
+              },
+            },
+            beginAtZero: true,
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Quantidade de produtos",
+              font: {
+                size: 13,
+                weight: 700,
+              },
+            },
+            beginAtZero: true,
+          },
+        },
+      },
+    }
+  );
   var grafico_pizza = new Chart(document.getElementById("grafico-pizza"), {
             type: "pie",
             data: {
@@ -182,13 +264,6 @@
             },
             plugins: [ChartDataLabels], // Ativando o plugin ChartDataLabels
         });;
-  var gradient = ctx.createLinearGradient(0, 0, 0, 400);
-  gradient.addColorStop(0, "#384cd1");
-  gradient.addColorStop(1, "#3999f4");
-
-  var gradient1 = ctx.createLinearGradient(0, 0, 0, 400);
-  gradient1.addColorStop(0, "#f90000");
-  gradient1.addColorStop(1, "#c36767");
   var graficoBarra = graficoBarra = new Chart(document.getElementById("grafico-barra"), {
         type: "bar",
         data: {
@@ -422,128 +497,56 @@ function atualizarGraficoBarra(registros) {
       });
         }
     }
+function atualizarGraficoLinha(registros) {
 
-    function listarEsteiras() {
-        var fkEmpresa = sessionStorage.idEmpresa
-        fetch(`/esteiras/listar/${fkEmpresa}`, {
-            method: "GET"
-        })
-            .then((resposta) => {
-                if (resposta.ok) {
-                    resposta.json()
-                        .then((dados) => {
-                            if (dados.length == 0) {
-                                div_containerEsteiras.innerHTML = "<p>Nenhuma esteira cadastrada</p>"
-                            }
-                            // populando <select> com as esteiras
-                            slt_esteiras.innerHTML = `<option selected value="#">Selecione uma esteira</option>`
-                            for (var i = 0; i < dados.length; i++) {
-                                slt_esteiras.innerHTML += `<option value=${dados[i].idEsteira}>${dados[i].nome}</option>`
-                            }
-                        })
-                        .catch((erro) => {
-                            console.log("Erro ao converter JSON: ", erro)
-                        })
-                }
-            })
-            .catch((erro => {
-                console.log("Erro ao enviar requisição: ", erro)
-            }))
-    }
-    slt_esteiras.addEventListener("change", () => {
-        // div_containerEsteiras.innerHTML = ""
-        // console.log(slt_esteiras.value)
-        sessionStorage.setItem('ESTEIRA_ATUAL', slt_esteiras.value)
-        if (slt_esteiras.value == "#") {
-            return
-        }
-        buscarRegistrosGraficoPizza()
-        buscarRegistrosGraficoBarra()
-    })
+  lista_ultimos_6_invalidos = [];
+  lista_ultimos_6_validos = [];
+  lista_horarios = [];
+  // atualizarGraficoLinha
+  for (var contador = registros.length - 1; contador >= 0; contador--) {
+    var dataHoraAtual = registros[contador].dataRegistro;
+    var objeto_data_hora = new Date(dataHoraAtual)
+    var horaAtual = objeto_data_hora.getUTCHours().toString().padStart(2, '0'); 
+    var minutoAtual = objeto_data_hora.getUTCMinutes().toString().padStart(2, '0');
+    var segundoAtual = objeto_data_hora.getUTCSeconds().toString().padStart(2, '0');
+    var horaFormatada = `${horaAtual}:${minutoAtual}:${segundoAtual}`
 
-    function buscarMetricasDeRegistros(porcentagemValidos) { 
-    fetch(`/metricas/listarMetricaParaPorcentagem/${sessionStorage.idEmpresa}/${sessionStorage.ESTEIRA_ATUAL}/${porcentagemValidos}`, { 
-      method: 'GET', 
-    }) 
-        .then((response) => { 
-          if (response.ok) { 
-            return response.json(); 
-          } else { 
-            throw new Error('Erro ao buscar as registros.'); 
-          } }) 
-          .then((registros) => { 
-            console.log("registros recebidas:", registros); 
-            status_esteiras.style.cssText = `background-color: #${registros[0].corMetrica}`
-            status_esteiras.innerHTML = registros[0].nomeMetrica;
-          }) .catch((erro) => { 
-            console.error('Erro ao listar registros:', erro); 
-            alert('Erro ao listar métricas.'); 
-          });
-        }
+    var produtoValidoAtual = Number(registros[contador].ProdutosValidos);
+    var produtoInvalidoAtual = Number(registros[contador].ProdutosInvalidos);
+    
+    lista_horarios.push(horaFormatada);
+    lista_ultimos_6_validos.push(produtoValidoAtual);
+    lista_ultimos_6_invalidos.push(produtoInvalidoAtual);
+  }
+  console.log(lista_ultimos_6_invalidos)
+  console.log(lista_ultimos_6_validos)
+  console.log("Hora formatada: ", lista_horarios)
 
-    function buscarRegistrosGraficoPizza() { 
-    fetch(`/registros/listarProdutosValidosInvalidosTotalEsteiraEmpresa/${sessionStorage.idEmpresa}/${sessionStorage.ESTEIRA_ATUAL}`, { 
-      method: 'GET', 
-    }) 
-        .then((response) => { 
-          if (response.ok) { 
-            return response.json(); 
-          } else { 
-            throw new Error('Erro ao buscar as registros.'); 
-          } }) 
-          .then((registros) => { 
-            console.log("registros recebidas:", registros); 
-            atualizarGraficoPizza(registros); 
-          }) .catch((erro) => { 
-            console.error('Erro ao listar registros:', erro); 
-            alert('Erro ao listar registros.'); 
-          });
-        }
-
-function buscarRegistrosGraficoBarra() { 
-    fetch(`/registros/listarProdutosValidosInvalidosPorSemanaEsteiraEmpresa/${sessionStorage.idEmpresa}/${sessionStorage.ESTEIRA_ATUAL}`, { 
-      method: 'GET', 
-    }) 
-        .then((response) => { 
-          if (response.ok) { 
-            return response.json(); 
-          } else { 
-            throw new Error('Erro ao buscar as registros.'); 
-          } }) 
-          .then((registros) => { 
-            console.log("registros recebidas:", registros);
-            atualizarGraficoBarra(registros); 
-          }) .catch((erro) => { 
-            console.error('Erro ao listar registros:', erro); 
-            alert('Erro ao listar registros.'); 
-          });
-        }
-
-//   var buscarRegistrosGraficoPizzaConstantemente = setInterval(buscarRegistrosGraficoPizza, 2000);
-  
-//   setTimeout(()=>{ var buscarRegistrosGraficoBarraDiariamente = setInterval(buscarRegistrosGraficoBarra, 2000 );}, 1000)
-  // Criar gradiente
-  
-
-  var grafico_tempo_real = new Chart(
+  if (grafico_tempo_real) {
+      grafico_tempo_real.data.labels = lista_horarios;
+      grafico_tempo_real.data.datasets[0].data = lista_ultimos_6_validos;
+      grafico_tempo_real.data.datasets[1].data = lista_ultimos_6_invalidos;
+      grafico_tempo_real.update();
+  } else {
+    grafico_tempo_real = new Chart(
     document.getElementById("grafico-tempo-real"),
     {
       type: "line",
       data: {
-        labels: ["12:00", "12:01", "12:02", "12:03", "12:04", "12:05"],
+        labels: lista_horarios,
         datasets: [
           {
             label: "Produtos inválidos",
             backgroundColor: gradient1,
             borderColor: gradient1,
-            data: qtdInvalidosTempoReal,
+            data: lista_ultimos_6_invalidos,
             fill: false,
           },
           {
             label: "Produtos válidos",
             backgroundColor: gradient,
             borderColor: gradient,
-            data: qtdValidosTempoReal,
+            data: lista_ultimos_6_validos,
             fill: false,
           },
         ],
@@ -596,6 +599,133 @@ function buscarRegistrosGraficoBarra() {
       },
     }
   );
+      }
+  }
+
+    function listarEsteiras() {
+        var fkEmpresa = sessionStorage.idEmpresa
+        fetch(`/esteiras/listar/${fkEmpresa}`, {
+            method: "GET"
+        })
+            .then((resposta) => {
+                if (resposta.ok) {
+                    resposta.json()
+                        .then((dados) => {
+                            if (dados.length == 0) {
+                                div_containerEsteiras.innerHTML = "<p>Nenhuma esteira cadastrada</p>"
+                            }
+                            // populando <select> com as esteiras
+                            slt_esteiras.innerHTML = `<option selected value="#">Selecione uma esteira</option>`
+                            for (var i = 0; i < dados.length; i++) {
+                                slt_esteiras.innerHTML += `<option value=${dados[i].idEsteira}>${dados[i].nome}</option>`
+                            }
+                        })
+                        .catch((erro) => {
+                            console.log("Erro ao converter JSON: ", erro)
+                        })
+                }
+            })
+            .catch((erro => {
+                console.log("Erro ao enviar requisição: ", erro)
+            }))
+    }
+    slt_esteiras.addEventListener("change", () => {
+        // div_containerEsteiras.innerHTML = ""
+        // console.log(slt_esteiras.value)
+        sessionStorage.setItem('ESTEIRA_ATUAL', slt_esteiras.value)
+        if (slt_esteiras.value == "#") {
+            return
+        }
+        buscarRegistrosGraficoPizza();
+      
+    })
+
+    function buscarMetricasDeRegistros(porcentagemValidos) { 
+    fetch(`/metricas/listarMetricaParaPorcentagem/${sessionStorage.idEmpresa}/${sessionStorage.ESTEIRA_ATUAL}/${porcentagemValidos}`, { 
+      method: 'GET', 
+    }) 
+        .then((response) => { 
+          if (response.ok) { 
+            return response.json(); 
+          } else { 
+            throw new Error('Erro ao buscar as registros.'); 
+          } }) 
+          .then((registros) => { 
+            console.log("registros recebidas:", registros); 
+            status_esteiras.style.cssText = `background-color: #${registros[0].corMetrica}`
+            status_esteiras.innerHTML = registros[0].nomeMetrica;
+          }) .catch((erro) => { 
+            console.error('Erro ao listar registros:', erro); 
+            alert('Erro ao listar métricas.'); 
+          });
+        }
+
+    function buscarRegistrosGraficoPizza() { 
+    fetch(`/registros/listarProdutosValidosInvalidosTotalEsteiraEmpresa/${sessionStorage.idEmpresa}/${sessionStorage.ESTEIRA_ATUAL}`, { 
+      method: 'GET', 
+    }) 
+        .then((response) => { 
+          if (response.ok) { 
+            return response.json(); 
+          } else { 
+            throw new Error('Erro ao buscar as registros.'); 
+          } }) 
+          .then((registros) => { 
+            console.log("registros recebidas:", registros);
+            buscarRegistrosGraficoBarra(); 
+            atualizarGraficoPizza(registros); 
+          }) .catch((erro) => { 
+            console.error('Erro ao listar registros:', erro); 
+            alert('Erro ao listar registros.'); 
+          });
+        }
+
+function buscarRegistrosGraficoBarra() { 
+    fetch(`/registros/listarProdutosValidosInvalidosPorSemanaEsteiraEmpresa/${sessionStorage.idEmpresa}/${sessionStorage.ESTEIRA_ATUAL}`, { 
+      method: 'GET', 
+    }) 
+        .then((response) => { 
+          if (response.ok) { 
+            return response.json(); 
+          } else { 
+            throw new Error('Erro ao buscar as registros.'); 
+          } }) 
+          .then((registros) => { 
+            console.log("registros recebidas:", registros);
+            atualizarGraficoBarra(registros); 
+            buscarRegistrosGraficoLinha();
+          }) .catch((erro) => { 
+            console.error('Erro ao listar registros:', erro); 
+            alert('Erro ao listar registros.'); 
+          });
+        }
+
+    function buscarRegistrosGraficoLinha() { 
+    fetch(`/registros/listarProdutosValidosInvalidosTempoReal/${sessionStorage.idEmpresa}/${sessionStorage.ESTEIRA_ATUAL}`, { 
+      method: 'GET', 
+    }) 
+        .then((response) => { 
+          if (response.ok) { 
+            return response.json(); 
+          } else { 
+            throw new Error('Erro ao buscar as registros.'); 
+          } }) 
+          .then((registros) => { 
+            console.log("registros recebidos para o gráfico de linha:", registros);
+            atualizarGraficoLinha(registros); 
+          }) .catch((erro) => { 
+            console.error('Erro ao listar registros:', erro); 
+            alert('Erro ao listar registros.'); 
+          });
+        }
+
+//   var buscarRegistrosGraficoPizzaConstantemente = setInterval(buscarRegistrosGraficoPizza, 2000);
+  
+//   setTimeout(()=>{ var buscarRegistrosGraficoBarraDiariamente = setInterval(buscarRegistrosGraficoBarra, 2000 );}, 1000)
+  // Criar gradiente
+  
+
+  
 
   
 

@@ -68,7 +68,7 @@ const serial = async (
                 [sensorDigital, sorteado]
             );
             console.log("valores inseridos no banco:" + sensorDigital);
-
+ 
         }
 
     });
