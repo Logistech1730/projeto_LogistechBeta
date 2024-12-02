@@ -57,7 +57,7 @@ idMetrica INT PRIMARY KEY AUTO_INCREMENT,
 nomeMetrica VARCHAR(50),
 valorMinimo DOUBLE,
 valorMaximo DOUBLE,
-dataCadastro DATE,
+dataCadastro DATETIME DEFAULT (CURRENT_TIMESTAMP),
 cor CHAR(6),
 fkEsteira INT,
 CONSTRAINT fkMetricaEsteira FOREIGN KEY (fkEsteira) REFERENCES esteira (idEsteira)
