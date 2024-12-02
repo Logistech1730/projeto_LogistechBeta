@@ -36,13 +36,12 @@ function listarProdutosValidosInvalidosTotalEmpresa(fkEmpresa) {
 
 function listarProdutosValidosInvalidosPorSemanaEmpresa(fkEmpresa) {
     var instrucaoSql = `
-    SELECT 
-    DATE(r.dataRegistro) AS 'data',
-    SUM(CASE WHEN r.distancia = e.distanciaEsperada THEN 1 ELSE 0 END) AS ProdutosValidos,
-    SUM(CASE WHEN r.distancia <> e.distanciaEsperada THEN 1 ELSE 0 END) AS ProdutosInvalidos
-    FROM registro AS r JOIN sensor AS s ON r.fkSensor = s.idSensor JOIN esteira AS e ON s.fkEsteira = e.idEsteira 
-    JOIN empresa AS emp ON e.fkEmpresa = emp.idEmpresa WHERE emp.idEmpresa = ${fkEmpresa} 
-    AND DATE(r.dataRegistro) >= CURRENT_DATE() - INTERVAL 6 DAY AND DATE(r.dataRegistro) < CURDATE() + INTERVAL 1 DAY GROUP BY DATE(r.dataRegistro) ORDER BY DATE(r.dataRegistro);
+    SELECT DATE(r.dataRegistro) AS 'data', 
+    IFNULL(SUM(CASE WHEN r.distancia = e.distanciaEsperada THEN 1 ELSE 0 END),0) AS ProdutosValidos, 
+    IFNULL(SUM(CASE WHEN r.distancia <> e.distanciaEsperada THEN 1 ELSE 0 END),0) AS ProdutosInvalidos 
+    FROM registro AS r LEFT JOIN sensor AS s ON r.fkSensor = s.idSensor LEFT JOIN esteira AS e ON s.fkEsteira = e.idEsteira 
+    LEFT JOIN empresa AS emp ON e.fkEmpresa = emp.idEmpresa WHERE emp.idEmpresa = ${fkEmpresa} AND DATE(r.dataRegistro) >= CURRENT_DATE() - INTERVAL 6 DAY 
+    AND DATE(r.dataRegistro) < CURDATE() + INTERVAL 1 DAY GROUP BY DATE(r.dataRegistro) ORDER BY DATE(r.dataRegistro);
 `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql); 
@@ -60,10 +59,26 @@ WHERE e.fkEmpresa = ${fkEmpresa} GROUP BY e.nome;
     return database.executar(instrucaoSql); 
 }
 
+function listarProdutosValidosInvalidosTotalEsteiraEmpresa(fkEmpresa, idEsteira) {
+    var instrucaoSql = `
+    SELECT 
+    COUNT(CASE WHEN r.distancia = e.distanciaEsperada THEN 1 END) AS "ProdutosValidos",
+    COUNT(CASE WHEN r.distancia <> e.distanciaEsperada THEN 1 END) AS "ProdutosInvalidos"
+    FROM registro AS r
+    JOIN sensor AS s ON r.fkSensor = s.idSensor
+    JOIN esteira AS e ON s.fkEsteira = e.idEsteira
+    JOIN empresa AS emp ON e.fkEmpresa = emp.idEmpresa
+    WHERE emp.idEmpresa = ${fkEmpresa} AND e.idEsteira = ${idEsteira};
+`;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql); 
+}
+
 module.exports = {
     listarTodosRegistros,
     listarRegistrosPorData,
     listarProdutosValidosInvalidosTotalEmpresa,
     listarProdutosValidosInvalidosPorSemanaEmpresa,
-    listarValidosInvalidosTodasEsteirasEmpresa
+    listarValidosInvalidosTodasEsteirasEmpresa,
+    listarProdutosValidosInvalidosTotalEsteiraEmpresa
 };

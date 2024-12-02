@@ -22,57 +22,57 @@
     />
   </head>
 
-  <body onload="buscarRegistrosGraficoBarra(); buscarRegistrosGraficoPizza(); carregarNomeEmpresa(); buscarRegistrosGraficoEsteiras()">
+  <body onload="buscarRegistrosGraficoBarra(); buscarRegistrosGraficoPizza(); gerarPorcentagemProdutos(); carregarNomeEmpresa();">
     <div class="container-dash">
-       <div id="barralateral" class="barra-lateral">
-        <div class="div-imagem-perfil">
-          <img
-            src="../img/perfilexemplo.png"
-            class="perfil-foto"
-            alt="foto de perfil"
-          />
-        </div>
-        <h4 id="nomeFuncionario">Fernando Brandão</h4>
-        <h4 id="nomeEmpresa">BIG BRANDS</h4>
-        <div class="option selected">
-          <i class="fa-solid fa-chart-line"></i>
-          <span><a href="./dashboard.html">Dashboard Geral</a></span>
-        </div>
-        <div class="option">
-          <i class="fa-solid fa-chart-line"></i>
-          <span><a href="./dashPorEsteira.html">Dash por Esteira</a></span>
-        </div>
-        <div class="option">
-          <i class="fa-solid fa-circle-plus"></i>
-          <span><a href="./cadastroEsteira.html">Esteira</a></span>
-        </div>
-        <div class="option">
-          <i class="fa-solid fa-book"></i>
-          <span><a href="./historico.html">Histórico</a></span>
-        </div>
-        <div class="option">
-          <i class="fa-regular fa-bell"></i>
-          <span><a href="./alertas.html">Alertas</a></span>
-        </div>
-
-        <div class="option">
-          <i class="fa-solid fa-gauge"></i>
-          <span><a href="./metricas.html">Métricas</a></span>
-        </div>
-
-        <div class="option">
-          <i class="fa-solid fa-ticket"></i>
-          <span><a href="./cadastroFuncionario.html">Funcionários</a></span>
-        </div>
-        <div class="option">
-          <i class="fa-solid fa-headset"></i>
-          <span><a href="./atendimento.html">Suporte</a></span>
-        </div>
-        <div class="option">
-          <i class="fa-solid fa-door-open"></i>
-          <span><a onclick="deslogar()">Sair</a></span>
-        </div>
-      </div>
+        <div id="barralateral" class="barra-lateral">
+            <div class="div-imagem-perfil">
+              <img
+                src="../img/perfilexemplo.png"
+                class="perfil-foto"
+                alt="foto de perfil"
+              />
+            </div>
+            <h4 id="nomeFuncionario">Fernando Brandão</h4>
+            <h4 id="nomeEmpresa">BIG BRANDS</h4>
+            <div class="option selected">
+              <i class="fa-solid fa-chart-line"></i>
+              <span><a href="./dashboard.html">Dashboard Geral</a></span>
+            </div>
+            <div class="option">
+                <i class="fa-solid fa-chart-line"></i>
+                <span><a href="./dashPorEsteira.html">Dash por Esteira</a></span>
+              </div>
+            <div class="option">
+              <i class="fa-solid fa-circle-plus"></i>
+              <span><a href="./cadastroEsteira.html">Esteira</a></span>
+            </div>
+            <div class="option">
+              <i class="fa-solid fa-book"></i>
+              <span><a href="./historico.html">Histórico</a></span>
+            </div>
+            <div class="option">
+              <i class="fa-regular fa-bell"></i>
+              <span><a href="./alertas.html">Alertas</a></span>
+            </div>
+    
+            <div class="option">
+              <i class="fa-solid fa-gauge"></i>
+              <span><a href="./metricas.html">Métricas</a></span>
+            </div>
+    
+            <div class="option">
+              <i class="fa-solid fa-ticket"></i>
+              <span><a href="./cadastroFuncionario.html">Funcionários</a></span>
+            </div>
+            <div class="option">
+              <i class="fa-solid fa-headset"></i>
+              <span><a href="./atendimento.html">Suporte</a></span>
+            </div>
+            <div class="option">
+              <i class="fa-solid fa-door-open"></i>
+              <span><a onclick="deslogar()">Sair</a></span>
+            </div>
+          </div>
 
       <div class="dashboard">
         <div class="kpis">
@@ -81,8 +81,12 @@
             <p id="span_qtd_produtos"></p>
           </div>
           <div class="esteira-mais-desvio">
-            <p><b>Esteira com mais produtos Inválidos</b></p>
-            <p id="esteira_com_mais_desvio">Esteira 3</p>
+            <p><b>Esteira com mais desvio</b></p>
+            <p id="esteira-com-mais-desvio">Esteira 3</p>
+          </div>
+          <div class="status-esteiras">
+            <p><b>Status das esteiras</b></p>
+            <p id="status_esteiras" style="color: green">Conforme esperado</p>
           </div>
         </div>
         <div class="blocos">
@@ -104,7 +108,7 @@
         </div>
         <div class="bloco3">
           <div style="width: 100%; height: 100%" class="grafico-linha">
-            <canvas id="grafico_esteiras"></canvas>
+            <canvas id="grafico-tempo-real"></canvas>
           </div>
         </div>
       </div>
@@ -120,20 +124,18 @@
  
 
   var ctx = document.getElementById("grafico-barra").getContext("2d");
-  var qtdValidosTotal = 0;
-  var qtdInvalidosTotal = 0;
+  var qtdValidosTotal = 20;
+  var qtdInvalidosTotal = 5;
   var qtdProdutosTotal = qtdInvalidosTotal + qtdInvalidosTotal;
   
   var qtd_validos_7_dias = [];
   var qtd_invalidos_7_dias = [];
   var datas_ultimos_7_dias = [];
+
+  var qtdValidosTempoReal = [60,40,50,49,39,51];
+  var qtdInvalidosTempoReal = [10,20,10,9,19,11];
   var grafico_pizza;
   var graficoBarra;
-  var graficoEsteiras;
-  var lista_de_esteiras = [];
-  var qtd_invalidos_esteiras = [];
-  var qtd_validos_esteiras = [];
-  var esteiraComMaisInvalidos = "";
 
 function atualizarGraficoPizza(registros) {
     qtdValidosTotal = Number(registros[0].ProdutosValidos);
@@ -287,100 +289,6 @@ function atualizarGraficoBarra(registros) {
       });
         }
     }
-    function atualizarGraficoEsteiras(registros) {
-
-    lista_de_esteiras = [];
-    qtd_invalidos_esteiras = [];
-    qtd_validos_esteiras = [];
-    esteiraComMaisInvalidos = registros[0].Esteira;
-    maior_qtd_produtos_invalidos = Number(registros[0].ProdutosInvalidos);
-    for (var contador = 0; contador < registros.length; contador++) {
-      var esteiraAtual = registros[contador].Esteira;
-      var produtoValidoAtual = Number(registros[contador].ProdutosValidos);
-      var produtoInvalidoAtual = Number(registros[contador].ProdutosInvalidos);
-    if (maior_qtd_produtos_invalidos < produtoInvalidoAtual) {
-      maior_qtd_produtos_invalidos = produtoInvalidoAtual;
-      esteiraComMaisInvalidos = esteiraAtual;
-    }
-    
-    lista_de_esteiras.push(esteiraAtual);
-    qtd_validos_esteiras.push(produtoValidoAtual);
-    qtd_invalidos_esteiras.push(produtoInvalidoAtual);
-  }
-  esteira_com_mais_desvio.innerHTML = esteiraComMaisInvalidos
-  console.log(lista_de_esteiras)
-  console.log(qtd_validos_esteiras)
-  console.log(qtd_invalidos_esteiras)
-
-  if (graficoEsteiras) {
-      graficoEsteiras.data.datasets[0].data = qtd_validos_esteiras;
-      graficoEsteiras.data.datasets[1].data = qtd_invalidos_esteiras;
-      graficoEsteiras.update();
-  } else {
-    graficoEsteiras = new Chart(document.getElementById("grafico_esteiras"), {
-      type: "bar",
-      data: {
-        labels: lista_de_esteiras,
-        datasets: [
-          {
-            label: "Produtos válidos",
-            backgroundColor: gradient,
-            data: qtd_validos_esteiras,
-            borderWidth: 0,
-          },
-          {
-            label: "Produtos inválidos",
-            backgroundColor: gradient1,
-            data: qtd_invalidos_esteiras,
-            borderWidth: 0,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          title: {
-            display: true,
-            text: "Produtos válidos e inválidos de cada esteira",
-            font: {
-              size: 16,
-            },
-            color: "#000",
-            padding: {
-              top: 5,
-              bottom: 5,
-            },
-          },
-        },
-
-       scales: {
-          y: {
-            title: {
-              display: true,
-              text: "Quantidade de produtos",
-              font: {
-                size: 16,
-                weight: 700,
-              },
-            },
-            beginAtZero: true,
-          },
-          x: {
-            title: {
-              display: true,
-              text: "Esteiras",
-              font: {
-                size: 16,
-                weight: 700,
-              },
-            },
-          },
-        },
-      },
-    });
-      }
-  }
 
 function buscarRegistrosGraficoPizza() { 
     fetch(`/registros/listarValidosInvalidosTotalEmpresa/${sessionStorage.idEmpresa}`, { 
@@ -420,30 +328,9 @@ function buscarRegistrosGraficoBarra() {
           });
         }
 
-    function buscarRegistrosGraficoEsteiras() { 
-    fetch(`/registros/listarValidosInvalidosTodasEsteirasEmpresa/${sessionStorage.idEmpresa}`, { 
-      method: 'GET', 
-    }) 
-        .then((response) => { 
-          if (response.ok) { 
-            return response.json(); 
-          } else { 
-            throw new Error('Erro ao buscar as registros.'); 
-          } }) 
-          .then((registros) => { 
-            console.log("registros recebidas:", registros);
-            atualizarGraficoEsteiras(registros); 
-          }) .catch((erro) => { 
-            console.error('Erro ao listar registros:', erro); 
-            alert('Erro ao listar registros.'); 
-          });
-        }
-
-  var buscarRegistrosGraficoPizzaConstantemente = setInterval(buscarRegistrosGraficoPizza, 4000);
+  var buscarRegistrosGraficoPizzaConstantemente = setInterval(buscarRegistrosGraficoPizza, 2000);
   
-  setTimeout(()=>{ var buscarRegistrosGraficoBarraDiariamente = setInterval(buscarRegistrosGraficoBarra, 4000 );}, 1333)
-
-  setTimeout(()=>{ var buscarRegistrosGraficoEsteirasConstantemente = setInterval(buscarRegistrosGraficoEsteiras, 4000 );}, 2667)
+  setTimeout(()=>{ var buscarRegistrosGraficoBarraDiariamente = setInterval(buscarRegistrosGraficoBarra, 2000 );}, 1000)
   // Criar gradiente
   var gradient = ctx.createLinearGradient(0, 0, 0, 400);
   gradient.addColorStop(0, "#384cd1");
@@ -452,6 +339,97 @@ function buscarRegistrosGraficoBarra() {
   var gradient1 = ctx.createLinearGradient(0, 0, 0, 400);
   gradient1.addColorStop(0, "#f90000");
   gradient1.addColorStop(1, "#c36767");
+
+  var grafico_tempo_real = new Chart(
+    document.getElementById("grafico-tempo-real"),
+    {
+      type: "line",
+      data: {
+        labels: ["12:00", "12:01", "12:02", "12:03", "12:04", "12:05"],
+        datasets: [
+          {
+            label: "Produtos inválidos",
+            backgroundColor: gradient1,
+            borderColor: gradient1,
+            data: qtdInvalidosTempoReal,
+            fill: false,
+          },
+          {
+            label: "Produtos válidos",
+            backgroundColor: gradient,
+            borderColor: gradient,
+            data: qtdValidosTempoReal,
+            fill: false,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: true,
+            text: "Acompanhamento de produtos",
+            font: {
+              size: 15,
+            },
+            color: "#000",
+            padding: {
+              top: 5,
+              bottom: 5,
+            },
+          },
+          legend: {
+            display: true,
+            position: "bottom",
+          },
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Período",
+              font: {
+                size: 16,
+                weight: 700,
+              },
+            },
+            beginAtZero: true,
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Quantidade de produtos",
+              font: {
+                size: 13,
+                weight: 700,
+              },
+            },
+            beginAtZero: true,
+          },
+        },
+      },
+    }
+  );
+
+  
+
+  // quando minha página carregar, modificar o total de produtos e calcular a porcentagem
+  function gerarPorcentagemProdutos() {
+    if (qtdValidosTotal > 95) {
+      status_esteiras.innerHTML = "Conforme esperado";
+      status_esteiras.style.color = "#fff";
+      status_esteiras.style.backgroundColor = "#0F6C00";
+    } else if (qtdValidosTotal > 90) {
+      status_esteiras.innerHTML = "Alerta!";
+      status_esteiras.style.color = "#fff";
+      status_esteiras.style.backgroundColor = "#ffb600";
+    } else {
+      status_esteiras.innerHTML = "Abaixo do esperado";
+      status_esteiras.style.color = "#fff";
+      status_esteiras.style.backgroundColor = "#D83F3F";
+    }
+  }
 
 
   function carregarNomeEmpresa() {
