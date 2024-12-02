@@ -20,6 +20,14 @@ body{
     height: 100vh;
 }
 
+.selecionado {
+    color: #b4b4b4;
+}
+
+.selecionado span a {
+    color: #b4b4b4;
+}
+
 .barra-lateral a{
     text-decoration: none;
     color: #fff;
