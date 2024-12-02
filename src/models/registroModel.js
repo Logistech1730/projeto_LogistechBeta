@@ -51,8 +51,8 @@ function listarProdutosValidosInvalidosPorSemanaEmpresa(fkEmpresa) {
 function listarValidosInvalidosTodasEsteirasEmpresa(fkEmpresa) {
     var instrucaoSql = `
     SELECT e.nome AS Esteira, 
-       IFNULL(SUM(CASE WHEN r.distancia <= e.distanciaEsperada THEN 1 ELSE 0 END), 0) AS ProdutosValidos, 
-       IFNULL(SUM(CASE WHEN r.distancia > e.distanciaEsperada THEN 1 ELSE 0 END), 0) AS ProdutosInvalidos
+       IFNULL(SUM(CASE WHEN r.distancia = e.distanciaEsperada THEN 1 ELSE 0 END), 0) AS ProdutosValidos, 
+       IFNULL(SUM(CASE WHEN r.distancia <> e.distanciaEsperada THEN 1 ELSE 0 END), 0) AS ProdutosInvalidos
 FROM esteira e LEFT JOIN sensor s ON e.idEsteira = s.fkEsteira LEFT JOIN registro r ON s.idSensor = r.fkSensor 
 WHERE e.fkEmpresa = ${fkEmpresa} GROUP BY e.nome;
 `;
