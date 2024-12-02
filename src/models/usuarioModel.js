@@ -53,6 +53,16 @@ function verificarEmailExistente(email) {
     return database.executar(instrucaoSql);
 }
 
+function verificarEmailExistenteUpdate(emailNovo, emailAntigo) {
+    var instrucaoSql = `
+        SELECT * 
+        FROM usuario 
+        WHERE email = '${emailNovo}' AND email != '${emailAntigo}';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 function listarPorId(idUsuario) {
     var instrucaoSql = `
     SELECT usuario.nome, usuario.nivel, empresa.nomeFantasia FROM usuario LEFT JOIN empresa ON fkEmpresa = idEmpresa WHERE idUsuario = ${idUsuario};
@@ -77,5 +87,6 @@ module.exports = {
     editarUsuario,
     listarPorId,
     pesquisarUsuario,
-    verificarEmailExistente
+    verificarEmailExistente,
+    verificarEmailExistenteUpdate
 };

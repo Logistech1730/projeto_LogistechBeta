@@ -150,6 +150,7 @@ function editarUsuario(req, res){
   if (idUsuario == undefined) {
     res.status(400).send("ID do usuario indefinido");
 } else {
+  
     usuarioModel.editarUsuario(idUsuario, nome, email, senha)
         .then(
             function (resultado) {
