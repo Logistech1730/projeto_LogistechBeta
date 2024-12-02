@@ -131,7 +131,10 @@
                 </div>
                 <div class="filtrosEsteira">
                     <ul>
-                        <li>Pesquisar <input type="text"> <i class="fa-solid fa-magnifying-glass"></i></li>
+                        <li>Pesquisar <input type="text" id="inpPesquisa"> <i class="fa-solid fa-magnifying-glass" onclick="pesquisarEsteira()"></i></li>
+                        <li class="containerBtnLimpar">
+                            <button class="btn-limparPesquisa" onclick="window.location.reload()">Limpar pesquisa</button>
+                          </li>
                     </ul>
                 </div>
             </div>
@@ -315,6 +318,38 @@
     }
 
 
+    function pesquisarEsteira() {
+    var idEmpresa = sessionStorage.idEmpresa
+    bodyTabela.innerHTML = ''
+    var nomePesquisa = document.getElementById('inpPesquisa').value
+
+    fetch(`/esteiras/pesquisarEsteira/${idEmpresa}/${nomePesquisa}`)
+      .then((resposta) => {
+        if (resposta.ok) {
+          resposta.json().then((esteiras) => {
+            for (var i = 0; i < esteiras.length; i++) {
+              bodyTabela.innerHTML += `
+            <tr>
+                <td>${esteiras[i].nome}</td>
+                <td>${esteiras[i].departamento}</td>
+                <td>${esteiras[i].distanciaEsperada}</td>
+                <td>${esteiras[i].localizacao}</td>
+                <td class='tableIcons'> <i class="fa-solid fa-pencil" onclick="editarEsteira(${esteiras[i].idEsteira}, '${esteiras[i].nome}', '${esteiras[i].departamento}', '${esteiras[i].localizacao}', ${esteiras[i].distanciaEsperada})"></i></td>
+                <td class='tableIcons'><i class="fa-solid fa-trash tableIcons" onclick="deletarEsteira(${esteiras[i].idEsteira})"></i></td>
+            </tr>
+                `
+
+              if (resultado[i].idUsuario == sessionStorage.idUsuario) {
+                var deletarUserElements = document.querySelectorAll('.deletarUser')
+                deletarUserElements[i].innerHTML = ''
+              }
+            }
+          })
+        }
+      }).catch((erro => {
+        console.log("Erro ao enviar requisição: ", erro)
+      }))
+  }
 
 
     function salvarEsteira(idEsteira) {

@@ -49,8 +49,6 @@ function horarioAleatorio(){
 
 document.getElementById('cadastroBtn').addEventListener('click', () => {
 
-  
-
      //O valor de data-modal é atribuido a constante modalId
      const modalId = openButton.getAttribute('data-modal');
      //O valor modal-1 está na tag dialog, sendo referenciado pelo valor que está dentro de data-modal

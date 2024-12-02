@@ -30,5 +30,9 @@ router.get('/listarValidosPorEsteira/:idEmpresa', function (req, res){
     esteiraController.listarValidosPorEsteira(req, res)
 })
 
+router.get("/pesquisarEsteira/:idEmpresa/:nome", function(req, res) {
+    esteiraController.pesquisarEsteira(req, res);
+});
+
 
 module.exports = router;

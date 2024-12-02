@@ -66,11 +66,20 @@ function listarInvalidosPorEsteira(idEmpresa){
     return database.executar(instrucaoSql)
 }
 
+function pesquisarEsteira(idEmpresa, nome){
+    var instrucaoSql = `
+    SELECT * FROM esteira WHERE fkEmpresa = ${idEmpresa} AND nome LIKE '%${nome}%';
+    `
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql)
+}
+
 module.exports = {
     cadastrar,
     listarTodasEsteiras,
     deletarEsteira,
     editarEsteira,
     listarValidosPorEsteira,
-    listarInvalidosPorEsteira
+    listarInvalidosPorEsteira,
+    pesquisarEsteira
 };
