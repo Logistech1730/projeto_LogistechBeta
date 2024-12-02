@@ -41,8 +41,20 @@ function listarProdutosValidosInvalidosPorSemanaEmpresa(fkEmpresa) {
     SUM(CASE WHEN r.distancia = e.distanciaEsperada THEN 1 ELSE 0 END) AS ProdutosValidos,
     SUM(CASE WHEN r.distancia <> e.distanciaEsperada THEN 1 ELSE 0 END) AS ProdutosInvalidos
     FROM registro AS r JOIN sensor AS s ON r.fkSensor = s.idSensor JOIN esteira AS e ON s.fkEsteira = e.idEsteira 
-    JOIN empresa AS emp ON e.fkEmpresa = emp.idEmpresa WHERE emp.idEmpresa = 1 
+    JOIN empresa AS emp ON e.fkEmpresa = emp.idEmpresa WHERE emp.idEmpresa = ${fkEmpresa} 
     AND DATE(r.dataRegistro) >= CURRENT_DATE() - INTERVAL 6 DAY AND DATE(r.dataRegistro) < CURDATE() + INTERVAL 1 DAY GROUP BY DATE(r.dataRegistro) ORDER BY DATE(r.dataRegistro);
+`;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql); 
+}
+
+function listarValidosInvalidosTodasEsteirasEmpresa(fkEmpresa) {
+    var instrucaoSql = `
+    SELECT e.nome AS Esteira, 
+       IFNULL(SUM(CASE WHEN r.distancia <= e.distanciaEsperada THEN 1 ELSE 0 END), 0) AS ProdutosValidos, 
+       IFNULL(SUM(CASE WHEN r.distancia > e.distanciaEsperada THEN 1 ELSE 0 END), 0) AS ProdutosInvalidos
+FROM esteira e LEFT JOIN sensor s ON e.idEsteira = s.fkEsteira LEFT JOIN registro r ON s.idSensor = r.fkSensor 
+WHERE e.fkEmpresa = ${fkEmpresa} GROUP BY e.nome;
 `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql); 
@@ -52,5 +64,6 @@ module.exports = {
     listarTodosRegistros,
     listarRegistrosPorData,
     listarProdutosValidosInvalidosTotalEmpresa,
-    listarProdutosValidosInvalidosPorSemanaEmpresa
+    listarProdutosValidosInvalidosPorSemanaEmpresa,
+    listarValidosInvalidosTodasEsteirasEmpresa
 };
