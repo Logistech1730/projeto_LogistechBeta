@@ -114,8 +114,6 @@
                 </div>
             </dialog>
             <div id="div_containerEsteiras" class="containerEsteiras">
-                <p>Selecione uma esteira</p>
-
                 <table id="tabelaMetricas">
                     <thead>
                         <tr>
@@ -143,7 +141,6 @@
 
     // adicionando evento onchange em cada <option>
     slt_esteiras.addEventListener("change", () => {
-        div_containerEsteiras.innerHTML = ""
         console.log(slt_esteiras.value)
         carregarMetricas(slt_esteiras.value)
         sessionStorage.setItem('esteira', slt_esteiras.value)
@@ -153,6 +150,7 @@
     function carregarMetricas(idEsteira) {
         let bodyTabela = document.getElementById('bodyTabela')
         if (idEsteira == "#") {
+            bodyTabela.innerHTML = "";
             return
         }
         fetch(`/metricas/listar/esteira/${idEsteira}`, {
@@ -163,19 +161,21 @@
                     resposta.json()
                         .then((dados) => {
                             if (dados.length == 0) {
-                                div_containerEsteiras.innerHTML = "<p>Nenhuma métrica cadastrada para essa esteira</p>"
+                                bodyTabela.innerHTML = "";
                             } else {
+                                bodyTabela.innerHTML = "";
                                 // populando os cards com as métricas
                                 for (var i = 0; i < dados.length; i++) {
+
                                     bodyTabela.innerHTML += `
                                         <tr>
-                                            <td style="color: ${dados[i].cor};">${dados[i].nomeMetrica}</td>
+                                            <td style="color: #${dados[i].cor};">${dados[i].nomeMetrica}</td>
                                             <td>${dados[i].valorMinimo}</td>
                                             <td>${dados[i].valorMaximo}</td>
                                             <td>${formatarData(dados[i].dataCadastro)}</td>
                                             <td>#${dados[i].cor}</td>
+                                                  <td class='tableIcons'><i onclick="editarMetrica(${dados[i].idMetrica})" class="fa-solid fa-pencil"></i></td>
                                             <td class='tableIcons'><i onclick="deletarMetrica(${dados[i].idMetrica})" class="fa-solid fa-trash"></i></td>
-                                            <td class='tableIcons'><i onclick="editarMetrica(${dados[i].idMetrica})" class="fa-solid fa-pencil"></i></td>
                                         </tr>
                                         `
 
