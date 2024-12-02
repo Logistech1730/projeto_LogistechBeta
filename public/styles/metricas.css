@@ -356,3 +356,29 @@ dialog::backdrop {
     }
 }
 
+#tabelaMetricas {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+  }
+
+  .tableIcons{
+    text-align: center;
+    transition: 0.2s;
+    cursor: pointer;
+  }
+
+  th {
+    background-color: #f4f4f4;
+  }
+
+  .tableIcons i:hover{
+    transition: 0.2s;
+    color: #0f26b9;
+  }
