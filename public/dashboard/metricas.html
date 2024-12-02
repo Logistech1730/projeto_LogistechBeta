@@ -136,6 +136,9 @@
 
 
     function carregarMetricas(idEsteira) {
+        if (idEsteira == "#") {
+            return;
+        }
         fetch(`/metricas/listar/esteira/${idEsteira}`, {
             method: "GET"
         })
@@ -143,7 +146,10 @@
                 if (resposta.ok) {
                     resposta.json()
                         .then((dados) => {
-                            // populando os cards com as métricas
+                            if (dados.length == 0) {
+                                div_containerEsteiras.innerHTML = "<p>Nenhuma métrica cadastrada para essa esteira</p>"
+                            } else {
+                                // populando os cards com as métricas
                             for (var i = 0; i < dados.length; i++) {
                                 div_containerEsteiras.innerHTML += `
         <div class="cardEsteira">
@@ -169,6 +175,8 @@
         </div>
     </div>`;
                             }
+                            }
+                            
                         })
                         .catch((erro) => {
                             console.log("Erro ao converter JSON: ", erro);
@@ -188,7 +196,11 @@
                 if (resposta.ok) {
                     resposta.json()
                         .then((dados) => {
+                            if (dados.length == 0) {
+                                div_containerEsteiras.innerHTML = "<p>Nenhuma esteira cadastrada</p>"
+                            }
                             // populando <select> com as esteiras
+                                slt_esteiras.innerHTML = `<option selected value="#">Selecione uma esteira</option>`;
                             for (var i = 0; i < dados.length; i++) {
                                 slt_esteiras.innerHTML += `<option value=${dados[i].idEsteira}>${dados[i].departamento}</option>`;
                             }
