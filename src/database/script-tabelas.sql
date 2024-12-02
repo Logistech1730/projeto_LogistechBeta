@@ -75,7 +75,7 @@ ON DELETE CASCADE
 
 CREATE TABLE registro(
 idRegistro INT PRIMARY KEY AUTO_INCREMENT,
-distancia DOUBLE,
+distancia INT,
 dataRegistro DATETIME DEFAULT CURRENT_TIMESTAMP(),
 isProdutoViavel TINYINT,
 CONSTRAINT chkProduto CHECK(isProdutoViavel IN(0,1)),
@@ -92,6 +92,33 @@ PRIMARY KEY (IdAlerta, fkRegistro),
 CONSTRAINT fkRegistroAlerta FOREIGN KEY (fkRegistro) REFERENCES registro (idRegistro)
 ON DELETE CASCADE
 );
+
+-- criação do TRIGGER de geração de alerta
+DELIMITER $$
+
+CREATE TRIGGER after_insert_registro
+AFTER INSERT ON registro
+FOR EACH ROW
+BEGIN
+    -- Variável para armazenar a distância esperada da esteira
+    DECLARE distancia_esperada INT;
+    
+    -- Buscar a distância esperada da esteira associada ao sensor
+    SELECT e.distanciaEsperada
+    INTO distancia_esperada
+    FROM esteira e
+    JOIN sensor s ON s.fkEsteira = e.idEsteira
+    WHERE s.idSensor = NEW.fkSensor;
+    
+    -- Verificar se a distância registrada é diferente da distância esperada
+    IF NEW.distancia != distancia_esperada THEN
+        -- Inserir um alerta na tabela Alerta, caso as distâncias sejam diferentes
+        INSERT INTO Alerta (fkRegistro, visto)
+        VALUES (NEW.idRegistro, 0);
+    END IF;
+END $$
+
+DELIMITER ;
 
 -- Inserções na tabela 'empresa'
 INSERT INTO empresa (cnpj, telefone, nomeFantasia, isAtivo) VALUES 
