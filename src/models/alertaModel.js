@@ -42,7 +42,7 @@ function listarAlertasNaoVistos(fkEmpresa) {
          JOIN sensor ON registro.fkSensor = sensor.idSensor
          JOIN esteira ON sensor.fkEsteira = esteira.idEsteira
          JOIN empresa on esteira.fkEmpresa = empresa.idEmpresa
-         WHERE empresa.idEmpresa = ${fkEmpresa} AND alerta.visto = 0
+         WHERE empresa.idEmpresa = ${fkEmpresa} AND Alerta.visto = 0
  ORDER BY registro.dataRegistro DESC;
  
      `;
@@ -80,8 +80,8 @@ function listarAlertasNaoVistosPorData(dataInicial, dataFinal, fkEmpresa) {
     JOIN empresa ON esteira.fkEmpresa = empresa.idEmpresa
     WHERE empresa.idEmpresa = ${fkEmpresa} 
     AND Alerta.visto = 0  -- Filtro para alertas não vistos
-    AND registro.dataRegistro >= '${dataInicial}'  -- Filtro de data inicial
-    AND registro.dataRegistro <= '${dataFinal}'  -- Filtro de data final
+    AND DATE(registro.dataRegistro) >= '${dataInicial}'  -- Filtro de data inicial
+    AND DATE(registro.dataRegistro) <= '${dataFinal}'  -- Filtro de data final
     ORDER BY registro.dataRegistro DESC;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -107,8 +107,8 @@ function listarAlertasPorData(dataInicial, dataFinal, fkEmpresa) {
     JOIN esteira ON sensor.fkEsteira = esteira.idEsteira
     JOIN empresa ON esteira.fkEmpresa = empresa.idEmpresa
     WHERE empresa.idEmpresa = 1
-    AND registro.dataRegistro >= '${dataInicial}'  -- Filtro de data inicial
-    AND registro.dataRegistro <= '${dataFinal}'  -- Filtro de data final
+    AND DATE(registro.dataRegistro) >= '${dataInicial}'  -- Filtro de data inicial
+    AND DATE(registro.dataRegistro) <= '${dataFinal}'  -- Filtro de data final
     ORDER BY registro.dataRegistro DESC;
 
     `;
