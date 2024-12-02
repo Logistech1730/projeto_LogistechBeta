@@ -16,7 +16,16 @@ body {
 
 }
 
-
+.slt_esteiras{
+    /* margin-top: 3vh; */
+    height: 5vh;
+    border-radius: 1vh;
+    width: 20vw;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    background-color: #384cd1;
+}
 
 .dashboard {
     display: flex;
@@ -32,17 +41,19 @@ body {
     height: auto;
     display: flex;
     justify-content: space-around;
+    align-items: flex-end;
 }
 
 .kpis div {
     width: 30%;
     display: flex;
     flex-direction: column;
+    /* justify-content: flex-end; */
     gap: 10px;
 
 }
 
-.kpis div :nth-child(2) {
+ .kpis div :nth-child(2) {
     width: 100%;
     background-color: #384cd1;
     font-size: 1.5rem;
@@ -52,7 +63,7 @@ body {
     border-radius: 10px;
     color: #fff;
     box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-}
+} 
 
 .dashboard .blocos {
     display: flex;

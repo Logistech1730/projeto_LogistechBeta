@@ -138,6 +138,33 @@ function listarMetricasPorEsteira(req, res) {
 
 }
 
+function listarMetricaParaPorcentagem(req, res) {
+    var fkEmpresa = req.params.fkEmpresa;
+    var idEsteira = req.params.idEsteira;
+    var porcentagem = req.params.porcentagem;
+
+    if (fkEmpresa == undefined) {
+        res.status(400).send("ID da esteira indefinido");
+    } else {
+        metricaModel.listarMetricaParaPorcentagem(fkEmpresa, idEsteira, porcentagem)
+            .then(
+                function (resultado) {
+                    res.status(200).json(resultado);
+                }
+            )
+            .catch(function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao listar esteiras! Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            })
+    }
+
+
+}
+
 function deletar(req, res) {
     var idMetrica = req.params.idMetrica;
 
@@ -166,5 +193,6 @@ module.exports = {
     listarMetricasPorEsteira,
     deletar,
     listarMetricasPorId,
-    atualizar
+    atualizar,
+    listarMetricaParaPorcentagem
 }

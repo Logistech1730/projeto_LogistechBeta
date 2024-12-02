@@ -62,6 +62,19 @@ function deletarEsteira(idEsteira) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+function listarMetricaParaPorcentagem(fkEmpresa, idEsteira, porcentagem) {
+    var instrucaoSql = `
+    SELECT IFNULL(MAX(m.nomeMetrica), 'Nenhuma métrica')  AS nomeMetrica, IFNULL(MAX(m.cor), '000000') AS corMetrica FROM registro AS r
+    LEFT JOIN sensor AS s ON r.fkSensor = s.idSensor
+    LEFT JOIN esteira AS e ON s.fkEsteira = e.idEsteira
+    LEFT JOIN metrica AS m ON m.fkEsteira = e.idEsteira
+    LEFT JOIN empresa AS emp ON e.fkEmpresa = emp.idEmpresa
+    WHERE emp.idEmpresa = ${fkEmpresa} AND e.idEsteira = ${idEsteira} AND m.valorMinimo <= ${porcentagem} AND m.valorMaximo >= ${porcentagem};
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 
 module.exports = {
     cadastrar,
@@ -70,5 +83,6 @@ module.exports = {
     verificarConflito,
     listarMetricasPorId,
     atualizar,
-    deletarMetrica
+    deletarMetrica,
+    listarMetricaParaPorcentagem
 };

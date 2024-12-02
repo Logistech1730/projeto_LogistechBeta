@@ -18,6 +18,14 @@ router.get("/listarValidosInvalidosTodasEsteirasEmpresa/:fkEmpresa", function (r
     registroController.listarValidosInvalidosTodasEsteirasEmpresa(req, res);
 })
 
+router.get("/listarProdutosValidosInvalidosTotalEsteiraEmpresa/:fkEmpresa/:idEsteira", function (req, res) {
+    registroController.listarProdutosValidosInvalidosTotalEsteiraEmpresa(req, res);
+})
+
+router.get("/listarProdutosValidosInvalidosPorSemanaEsteiraEmpresa/:fkEmpresa/:idEsteira", function (req, res) {
+    registroController.listarProdutosValidosInvalidosPorSemanaEsteiraEmpresa(req, res);
+})
+
 router.post("/listarPorData/:fkEmpresa", function (req, res) {
     registroController.listarRegistrosPorData(req, res);
 })

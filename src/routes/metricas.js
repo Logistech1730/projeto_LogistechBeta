@@ -14,6 +14,9 @@ router.get("/listar/esteira/:fkEsteira", function (req, res) {
 router.get("/listar/metrica/:idMetrica", (req, res) => {
     metricaController.listarMetricasPorId(req, res);
 })
+router.get("/listarMetricaParaPorcentagem/:fkEmpresa/:idEsteira/:porcentagem", (req, res) => {
+    metricaController.listarMetricaParaPorcentagem(req, res);
+})
 
 router.put("/atualizar", (req, res) => {
     metricaController.atualizar(req, res);

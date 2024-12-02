@@ -22,7 +22,7 @@
     />
   </head>
 
-  <body onload="buscarRegistrosGraficoBarra(); buscarRegistrosGraficoPizza(); gerarPorcentagemProdutos(); carregarNomeEmpresa();">
+  <body onload="listarEsteiras(); carregarNomeEmpresa(); ">
     <div class="container-dash">
         <div id="barralateral" class="barra-lateral">
             <div class="div-imagem-perfil">
@@ -75,18 +75,16 @@
           </div>
 
       <div class="dashboard">
-        <div class="kpis">
+        <div class="kpis">        
+                <select id="slt_esteiras" class="slt_esteiras">
+                </select>
           <div class="produtos-registrados">
             <p><b>Total de produtos</b></p>
-            <p id="span_qtd_produtos"></p>
+            <p id="span_qtd_produtos">0</p>
           </div>
-          <div class="esteira-mais-desvio">
-            <p><b>Esteira com mais desvio</b></p>
-            <p id="esteira-com-mais-desvio">Esteira 3</p>
-          </div>
-          <div class="status-esteiras">
+          <div class="status-esteiras" id="container_status_esteira">
             <p><b>Status das esteiras</b></p>
-            <p id="status_esteiras" style="color: green">Conforme esperado</p>
+            <p id="status_esteiras" >Cadastre métricas</p>
           </div>
         </div>
         <div class="blocos">
@@ -132,16 +130,150 @@
   var qtd_invalidos_7_dias = [];
   var datas_ultimos_7_dias = [];
 
+  var porcentagem_Validos = 0;
+  var porcentagem_Invalidos = 0;
+
   var qtdValidosTempoReal = [60,40,50,49,39,51];
   var qtdInvalidosTempoReal = [10,20,10,9,19,11];
-  var grafico_pizza;
-  var graficoBarra;
+  var grafico_pizza = new Chart(document.getElementById("grafico-pizza"), {
+            type: "pie",
+            data: {
+                labels: ["Válidos", "Não válidos"],
+                datasets: [
+                    {
+                        label: "Valor",
+                        data: [0, 0],
+                        backgroundColor: ["#384cd1", "#FF0000"],
+                        borderWidth: 0,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                // cutout: '30%',
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: "Produtos válidos VS inválidos",
+                        font: {
+                            size: 20,
+                        },
+                        color: "#000",
+                        padding: {
+                            top: 5,
+                            bottom: 5,
+                        },
+                    },
+                    datalabels: {
+                        color: "#fff",
+                        font: {
+                            weight: "bold",
+                            size: 20,
+                        },
+                        formatter: (value, ctx) => {
+                            var porcentagens = Math.round((value / qtdProdutosTotal) * 100);
+                            return `${porcentagens}%`;
+                        },
+                        anchor: "center",
+                        align: "center",
+                    },
+                },
+            },
+            plugins: [ChartDataLabels], // Ativando o plugin ChartDataLabels
+        });;
+  var gradient = ctx.createLinearGradient(0, 0, 0, 400);
+  gradient.addColorStop(0, "#384cd1");
+  gradient.addColorStop(1, "#3999f4");
+
+  var gradient1 = ctx.createLinearGradient(0, 0, 0, 400);
+  gradient1.addColorStop(0, "#f90000");
+  gradient1.addColorStop(1, "#c36767");
+  var graficoBarra = graficoBarra = new Chart(document.getElementById("grafico-barra"), {
+        type: "bar",
+        data: {
+          labels: [1,2,3,4,5,6,7],
+          datasets: [
+            {
+              label: "Produtos válidos",
+              backgroundColor: gradient,
+              data: [0,0,0,0,0,0,0],
+              borderWidth: 0,
+            },
+            {
+              label: "Produtos inválidos",
+              backgroundColor: gradient1,
+              data: [0,0,0,0,0,0,0],
+              borderWidth: 0,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            title: {
+              display: true,
+              text: "Produtos válidos e inválidos dos últimos 7 dias",
+              font: {
+                size: 16,
+              },
+              color: "#000",
+              padding: {
+                top: 5,
+                bottom: 5,
+              },
+            },
+          },
+
+         scales: {
+            y: {
+              title: {
+                display: true,
+                text: "Quantidade de produtos",
+                font: {
+                  size: 16,
+                  weight: 700,
+                },
+              },
+              beginAtZero: true,
+            },
+            x: {
+              title: {
+                display: true,
+                text: "Período",
+                font: {
+                  size: 16,
+                  weight: 700,
+                },
+              },
+            },
+          },
+        },
+      });;
 
 function atualizarGraficoPizza(registros) {
     qtdValidosTotal = Number(registros[0].ProdutosValidos);
+    console.log("Quantidade de validos: ", qtdValidosTotal);
     qtdInvalidosTotal = Number(registros[0].ProdutosInvalidos);
+    console.log("Quantidade de invalidos: ", qtdInvalidosTotal);
     qtdProdutosTotal = qtdInvalidosTotal + qtdValidosTotal;
+    console.log("Quantidade total: ", qtdProdutosTotal);
     span_qtd_produtos.innerHTML = qtdProdutosTotal;
+    if (qtdValidosTotal <= 0) {
+        porcentagem_Validos = 0;
+    } else{
+        porcentagem_Validos = Math.round((qtdValidosTotal/qtdProdutosTotal) * 100);
+    } 
+    if (qtdInvalidosTotal <= 0) {
+        porcentagem_Invalidos = 0;
+    } else {
+        porcentagem_Invalidos = Math.round((qtdInvalidosTotal/qtdProdutosTotal) * 100);
+    }
+    console.log("Poncentagem invalidos: ", porcentagem_Invalidos);
+    console.log("Poncentagem validos: ", porcentagem_Validos);
+    buscarMetricasDeRegistros(porcentagem_Validos)
+
 
     if (grafico_pizza) {
         grafico_pizza.data.datasets[0].data = [qtdValidosTotal, qtdInvalidosTotal];
@@ -221,6 +353,7 @@ function atualizarGraficoBarra(registros) {
     console.log(datas_ultimos_7_dias)
 
     if (graficoBarra) {
+        graficoBarra.data.labels = datas_ultimos_7_dias;
         graficoBarra.data.datasets[0].data = qtd_validos_7_dias;
         graficoBarra.data.datasets[1].data = qtd_invalidos_7_dias;
         graficoBarra.update();
@@ -290,8 +423,66 @@ function atualizarGraficoBarra(registros) {
         }
     }
 
-function buscarRegistrosGraficoPizza() { 
-    fetch(`/registros/listarValidosInvalidosTotalEmpresa/${sessionStorage.idEmpresa}`, { 
+    function listarEsteiras() {
+        var fkEmpresa = sessionStorage.idEmpresa
+        fetch(`/esteiras/listar/${fkEmpresa}`, {
+            method: "GET"
+        })
+            .then((resposta) => {
+                if (resposta.ok) {
+                    resposta.json()
+                        .then((dados) => {
+                            if (dados.length == 0) {
+                                div_containerEsteiras.innerHTML = "<p>Nenhuma esteira cadastrada</p>"
+                            }
+                            // populando <select> com as esteiras
+                            slt_esteiras.innerHTML = `<option selected value="#">Selecione uma esteira</option>`
+                            for (var i = 0; i < dados.length; i++) {
+                                slt_esteiras.innerHTML += `<option value=${dados[i].idEsteira}>${dados[i].nome}</option>`
+                            }
+                        })
+                        .catch((erro) => {
+                            console.log("Erro ao converter JSON: ", erro)
+                        })
+                }
+            })
+            .catch((erro => {
+                console.log("Erro ao enviar requisição: ", erro)
+            }))
+    }
+    slt_esteiras.addEventListener("change", () => {
+        // div_containerEsteiras.innerHTML = ""
+        // console.log(slt_esteiras.value)
+        sessionStorage.setItem('ESTEIRA_ATUAL', slt_esteiras.value)
+        if (slt_esteiras.value == "#") {
+            return
+        }
+        buscarRegistrosGraficoPizza()
+        buscarRegistrosGraficoBarra()
+    })
+
+    function buscarMetricasDeRegistros(porcentagemValidos) { 
+    fetch(`/metricas/listarMetricaParaPorcentagem/${sessionStorage.idEmpresa}/${sessionStorage.ESTEIRA_ATUAL}/${porcentagemValidos}`, { 
+      method: 'GET', 
+    }) 
+        .then((response) => { 
+          if (response.ok) { 
+            return response.json(); 
+          } else { 
+            throw new Error('Erro ao buscar as registros.'); 
+          } }) 
+          .then((registros) => { 
+            console.log("registros recebidas:", registros); 
+            status_esteiras.style.cssText = `background-color: #${registros[0].corMetrica}`
+            status_esteiras.innerHTML = registros[0].nomeMetrica;
+          }) .catch((erro) => { 
+            console.error('Erro ao listar registros:', erro); 
+            alert('Erro ao listar métricas.'); 
+          });
+        }
+
+    function buscarRegistrosGraficoPizza() { 
+    fetch(`/registros/listarProdutosValidosInvalidosTotalEsteiraEmpresa/${sessionStorage.idEmpresa}/${sessionStorage.ESTEIRA_ATUAL}`, { 
       method: 'GET', 
     }) 
         .then((response) => { 
@@ -310,7 +501,7 @@ function buscarRegistrosGraficoPizza() {
         }
 
 function buscarRegistrosGraficoBarra() { 
-    fetch(`/registros/listarValidosInvalidosPorSemanaEmpresa/${sessionStorage.idEmpresa}`, { 
+    fetch(`/registros/listarProdutosValidosInvalidosPorSemanaEsteiraEmpresa/${sessionStorage.idEmpresa}/${sessionStorage.ESTEIRA_ATUAL}`, { 
       method: 'GET', 
     }) 
         .then((response) => { 
@@ -328,17 +519,11 @@ function buscarRegistrosGraficoBarra() {
           });
         }
 
-  var buscarRegistrosGraficoPizzaConstantemente = setInterval(buscarRegistrosGraficoPizza, 2000);
+//   var buscarRegistrosGraficoPizzaConstantemente = setInterval(buscarRegistrosGraficoPizza, 2000);
   
-  setTimeout(()=>{ var buscarRegistrosGraficoBarraDiariamente = setInterval(buscarRegistrosGraficoBarra, 2000 );}, 1000)
+//   setTimeout(()=>{ var buscarRegistrosGraficoBarraDiariamente = setInterval(buscarRegistrosGraficoBarra, 2000 );}, 1000)
   // Criar gradiente
-  var gradient = ctx.createLinearGradient(0, 0, 0, 400);
-  gradient.addColorStop(0, "#384cd1");
-  gradient.addColorStop(1, "#3999f4");
-
-  var gradient1 = ctx.createLinearGradient(0, 0, 0, 400);
-  gradient1.addColorStop(0, "#f90000");
-  gradient1.addColorStop(1, "#c36767");
+  
 
   var grafico_tempo_real = new Chart(
     document.getElementById("grafico-tempo-real"),
