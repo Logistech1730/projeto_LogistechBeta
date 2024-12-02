@@ -435,11 +435,11 @@ function buscarRegistrosGraficoBarra() {
           });
         }
 
-  var buscarRegistrosGraficoPizzaConstantemente = setInterval(buscarRegistrosGraficoPizza, 4000);
+  var buscarRegistrosGraficoPizzaConstantemente = setInterval(buscarRegistrosGraficoPizza, 1000);
   
-  setTimeout(()=>{ var buscarRegistrosGraficoBarraDiariamente = setInterval(buscarRegistrosGraficoBarra, 4000 );}, 1333)
+  var buscarRegistrosGraficoBarraDiariamente = setInterval(buscarRegistrosGraficoBarra, 1000 );
 
-  setTimeout(()=>{ var buscarRegistrosGraficoEsteirasConstantemente = setInterval(buscarRegistrosGraficoEsteiras, 4000 );}, 2667)
+  var buscarRegistrosGraficoEsteirasConstantemente = setInterval(buscarRegistrosGraficoEsteiras, 1000 );
   // Criar gradiente
   var gradient = ctx.createLinearGradient(0, 0, 0, 400);
   gradient.addColorStop(0, "#384cd1");

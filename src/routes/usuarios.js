@@ -8,7 +8,7 @@ var usuarioController = require("../controllers/usuarioController");
 // e que redirecionará esses argumentos para a função "cadastrar" da página usuarioController
 router.post("/cadastrar", function (req, res) {
     usuarioController.cadastrar(req, res);
-})
+}) 
 
 router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
