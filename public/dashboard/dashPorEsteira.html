@@ -506,7 +506,7 @@ function atualizarGraficoLinha(registros) {
   for (var contador = registros.length - 1; contador >= 0; contador--) {
     var dataHoraAtual = registros[contador].dataRegistro;
     var objeto_data_hora = new Date(dataHoraAtual)
-    var horaAtual = objeto_data_hora.getUTCHours().toString().padStart(2, '0'); 
+    var horaAtual = (objeto_data_hora.getUTCHours() - 3).toString().padStart(2, '0'); 
     var minutoAtual = objeto_data_hora.getUTCMinutes().toString().padStart(2, '0');
     var segundoAtual = objeto_data_hora.getUTCSeconds().toString().padStart(2, '0');
     var horaFormatada = `${horaAtual}:${minutoAtual}:${segundoAtual}`
@@ -521,6 +521,7 @@ function atualizarGraficoLinha(registros) {
   console.log(lista_ultimos_6_invalidos)
   console.log(lista_ultimos_6_validos)
   console.log("Hora formatada: ", lista_horarios)
+  console.log
 
   if (grafico_tempo_real) {
       grafico_tempo_real.data.labels = lista_horarios;
