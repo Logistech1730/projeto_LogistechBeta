@@ -353,55 +353,7 @@ function atualizarGraficoPizza(registros) {
     if (grafico_pizza) {
         grafico_pizza.data.datasets[0].data = [qtdValidosTotal, qtdInvalidosTotal];
         grafico_pizza.update();
-    } else {
-        grafico_pizza = new Chart(document.getElementById("grafico-pizza"), {
-            type: "pie",
-            data: {
-                labels: ["Válidos", "Não válidos"],
-                datasets: [
-                    {
-                        label: "Valor",
-                        data: [qtdValidosTotal, qtdInvalidosTotal],
-                        backgroundColor: ["#384cd1", "#FF0000"],
-                        borderWidth: 0,
-                    },
-                ],
-            },
-            options: {
-                responsive: true,
-                // cutout: '30%',
-                maintainAspectRatio: false,
-                plugins: {
-                    title: {
-                        display: true,
-                        text: "Produtos válidos VS inválidos",
-                        font: {
-                            size: 20,
-                        },
-                        color: "#000",
-                        padding: {
-                            top: 5,
-                            bottom: 5,
-                        },
-                    },
-                    datalabels: {
-                        color: "#fff",
-                        font: {
-                            weight: "bold",
-                            size: 20,
-                        },
-                        formatter: (value, ctx) => {
-                            var porcentagens = (value / qtdProdutosTotal) * 100;
-                            return `${Math.round (porcentagens)}%`;
-                        },
-                        anchor: "center",
-                        align: "center",
-                    },
-                },
-            },
-            plugins: [ChartDataLabels], // Ativando o plugin ChartDataLabels
-        });
-    }
+    } 
 }
 
 function atualizarGraficoBarra(registros) {
@@ -432,70 +384,7 @@ function atualizarGraficoBarra(registros) {
         graficoBarra.data.datasets[0].data = qtd_validos_7_dias;
         graficoBarra.data.datasets[1].data = qtd_invalidos_7_dias;
         graficoBarra.update();
-    } else {
-      graficoBarra = new Chart(document.getElementById("grafico-barra"), {
-        type: "bar",
-        data: {
-          labels: datas_ultimos_7_dias,
-          datasets: [
-            {
-              label: "Produtos válidos",
-              backgroundColor: gradient,
-              data: qtd_validos_7_dias,
-              borderWidth: 0,
-            },
-            {
-              label: "Produtos inválidos",
-              backgroundColor: gradient1,
-              data: qtd_invalidos_7_dias,
-              borderWidth: 0,
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            title: {
-              display: true,
-              text: "Produtos válidos e inválidos dos últimos 7 dias",
-              font: {
-                size: 16,
-              },
-              color: "#000",
-              padding: {
-                top: 5,
-                bottom: 5,
-              },
-            },
-          },
-
-         scales: {
-            y: {
-              title: {
-                display: true,
-                text: "Quantidade de produtos",
-                font: {
-                  size: 16,
-                  weight: 700,
-                },
-              },
-              beginAtZero: true,
-            },
-            x: {
-              title: {
-                display: true,
-                text: "Período",
-                font: {
-                  size: 16,
-                  weight: 700,
-                },
-              },
-            },
-          },
-        },
-      });
-        }
+    } 
     }
 function atualizarGraficoLinha(registros) {
 
@@ -528,79 +417,7 @@ function atualizarGraficoLinha(registros) {
       grafico_tempo_real.data.datasets[0].data = lista_ultimos_6_invalidos;
       grafico_tempo_real.data.datasets[1].data = lista_ultimos_6_validos;
       grafico_tempo_real.update();
-  } else {
-    grafico_tempo_real = new Chart(
-    document.getElementById("grafico-tempo-real"),
-    {
-      type: "line",
-      data: {
-        labels: lista_horarios,
-        datasets: [
-          {
-            label: "Produtos inválidos",
-            backgroundColor: gradient1,
-            borderColor: gradient1,
-            data: lista_ultimos_6_invalidos,
-            fill: false,
-          },
-          {
-            label: "Produtos válidos",
-            backgroundColor: gradient,
-            borderColor: gradient,
-            data: lista_ultimos_6_validos,
-            fill: false,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          title: {
-            display: true,
-            text: "Acompanhamento de produtos",
-            font: {
-              size: 15,
-            },
-            color: "#000",
-            padding: {
-              top: 5,
-              bottom: 5,
-            },
-          },
-          legend: {
-            display: true,
-            position: "bottom",
-          },
-        },
-        scales: {
-          x: {
-            title: {
-              display: true,
-              text: "Período",
-              font: {
-                size: 16,
-                weight: 700,
-              },
-            },
-            beginAtZero: true,
-          },
-          y: {
-            title: {
-              display: true,
-              text: "Quantidade de produtos",
-              font: {
-                size: 13,
-                weight: 700,
-              },
-            },
-            beginAtZero: true,
-          },
-        },
-      },
-    }
-  );
-      }
+  } 
   }
 
     function listarEsteiras() {
@@ -637,7 +454,12 @@ function atualizarGraficoLinha(registros) {
         if (slt_esteiras.value == "#") {
             return
         }
-        buscarRegistrosGraficoPizza();
+        clearInterval(buscarRegistrosGraficoPizzaConstantemente);
+        clearInterval(buscarRegistrosGraficoBarraDiariamente);
+        clearInterval(buscarRegistrosGraficoLinhaConstantemente);
+        var buscarRegistrosGraficoPizzaConstantemente = setInterval(buscarRegistrosGraficoPizza, 1000);
+        var buscarRegistrosGraficoBarraDiariamente = setInterval(buscarRegistrosGraficoBarra, 1000 );
+        var buscarRegistrosGraficoLinhaConstantemente = setInterval(buscarRegistrosGraficoLinha, 1000 );
       
     })
 
@@ -673,7 +495,6 @@ function atualizarGraficoLinha(registros) {
           } }) 
           .then((registros) => { 
             console.log("registros recebidas:", registros);
-            buscarRegistrosGraficoBarra(); 
             atualizarGraficoPizza(registros); 
           }) .catch((erro) => { 
             console.error('Erro ao listar registros:', erro); 
@@ -720,8 +541,8 @@ function buscarRegistrosGraficoBarra() {
           });
         }
 
-//   var buscarRegistrosGraficoPizzaConstantemente = setInterval(buscarRegistrosGraficoPizza, 2000);
-  
+        //   
+        
 //   setTimeout(()=>{ var buscarRegistrosGraficoBarraDiariamente = setInterval(buscarRegistrosGraficoBarra, 2000 );}, 1000)
   // Criar gradiente
   
