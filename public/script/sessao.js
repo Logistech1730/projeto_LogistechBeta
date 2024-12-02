@@ -95,7 +95,7 @@ function deslogar() {
             </div>`;
             }
          
-            console.log(resultado)
+            // console.log(resultado)
             nomeFuncionario.innerHTML = resultado[0].nome;
           })
           .catch((erro) => {
