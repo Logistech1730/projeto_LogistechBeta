@@ -228,14 +228,15 @@
                     resposta.json()
                         .then((resultado) => {
                             sessionStorage.setItem("idUsuario", resultado[0].idUsuario)
+                            if (resultado[0].nivel == 2) {
+                                window.location.href = "./suporte/suporte.html"
+                            } else
                             // caso a empresa esteja com o cadastro ativo, vamos redirecionar para a dashboard, caso não
                             if (resultado[0].isAtivo == 1) {
                                 // armazenando os dados do usuário logado no SessionStorage
                                 sessionStorage.setItem("idEmpresa", resultado[0].fkEmpresa)
                                 // verificando nível de usuário e o direcionando para a tela certa
                                 window.location.href = "./dashboard/dashboard.html"
-                            } else if (resultado[0].nivel == 2) {
-                                window.location.href = "./suporte/suporte.html"
                             } else {
                                 alert("Sua empresa não está com cadastro ativo ainda!")
                             }

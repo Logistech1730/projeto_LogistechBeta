@@ -49,7 +49,7 @@ function editarUsuario(idUsuario, nome, email, senha){
 
 function listarPorId(idUsuario) {
     var instrucaoSql = `
-    SELECT usuario.nome, usuario.nivel, empresa.nomeFantasia FROM usuario JOIN empresa ON fkEmpresa = idEmpresa WHERE idUsuario = ${idUsuario};
+    SELECT usuario.nome, usuario.nivel, empresa.nomeFantasia FROM usuario LEFT JOIN empresa ON fkEmpresa = idEmpresa WHERE idUsuario = ${idUsuario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

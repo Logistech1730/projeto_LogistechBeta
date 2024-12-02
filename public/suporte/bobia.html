@@ -29,7 +29,7 @@
             </div>
             <div class="option">
                 <i class="fa-solid fa-ticket"></i>
-                <span><a href="https://desk.zoho.com/agent/logistech/logistech/tickets">Ferramenta de suporte</a></span>
+                <span><a target="_blank" href="https://desk.zoho.com/agent/logistech/logistech/tickets">Ferramenta de suporte</a></span>
             </div>
             <div class="option">
                 <i class="fa-solid fa-door-open"></i>
@@ -47,6 +47,9 @@
             </label>
             <textarea type="text" id="ipt_pergunta"></textarea>
             <button onclick="enviarPergunta()">Enviar pergunta</button>
+            <div  style="display: none;" id="loading">
+                <img src="/img/loading.gif" alt="Loading..." />
+            </div>
             <label for="ipt_resposta">Resposta</label>
             <textarea readonly id="ipt_resposta"></textarea>
         </div>
@@ -58,19 +61,15 @@
     carregarNomeUsuario()
     function enviarPergunta() {
         var pergunta = ipt_pergunta.value;
-        console.log(pergunta)
+        // console.log(pergunta)
         if (pergunta == "") {
             alert("Preencha a pergunta.");
             return;
         }
 
         // Criar o elemento de loading
-        const loading = document.createElement("div");
-        loading.id = "loading";
-        loading.innerHTML = `
-        <img src="/img/loading.gif" alt="Loading..." />
-    `;
-        document.body.appendChild(loading);
+        const loading = document.getElementById("loading");
+        loading.style.display = "block";
 
 
         fetch("/bobia/perguntar", {
@@ -97,7 +96,7 @@
             .finally(() => {
                 const loadingElement = document.getElementById("loading");
                 if (loadingElement) {
-                    loadingElement.remove();
+                    loadingElement.style.display = "none";
                 }
             })
     }

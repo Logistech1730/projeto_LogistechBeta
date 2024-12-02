@@ -9,7 +9,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    /* gap: 1rem; */
 }
 
 .paragrafos {
@@ -45,14 +45,10 @@ button {
 }
 
 #loading {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 999;
+
 }
 
 #loading img {
-    width: 250px;
+    width: 150px;
     height: auto; 
 }
