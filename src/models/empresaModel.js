@@ -20,7 +20,7 @@ function listarPorId(idEmpresa) {
 }
 
 function listarInativas() {
-    var instrucaoSql = `SELECT * FROM empresa WHERE isAtivo = 0;`;
+    var instrucaoSql = `SELECT * FROM listarInativas;`;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
