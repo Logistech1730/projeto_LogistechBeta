@@ -12,6 +12,7 @@ body {
     height: 100vh;
     flex-direction: column;
     width: 85vw;
+    margin: 0 10px 0 10px;
 }
 
 .container-title p{
