@@ -19,7 +19,6 @@ idUsuario INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(45),
 email VARCHAR(45),
 senha VARCHAR(45),
-telefone VARCHAR(45),
 nivel INT default 0,
 dataCadastro DATETIME DEFAULT current_timestamp,
 fkEmpresa INT,
@@ -276,13 +275,13 @@ INSERT INTO empresa (cnpj, telefone, nomeFantasia, isAtivo) VALUES
 ('33333333000333', '51943210987', 'Delta Logística', 1);
 
 -- Inserir usuarios para cada empresa
-INSERT INTO usuario (nome, email, senha, telefone, nivel, fkEmpresa) VALUES
-('Carlos Silva', 'carlos.silva@techsolutions.com', 'senha123', '11987654322', 1, 1),
-('Mariana Costa', 'mariana.costa@alphaconstrutora.com', 'senha123', '21976543211', 1, 2),
-('João Almeida', 'joao.almeida@betaconsultoria.com', 'senha123', '31965432110', 1, 3),
+INSERT INTO usuario (nome, email, senha, nivel, fkEmpresa) VALUES
+('Carlos Silva', 'carlos.silva@techsolutions.com', 'senha123', 1, 1),
+('Mariana Costa', 'mariana.costa@alphaconstrutora.com', 'senha123', 1, 2),
+('João Almeida', 'joao.almeida@betaconsultoria.com', 'senha123', 1, 3),
 ('Ana Santos', 'ana.santos@gamma.com', 'senha123', '41954321099', 1, 4),
-('Lucas Pereira', 'lucas.pereira@deltalogistica.com', 'senha123', '51943210988', 1, 5),
-('Vitor Ameida', 'vitor.almeida@logistechsuporte.com', 'senha123', '21322342123', 1, 5);
+('Lucas Pereira', 'lucas.pereira@deltalogistica.com', 'senha123', 1, 5),
+('Vitor Ameida', 'vitor.almeida@logistechsuporte.com', 'senha123', 1, 5);
 
 -- Inserir endereços para cada empresa
 INSERT INTO endereco (cep, logradouro, cidade, UF, numero, complemento, fkEmpresa) VALUES
