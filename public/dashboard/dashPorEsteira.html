@@ -80,7 +80,10 @@
   var qtdValidosTotal = 20;
   var qtdInvalidosTotal = 5;
   var qtdProdutosTotal = qtdInvalidosTotal + qtdInvalidosTotal;
-  
+  var buscarRegistrosGraficoPizzaConstantemente;
+  var buscarRegistrosGraficoBarraDiariamente;
+  var buscarRegistrosGraficoLinhaConstantemente;
+
   var qtd_validos_7_dias = [];
   var qtd_invalidos_7_dias = [];
   var datas_ultimos_7_dias = [];
@@ -409,12 +412,15 @@ function atualizarGraficoLinha(registros) {
         if (slt_esteiras.value == "#") {
             return
         }
-        clearInterval(buscarRegistrosGraficoPizzaConstantemente);
-        clearInterval(buscarRegistrosGraficoBarraDiariamente);
-        clearInterval(buscarRegistrosGraficoLinhaConstantemente);
-        var buscarRegistrosGraficoPizzaConstantemente = setInterval(buscarRegistrosGraficoPizza, 1000);
-        var buscarRegistrosGraficoBarraDiariamente = setInterval(buscarRegistrosGraficoBarra, 1000 );
-        var buscarRegistrosGraficoLinhaConstantemente = setInterval(buscarRegistrosGraficoLinha, 1000 );
+        if (!buscarRegistrosGraficoPizzaConstantemente) {
+          buscarRegistrosGraficoPizzaConstantemente = setInterval(buscarRegistrosGraficoPizza, 1000);
+        }
+        if (!buscarRegistrosGraficoBarraDiariamente) {
+          buscarRegistrosGraficoBarraDiariamente = setInterval(buscarRegistrosGraficoBarra, 1000 );
+        }
+        if (buscarRegistrosGraficoLinhaConstantemente) {
+          buscarRegistrosGraficoLinhaConstantemente = setInterval(buscarRegistrosGraficoLinha, 1000 );
+        }
       
     })
 
