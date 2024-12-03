@@ -294,43 +294,44 @@ INSERT INTO endereco (cep, logradouro, cidade, UF, numero, complemento, fkEmpres
 
 -- Inserir esteiras para a empresa 1
 INSERT INTO esteira (nome, departamento, localizacao, distanciaEsperada, fkEmpresa) VALUES
-('Esteira Mouse', 'Montagem', 'Bloco A1', 20, 1),
-('Esteira Teclado', 'Montagem', 'Bloco A2', 25, 1),
-('Esteira Monitor', 'Qualidade', 'Bloco A3', 30, 1),
-('Esteira Placa Mãe', 'Produção', 'Bloco A4', 40, 1),
-('Esteira Processador', 'Finalização', 'Bloco A5', 10, 1);
+('Esteira Mouse', 'Periféricos', 'Bloco A1', 20, 1),
+('Esteira Teclado', 'Periféricos', 'Bloco A2', 25, 1),
+('Esteira Monitor', 'Componentes', 'Bloco A3', 30, 1),
+('Esteira Placa Mãe', 'Componentes', 'Bloco A4', 40, 1),
+('Esteira Processador', 'Componentes', 'Bloco A5', 10, 1);
 
 -- Inserir esteiras para a empresa 2
 INSERT INTO esteira (nome, departamento, localizacao, distanciaEsperada, fkEmpresa) VALUES
-('Esteira Cabos USB', 'Montagem', 'Bloco B1', 15, 2),
+('Esteira Cabos USB', 'Acessórios', 'Bloco B1', 15, 2),
 ('Esteira HD Externo', 'Armazenamento', 'Bloco B2', 30, 2),
-('Esteira SSD', 'Qualidade', 'Bloco B3', 20, 2),
-('Esteira Fonte', 'Produção', 'Bloco B4', 35, 2),
-('Esteira Memória RAM', 'Finalização', 'Bloco B5', 45, 2);
+('Esteira SSD', 'Armazenamento', 'Bloco B3', 20, 2),
+('Esteira Fonte', 'Componentes', 'Bloco B4', 35, 2),
+('Esteira Memória RAM', 'Componentes', 'Bloco B5', 45, 2);
 
 -- Inserir esteiras para a empresa 3
 INSERT INTO esteira (nome, departamento, localizacao, distanciaEsperada, fkEmpresa) VALUES
-('Esteira Impressora', 'Montagem', 'Bloco C1', 25, 3),
-('Esteira Scanner', 'Qualidade', 'Bloco C2', 20, 3),
-('Esteira Webcam', 'Produção', 'Bloco C3', 30, 3),
-('Esteira Microfone', 'Finalização', 'Bloco C4', 35, 3),
-('Esteira Caixa de Som', 'Montagem', 'Bloco C5', 50, 3);
+('Esteira Impressora', 'Periféricos', 'Bloco C1', 25, 3),
+('Esteira Scanner', 'Periféricos', 'Bloco C2', 20, 3),
+('Esteira Webcam', 'Periféricos', 'Bloco C3', 30, 3),
+('Esteira Microfone', 'Áudio e Vídeo', 'Bloco C4', 35, 3),
+('Esteira Caixa de Som', 'Áudio e Vídeo', 'Bloco C5', 50, 3);
 
 -- Inserir esteiras para a empresa 4
 INSERT INTO esteira (nome, departamento, localizacao, distanciaEsperada, fkEmpresa) VALUES
-('Esteira Joystick', 'Montagem', 'Bloco D1', 15, 4),
-('Esteira Controle', 'Produção', 'Bloco D2', 25, 4),
-('Esteira Console', 'Qualidade', 'Bloco D3', 40, 4),
-('Esteira Adaptador HDMI', 'Finalização', 'Bloco D4', 20, 4),
-('Esteira Gamepad', 'Montagem', 'Bloco D5', 30, 4);
+('Esteira Joystick', 'Acessórios', 'Bloco D1', 15, 4),
+('Esteira Controle', 'Acessórios', 'Bloco D2', 25, 4),
+('Esteira Console', 'Periféricos', 'Bloco D3', 40, 4),
+('Esteira Adaptador HDMI', 'Acessórios', 'Bloco D4', 20, 4),
+('Esteira Gamepad', 'Acessórios', 'Bloco D5', 30, 4);
 
 -- Inserir esteiras para a empresa 5
 INSERT INTO esteira (nome, departamento, localizacao, distanciaEsperada, fkEmpresa) VALUES
-('Esteira Projetor', 'Montagem', 'Bloco E1', 50, 5),
-('Esteira Smart TV', 'Qualidade', 'Bloco E2', 60, 5),
-('Esteira Chromecast', 'Produção', 'Bloco E3', 40, 5),
-('Esteira Soundbar', 'Finalização', 'Bloco E4', 35, 5),
-('Esteira Subwoofer', 'Montagem', 'Bloco E5', 45, 5);
+('Esteira Projetor', 'Áudio e Vídeo', 'Bloco E1', 50, 5),
+('Esteira Smart TV', 'Áudio e Vídeo', 'Bloco E2', 60, 5),
+('Esteira Chromecast', 'Acessórios', 'Bloco E3', 40, 5),
+('Esteira Soundbar', 'Áudio e Vídeo', 'Bloco E4', 35, 5),
+('Esteira Subwoofer', 'Áudio e Vídeo', 'Bloco E5', 45, 5);
+
 
 -- Inserir métricas com intervalos aleatórios e não sobrepostos
 INSERT INTO metrica (nomeMetrica, valorMinimo, valorMaximo, cor, fkEsteira) VALUES
