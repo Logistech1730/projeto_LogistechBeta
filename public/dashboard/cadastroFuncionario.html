@@ -61,7 +61,7 @@
 
           <label for="inpTamanho">Senha</label>
           <input type="password" id="inpSenhaAtt" />
-          <div id="container-aviso"></div>
+          <div id="container-aviso2"></div>
           <button id="salvarFunc">Salvar</button>
         </div>
       </div>
@@ -72,8 +72,8 @@
 
 
   <main class="container-main">
-     <div id="barralateral" class="barra-lateral">
-    
+    <div id="barralateral" class="barra-lateral">
+
     </div>
 
     <div class="mainContent">
@@ -217,13 +217,17 @@
       .then((resposta) => {
         console.log(resposta)
         if (resposta.status == 200) {
-          alert("Usuário cadastrado com sucesso.")
-          window.location.reload()
+          // alert("Usuário cadastrado com sucesso.")
+          divMensagem.style.color = 'blue'
+          divMensagem.innerText = 'Usuario cadastrado com sucesso'
+          setTimeout(() => {
+            window.location.reload()
+          }, 1000)
         } else if (resposta.status == 400) {
           resposta.text()
-          .then(texto => {
-            alert(texto)
-          })
+            .then(texto => {
+              alert(texto)
+            })
         }
       })
       .catch((erro) => {
@@ -281,9 +285,21 @@
   }
 
   function salvarFuncionario(idUsuario) {
+    let divMensagem = document.getElementById('container-aviso2')
     let attNome = inpNomeAtt.value
     let attEmail = inpEmailAtt.value
     let attSenha = inpSenhaAtt.value
+
+    if (attNome == '' || attEmail == '' || attEmail == '' || attSenha == '') {
+      divMensagem.style.color = 'red'
+      divMensagem.innerText = 'Preencha todos os campos'
+      return false
+    }
+
+    setTimeout(() => {
+      divMensagem.innerHTML = ''
+    }, 1000)
+
 
     fetch(`/usuarios/editar/${idUsuario}`, {
       method: "PUT",
@@ -297,8 +313,11 @@
       }),
     }).then((resposta) => {
       if (resposta.status === 200) {
-        alert('Usuario alterado com sucesso!')
-        window.location.reload()
+        divMensagem.style.color = 'blue'
+        divMensagem.innerText = 'Dados atualizados'
+        setTimeout(() => {
+          window.location.reload()
+        }, 1000)
       } else {
         console.log(resposta)
       }
@@ -344,9 +363,11 @@
 
   function fecharEdicao() {
     let divMensagem = document.getElementById('container-aviso')
+    let divMensagem2 = document.getElementById('container-aviso2')
 
     area_modal2.style.display = 'none'
     divMensagem.innerHTML = ''
+    divMensagem2.innerHTML = ''
   }
 
 </script>
