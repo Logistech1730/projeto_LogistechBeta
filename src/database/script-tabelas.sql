@@ -119,45 +119,7 @@ END $$
 
 DELIMITER ;
 
--- Inserções na tabela 'empresa'
-INSERT INTO empresa (cnpj, telefone, nomeFantasia, isAtivo) VALUES 
-('12345678000195', '123456789', 'Empresa A', 1),
-('98765432000185', '987654321', 'Empresa B', 1),
-('19283746000172', '192837465', 'Empresa C', 0),
-('45678912000156', '456789123', 'Empresa D', 1),
-('32165498000123', '321654987', 'Empresa E', 0);
 
--- Inserções na tabela 'usuario'
-INSERT INTO usuario (nome, email, senha, telefone, fkEmpresa) VALUES 
-('João Silva', 'joao@empresaA.com', 'senha123', '999999999', 1),
-('Maria Santos', 'maria@empresaB.com', 'senha456', '988888888', 2),
-('Pedro Costa', 'pedro@empresaC.com', 'senha789', '977777777', 3),
-('Ana Lima', 'ana@empresaD.com', 'senha321', '966666666', 4),
-('Carlos Souza', 'carlos@empresaE.com', 'senha654', '955555555', 5);
-
--- Inserções na tabela 'endereco'
-INSERT INTO endereco (cep, logradouro, cidade, UF, numero, complemento, fkEmpresa) VALUES 
-('12345678', 'Rua A', 'São Paulo', 'SP', '123', 'Apt 1', 1),
-('87654321', 'Rua B', 'Rio de Janeiro', 'RJ', '456', 'Casa 2', 2),
-('56781234', 'Rua C', 'Belo Horizonte', 'MG', '789', 'Apt 3', 3),
-('43218765', 'Rua D', 'Salvador', 'BA', '321', 'Casa 4', 4),
-('23456781', 'Rua E', 'Fortaleza', 'CE', '654', 'Apt 5', 5);
-
--- Inserções na tabela 'esteira'
-INSERT INTO esteira (departamento, localizacao, distanciaEsperada, fkEmpresa) VALUES 
-('Logística', 'Depósito A', 100, 1),
-('Produção', 'Depósito B', 200, 1),
-('Expedição', 'Depósito C', 150, 2),
-('Armazenagem', 'Depósito D', 250, 2),
-('Distribuição', 'Depósito E', 300, 2);
-
--- Inserções na tabela 'sensor'
-INSERT INTO sensor (dataInstalacao, ultimaManutencao, fkEsteira) VALUES 
-('2024-01-01', '2024-07-01', 1),
-('2023-05-15', '2024-05-15', 2),
-('2022-11-20', '2023-11-20', 3),
-('2024-06-10', '2024-09-10', 4),
-('2023-03-30', '2024-03-30', 5);
 
 SELECT 
     esteira.departamento AS 'Esteira', registro.distancia as 'distancia', registro.dataRegistro AS 'Data',
@@ -171,20 +133,6 @@ SELECT
     JOIN empresa on esteira.fkEmpresa = empresa.idEmpresa
     WHERE empresa.idEmpresa = 1
     ORDER BY registro.dataRegistro DESC;
--- Inserções na tabela 'registro'
-INSERT INTO registro (distancia, fkSensor) VALUES 
-(10, 1),
-(10, 1),
-(10, 1),
-(10, 1),
-(10, 1),
-(10, 1),
-(10, 2),
-(10, 2),
-(10, 2),
-(10, 2),
-(12, 2),
-(12, 2);
 
 -- Inserções na tabela alertas
 INSERT INTO Alerta (fkRegistro, visto) VALUES
@@ -269,20 +217,22 @@ WHERE visto = 0;
 -- Inserir empresas
 INSERT INTO empresa (cnpj, telefone, nomeFantasia, isAtivo) VALUES
 ('12345678000101', '11987654321', 'Tech Solutions Ltda', 1),
-('98765432000101', '21976543210', 'Alpha Construtora', 1),
-('11111111000111', '31965432109', 'Beta Consultoria', 1),
+('98765432000101', '21976543210', 'Alpha Tech', 1),
+('11111111000111', '31965432109', 'Beta Enterprise', 1),
 ('22222222000222', '41954321098', 'Gamma Service', 1),
 ('33333333000333', '51943210987', 'Delta Logística', 1);
-
+select * from usuario;
 -- Inserir usuarios para cada empresa
 INSERT INTO usuario (nome, email, senha, nivel, fkEmpresa) VALUES
 ('Carlos Silva', 'carlos.silva@techsolutions.com', 'senha123', 1, 1),
-('Mariana Costa', 'mariana.costa@alphaconstrutora.com', 'senha123', 1, 2),
-('João Almeida', 'joao.almeida@betaconsultoria.com', 'senha123', 1, 3),
-('Ana Santos', 'ana.santos@gamma.com', 'senha123', '41954321099', 1, 4),
-('Lucas Pereira', 'lucas.pereira@deltalogistica.com', 'senha123', 1, 5),
-('Vitor Ameida', 'vitor.almeida@logistechsuporte.com', 'senha123', 1, 5);
+('Mariana Costa', 'mariana.costa@alphatech.com', 'senha123', 1, 2),
+('João Almeida', 'joao.almeida@betaenterprise.com', 'senha123', 1, 3),
+('Ana Santos', 'ana.santos@gamma.com', 'senha123', 1, 4),
+('Lucas Pereira', 'lucas.pereira@deltalogistica.com', 'senha123', 1, 5);
 
+
+INSERT INTO usuario (nome, email, senha, nivel) VALUES
+('Gabriel', 'gabriel@logistechsuporte.com', 'senha123', 2);
 -- Inserir endereços para cada empresa
 INSERT INTO endereco (cep, logradouro, cidade, UF, numero, complemento, fkEmpresa) VALUES
 ('12345678', 'Rua das Inovações, 101', 'São Paulo', 'SP', '101', 'Prédio A', 1),
@@ -332,58 +282,69 @@ INSERT INTO esteira (nome, departamento, localizacao, distanciaEsperada, fkEmpre
 ('Esteira Soundbar', 'Áudio e Vídeo', 'Bloco E4', 35, 5),
 ('Esteira Subwoofer', 'Áudio e Vídeo', 'Bloco E5', 45, 5);
 
-
--- Inserir métricas com intervalos aleatórios e não sobrepostos
+drop table metrica;
+-- Inserir métricas para as esteiras com intervalos aleatórios
 INSERT INTO metrica (nomeMetrica, valorMinimo, valorMaximo, cor, fkEsteira) VALUES
 -- Esteira 1
-('Baixo', 0, 25, '00FF00', 1),
-('Moderado', 26, 60, 'FFFF00', 1),
-('Alto', 61, 100, 'FF0000', 1),
+('Crítico', 0, 40, 'FF0000', 1),
+('Atenção', 41, 60, 'FFFF00', 1),
+('Esperado', 61, 85, '00FFFF', 1),
+('Ideal', 86, 100, '00FF00', 1),
 
 -- Esteira 2
-('Normal', 0, 20, '00FF00', 2),
-('Atenção', 21, 70, 'FFFF00', 2),
-('Crítico', 71, 100, 'FF0000', 2),
+('Crítico', 0, 30, 'FF0000', 2),
+('Atenção', 31, 55, 'FFFF00', 2),
+('Esperado', 56, 75, '00FFFF', 2),
+('Ideal', 76, 100, '00FF00', 2),
 
 -- Esteira 3
-('Ideal', 0, 35, '00FF00', 3),
-('Risco', 36, 85, 'FFFF00', 3),
-('Emergência', 86, 100, 'FF0000', 3),
+('Crítico', 0, 35, 'FF0000', 3),
+('Atenção', 36, 60, 'FFFF00', 3),
+('Esperado', 61, 80, '00FFFF', 3),
+('Ideal', 81, 100, '00FF00', 3),
 
 -- Esteira 4
-('Estável', 0, 30, '00FF00', 4),
-('Instável', 31, 75, 'FFFF00', 4),
-('Perigoso', 76, 100, 'FF0000', 4),
+('Crítico', 0, 25, 'FF0000', 4),
+('Atenção', 26, 50, 'FFFF00', 4),
+('Esperado', 51, 70, '00FFFF', 4),
+('Ideal', 71, 100, '00FF00', 4),
 
 -- Esteira 5
-('Aceitável', 0, 40, '00FF00', 5),
-('Atenção', 41, 80, 'FFFF00', 5),
-('Problema', 81, 100, 'FF0000', 5),
+('Crítico', 0, 20, 'FF0000', 5),
+('Atenção', 21, 40, 'FFFF00', 5),
+('Esperado', 41, 69, '00FFFF', 5),
+('Ideal', 70, 100, '00FF00', 5),
 
 -- Esteira 6
-('Leve', 0, 20, '00FF00', 6),
-('Moderado', 21, 65, 'FFFF00', 6),
-('Severo', 66, 100, 'FF0000', 6),
+('Crítico', 0, 30, 'FF0000', 6),
+('Atenção', 31, 50, 'FFFF00', 6),
+('Esperado', 51, 75, '00FFFF', 6),
+('Ideal', 76, 100, '00FF00', 6),
 
 -- Esteira 7
-('Segura', 0, 30, '00FF00', 7),
-('Instável', 31, 70, 'FFFF00', 7),
-('Crítica', 71, 100, 'FF0000', 7),
+('Crítico', 0, 45, 'FF0000', 7),
+('Atenção', 46, 60, 'FFFF00', 7),
+('Esperado', 61, 80, '00FFFF', 7),
+('Ideal', 81, 100, '00FF00', 7),
 
 -- Esteira 8
-('Baixo Risco', 0, 15, '00FF00', 8),
-('Risco Médio', 16, 70, 'FFFF00', 8),
-('Risco Alto', 71, 100, 'FF0000', 8),
+('Crítico', 0, 20, 'FF0000', 8),
+('Atenção', 21, 50, 'FFFF00', 8),
+('Esperado', 51, 70, '00FFFF', 8),
+('Ideal', 71, 100, '00FF00', 8),
 
 -- Esteira 9
-('Nível 1', 0, 40, '00FF00', 9),
-('Nível 2', 41, 85, 'FFFF00', 9),
-('Nível 3', 86, 100, 'FF0000', 9),
+('Crítico', 0, 15, 'FF0000', 9),
+('Atenção', 16, 40, 'FFFF00', 9),
+('Esperado', 41, 69, '00FFFF', 9),
+('Ideal', 70, 100, '00FF00', 9),
 
 -- Esteira 10
-('Segura', 0, 33, '00FF00', 10),
-('Alerta', 34, 70, 'FFFF00', 10),
-('Crítica', 71, 100, 'FF0000', 10);
+('Crítico', 0, 25, 'FF0000', 10),
+('Atenção', 26, 55, 'FFFF00', 10),
+('Esperado', 56, 79, '00FFFF', 10),
+('Ideal', 80, 100, '00FF00', 10);
+drop table metrica;
 
 
 -- Inserir sensores para cada esteira
@@ -415,25 +376,63 @@ INSERT INTO sensor (dataInstalacao, ultimaManutencao, fkEsteira) VALUES
 ('2024-11-09', NULL, 25);
 
 
-
--- Gerar registros para cada sensor
-INSERT INTO registro (distancia, isProdutoViavel, fkSensor) VALUES
 -- Sensor 1
-(20, 1, 1), (22, 1, 1), (18, 1, 1), (25, 0, 1), (30, 0, 1),
-(19, 1, 1), (21, 1, 1), (35, 0, 1), (23, 1, 1), (40, 0, 1),
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (20, 1, 1, '2024-11-27 08:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (22, 1, 1, '2024-11-27 09:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (18, 1, 1, '2024-11-28 08:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (25, 0, 1, '2024-11-28 09:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (30, 0, 1, '2024-11-29 08:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (19, 1, 1, '2024-11-29 09:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (21, 1, 1, '2024-11-30 08:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (35, 0, 1, '2024-11-30 09:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (23, 1, 1, '2024-12-01 08:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (40, 0, 1, '2024-12-01 09:00:00');
 
 -- Sensor 2
-(25, 1, 2), (26, 1, 2), (24, 1, 2), (20, 0, 2), (27, 0, 2),
-(23, 1, 2), (25, 1, 2), (28, 0, 2), (30, 0, 2), (29, 0, 2),
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (25, 1, 2, '2024-12-02 08:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (26, 1, 2, '2024-12-02 09:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (24, 1, 2, '2024-12-03 08:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (20, 0, 2, '2024-12-03 09:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (27, 0, 2, '2024-11-27 08:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (23, 1, 2, '2024-11-27 09:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (25, 1, 2, '2024-11-28 08:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (28, 0, 2, '2024-11-28 09:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (30, 0, 2, '2024-11-29 08:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (29, 0, 2, '2024-11-29 09:00:00');
 
 -- Sensor 3
-(30, 1, 3), (32, 1, 3), (28, 1, 3), (35, 0, 3), (40, 0, 3),
-(29, 1, 3), (31, 1, 3), (38, 0, 3), (34, 0, 3), (33, 1, 3),
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (30, 1, 3, '2024-11-30 08:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (32, 1, 3, '2024-11-30 09:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (28, 1, 3, '2024-12-01 08:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (35, 0, 3, '2024-12-01 09:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (40, 0, 3, '2024-12-02 08:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (29, 1, 3, '2024-12-02 09:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (31, 1, 3, '2024-12-03 08:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (38, 0, 3, '2024-12-03 09:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (34, 0, 3, '2024-11-27 08:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (33, 1, 3, '2024-11-27 09:00:00');
 
+-- Os demais sensores seguem um padrão similar, ajustando os registros para os últimos 7 dias.
 -- Sensor 4
-(40, 1, 4), (38, 1, 4), (42, 1, 4), (45, 0, 4), (50, 0, 4),
-(39, 1, 4), (41, 1, 4), (48, 0, 4), (43, 1, 4), (47, 0, 4),
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (40, 1, 4, '2024-11-27 08:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (38, 1, 4, '2024-11-27 09:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (42, 1, 4, '2024-11-28 08:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (45, 0, 4, '2024-11-28 09:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (50, 0, 4, '2024-11-29 08:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (39, 1, 4, '2024-11-29 09:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (41, 1, 4, '2024-11-30 08:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (48, 0, 4, '2024-11-30 09:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (43, 1, 4, '2024-12-01 08:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (47, 0, 4, '2024-12-01 09:00:00');
 
 -- Sensor 5
-(50, 1, 5), (48, 1, 5), (52, 1, 5), (55, 0, 5), (60, 0, 5),
-(49, 1, 5), (51, 1, 5), (58, 0, 5), (53, 1, 5), (57, 0, 5);
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (50, 1, 5, '2024-12-02 08:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (48, 1, 5, '2024-12-02 09:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (52, 1, 5, '2024-12-03 08:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (55, 0, 5, '2024-12-03 09:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (60, 0, 5, '2024-11-27 08:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (49, 1, 5, '2024-11-27 09:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (51, 1, 5, '2024-11-28 08:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (58, 0, 5, '2024-11-28 09:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (53, 1, 5, '2024-11-29 08:00:00');
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor, dataRegistro) VALUES (57, 0, 5, '2024-11-29 09:00:00');
