@@ -215,7 +215,7 @@
                             size: 20,
                         },
                         formatter: (value, ctx) => {
-                            var porcentagens = Math.round((value / qtdProdutosTotal) * 100);
+                            var porcentagens = (((Number(value / qtdProdutosTotal)) * 100)).toFixed(1);
                             return `${porcentagens}%`;
                         },
                         anchor: "center",

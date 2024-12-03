@@ -133,8 +133,8 @@ function atualizarGraficoPizza(registros) {
                             size: 20,
                         },
                         formatter: (value, ctx) => {
-                            var porcentagens = (value / qtdProdutosTotal) * 100;
-                            return `${Math.round (porcentagens)}%`;
+                            var porcentagens = (((Number(value / qtdProdutosTotal)) * 100)).toFixed(1);
+                            return `${porcentagens}%`;
                         },
                         anchor: "center",
                         align: "center",
