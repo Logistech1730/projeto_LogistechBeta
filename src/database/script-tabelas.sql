@@ -221,7 +221,7 @@ INSERT INTO empresa (cnpj, telefone, nomeFantasia, isAtivo) VALUES
 ('11111111000111', '31965432109', 'Beta Enterprise', 1),
 ('22222222000222', '41954321098', 'Gamma Service', 1),
 ('33333333000333', '51943210987', 'Delta Logística', 1);
-select * from usuario;
+
 -- Inserir usuarios para cada empresa
 INSERT INTO usuario (nome, email, senha, nivel, fkEmpresa) VALUES
 ('Carlos Silva', 'carlos.silva@techsolutions.com', 'senha123', 1, 1),
@@ -229,6 +229,71 @@ INSERT INTO usuario (nome, email, senha, nivel, fkEmpresa) VALUES
 ('João Almeida', 'joao.almeida@betaenterprise.com', 'senha123', 1, 3),
 ('Ana Santos', 'ana.santos@gamma.com', 'senha123', 1, 4),
 ('Lucas Pereira', 'lucas.pereira@deltalogistica.com', 'senha123', 1, 5);
+
+-- Insert de funcionários para cada empresa
+INSERT INTO usuario (nome, email, senha, dataCadastro, fkEmpresa)
+VALUES
+-- Usuários para Tech Solutions Ltda
+('João Silva', 'joao.silva1@techsolutions.com', 'senha123', '2023-11-24 10:00:00', 1),
+('Maria Oliveira', 'maria.oliveira1@techsolutions.com', 'senha123', '2023-11-25 11:00:00', 1),
+('Carlos Pereira', 'carlos.pereira1@techsolutions.com', 'senha123', '2023-11-26 12:00:00', 1),
+('Ana Souza', 'ana.souza1@techsolutions.com', 'senha123', '2023-11-27 13:00:00', 1),
+('Pedro Costa', 'pedro.costa1@techsolutions.com', 'senha123', '2023-11-28 14:00:00', 1),
+('Clara Lima', 'clara.lima1@techsolutions.com', 'senha123', '2023-11-29 15:00:00', 1),
+('Lucas Rocha', 'lucas.rocha1@techsolutions.com', 'senha123', '2023-11-30 16:00:00', 1),
+('Juliana Mendes', 'juliana.mendes1@techsolutions.com', 'senha123', '2023-11-24 17:00:00', 1),
+('Fernando Santos', 'fernando.santos1@techsolutions.com', 'senha123', '2023-11-25 18:00:00', 1),
+('Sofia Martins', 'sofia.martins1@techsolutions.com', 'senha123', '2023-11-26 19:00:00', 1),
+
+-- Usuários para Alpha Tech
+('João Silva', 'joao.silva2@alphatech.com', 'senha123', '2023-11-24 10:00:00', 2),
+('Maria Oliveira', 'maria.oliveira2@alphatech.com', 'senha123', '2023-11-25 11:00:00', 2),
+('Carlos Pereira', 'carlos.pereira2@alphatech.com', 'senha123', '2023-11-26 12:00:00', 2),
+('Ana Souza', 'ana.souza2@alphatech.com', 'senha123', '2023-11-27 13:00:00', 2),
+('Pedro Costa', 'pedro.costa2@alphatech.com', 'senha123', '2023-11-28 14:00:00', 2),
+('Clara Lima', 'clara.lima2@alphatech.com', 'senha123', '2023-11-29 15:00:00', 2),
+('Lucas Rocha', 'lucas.rocha2@alphatech.com', 'senha123', '2023-11-30 16:00:00', 2),
+('Juliana Mendes', 'juliana.mendes2@alphatech.com', 'senha123', '2023-11-24 17:00:00', 2),
+('Fernando Santos', 'fernando.santos2@alphatech.com', 'senha123', '2023-11-25 18:00:00', 2),
+('Sofia Martins', 'sofia.martins2@alphatech.com', 'senha123', '2023-11-26 19:00:00', 2),
+
+-- Usuários para Beta Enterprise
+('João Silva', 'joao.silva3@betaenterprise.com', 'senha123', '2023-11-24 10:00:00', 3),
+('Maria Oliveira', 'maria.oliveira3@betaenterprise.com', 'senha123', '2023-11-25 11:00:00', 3),
+('Carlos Pereira', 'carlos.pereira3@betaenterprise.com', 'senha123', '2023-11-26 12:00:00', 3),
+('Ana Souza', 'ana.souza3@betaenterprise.com', 'senha123', '2023-11-27 13:00:00', 3),
+('Pedro Costa', 'pedro.costa3@betaenterprise.com', 'senha123', '2023-11-28 14:00:00', 3),
+('Clara Lima', 'clara.lima3@betaenterprise.com', 'senha123', '2023-11-29 15:00:00', 3),
+('Lucas Rocha', 'lucas.rocha3@betaenterprise.com', 'senha123', '2023-11-30 16:00:00', 3),
+('Juliana Mendes', 'juliana.mendes3@betaenterprise.com', 'senha123', '2023-11-24 17:00:00', 3),
+('Fernando Santos', 'fernando.santos3@betaenterprise.com', 'senha123', '2023-11-25 18:00:00', 3),
+('Sofia Martins', 'sofia.martins3@betaenterprise.com', 'senha123', '2023-11-26 19:00:00', 3),
+
+-- Usuários para Gamma Service
+('João Silva', 'joao.silva4@gammaservice.com', 'senha123', '2023-11-24 10:00:00', 4),
+('Maria Oliveira', 'maria.oliveira4@gammaservice.com', 'senha123', '2023-11-25 11:00:00', 4),
+('Carlos Pereira', 'carlos.pereira4@gammaservice.com', 'senha123', '2023-11-26 12:00:00', 4),
+('Ana Souza', 'ana.souza4@gammaservice.com', 'senha123', '2023-11-27 13:00:00', 4),
+('Pedro Costa', 'pedro.costa4@gammaservice.com', 'senha123', '2023-11-28 14:00:00', 4),
+('Clara Lima', 'clara.lima4@gammaservice.com', 'senha123', '2023-11-29 15:00:00', 4),
+('Lucas Rocha', 'lucas.rocha4@gammaservice.com', 'senha123', '2023-11-30 16:00:00', 4),
+('Juliana Mendes', 'juliana.mendes4@gammaservice.com', 'senha123', '2023-11-24 17:00:00', 4),
+('Fernando Santos', 'fernando.santos4@gammaservice.com', 'senha123', '2023-11-25 18:00:00', 4),
+('Sofia Martins', 'sofia.martins4@gammaservice.com', 'senha123', '2023-11-26 19:00:00', 4),
+
+-- Usuários para Delta Logística
+('João Silva', 'joao.silva5@deltalogistica.com', 'senha123', '2023-11-24 10:00:00', 5),
+('Maria Oliveira', 'maria.oliveira5@deltalogistica.com', 'senha123', '2023-11-25 11:00:00', 5),
+('Carlos Pereira', 'carlos.pereira5@deltalogistica.com', 'senha123', '2023-11-26 12:00:00', 5),
+('Ana Souza', 'ana.souza5@deltalogistica.com', 'senha123', '2023-11-27 13:00:00', 5),
+('Pedro Costa', 'pedro.costa5@deltalogistica.com', 'senha123', '2023-11-28 14:00:00', 5),
+('Clara Lima', 'clara.lima5@deltalogistica.com', 'senha123', '2023-11-29 15:00:00', 5),
+('Lucas Rocha', 'lucas.rocha5@deltalogistica.com', 'senha123', '2023-11-30 16:00:00', 5),
+('Juliana Mendes', 'juliana.mendes5@deltalogistica.com', 'senha123', '2023-11-24 17:00:00', 5),
+('Fernando Santos', 'fernando.santos5@deltalogistica.com', 'senha123', '2023-11-25 18:00:00', 5),
+('Sofia Martins', 'sofia.martins5@deltalogistica.com', 'senha123', '2023-11-26 19:00:00', 5);
+
+
 
 
 INSERT INTO usuario (nome, email, senha, nivel) VALUES

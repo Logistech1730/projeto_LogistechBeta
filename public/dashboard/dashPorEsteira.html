@@ -434,7 +434,6 @@ function atualizarGraficoLinha(registros) {
             status_esteiras.innerHTML = registros[0].nomeMetrica;
           }) .catch((erro) => { 
             console.error('Erro ao listar registros:', erro); 
-            alert('Erro ao listar métricas.'); 
           });
         }
 
@@ -453,7 +452,6 @@ function atualizarGraficoLinha(registros) {
             atualizarGraficoPizza(registros); 
           }) .catch((erro) => { 
             console.error('Erro ao listar registros:', erro); 
-            alert('Erro ao listar registros.'); 
           });
         }
 
@@ -473,7 +471,6 @@ function buscarRegistrosGraficoBarra() {
             buscarRegistrosGraficoLinha();
           }) .catch((erro) => { 
             console.error('Erro ao listar registros:', erro); 
-            alert('Erro ao listar registros.'); 
           });
         }
 
@@ -492,7 +489,6 @@ function buscarRegistrosGraficoBarra() {
             atualizarGraficoLinha(registros); 
           }) .catch((erro) => { 
             console.error('Erro ao listar registros:', erro); 
-            alert('Erro ao listar registros.'); 
           });
         }
 
