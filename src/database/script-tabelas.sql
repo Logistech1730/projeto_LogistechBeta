@@ -265,4 +265,175 @@ WHERE visto = 0;
 
 
 
+-- INSERTS PARA A APRESENTAÇÃO
 
+-- Inserir empresas
+INSERT INTO empresa (cnpj, telefone, nomeFantasia, isAtivo) VALUES
+('12345678000101', '11987654321', 'Tech Solutions Ltda', 1),
+('98765432000101', '21976543210', 'Alpha Construtora', 1),
+('11111111000111', '31965432109', 'Beta Consultoria', 1),
+('22222222000222', '41954321098', 'Gamma Service', 1),
+('33333333000333', '51943210987', 'Delta Logística', 1);
+
+-- Inserir usuarios para cada empresa
+INSERT INTO usuario (nome, email, senha, telefone, nivel, fkEmpresa) VALUES
+('Carlos Silva', 'carlos.silva@techsolutions.com', 'senha123', '11987654322', 1, 1),
+('Mariana Costa', 'mariana.costa@alphaconstrutora.com', 'senha123', '21976543211', 1, 2),
+('João Almeida', 'joao.almeida@betaconsultoria.com', 'senha123', '31965432110', 1, 3),
+('Ana Santos', 'ana.santos@gamma.com', 'senha123', '41954321099', 1, 4),
+('Lucas Pereira', 'lucas.pereira@deltalogistica.com', 'senha123', '51943210988', 1, 5),
+('Vitor Ameida', 'vitor.almeida@logistechsuporte.com', 'senha123', '21322342123', 1, 5);
+
+-- Inserir endereços para cada empresa
+INSERT INTO endereco (cep, logradouro, cidade, UF, numero, complemento, fkEmpresa) VALUES
+('12345678', 'Rua das Inovações, 101', 'São Paulo', 'SP', '101', 'Prédio A', 1),
+('87654321', 'Avenida dos Engenheiros, 202', 'Rio de Janeiro', 'RJ', '202', 'Bloco B', 2),
+('11112222', 'Rua das Consultorias, 303', 'Belo Horizonte', 'MG', '303', 'Sala 12', 3),
+('22223333', 'Estrada da Alimentação, 404', 'Curitiba', 'PR', '404', 'Galpão 7', 4),
+('33334444', 'Avenida da Logística, 505', 'Porto Alegre', 'RS', '505', 'Andar 2', 5);
+
+
+-- Inserir esteiras para a empresa 1
+INSERT INTO esteira (nome, departamento, localizacao, distanciaEsperada, fkEmpresa) VALUES
+('Esteira Mouse', 'Montagem', 'Bloco A1', 20, 1),
+('Esteira Teclado', 'Montagem', 'Bloco A2', 25, 1),
+('Esteira Monitor', 'Qualidade', 'Bloco A3', 30, 1),
+('Esteira Placa Mãe', 'Produção', 'Bloco A4', 40, 1),
+('Esteira Processador', 'Finalização', 'Bloco A5', 10, 1);
+
+-- Inserir esteiras para a empresa 2
+INSERT INTO esteira (nome, departamento, localizacao, distanciaEsperada, fkEmpresa) VALUES
+('Esteira Cabos USB', 'Montagem', 'Bloco B1', 15, 2),
+('Esteira HD Externo', 'Armazenamento', 'Bloco B2', 30, 2),
+('Esteira SSD', 'Qualidade', 'Bloco B3', 20, 2),
+('Esteira Fonte', 'Produção', 'Bloco B4', 35, 2),
+('Esteira Memória RAM', 'Finalização', 'Bloco B5', 45, 2);
+
+-- Inserir esteiras para a empresa 3
+INSERT INTO esteira (nome, departamento, localizacao, distanciaEsperada, fkEmpresa) VALUES
+('Esteira Impressora', 'Montagem', 'Bloco C1', 25, 3),
+('Esteira Scanner', 'Qualidade', 'Bloco C2', 20, 3),
+('Esteira Webcam', 'Produção', 'Bloco C3', 30, 3),
+('Esteira Microfone', 'Finalização', 'Bloco C4', 35, 3),
+('Esteira Caixa de Som', 'Montagem', 'Bloco C5', 50, 3);
+
+-- Inserir esteiras para a empresa 4
+INSERT INTO esteira (nome, departamento, localizacao, distanciaEsperada, fkEmpresa) VALUES
+('Esteira Joystick', 'Montagem', 'Bloco D1', 15, 4),
+('Esteira Controle', 'Produção', 'Bloco D2', 25, 4),
+('Esteira Console', 'Qualidade', 'Bloco D3', 40, 4),
+('Esteira Adaptador HDMI', 'Finalização', 'Bloco D4', 20, 4),
+('Esteira Gamepad', 'Montagem', 'Bloco D5', 30, 4);
+
+-- Inserir esteiras para a empresa 5
+INSERT INTO esteira (nome, departamento, localizacao, distanciaEsperada, fkEmpresa) VALUES
+('Esteira Projetor', 'Montagem', 'Bloco E1', 50, 5),
+('Esteira Smart TV', 'Qualidade', 'Bloco E2', 60, 5),
+('Esteira Chromecast', 'Produção', 'Bloco E3', 40, 5),
+('Esteira Soundbar', 'Finalização', 'Bloco E4', 35, 5),
+('Esteira Subwoofer', 'Montagem', 'Bloco E5', 45, 5);
+
+-- Inserir métricas com intervalos aleatórios e não sobrepostos
+INSERT INTO metrica (nomeMetrica, valorMinimo, valorMaximo, cor, fkEsteira) VALUES
+-- Esteira 1
+('Baixo', 0, 25, '00FF00', 1),
+('Moderado', 26, 60, 'FFFF00', 1),
+('Alto', 61, 100, 'FF0000', 1),
+
+-- Esteira 2
+('Normal', 0, 20, '00FF00', 2),
+('Atenção', 21, 70, 'FFFF00', 2),
+('Crítico', 71, 100, 'FF0000', 2),
+
+-- Esteira 3
+('Ideal', 0, 35, '00FF00', 3),
+('Risco', 36, 85, 'FFFF00', 3),
+('Emergência', 86, 100, 'FF0000', 3),
+
+-- Esteira 4
+('Estável', 0, 30, '00FF00', 4),
+('Instável', 31, 75, 'FFFF00', 4),
+('Perigoso', 76, 100, 'FF0000', 4),
+
+-- Esteira 5
+('Aceitável', 0, 40, '00FF00', 5),
+('Atenção', 41, 80, 'FFFF00', 5),
+('Problema', 81, 100, 'FF0000', 5),
+
+-- Esteira 6
+('Leve', 0, 20, '00FF00', 6),
+('Moderado', 21, 65, 'FFFF00', 6),
+('Severo', 66, 100, 'FF0000', 6),
+
+-- Esteira 7
+('Segura', 0, 30, '00FF00', 7),
+('Instável', 31, 70, 'FFFF00', 7),
+('Crítica', 71, 100, 'FF0000', 7),
+
+-- Esteira 8
+('Baixo Risco', 0, 15, '00FF00', 8),
+('Risco Médio', 16, 70, 'FFFF00', 8),
+('Risco Alto', 71, 100, 'FF0000', 8),
+
+-- Esteira 9
+('Nível 1', 0, 40, '00FF00', 9),
+('Nível 2', 41, 85, 'FFFF00', 9),
+('Nível 3', 86, 100, 'FF0000', 9),
+
+-- Esteira 10
+('Segura', 0, 33, '00FF00', 10),
+('Alerta', 34, 70, 'FFFF00', 10),
+('Crítica', 71, 100, 'FF0000', 10);
+
+
+-- Inserir sensores para cada esteira
+INSERT INTO sensor (dataInstalacao, ultimaManutencao, fkEsteira) VALUES
+('2024-11-03', NULL, 1),
+('2024-11-07', NULL, 2),
+('2024-11-12', NULL, 3),
+('2024-11-15', NULL, 4),
+('2024-11-19', NULL, 5),
+('2024-11-22', NULL, 6),
+('2024-11-25', NULL, 7),
+('2024-11-26', NULL, 8),
+('2024-11-27', NULL, 9),
+('2024-11-29', NULL, 10),
+('2024-11-01', NULL, 11),
+('2024-11-05', NULL, 12),
+('2024-11-08', NULL, 13),
+('2024-11-10', NULL, 14),
+('2024-11-13', NULL, 15),
+('2024-11-16', NULL, 16),
+('2024-11-18', NULL, 17),
+('2024-11-20', NULL, 18),
+('2024-11-23', NULL, 19),
+('2024-11-24', NULL, 20),
+('2024-11-28', NULL, 21),
+('2024-11-02', NULL, 22),
+('2024-11-04', NULL, 23),
+('2024-11-06', NULL, 24),
+('2024-11-09', NULL, 25);
+
+
+
+-- Gerar registros para cada sensor
+INSERT INTO registro (distancia, isProdutoViavel, fkSensor) VALUES
+-- Sensor 1
+(20, 1, 1), (22, 1, 1), (18, 1, 1), (25, 0, 1), (30, 0, 1),
+(19, 1, 1), (21, 1, 1), (35, 0, 1), (23, 1, 1), (40, 0, 1),
+
+-- Sensor 2
+(25, 1, 2), (26, 1, 2), (24, 1, 2), (20, 0, 2), (27, 0, 2),
+(23, 1, 2), (25, 1, 2), (28, 0, 2), (30, 0, 2), (29, 0, 2),
+
+-- Sensor 3
+(30, 1, 3), (32, 1, 3), (28, 1, 3), (35, 0, 3), (40, 0, 3),
+(29, 1, 3), (31, 1, 3), (38, 0, 3), (34, 0, 3), (33, 1, 3),
+
+-- Sensor 4
+(40, 1, 4), (38, 1, 4), (42, 1, 4), (45, 0, 4), (50, 0, 4),
+(39, 1, 4), (41, 1, 4), (48, 0, 4), (43, 1, 4), (47, 0, 4),
+
+-- Sensor 5
+(50, 1, 5), (48, 1, 5), (52, 1, 5), (55, 0, 5), (60, 0, 5),
+(49, 1, 5), (51, 1, 5), (58, 0, 5), (53, 1, 5), (57, 0, 5);
