@@ -160,7 +160,7 @@
                                 div_containerEsteiras.innerHTML = "<p>Nenhuma esteira cadastrada</p>"
                             }
                             // populando <select> com as esteiras
-                            slt_esteiras.innerHTML = `<option selected value="#">Selecione uma esteira</option>`
+                            slt_esteiras.innerHTML = `<option selected disabled value="#">Selecione uma esteira</option>`
                             for (var i = 0; i < dados.length; i++) {
                                 slt_esteiras.innerHTML += `<option value=${dados[i].idEsteira}>${dados[i].nome}</option>`
                             }
