@@ -74,6 +74,20 @@ function pesquisarEsteira(idEmpresa, nome){
     return database.executar(instrucaoSql)
 }
 
+function filtrarEsteira(idEsteira){
+
+    var instrucaoSql = `
+    SELECT esteira.nome AS nomEsteira,
+    esteira.departamento AS Esteira, registro.distancia AS AlturaDetectada, registro.dataRegistro AS DataRegistro FROM esteira 
+    JOIN sensor ON sensor.fkEsteira = esteira.idEsteira JOIN registro ON registro.fkSensor = sensor.idSensor JOIN empresa ON esteira.fkEmpresa = empresa.idEmpresa
+    WHERE idEsteira = ${idEsteira} ORDER BY DATE(dataRegistro) DESC;
+    `
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql)
+
+
+}
+
 module.exports = {
     cadastrar,
     listarTodasEsteiras,
@@ -81,5 +95,6 @@ module.exports = {
     editarEsteira,
     listarValidosPorEsteira,
     listarInvalidosPorEsteira,
-    pesquisarEsteira
+    pesquisarEsteira,
+    filtrarEsteira
 };

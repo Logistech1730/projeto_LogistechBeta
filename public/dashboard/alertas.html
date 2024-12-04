@@ -112,14 +112,14 @@
             </tr>`;
         } else {
           for (let contador = 0; contador < alertas.length; contador++) {
-            const { Esteira, distancia, Data, Visto, idAlerta, fkRegistro } = alertas[contador];
+            const { nomeEsteira ,Esteira, distancia, Data, Visto, idAlerta, fkRegistro } = alertas[contador];
             const data = new Date(Data);
             const dataFormatada = data.toLocaleString('pt-BR');
             const checkboxVisto = Visto === "Sim" ? "checked" : "";
 
             conteudo_tabela += `
             <tr>
-                <td>${Esteira}</td>
+                <td>${nomeEsteira}</td>
                 <td>${distancia} cm</td>
                 <td>${dataFormatada}</td>
                 <td><input type="checkbox" id="checkbox-${idAlerta}" ${checkboxVisto} onchange="atualizarVisto(${idAlerta}, ${fkRegistro})" data-fkRegistro="${fkRegistro}"></td>
@@ -160,14 +160,14 @@
             </tr>`;
         } else {
           for (let contador = 0; contador < alertas.length; contador++) {
-            const { Esteira, distancia, Data, Visto, idAlerta, fkRegistro } = alertas[contador];
+            const { nomeEsteira ,Esteira, distancia, Data, Visto, idAlerta, fkRegistro } = alertas[contador];
             const data = new Date(Data);
             const dataFormatada = data.toLocaleString('pt-BR');
             const checkboxVisto = Visto === "Sim" ? "checked" : "";
 
             conteudo_tabela += `
             <tr>
-                <td>${Esteira}</td>
+                <td>${nomeEsteira}</td>
                 <td>${distancia} cm</td>
                 <td>${dataFormatada}</td>
                 <td><input type="checkbox" id="checkbox-${idAlerta}" ${checkboxVisto} onchange="atualizarVisto(${idAlerta}, ${fkRegistro})" data-fkRegistro="${fkRegistro}"></td>
@@ -208,14 +208,14 @@
             </tr>`;
         } else {
           for (let contador = 0; contador < alertas.length; contador++) {
-            const { Esteira, distancia, Data, Visto, idAlerta, fkRegistro } = alertas[contador];
+            const { nomeEsteira, Esteira, distancia, Data, Visto, idAlerta, fkRegistro } = alertas[contador];
             const data = new Date(Data);
             const dataFormatada = data.toLocaleString('pt-BR');
             const checkboxVisto = Visto === "Sim" ? "checked" : "";
 
             conteudo_tabela += `
             <tr>
-                <td>${Esteira}</td>
+                <td>${nomeEsteira}</td>
                 <td>${distancia} cm</td>
                 <td>${dataFormatada}</td>
                 <td><input type="checkbox" id="checkbox-${idAlerta}" ${checkboxVisto} onchange="atualizarVisto(${idAlerta}, ${fkRegistro})" data-fkRegistro="${fkRegistro}"></td>

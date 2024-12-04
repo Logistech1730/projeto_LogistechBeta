@@ -3,6 +3,7 @@ var database = require("../database/config")
 function listarTodosAlertas(fkEmpresa) {
     var instrucaoSql = `
    SELECT 
+        esteira.nome AS 'nomeEsteira',
         esteira.departamento AS 'Esteira', 
         registro.distancia as 'distancia', 
         registro.dataRegistro AS 'Data',

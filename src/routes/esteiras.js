@@ -34,5 +34,9 @@ router.get("/pesquisarEsteira/:idEmpresa/:nome", function(req, res) {
     esteiraController.pesquisarEsteira(req, res);
 });
 
+router.get("/filtrarEsteira/:idEsteira", function(req, res) {
+    esteiraController.filtrarEsteira(req, res);
+});
+
 
 module.exports = router;
