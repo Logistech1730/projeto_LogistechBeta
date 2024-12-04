@@ -29,6 +29,7 @@ ORDER BY registro.dataRegistro DESC;
 function listarAlertasNaoVistos(fkEmpresa) {
     var instrucaoSql = `
     SELECT 
+        esteira.nome AS 'nomeEsteira',
          esteira.departamento AS 'Esteira', 
          registro.distancia as 'distancia', 
          registro.dataRegistro AS 'Data',
